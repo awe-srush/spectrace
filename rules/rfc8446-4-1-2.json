@@ -1,0 +1,669 @@
+[
+  {
+    "rule_id": "rfc8446-4.1.2-R01",
+    "source_section": "4.1.2",
+    "source_text": "When a client first connects to a server, it is REQUIRED to send the ClientHello as its first TLS message.",
+    "normative_keyword": "REQUIRED",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "The client MUST send ClientHello as its first TLS message when connecting to a server.",
+    "entity": "client",
+    "applies_when": "Client initiates a TLS connection",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Need to verify ClientHello is the first message sent in the handshake state machine.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Unambiguous requirement.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R02",
+    "source_section": "4.1.2",
+    "source_text": "In that case, the client MUST send the same ClientHello without modification, except as follows:",
+    "normative_keyword": "MUST",
+    "rule_type": "message_construction",
+    "rule_statement": "After receiving a HelloRetryRequest, the client MUST resend the same ClientHello with only the permitted modifications (key_share replacement, early_data removal, cookie addition, PSK update, padding changes).",
+    "entity": "client",
+    "applies_when": "Client receives a HelloRetryRequest",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [
+      "key_share",
+      "early_data",
+      "cookie",
+      "pre_shared_key",
+      "padding"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "HelloRetryRequest"
+      ],
+      "field_names": [
+        "key_share",
+        "early_data",
+        "cookie",
+        "pre_shared_key",
+        "padding"
+      ],
+      "extension_names": [
+        "key_share",
+        "early_data",
+        "cookie",
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Need to verify the second ClientHello matches the first except for the allowed modifications.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Clear requirement with explicit list of permitted changes.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R03",
+    "source_section": "4.1.2",
+    "source_text": "Because TLS 1.3 forbids renegotiation, if a server has negotiated TLS 1.3 and receives a ClientHello at any other time, it MUST terminate the connection with an \"unexpected_message\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If a server has negotiated TLS 1.3 and receives a ClientHello at any time other than the initial handshake, it MUST terminate with an unexpected_message alert.",
+    "entity": "server",
+    "applies_when": "Server in TLS 1.3 receives ClientHello outside initial handshake",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "inline",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "renegotiation"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Check that the server's state machine rejects ClientHello after handshake completion.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Unambiguous conditional with explicit alert.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R04",
+    "source_section": "4.1.2",
+    "source_text": "If a server established a TLS connection with a previous version of TLS and receives a TLS 1.3 ClientHello in a renegotiation, it MUST retain the previous protocol version. In particular, it MUST NOT negotiate TLS 1.3.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If a server has a pre-1.3 TLS connection and receives a TLS 1.3 ClientHello in renegotiation, it MUST retain the previous version and MUST NOT negotiate TLS 1.3.",
+    "entity": "server",
+    "applies_when": "Server with pre-1.3 connection receives TLS 1.3 ClientHello in renegotiation",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [
+      "supported_versions"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "ServerHello"
+      ],
+      "field_names": [
+        "legacy_version"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "renegotiation"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Need to verify version negotiation logic during renegotiation path.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Compound but unambiguous requirement.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R05",
+    "source_section": "4.1.2",
+    "source_text": "the legacy_version field MUST be set to 0x0303, which is the version number for TLS 1.2.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "In a TLS 1.3 ClientHello, the legacy_version field MUST be set to 0x0303.",
+    "entity": "client",
+    "applies_when": "Constructing a TLS 1.3 ClientHello",
+    "target_message": "ClientHello",
+    "target_field": "legacy_version",
+    "expected_value": "0x0303",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "legacy_version"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct value assignment check.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Unambiguous value constraint with explicit field and value.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": "Server-side handling of wrong legacy_version is in \u00a74.1.3.",
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R06",
+    "source_section": "4.1.2",
+    "source_text": "A client which has a cached session ID set by a pre-TLS 1.3 server SHOULD set this field to that value.",
+    "normative_keyword": "SHOULD",
+    "rule_type": "value_constraint",
+    "rule_statement": "A client with a cached pre-TLS 1.3 session ID SHOULD set legacy_session_id to that cached value.",
+    "entity": "client",
+    "applies_when": "Client has a cached session ID from a pre-TLS 1.3 server",
+    "target_message": "ClientHello",
+    "target_field": "legacy_session_id",
+    "expected_value": "cached session ID",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "legacy_session_id"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "session_resumption"
+      ]
+    },
+    "checkability": "low",
+    "checkability_rationale": "Depends on whether cached session state exists at runtime.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Clear SHOULD recommendation.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R07",
+    "source_section": "4.1.2",
+    "source_text": "In compatibility mode (see Appendix D.4), this field MUST be non-empty, so a client not offering a pre-TLS 1.3 session MUST generate a new 32-byte value.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "In compatibility mode, legacy_session_id MUST be non-empty. A client without a cached session MUST generate a new 32-byte value.",
+    "entity": "client",
+    "applies_when": "Constructing ClientHello in compatibility mode without a cached session",
+    "target_message": "ClientHello",
+    "target_field": "legacy_session_id",
+    "expected_value": "non-empty, 32 bytes",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "legacy_session_id"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "compatibility_mode"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Check that legacy_session_id is set to a 32-byte value in compatibility mode.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit value constraint with specified length.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R08",
+    "source_section": "4.1.2",
+    "source_text": "This value need not be random but SHOULD be unpredictable to avoid implementations fixating on a specific value (also known as ossification).",
+    "normative_keyword": "SHOULD",
+    "rule_type": "algorithmic",
+    "rule_statement": "The generated legacy_session_id value SHOULD be unpredictable.",
+    "entity": "client",
+    "applies_when": "Generating a legacy_session_id in compatibility mode",
+    "target_message": "ClientHello",
+    "target_field": "legacy_session_id",
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "legacy_session_id"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "compatibility_mode"
+      ]
+    },
+    "checkability": "not_checkable",
+    "checkability_rationale": "Unpredictability of generated values cannot be verified by static analysis.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Clear SHOULD with stated rationale.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R09",
+    "source_section": "4.1.2",
+    "source_text": "Otherwise, it MUST be set as a zero-length vector (i.e., a zero-valued single byte length field).",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "When not in compatibility mode and without a cached session, legacy_session_id MUST be a zero-length vector.",
+    "entity": "client",
+    "applies_when": "Constructing ClientHello outside compatibility mode without a cached session",
+    "target_message": "ClientHello",
+    "target_field": "legacy_session_id",
+    "expected_value": "zero-length",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "legacy_session_id"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct value check on legacy_session_id length.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit value with specified encoding.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R10",
+    "source_section": "4.1.2",
+    "source_text": "If the list contains cipher suites that the server does not recognize, support, or wish to use, the server MUST ignore those cipher suites and process the remaining ones as usual.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "The server MUST ignore unrecognized cipher suites in the ClientHello and process the remaining ones normally.",
+    "entity": "server",
+    "applies_when": "Processing ClientHello cipher_suites list",
+    "target_message": "ClientHello",
+    "target_field": "cipher_suites",
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "cipher_suites"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "low",
+    "checkability_rationale": "Verifying tolerance (not rejecting) is harder than verifying rejection.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Clear behavioral tolerance requirement.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R11",
+    "source_section": "4.1.2",
+    "source_text": "If the client is attempting a PSK key establishment, it SHOULD advertise at least one cipher suite indicating a Hash associated with the PSK.",
+    "normative_keyword": "SHOULD",
+    "rule_type": "presence_requirement",
+    "rule_statement": "When attempting PSK key establishment, the client SHOULD include at least one cipher suite with a Hash matching the PSK.",
+    "entity": "client",
+    "applies_when": "Client attempts PSK key establishment",
+    "target_message": "ClientHello",
+    "target_field": "cipher_suites",
+    "expected_value": null,
+    "related_fields": [
+      "pre_shared_key"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "cipher_suites"
+      ],
+      "extension_names": [
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "psk_ke"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Need to check cipher suite list construction when PSK is offered.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Clear SHOULD with specific condition.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R12",
+    "source_section": "4.1.2",
+    "source_text": "For every TLS 1.3 ClientHello, this vector MUST contain exactly one byte, set to zero, which corresponds to the \"null\" compression method in prior versions of TLS.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "In a TLS 1.3 ClientHello, legacy_compression_methods MUST contain exactly one byte set to zero.",
+    "entity": "client",
+    "applies_when": "Constructing a TLS 1.3 ClientHello",
+    "target_message": "ClientHello",
+    "target_field": "legacy_compression_methods",
+    "expected_value": "0x00 (single byte)",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "legacy_compression_methods"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct value check on compression methods field.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Unambiguous value with exact encoding.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R13",
+    "source_section": "4.1.2",
+    "source_text": "If a TLS 1.3 ClientHello is received with any other value in this field, the server MUST abort the handshake with an \"illegal_parameter\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If a server receives a TLS 1.3 ClientHello with legacy_compression_methods not equal to [0x00], it MUST abort with an illegal_parameter alert.",
+    "entity": "server",
+    "applies_when": "Server receives TLS 1.3 ClientHello with non-null compression methods",
+    "target_message": "ClientHello",
+    "target_field": "legacy_compression_methods",
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "inline",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "legacy_compression_methods"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Check for validation of compression methods and alert on invalid values.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit conditional with exact alert.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R14",
+    "source_section": "4.1.2",
+    "source_text": "Note that TLS 1.3 servers might receive TLS 1.2 or prior ClientHellos which contain other compression methods and (if negotiating such a prior version) MUST follow the procedures for the appropriate prior version of TLS.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "When a TLS 1.3 server negotiates a prior TLS version, it MUST follow the procedures for that prior version regarding compression methods.",
+    "entity": "server",
+    "applies_when": "TLS 1.3 server negotiating a prior TLS version",
+    "target_message": "ClientHello",
+    "target_field": "legacy_compression_methods",
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "legacy_compression_methods"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "low",
+    "checkability_rationale": "Requires verifying conformance to a different RFC version's procedures.",
+    "extraction_confidence": "medium",
+    "extraction_confidence_rationale": "Delegates to prior version procedures which are not specified here.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": "The specific 'procedures for the appropriate prior version' are defined in RFC 5246 and its predecessors.",
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R15",
+    "source_section": "4.1.2",
+    "source_text": "Servers MUST ignore unrecognized extensions.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "Servers MUST ignore unrecognized extensions in the ClientHello.",
+    "entity": "server",
+    "applies_when": "Processing ClientHello extensions",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "low",
+    "checkability_rationale": "Verifying that code does NOT reject unknown extensions requires confirming absence of error paths.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Clear behavioral tolerance requirement.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.2-R16",
+    "source_section": "4.1.2",
+    "source_text": "If negotiating a version of TLS prior to 1.3, a server MUST check that the message either contains no data after legacy_compression_methods or that it contains a valid extensions block with no data following. If not, then it MUST abort the handshake with a \"decode_error\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "When negotiating pre-1.3 TLS, the server MUST validate that data after legacy_compression_methods is either absent or a valid extensions block with no trailing data. If invalid, MUST abort with decode_error.",
+    "entity": "server",
+    "applies_when": "Server negotiates TLS version prior to 1.3",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [
+      "legacy_compression_methods"
+    ],
+    "violation_alert": "decode_error",
+    "violation_alert_source": "inline",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "legacy_compression_methods"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "decode_error"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Need to verify message parsing validates trailing data and sends correct alert.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Compound but explicit requirement with clear alert.",
+    "cross_section_context_used": [
+      "4.1.2",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

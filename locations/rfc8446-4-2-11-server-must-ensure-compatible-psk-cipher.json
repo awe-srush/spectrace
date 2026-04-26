@@ -1,0 +1,602 @@
+{
+  "rule_id": "rfc8446-4.2.11-server-must-ensure-compatible-psk-cipher",
+  "rule_type": "consistency_check",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ServerHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ServerHello",
+        "server_hello"
+      ]
+    },
+    {
+      "term": "selected_identity",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "selected_identity",
+        "SelectedIdentity"
+      ]
+    },
+    {
+      "term": "cipher_suite",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "cipher_suite",
+        "CipherSuite"
+      ]
+    },
+    {
+      "term": "pre_shared_key",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "pre_shared_key",
+        "PreSharedKey"
+      ]
+    },
+    {
+      "term": "PSK selection",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "PSK selection"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "cipher_suite"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1821,
+          "text": "* ServerHello.random confirmation trick. If that is good"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1967,
+          "text": "* In TLSv1.3 a ServerHello message signals a key change so the end of"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1702,
+          "text": "MSG_PROCESS_RETURN tls_process_server_hello(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1810,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1811,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1838,
+          "text": "prelude[0] = SSL3_MT_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1956,
+          "text": "context = SSL_CONNECTION_IS_TLS13(s) ? SSL_EXT_TLS1_3_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1957,
+          "text": ": SSL_EXT_TLS1_2_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1978,
+          "text": "SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1830,
+          "text": "if (!set_client_ciphersuite(s, cipherchars)) {"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1941,
+          "text": "if (!set_client_ciphersuite(s, cipherchars)) {"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 2080,
+          "text": "if (!set_client_ciphersuite(s, cipherchars)) {"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "cipher_suite"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2164,
+          "text": "* ServerHello."
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1936,
+          "text": "if (!ssl_cache_cipherlist(s, &clienthello->ciphersuites)"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1937,
+          "text": "|| !ossl_bytes_to_cipher_list(s, &clienthello->ciphersuites, &ciphers, &scsvs, 1)) {"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1970,
+          "text": "/* For TLSv1.3 we must select the ciphersuite *before* session resumption */"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1982,
+          "text": "* A previous HRR picked a different ciphersuite to the one we"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 2045,
+          "text": "* ciphersuite compatibility with the session as part of resumption."
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_read_transition",
+      "line_range": [
+        227,
+        408
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "cipher_suite"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 263,
+          "text": "* data. The only thing allowed now is a ServerHello or a"
+        },
+        {
+          "term": "ServerHello",
+          "line": 295,
+          "text": "* the next server message after the ServerHello to determine if"
+        },
+        {
+          "term": "ServerHello",
+          "line": 247,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "ServerHello",
+          "line": 266,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 309,
+          "text": "/* SKE is optional for some PSK ciphersuites */"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 343,
+          "text": "/* SKE is optional for some PSK ciphersuites */"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "set_client_ciphersuite",
+      "line_range": [
+        1624,
+        1700
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "cipher_suite"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1657,
+          "text": "/* ServerHello selected a different ciphersuite to that in the HRR */"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1624,
+          "text": "static int set_client_ciphersuite(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1657,
+          "text": "/* ServerHello selected a different ciphersuite to that in the HRR */"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1679,
+          "text": "* ciphersuite as long as the hash is the same."
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1684,
+          "text": "SSL_R_CIPHERSUITE_DIGEST_HAS_CHANGED);"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1690,
+          "text": "* ciphersuite."
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_psk",
+      "line_range": [
+        1318,
+        1566
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "cipher_suite",
+          "pre_shared_key"
+        ]
+      },
+      "hits": [
+        {
+          "term": "cipher_suite",
+          "line": 1512,
+          "text": "/* The ciphersuite is not compatible with this session. */"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1518,
+          "text": "* issued to the client with the newly negotiated ciphersuite,"
+        },
+        {
+          "term": "pre_shared_key",
+          "line": 1345,
+          "text": "for (id = 0; PACKET_remaining(&identities) != 0 && id < MAX_PRE_SHARED_KEYS; id++) {"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_server_hello",
+      "line_range": [
+        1094,
+        1128
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "cipher_suite"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1094,
+          "text": "static int ssl_print_server_hello(BIO *bio, int indent,"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1124,
+          "text": "if (!ssl_print_extensions(bio, indent, 1, SSL3_MT_SERVER_HELLO, &msg,"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1111,
+          "text": "BIO_printf(bio, \"cipher_suite {0x%02X, 0x%02X} %s\\n\","
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_hello",
+      "line_range": [
+        1619,
+        1846
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "cipher_suite"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1633,
+          "text": "* the ServerHello.random (or ECH extension if HRR) to signal to the client"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1794,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &clienthello->ciphersuites)) {"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "negotiate_dhe",
+      "line_range": [
+        205,
+        258
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "cipher_suite"
+        ]
+      },
+      "hits": [
+        {
+          "term": "cipher_suite",
+          "line": 215,
+          "text": "/* See if we support any EC or FFDHE ciphersuites */"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 223,
+          "text": "int is_ffdhe_ciphersuite = (alg_k & (SSL_kDHE | SSL_kDHEPSK));"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 224,
+          "text": "int is_ec_ciphersuite = ((alg_k & (SSL_kECDHE | SSL_kECDHEPSK))"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 229,
+          "text": "if ((check_type == ffdhe_check && (is_ffdhe_ciphersuite || is_tls13))"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 230,
+          "text": "|| (check_type == ecdhe_check && (is_ec_ciphersuite || is_tls13))"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 231,
+          "text": "|| (check_type == ptfmt_check && is_ec_ciphersuite)) {"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/ssl_ciph.c",
+      "function": "ciphersuite_cb",
+      "line_range": [
+        1230,
+        1260
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "cipher_suite"
+        ]
+      },
+      "hits": [
+        {
+          "term": "cipher_suite",
+          "line": 1230,
+          "text": "static int ciphersuite_cb(const char *elem, int len, void *arg)"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1232,
+          "text": "STACK_OF(SSL_CIPHER) *ciphersuites = (STACK_OF(SSL_CIPHER) *)arg;"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1246,
+          "text": "/* Ciphersuite not found but return 1 to parse rest of the list */"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1250,
+          "text": "for (int i = 0; i < sk_SSL_CIPHER_num(ciphersuites); ++i)"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1251,
+          "text": "if (sk_SSL_CIPHER_value(ciphersuites, i)->id == cipher->id)"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1254,
+          "text": "if (!sk_SSL_CIPHER_push(ciphersuites, cipher)) {"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/ssl_ciph.c",
+      "function": "update_cipher_list",
+      "line_range": [
+        1301,
+        1345
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "cipher_suite"
+        ]
+      },
+      "hits": [
+        {
+          "term": "cipher_suite",
+          "line": 1304,
+          "text": "STACK_OF(SSL_CIPHER) *tls13_ciphersuites)"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1313,
+          "text": "* Delete any existing TLSv1.3 ciphersuites. These are always first in the"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1321,
+          "text": "/* Insert the new TLSv1.3 ciphersuites */"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1322,
+          "text": "for (i = sk_SSL_CIPHER_num(tls13_ciphersuites) - 1; i >= 0; i--) {"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1323,
+          "text": "const SSL_CIPHER *sslc = sk_SSL_CIPHER_value(tls13_ciphersuites, i);"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1325,
+          "text": "/* Don't include any TLSv1.3 ciphersuites that are disabled */"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-11-server-must-ensure-compatible-psk-cipher_candidate_1.c",
+    "locations/code/rfc8446-4-2-11-server-must-ensure-compatible-psk-cipher_candidate_2.c",
+    "locations/code/rfc8446-4-2-11-server-must-ensure-compatible-psk-cipher_candidate_3.c",
+    "locations/code/rfc8446-4-2-11-server-must-ensure-compatible-psk-cipher_candidate_4.c",
+    "locations/code/rfc8446-4-2-11-server-must-ensure-compatible-psk-cipher_candidate_5.c",
+    "locations/code/rfc8446-4-2-11-server-must-ensure-compatible-psk-cipher_candidate_6.c",
+    "locations/code/rfc8446-4-2-11-server-must-ensure-compatible-psk-cipher_candidate_7.c",
+    "locations/code/rfc8446-4-2-11-server-must-ensure-compatible-psk-cipher_candidate_8.c",
+    "locations/code/rfc8446-4-2-11-server-must-ensure-compatible-psk-cipher_candidate_9.c",
+    "locations/code/rfc8446-4-2-11-server-must-ensure-compatible-psk-cipher_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 285,
+    "files_with_hits": 33,
+    "functions_identified": 97,
+    "null_scope_hits": 81,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1872
+  }
+}

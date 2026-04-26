@@ -1,0 +1,1038 @@
+{
+  "rule_id": "rfc8446-4.2.1-must-not-use-legacy-version",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "legacy_version",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "legacy_version",
+        "LegacyVersion"
+      ]
+    },
+    {
+      "term": "supported_versions",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "supported_versions",
+        "SupportedVersions"
+      ]
+    },
+    {
+      "term": "version negotiation",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "version negotiation"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "ssl_choose_server_version",
+      "line_range": [
+        2139,
+        2298
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "legacy_version",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2139,
+          "text": "int ssl_choose_server_version(SSL_CONNECTION *s, CLIENTHELLO_MSG *hello,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2194,
+          "text": "* succeeded, and not with a smuggled earlier version ClientHello"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2224,
+          "text": "* ClientHello.legacy_version or ServerHello.legacy_version set to"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2278,
+          "text": "* the ClientHello."
+        },
+        {
+          "term": "legacy_version",
+          "line": 2153,
+          "text": "int client_version = hello->legacy_version;"
+        },
+        {
+          "term": "legacy_version",
+          "line": 2224,
+          "text": "* ClientHello.legacy_version or ServerHello.legacy_version set to"
+        },
+        {
+          "term": "legacy_version",
+          "line": 2230,
+          "text": "return SSL_R_BAD_LEGACY_VERSION;"
+        },
+        {
+          "term": "supported_versions",
+          "line": 2189,
+          "text": "suppversions = &hello->pre_proc_exts[TLSEXT_IDX_supported_versions];"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "ssl_set_client_hello_version",
+      "line_range": [
+        2554,
+        2591
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "field_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "legacy_version",
+          "version negotiation"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2554,
+          "text": "int ssl_set_client_hello_version(SSL_CONNECTION *s)"
+        },
+        {
+          "term": "legacy_version",
+          "line": 2585,
+          "text": "/* TLS1.3 always uses TLS1.2 in the legacy_version field */"
+        },
+        {
+          "term": "version negotiation",
+          "line": 2575,
+          "text": "* Even though this is technically before version negotiation,"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 54,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "legacy_version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1860,
+          "text": "CLIENTHELLO_MSG *clienthello = s->clienthello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1866,
+          "text": "/* Finished parsing the ClientHello, now we can start processing it */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1867,
+          "text": "/* Give the ClientHello callback a crack at things */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1869,
+          "text": "/* A failure in the ClientHello callback terminates the connection. */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1884,
+          "text": "memcpy(s->s3.client_random, clienthello->random, SSL3_RANDOM_SIZE);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1887,
+          "text": "protverr = ssl_choose_server_version(s, clienthello, &dgrd);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1897,
+          "text": "s->version = s->client_version = clienthello->legacy_version;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1903,
+          "text": "/* TLSv1.3 specifies that a ClientHello must end on a record boundary */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1914,
+          "text": "if (sctx->app_verify_cookie_cb(ussl, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1915,
+          "text": "(unsigned int)clienthello->dtls_cookie_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1923,
+          "text": "} else if (s->d1->cookie_len != clienthello->dtls_cookie_len"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1924,
+          "text": "|| memcmp(clienthello->dtls_cookie, s->d1->cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1936,
+          "text": "if (!ssl_cache_cipherlist(s, &clienthello->ciphersuites)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1937,
+          "text": "|| !ossl_bytes_to_cipher_list(s, &clienthello->ciphersuites, &ciphers, &scsvs, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1994,
+          "text": "clienthello->pre_proc_exts, NULL, 0)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2000,
+          "text": "* We don't allow resumption in a backwards compatible ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2021,
+          "text": "i = ssl_get_prev_session(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2038,
+          "text": "memcpy(s->tmp_session_id, s->clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2039,
+          "text": "s->clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2040,
+          "text": "s->tmp_session_id_len = s->clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2080,
+          "text": "if (clienthello->compressions_len == 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2085,
+          "text": "if (memchr(clienthello->compressions, 0,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2086,
+          "text": "clienthello->compressions_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2094,
+          "text": "ssl_check_for_safari(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2098,
+          "text": "clienthello->pre_proc_exts, NULL, 0, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2161,
+          "text": "* If the ClientHello contains both a Session ID and a PAC-Opaque in"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2166,
+          "text": "if (clienthello->session_id_len > 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2167,
+          "text": "memcpy(s->session->session_id, clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2168,
+          "text": "clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2169,
+          "text": "s->session->session_id_length = clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2201,
+          "text": "* a TLSv1.3 ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2203,
+          "text": "if (clienthello->compressions_len != 1) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2235,
+          "text": "for (k = 0; k < clienthello->compressions_len; k++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2236,
+          "text": "if (clienthello->compressions[k] == comp_id)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2239,
+          "text": "if (k >= clienthello->compressions_len) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2255,
+          "text": "for (o = 0; o < clienthello->compressions_len; o++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2256,
+          "text": "if (v == clienthello->compressions[o]) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2304,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2305,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2306,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2311,
+          "text": "if (clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2312,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2313,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2314,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1848,
+          "text": "static int tls_early_post_process_client_hello(SSL_CONNECTION *s)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1868,
+          "text": "if (sctx->client_hello_cb != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1870,
+          "text": "switch (sctx->client_hello_cb(ussl, &al, sctx->client_hello_cb_arg)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1871,
+          "text": "case SSL_CLIENT_HELLO_SUCCESS:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1873,
+          "text": "case SSL_CLIENT_HELLO_RETRY:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1874,
+          "text": "s->rwstate = SSL_CLIENT_HELLO_CB;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1876,
+          "text": "case SSL_CLIENT_HELLO_ERROR:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1993,
+          "text": "SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2097,
+          "text": "if (!tls_parse_all_extensions(s, SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "legacy_version",
+          "line": 1897,
+          "text": "s->version = s->client_version = clienthello->legacy_version;"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_hello",
+      "line_range": [
+        1619,
+        1846
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 31,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "legacy_version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1623,
+          "text": "CLIENTHELLO_MSG *clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1727,
+          "text": "/* Check if this is actually an unexpected renegotiation ClientHello */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1745,
+          "text": "clienthello = OPENSSL_zalloc(sizeof(*clienthello));"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1746,
+          "text": "if (clienthello == NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1752,
+          "text": "* First, parse the raw ClientHello data into the CLIENTHELLO_MSG structure."
+        },
+        {
+          "term": "ClientHello",
+          "line": 1756,
+          "text": "if (!PACKET_get_net_2(pkt, &clienthello->legacy_version)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1761,
+          "text": "if (!PACKET_copy_bytes(pkt, clienthello->random, SSL3_RANDOM_SIZE)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1763,
+          "text": "|| !PACKET_copy_all(&session_id, clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1765,
+          "text": "&clienthello->session_id_len)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1775,
+          "text": "if (!PACKET_copy_all(&cookie, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1777,
+          "text": "&clienthello->dtls_cookie_len)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1782,
+          "text": "* If we require cookies and this ClientHello doesn't contain one,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1787,
+          "text": "if (clienthello->dtls_cookie_len == 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1788,
+          "text": "OPENSSL_free(clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1794,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &clienthello->ciphersuites)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1806,
+          "text": "PACKET_null_init(&clienthello->extensions);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1808,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &clienthello->extensions)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1815,
+          "text": "if (!PACKET_copy_all(&compression, clienthello->compressions,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1817,
+          "text": "&clienthello->compressions_len)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1823,
+          "text": "extensions = clienthello->extensions;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1825,
+          "text": "&clienthello->pre_proc_exts,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1826,
+          "text": "&clienthello->pre_proc_exts_len, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1830,
+          "text": "s->clienthello = clienthello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1835,
+          "text": "if (clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1836,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1837,
+          "text": "OPENSSL_free(clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1839,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1619,
+          "text": "MSG_PROCESS_RETURN tls_process_client_hello(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1676,
+          "text": "if (!WPACKET_put_bytes_u8(&inner, SSL3_MT_CLIENT_HELLO)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1824,
+          "text": "if (!tls_collect_extensions(s, &extensions, SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "legacy_version",
+          "line": 1756,
+          "text": "if (!PACKET_get_net_2(pkt, &clienthello->legacy_version)) {"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/quic/quic_port.c",
+      "function": "port_send_version_negotiation",
+      "line_range": [
+        1309,
+        1379
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "supported_versions",
+          "version negotiation"
+        ]
+      },
+      "hits": [
+        {
+          "term": "supported_versions",
+          "line": 1316,
+          "text": "uint32_t supported_versions[1];"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1331,
+          "text": "supported_versions[0] = QUIC_VERSION_1;"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1342,
+          "text": "hdr.len = sizeof(supported_versions);"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1343,
+          "text": "hdr.data = (unsigned char *)supported_versions;"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1360,
+          "text": "for (i = 0; i < OSSL_NELEM(supported_versions); i++) {"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1361,
+          "text": "if (!WPACKET_put_bytes_u32(&wpkt, supported_versions[i]))"
+        },
+        {
+          "term": "version negotiation",
+          "line": 1335,
+          "text": "* Note: Version negotiation packets, must, unlike"
+        },
+        {
+          "term": "version negotiation",
+          "line": 1378,
+          "text": "\"port version negotiation send failed\");"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/extensions.c",
+      "function": "extension_is_relevant",
+      "line_range": [
+        756,
+        787
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "version negotiation"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 774,
+          "text": "* which is never true when generating the ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 776,
+          "text": "* ClientHello extensions are being parsed."
+        },
+        {
+          "term": "ClientHello",
+          "line": 778,
+          "text": "* the ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 782,
+          "text": "&& (thisctx & SSL_EXT_CLIENT_HELLO) == 0)"
+        },
+        {
+          "term": "version negotiation",
+          "line": 775,
+          "text": "* However, version negotiation *has* occurred by the time the"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/ssl_lib.c",
+      "function": "SSL_client_hello_get0_legacy_version",
+      "line_range": [
+        6982,
+        6992
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ClientHello",
+          "legacy_version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 6989,
+          "text": "if (sc->clienthello == NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 6991,
+          "text": "return sc->clienthello->legacy_version;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 6982,
+          "text": "unsigned int SSL_client_hello_get0_legacy_version(SSL *s)"
+        },
+        {
+          "term": "legacy_version",
+          "line": 6982,
+          "text": "unsigned int SSL_client_hello_get0_legacy_version(SSL *s)"
+        },
+        {
+          "term": "legacy_version",
+          "line": 6991,
+          "text": "return sc->clienthello->legacy_version;"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1152,
+          "text": "* ClientHello so we can add it to the transcript hash."
+        },
+        {
+          "term": "ClientHello",
+          "line": 1212,
+          "text": "/* Act as if this ClientHello came after a HelloRetryRequest */"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1173,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_supported_versions)"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_construct_client_hello",
+      "line_range": [
+        1198,
+        1379
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 16,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1361,
+          "text": "if (s->clienthello != NULL"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1362,
+          "text": "&& s->clienthello->pre_proc_exts != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1363,
+          "text": "OPENSSL_free(s->clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1364,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1365,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1373,
+          "text": "if (s->clienthello != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1374,
+          "text": "OPENSSL_free(s->clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1375,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1376,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1198,
+          "text": "__owur CON_FUNC_RETURN tls_construct_client_hello(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1207,
+          "text": "int mt = SSL3_MT_CLIENT_HELLO, rv = 0;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1211,
+          "text": "int protverr = ssl_set_client_hello_version(s);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1219,
+          "text": "return tls_construct_client_hello_aux(s, pkt);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1292,
+          "text": "|| tls_construct_client_hello_aux(s, &inner) != 1"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1328,
+          "text": "if (!tls_process_client_hello(s, &rpkt)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1344,
+          "text": "rv = tls_construct_client_hello_aux(s, pkt);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/d1_lib.c",
+      "function": "DTLSv1_listen",
+      "line_range": [
+        407,
+        843
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 445,
+          "text": "* requires the MAC to be calculated *including* the first ClientHello"
+        },
+        {
+          "term": "ClientHello",
+          "line": 536,
+          "text": "/* This is an initial ClientHello so the epoch has to be 0 */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 569,
+          "text": "* We don't support fragment reassembly for ClientHellos whilst"
+        },
+        {
+          "term": "ClientHello",
+          "line": 571,
+          "text": "* against the whole point of the ClientHello/HelloVerifyRequest"
+        },
+        {
+          "term": "ClientHello",
+          "line": 572,
+          "text": "* mechanism). Instead we only look at the first ClientHello fragment"
+        },
+        {
+          "term": "ClientHello",
+          "line": 576,
+          "text": "/* Non initial ClientHello fragment (or bad fragment) */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 604,
+          "text": "* ClientHello fragment. Either way we can't handle it."
+        },
+        {
+          "term": "ClientHello",
+          "line": 646,
+          "text": "* There was no cookie in the ClientHello so we need to send a"
+        },
+        {
+          "term": "ClientHello",
+          "line": 677,
+          "text": "* received ClientHello"
+        },
+        {
+          "term": "ClientHello",
+          "line": 557,
+          "text": "if (msgtype != SSL3_MT_CLIENT_HELLO) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 577,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_FRAGMENTED_CLIENT_HELLO);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-1-must-not-use-legacy-version_candidate_1.c",
+    "locations/code/rfc8446-4-2-1-must-not-use-legacy-version_candidate_2.c",
+    "locations/code/rfc8446-4-2-1-must-not-use-legacy-version_candidate_3.c",
+    "locations/code/rfc8446-4-2-1-must-not-use-legacy-version_candidate_4.c",
+    "locations/code/rfc8446-4-2-1-must-not-use-legacy-version_candidate_5.c",
+    "locations/code/rfc8446-4-2-1-must-not-use-legacy-version_candidate_6.c",
+    "locations/code/rfc8446-4-2-1-must-not-use-legacy-version_candidate_7.c",
+    "locations/code/rfc8446-4-2-1-must-not-use-legacy-version_candidate_8.c",
+    "locations/code/rfc8446-4-2-1-must-not-use-legacy-version_candidate_9.c",
+    "locations/code/rfc8446-4-2-1-must-not-use-legacy-version_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 466,
+    "files_with_hits": 31,
+    "functions_identified": 100,
+    "null_scope_hits": 130,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1841
+  }
+}

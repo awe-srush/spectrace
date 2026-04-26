@@ -1,0 +1,35 @@
+[
+  {
+    "rule_id": "rfc8446-7.1-should-erase-secret-after-derivation",
+    "source_section": "7.1",
+    "source_text": "Once all the values which are to be derived from a given secret have been computed, that secret SHOULD be erased.",
+    "normative_keyword": "SHOULD",
+    "rule_type": "conditional_action",
+    "rule_statement": "Once all derived values are computed from a secret, that secret SHOULD be erased.",
+    "entity": "both",
+    "applies_when": "All values derived from a key schedule secret have been computed",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "secret erased from memory",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "key schedule",
+        "secret erasure"
+      ]
+    },
+    "checkability": "low",
+    "checkability_rationale": "Internal memory management; cannot be verified externally.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit SHOULD.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

@@ -1,0 +1,574 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.3-key-type-appropriate",
+    "source_section": "4.2.3",
+    "source_text": "The keys found in certificates MUST also be of appropriate type for the signature algorithms they are used with.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "Certificate keys MUST be of appropriate type for the signature algorithms they are used with (e.g., RSA key for RSA-PSS signatures).",
+    "entity": "both",
+    "applies_when": "Endpoint uses a certificate key with a signature algorithm",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "key type matches signature algorithm requirements",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate",
+        "CertificateVerify"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "signature_algorithms",
+        "signature_algorithms_cert"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "certificate authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify key type matches the algorithm used in CertificateVerify or certificate chain.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-client-must-send-sig-algs",
+    "source_section": "4.2.3",
+    "source_text": "Clients which desire the server to authenticate itself via a certificate MUST send the \"signature_algorithms\" extension.",
+    "normative_keyword": "MUST",
+    "rule_type": "presence_requirement",
+    "rule_statement": "Clients that want server certificate authentication MUST send the signature_algorithms extension in ClientHello.",
+    "entity": "client",
+    "applies_when": "Client desires server certificate authentication",
+    "target_message": "ClientHello",
+    "target_field": "extensions",
+    "expected_value": "signature_algorithms extension present",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "certificate authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify extension is included when certificate auth is expected.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "9.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-server-abort-missing-sig-algs",
+    "source_section": "4.2.3",
+    "source_text": "If a server is authenticating via a certificate and the client has not sent a \"signature_algorithms\" extension, then the server MUST abort the handshake with a \"missing_extension\" alert (see Section 9.2).",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If the server authenticates via certificate and the client did not send signature_algorithms, the server MUST abort with a missing_extension alert.",
+    "entity": "server",
+    "applies_when": "Server wants to authenticate via certificate but ClientHello lacks signature_algorithms",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": "missing_extension",
+    "violation_alert_source": "4.2.3",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [
+        "missing_extension"
+      ],
+      "modes_or_conditions": [
+        "certificate authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server checks for extension presence and aborts with correct alert.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specific alert.",
+    "cross_section_context_used": [
+      "9.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-pss-rsae-salt-length",
+    "source_section": "4.2.3",
+    "source_text": "The length of the Salt MUST be equal to the length of the output of the digest algorithm.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "For RSASSA-PSS RSAE algorithms, the salt length MUST equal the output length of the digest algorithm.",
+    "entity": "both",
+    "applies_when": "Endpoint generates or verifies an RSASSA-PSS RSAE signature",
+    "target_message": "CertificateVerify",
+    "target_field": null,
+    "expected_value": "salt length = digest output length",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify",
+        "Certificate"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "RSASSA-PSS RSAE",
+        "rsa_pss_rsae_sha256",
+        "rsa_pss_rsae_sha384",
+        "rsa_pss_rsae_sha512"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify PSS parameters set salt length equal to hash output length.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with exact constraint.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-pss-rsae-oid",
+    "source_section": "4.2.3",
+    "source_text": "If the public key is carried in an X.509 certificate, it MUST use the rsaEncryption OID [RFC5280].",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "For RSASSA-PSS RSAE algorithms, the public key in X.509 certificate MUST use the rsaEncryption OID.",
+    "entity": "both",
+    "applies_when": "Certificate uses RSASSA-PSS RSAE algorithm with X.509 public key",
+    "target_message": "Certificate",
+    "target_field": null,
+    "expected_value": "rsaEncryption OID",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "RSASSA-PSS RSAE",
+        "X.509"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify OID in certificate public key info.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-pss-pss-salt-length",
+    "source_section": "4.2.3",
+    "source_text": "The length of the Salt MUST be equal to the length of the digest algorithm.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "For RSASSA-PSS PSS algorithms, the salt length MUST equal the output length of the digest algorithm.",
+    "entity": "both",
+    "applies_when": "Endpoint generates or verifies an RSASSA-PSS PSS signature",
+    "target_message": "CertificateVerify",
+    "target_field": null,
+    "expected_value": "salt length = digest output length",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify",
+        "Certificate"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "RSASSA-PSS PSS",
+        "rsa_pss_pss_sha256",
+        "rsa_pss_pss_sha384",
+        "rsa_pss_pss_sha512"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify PSS parameters set salt length equal to hash output length.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-pss-pss-oid",
+    "source_section": "4.2.3",
+    "source_text": "If the public key is carried in an X.509 certificate, it MUST use the RSASSA-PSS OID [RFC5756].",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "For RSASSA-PSS PSS algorithms, the public key in X.509 certificate MUST use the RSASSA-PSS OID.",
+    "entity": "both",
+    "applies_when": "Certificate uses RSASSA-PSS PSS algorithm with X.509 public key",
+    "target_message": "Certificate",
+    "target_field": null,
+    "expected_value": "RSASSA-PSS OID",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "RSASSA-PSS PSS",
+        "X.509"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify OID in certificate.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-pss-pss-params-der-encoded",
+    "source_section": "4.2.3",
+    "source_text": "When used in certificate signatures, the algorithm parameters MUST be DER encoded.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "When RSASSA-PSS PSS is used in certificate signatures, the algorithm parameters MUST be DER encoded.",
+    "entity": "both",
+    "applies_when": "RSASSA-PSS PSS algorithm is used in certificate signatures",
+    "target_message": "Certificate",
+    "target_field": null,
+    "expected_value": "DER-encoded parameters",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "RSASSA-PSS PSS",
+        "certificate signatures",
+        "DER encoding"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify DER encoding of algorithm parameters.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-pss-pss-params-must-match-pubkey",
+    "source_section": "4.2.3",
+    "source_text": "If the corresponding public key's parameters are present, then the parameters in the signature MUST be identical to those in the public key.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "If the public key has RSASSA-PSS parameters, the signature parameters MUST be identical to the public key parameters.",
+    "entity": "both",
+    "applies_when": "RSASSA-PSS PSS public key has parameters present",
+    "target_message": "Certificate",
+    "target_field": null,
+    "expected_value": "signature params = public key params",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "RSASSA-PSS PSS",
+        "parameter consistency"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct comparison of signature and public key parameters.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with clear condition.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-legacy-sha1-lowest-priority",
+    "source_section": "4.2.3",
+    "source_text": "Clients offering these values MUST list them as the lowest priority (listed after all other algorithms in SignatureSchemeList).",
+    "normative_keyword": "MUST",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "Clients offering legacy SHA-1 signature algorithms MUST list them as the lowest priority (last in SignatureSchemeList).",
+    "entity": "client",
+    "applies_when": "Client includes rsa_pkcs1_sha1 or ecdsa_sha1 in signature_algorithms",
+    "target_message": "ClientHello",
+    "target_field": "signature_algorithms.supported_signature_algorithms",
+    "expected_value": "SHA-1 schemes listed after all other algorithms",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "supported_signature_algorithms"
+      ],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "legacy algorithms",
+        "SHA-1",
+        "backward compatibility"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify ordering of algorithm list in the extension.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with clear ordering requirement.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-server-must-not-offer-sha1-cert",
+    "source_section": "4.2.3",
+    "source_text": "TLS 1.3 servers MUST NOT offer a SHA-1 signed certificate unless no valid certificate chain can be produced without it (see Section 4.4.2.2).",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "conditional_action",
+    "rule_statement": "TLS 1.3 servers MUST NOT offer a SHA-1 signed certificate unless no valid certificate chain can be produced without it.",
+    "entity": "server",
+    "applies_when": "Server selects a certificate chain for TLS 1.3",
+    "target_message": "Certificate",
+    "target_field": null,
+    "expected_value": "no SHA-1 signed certificates unless absolutely necessary",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "SHA-1",
+        "certificate selection"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify certificate selection avoids SHA-1, but the 'unless no valid chain' exception requires context.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT with stated exception.",
+    "cross_section_context_used": [
+      "4.4.2.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-tls12-compat-must-follow-rfc5246",
+    "source_section": "4.2.3",
+    "source_text": "TLS 1.3 implementations willing to negotiate TLS 1.2 MUST behave in accordance with the requirements of [RFC5246] when negotiating that version.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "TLS 1.3 implementations that negotiate TLS 1.2 MUST behave per RFC 5246 requirements for that version.",
+    "entity": "both",
+    "applies_when": "TLS 1.3 implementation negotiates TLS 1.2",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "TLS 1.2 negotiation",
+        "backward compatibility"
+      ]
+    },
+    "checkability": "low",
+    "checkability_rationale": "Requires full RFC 5246 conformance check \u2014 very broad scope.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-deprecated-must-not-offer",
+    "source_section": "4.2.3",
+    "source_text": "They MUST NOT be offered or negotiated by any implementation. In particular, MD5 [SLOTH], SHA-224, and DSA MUST NOT be used.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "value_constraint",
+    "rule_statement": "Deprecated legacy hash/signature pairs (MD5, SHA-224, DSA) MUST NOT be offered or negotiated by any implementation.",
+    "entity": "both",
+    "applies_when": "Any TLS 1.3 implementation constructs or processes signature algorithm lists",
+    "target_message": "ClientHello",
+    "target_field": "signature_algorithms",
+    "expected_value": "no MD5, SHA-224, or DSA algorithms",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "CertificateRequest"
+      ],
+      "field_names": [
+        "supported_signature_algorithms"
+      ],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "deprecated algorithms"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify that MD5, SHA-224, and DSA code points are not included.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-tls12-accept-any-advertised-curve",
+    "source_section": "4.2.3",
+    "source_text": "If TLS 1.2 is negotiated, implementations MUST be prepared to accept a signature that uses any curve that they advertised in the \"supported_groups\" extension.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "When TLS 1.2 is negotiated, implementations MUST accept ECDSA signatures using any curve they advertised in supported_groups.",
+    "entity": "both",
+    "applies_when": "TLS 1.2 is negotiated and ECDSA signatures are used",
+    "target_message": "CertificateVerify",
+    "target_field": null,
+    "expected_value": "accept any advertised curve for ECDSA",
+    "related_fields": [
+      "supported_groups"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify",
+        "Certificate"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "supported_groups",
+        "signature_algorithms"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "TLS 1.2",
+        "ECDSA"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Requires testing signature verification with different curves.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.3-tls12-accept-pss",
+    "source_section": "4.2.3",
+    "source_text": "Implementations that advertise support for RSASSA-PSS (which is mandatory in TLS 1.3) MUST be prepared to accept a signature using that scheme even when TLS 1.2 is negotiated.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "Implementations advertising RSASSA-PSS support MUST accept PSS signatures even when TLS 1.2 is negotiated.",
+    "entity": "both",
+    "applies_when": "TLS 1.2 is negotiated and implementation advertises RSASSA-PSS",
+    "target_message": "CertificateVerify",
+    "target_field": null,
+    "expected_value": "accept RSASSA-PSS signature under TLS 1.2",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "TLS 1.2",
+        "RSASSA-PSS"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Requires testing PSS signature verification under TLS 1.2 code path.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

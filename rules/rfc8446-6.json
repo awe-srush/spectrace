@@ -1,0 +1,141 @@
+[
+  {
+    "rule_id": "rfc8446-6-must-not-allow-data-after-error-alert",
+    "source_section": "6",
+    "source_text": "Upon receiving an error alert, the TLS implementation SHOULD indicate an error to the application and MUST NOT allow any further data to be sent or received on the connection.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "conditional_action",
+    "rule_statement": "Upon receiving an error alert, the implementation MUST NOT allow any further data to be sent or received.",
+    "entity": "both",
+    "applies_when": "Endpoint receives an error alert",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "no further data exchange",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "error alert",
+        "connection closure"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify no data is sent or accepted after error alert receipt.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-6-must-forget-secrets-on-failure",
+    "source_section": "6",
+    "source_text": "Servers and clients MUST forget the secret values and keys established in failed connections, with the exception of the PSKs associated with session tickets, which SHOULD be discarded if possible.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "On connection failure, endpoints MUST forget secret values and keys (except ticket PSKs which SHOULD be discarded).",
+    "entity": "both",
+    "applies_when": "TLS connection fails",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "secrets and keys erased from memory",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "connection failure",
+        "key erasure"
+      ]
+    },
+    "checkability": "low",
+    "checkability_rationale": "Internal memory management behavior; hard to verify externally.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-6-alerts-must-be-sent-as-fatal",
+    "source_section": "6",
+    "source_text": "All the alerts listed in Section 6.2 MUST be sent with AlertLevel=fatal and MUST be treated as error alerts when received regardless of the AlertLevel in the message.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "All Section 6.2 alerts MUST be sent with AlertLevel=fatal and MUST be treated as errors regardless of received AlertLevel.",
+    "entity": "both",
+    "applies_when": "Sending or receiving alerts listed in \u00a76.2",
+    "target_message": null,
+    "target_field": "AlertLevel",
+    "expected_value": "fatal (2) when sending; treated as error regardless when receiving",
+    "related_fields": [
+      "AlertDescription"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [
+        "AlertLevel",
+        "AlertDescription"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "error alert"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify AlertLevel field value in sent alerts and handling of received alerts.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "6.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-6-unknown-alerts-must-be-treated-as-error",
+    "source_section": "6",
+    "source_text": "Unknown Alert types MUST be treated as error alerts.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "Unknown alert types MUST be treated as error alerts (fatal).",
+    "entity": "both",
+    "applies_when": "Endpoint receives an alert with unrecognized AlertDescription",
+    "target_message": null,
+    "target_field": "AlertDescription",
+    "expected_value": "treated as fatal error",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [
+        "AlertDescription"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "unknown alert"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can send unknown alert type and verify receiver treats it as fatal.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

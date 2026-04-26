@@ -1,0 +1,134 @@
+{
+  "rule_id": "rfc8446-5.4-must-limit-scanning-to-aead-cleartext",
+  "rule_type": "algorithmic",
+  "checkability": "low",
+  "search_terms": [
+    {
+      "term": "TLSInnerPlaintext",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "TLSInnerPlaintext",
+        "tls_inner_plaintext"
+      ]
+    },
+    {
+      "term": "AEAD decryption",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "AEAD decryption"
+      ]
+    },
+    {
+      "term": "record padding",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "record padding"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/quic/quic_record_rx.c",
+      "function": "qrx_get_cipher_ctx_idx",
+      "line_range": [
+        787,
+        876
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "AEAD decryption"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AEAD decryption",
+          "line": 868,
+          "text": "* decrypt with, so just try that. If AEAD decryption fails, the"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/record/methods/ktls_meth.c",
+      "function": "ktls_set_crypto_state",
+      "line_range": [
+        286,
+        342
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "record padding"
+        ]
+      },
+      "hits": [
+        {
+          "term": "record padding",
+          "line": 320,
+          "text": "/* KTLS does not support record padding */"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/ssl_conf.c",
+      "function": "cmd_RecordPadding",
+      "line_range": [
+        667,
+        721
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "record padding"
+        ]
+      },
+      "hits": [
+        {
+          "term": "record padding",
+          "line": 698,
+          "text": "* However, when configuring record padding via config file, we have no idea if we are"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-4-must-limit-scanning-to-aead-cleartext_candidate_1.c",
+    "locations/code/rfc8446-5-4-must-limit-scanning-to-aead-cleartext_candidate_2.c",
+    "locations/code/rfc8446-5-4-must-limit-scanning-to-aead-cleartext_candidate_3.c"
+  ],
+  "stats": {
+    "total_grep_hits": 5,
+    "files_with_hits": 5,
+    "functions_identified": 3,
+    "null_scope_hits": 2,
+    "top_k_returned": 3,
+    "total_lines_in_top_k": 202
+  }
+}

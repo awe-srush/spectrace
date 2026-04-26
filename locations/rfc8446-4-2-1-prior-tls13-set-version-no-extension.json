@@ -1,0 +1,1394 @@
+{
+  "rule_id": "rfc8446-4.2.1-prior-tls13-set-version-no-extension",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ServerHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ServerHello",
+        "server_hello"
+      ]
+    },
+    {
+      "term": "version",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "version"
+      ]
+    },
+    {
+      "term": "legacy_version",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "legacy_version",
+        "LegacyVersion"
+      ]
+    },
+    {
+      "term": "supported_versions",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "supported_versions",
+        "SupportedVersions"
+      ]
+    },
+    {
+      "term": "TLS 1.2 negotiation",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "TLS 1.2 negotiation"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "ssl_choose_server_version",
+      "line_range": [
+        2139,
+        2298
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 61,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ServerHello",
+          "legacy_version",
+          "supported_versions",
+          "version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2224,
+          "text": "* ClientHello.legacy_version or ServerHello.legacy_version set to"
+        },
+        {
+          "term": "version",
+          "line": 2139,
+          "text": "int ssl_choose_server_version(SSL_CONNECTION *s, CLIENTHELLO_MSG *hello,"
+        },
+        {
+          "term": "version",
+          "line": 2143,
+          "text": "* With version-flexible methods we have an initial state with:"
+        },
+        {
+          "term": "version",
+          "line": 2145,
+          "text": "*   s->method->version == (D)TLS_ANY_VERSION,"
+        },
+        {
+          "term": "version",
+          "line": 2146,
+          "text": "*   s->version == (D)TLS_MAX_VERSION_INTERNAL."
+        },
+        {
+          "term": "version",
+          "line": 2148,
+          "text": "* So we detect version-flexible methods via the method version, not the"
+        },
+        {
+          "term": "version",
+          "line": 2149,
+          "text": "* handle version."
+        },
+        {
+          "term": "version",
+          "line": 2152,
+          "text": "int server_version = ssl->method->version;"
+        },
+        {
+          "term": "version",
+          "line": 2153,
+          "text": "int client_version = hello->legacy_version;"
+        },
+        {
+          "term": "version",
+          "line": 2154,
+          "text": "const version_info *vent;"
+        },
+        {
+          "term": "version",
+          "line": 2155,
+          "text": "const version_info *table;"
+        },
+        {
+          "term": "version",
+          "line": 2157,
+          "text": "RAW_EXTENSION *suppversions;"
+        },
+        {
+          "term": "version",
+          "line": 2159,
+          "text": "s->client_version = client_version;"
+        },
+        {
+          "term": "version",
+          "line": 2161,
+          "text": "switch (server_version) {"
+        },
+        {
+          "term": "version",
+          "line": 2164,
+          "text": "if (ssl_version_cmp(s, client_version, s->version) < 0)"
+        },
+        {
+          "term": "version",
+          "line": 2165,
+          "text": "return SSL_R_WRONG_SSL_VERSION;"
+        },
+        {
+          "term": "version",
+          "line": 2168,
+          "text": "* If this SSL handle is not from a version flexible method we don't"
+        },
+        {
+          "term": "version",
+          "line": 2171,
+          "text": "* versions they don't want.  If not, then easy to fix, just return"
+        },
+        {
+          "term": "version",
+          "line": 2181,
+          "text": "case TLS_ANY_VERSION:"
+        },
+        {
+          "term": "version",
+          "line": 2182,
+          "text": "table = tls_version_table;"
+        },
+        {
+          "term": "version",
+          "line": 2184,
+          "text": "case DTLS_ANY_VERSION:"
+        },
+        {
+          "term": "version",
+          "line": 2185,
+          "text": "table = dtls_version_table;"
+        },
+        {
+          "term": "version",
+          "line": 2189,
+          "text": "suppversions = &hello->pre_proc_exts[TLSEXT_IDX_supported_versions];"
+        },
+        {
+          "term": "version",
+          "line": 2194,
+          "text": "* succeeded, and not with a smuggled earlier version ClientHello"
+        },
+        {
+          "term": "version",
+          "line": 2196,
+          "text": "* This bit checks there is a supported version present, a little"
+        },
+        {
+          "term": "version",
+          "line": 2197,
+          "text": "* bit further below, we check that that version is TLSv1.3"
+        },
+        {
+          "term": "version",
+          "line": 2199,
+          "text": "if (!suppversions->present && s->ext.ech.success == 1)"
+        },
+        {
+          "term": "version",
+          "line": 2203,
+          "text": "/* If we did an HRR then supported versions is mandatory */"
+        },
+        {
+          "term": "version",
+          "line": 2204,
+          "text": "if (!suppversions->present && s->hello_retry_request != SSL_HRR_NONE)"
+        },
+        {
+          "term": "version",
+          "line": 2207,
+          "text": "if (suppversions->present && !SSL_CONNECTION_IS_DTLS(s)) {"
+        },
+        {
+          "term": "version",
+          "line": 2211,
+          "text": "PACKET versionslist;"
+        },
+        {
+          "term": "version",
+          "line": 2213,
+          "text": "suppversions->parsed = 1;"
+        },
+        {
+          "term": "version",
+          "line": 2215,
+          "text": "if (!PACKET_as_length_prefixed_1(&suppversions->data, &versionslist)) {"
+        },
+        {
+          "term": "version",
+          "line": 2221,
+          "text": "* The TLSv1.3 spec says the client MUST set this to TLS1_2_VERSION."
+        },
+        {
+          "term": "version",
+          "line": 2224,
+          "text": "* ClientHello.legacy_version or ServerHello.legacy_version set to"
+        },
+        {
+          "term": "version",
+          "line": 2225,
+          "text": "* 0x0300 MUST abort the handshake with a \"protocol_version\" alert.\""
+        },
+        {
+          "term": "version",
+          "line": 2229,
+          "text": "if (client_version <= SSL3_VERSION)"
+        },
+        {
+          "term": "version",
+          "line": 2230,
+          "text": "return SSL_R_BAD_LEGACY_VERSION;"
+        },
+        {
+          "term": "version",
+          "line": 2232,
+          "text": "while (PACKET_get_net_2(&versionslist, &candidate_vers)) {"
+        },
+        {
+          "term": "version",
+          "line": 2233,
+          "text": "if (ssl_version_cmp(s, candidate_vers, best_vers) <= 0)"
+        },
+        {
+          "term": "version",
+          "line": 2235,
+          "text": "if (ssl_version_supported(s, candidate_vers, &best_method))"
+        },
+        {
+          "term": "version",
+          "line": 2238,
+          "text": "if (PACKET_remaining(&versionslist) != 0) {"
+        },
+        {
+          "term": "version",
+          "line": 2246,
+          "text": "if (s->ext.ech.success == 1 && best_vers != TLS1_3_VERSION)"
+        },
+        {
+          "term": "version",
+          "line": 2254,
+          "text": "if (best_vers != TLS1_3_VERSION)"
+        },
+        {
+          "term": "version",
+          "line": 2259,
+          "text": "s->version = best_vers;"
+        },
+        {
+          "term": "version",
+          "line": 2261,
+          "text": "if (!ssl_set_record_protocol_version(s, best_vers))"
+        },
+        {
+          "term": "version",
+          "line": 2270,
+          "text": "* If the supported versions extension isn't present, then the highest"
+        },
+        {
+          "term": "version",
+          "line": 2271,
+          "text": "* version we can negotiate is TLSv1.2"
+        },
+        {
+          "term": "version",
+          "line": 2273,
+          "text": "if (ssl_version_cmp(s, client_version, TLS1_3_VERSION) >= 0)"
+        },
+        {
+          "term": "version",
+          "line": 2274,
+          "text": "client_version = TLS1_2_VERSION;"
+        },
+        {
+          "term": "version",
+          "line": 2277,
+          "text": "* No supported versions extension, so we just use the version supplied in"
+        },
+        {
+          "term": "version",
+          "line": 2280,
+          "text": "for (vent = table; vent->version != 0; ++vent) {"
+        },
+        {
+          "term": "version",
+          "line": 2283,
+          "text": "if (vent->smeth == NULL || ssl_version_cmp(s, client_version, vent->version) < 0)"
+        },
+        {
+          "term": "version",
+          "line": 2287,
+          "text": "check_for_downgrade(s, vent->version, dgrd);"
+        },
+        {
+          "term": "version",
+          "line": 2288,
+          "text": "s->version = vent->version;"
+        },
+        {
+          "term": "version",
+          "line": 2290,
+          "text": "if (!ssl_set_record_protocol_version(s, s->version))"
+        },
+        {
+          "term": "version",
+          "line": 2297,
+          "text": "return disabled ? SSL_R_UNSUPPORTED_PROTOCOL : SSL_R_VERSION_TOO_LOW;"
+        },
+        {
+          "term": "legacy_version",
+          "line": 2153,
+          "text": "int client_version = hello->legacy_version;"
+        },
+        {
+          "term": "legacy_version",
+          "line": 2224,
+          "text": "* ClientHello.legacy_version or ServerHello.legacy_version set to"
+        },
+        {
+          "term": "legacy_version",
+          "line": 2230,
+          "text": "return SSL_R_BAD_LEGACY_VERSION;"
+        },
+        {
+          "term": "supported_versions",
+          "line": 2189,
+          "text": "suppversions = &hello->pre_proc_exts[TLSEXT_IDX_supported_versions];"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "ssl_choose_client_version",
+      "line_range": [
+        2311,
+        2425
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 42,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ServerHello",
+          "supported_versions",
+          "version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2324,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2325,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "version",
+          "line": 2311,
+          "text": "int ssl_choose_client_version(SSL_CONNECTION *s, int version,"
+        },
+        {
+          "term": "version",
+          "line": 2314,
+          "text": "const version_info *vent;"
+        },
+        {
+          "term": "version",
+          "line": 2315,
+          "text": "const version_info *table;"
+        },
+        {
+          "term": "version",
+          "line": 2319,
+          "text": "origv = s->version;"
+        },
+        {
+          "term": "version",
+          "line": 2320,
+          "text": "s->version = version;"
+        },
+        {
+          "term": "version",
+          "line": 2322,
+          "text": "/* This will overwrite s->version if the extension is present */"
+        },
+        {
+          "term": "version",
+          "line": 2323,
+          "text": "if (!tls_parse_extension(s, TLSEXT_IDX_supported_versions,"
+        },
+        {
+          "term": "version",
+          "line": 2328,
+          "text": "s->version = origv;"
+        },
+        {
+          "term": "version",
+          "line": 2333,
+          "text": "&& s->version != TLS1_3_VERSION) {"
+        },
+        {
+          "term": "version",
+          "line": 2334,
+          "text": "s->version = origv;"
+        },
+        {
+          "term": "version",
+          "line": 2335,
+          "text": "SSLfatal(s, SSL_AD_PROTOCOL_VERSION, SSL_R_WRONG_SSL_VERSION);"
+        },
+        {
+          "term": "version",
+          "line": 2339,
+          "text": "switch (ssl->method->version) {"
+        },
+        {
+          "term": "version",
+          "line": 2341,
+          "text": "if (s->version != ssl->method->version) {"
+        },
+        {
+          "term": "version",
+          "line": 2342,
+          "text": "s->version = origv;"
+        },
+        {
+          "term": "version",
+          "line": 2343,
+          "text": "SSLfatal(s, SSL_AD_PROTOCOL_VERSION, SSL_R_WRONG_SSL_VERSION);"
+        },
+        {
+          "term": "version",
+          "line": 2347,
+          "text": "* If this SSL handle is not from a version flexible method we don't"
+        },
+        {
+          "term": "version",
+          "line": 2350,
+          "text": "* versions they don't want.  If not, then easy to fix, just return"
+        },
+        {
+          "term": "version",
+          "line": 2353,
+          "text": "if (!ssl_set_record_protocol_version(s, s->version)) {"
+        },
+        {
+          "term": "version",
+          "line": 2358,
+          "text": "case TLS_ANY_VERSION:"
+        },
+        {
+          "term": "version",
+          "line": 2359,
+          "text": "table = tls_version_table;"
+        },
+        {
+          "term": "version",
+          "line": 2361,
+          "text": "case DTLS_ANY_VERSION:"
+        },
+        {
+          "term": "version",
+          "line": 2362,
+          "text": "table = dtls_version_table;"
+        },
+        {
+          "term": "version",
+          "line": 2366,
+          "text": "ret = ssl_get_min_max_version(s, &ver_min, &ver_max, &real_max);"
+        },
+        {
+          "term": "version",
+          "line": 2368,
+          "text": "s->version = origv;"
+        },
+        {
+          "term": "version",
+          "line": 2369,
+          "text": "SSLfatal(s, SSL_AD_PROTOCOL_VERSION, ret);"
+        },
+        {
+          "term": "version",
+          "line": 2372,
+          "text": "if (ssl_version_cmp(s, s->version, ver_min) < 0"
+        },
+        {
+          "term": "version",
+          "line": 2373,
+          "text": "|| ssl_version_cmp(s, s->version, ver_max) > 0) {"
+        },
+        {
+          "term": "version",
+          "line": 2374,
+          "text": "s->version = origv;"
+        },
+        {
+          "term": "version",
+          "line": 2375,
+          "text": "SSLfatal(s, SSL_AD_PROTOCOL_VERSION, SSL_R_UNSUPPORTED_PROTOCOL);"
+        },
+        {
+          "term": "version",
+          "line": 2384,
+          "text": "if (!SSL_CONNECTION_IS_DTLS(s) && real_max > s->version) {"
+        },
+        {
+          "term": "version",
+          "line": 2385,
+          "text": "/* Signal applies to all versions */"
+        },
+        {
+          "term": "version",
+          "line": 2391,
+          "text": "s->version = origv;"
+        },
+        {
+          "term": "version",
+          "line": 2397,
+          "text": "if (real_max == TLS1_3_VERSION"
+        },
+        {
+          "term": "version",
+          "line": 2403,
+          "text": "s->version = origv;"
+        },
+        {
+          "term": "version",
+          "line": 2410,
+          "text": "for (vent = table; vent->version != 0; ++vent) {"
+        },
+        {
+          "term": "version",
+          "line": 2411,
+          "text": "if (vent->cmeth == NULL || s->version != vent->version)"
+        },
+        {
+          "term": "version",
+          "line": 2415,
+          "text": "if (!ssl_set_record_protocol_version(s, s->version)) {"
+        },
+        {
+          "term": "version",
+          "line": 2422,
+          "text": "s->version = origv;"
+        },
+        {
+          "term": "version",
+          "line": 2423,
+          "text": "SSLfatal(s, SSL_AD_PROTOCOL_VERSION, SSL_R_UNSUPPORTED_PROTOCOL);"
+        },
+        {
+          "term": "supported_versions",
+          "line": 2323,
+          "text": "if (!tls_parse_extension(s, TLSEXT_IDX_supported_versions,"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "ssl_set_client_hello_version",
+      "line_range": [
+        2554,
+        2591
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ServerHello",
+          "legacy_version",
+          "version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2578,
+          "text": "* we read the ServerHello. So we need to tell the record layer"
+        },
+        {
+          "term": "version",
+          "line": 2554,
+          "text": "int ssl_set_client_hello_version(SSL_CONNECTION *s)"
+        },
+        {
+          "term": "version",
+          "line": 2559,
+          "text": "* In a renegotiation we always send the same client_version that we sent"
+        },
+        {
+          "term": "version",
+          "line": 2560,
+          "text": "* last time, regardless of which version we eventually negotiated."
+        },
+        {
+          "term": "version",
+          "line": 2565,
+          "text": "ret = ssl_get_min_max_version(s, &ver_min, &ver_max, NULL);"
+        },
+        {
+          "term": "version",
+          "line": 2570,
+          "text": "s->version = ver_max;"
+        },
+        {
+          "term": "version",
+          "line": 2575,
+          "text": "* Even though this is technically before version negotiation,"
+        },
+        {
+          "term": "version",
+          "line": 2581,
+          "text": "if (!ssl_set_record_protocol_version(s, ver_max))"
+        },
+        {
+          "term": "version",
+          "line": 2584,
+          "text": "} else if (ver_max > TLS1_2_VERSION) {"
+        },
+        {
+          "term": "version",
+          "line": 2585,
+          "text": "/* TLS1.3 always uses TLS1.2 in the legacy_version field */"
+        },
+        {
+          "term": "version",
+          "line": 2586,
+          "text": "ver_max = TLS1_2_VERSION;"
+        },
+        {
+          "term": "version",
+          "line": 2589,
+          "text": "s->client_version = ver_max;"
+        },
+        {
+          "term": "legacy_version",
+          "line": 2585,
+          "text": "/* TLS1.3 always uses TLS1.2 in the legacy_version field */"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "legacy_version",
+          "version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2164,
+          "text": "* ServerHello."
+        },
+        {
+          "term": "version",
+          "line": 1886,
+          "text": "/* Choose the server SSL/TLS/DTLS version. */"
+        },
+        {
+          "term": "version",
+          "line": 1887,
+          "text": "protverr = ssl_choose_server_version(s, clienthello, &dgrd);"
+        },
+        {
+          "term": "version",
+          "line": 1896,
+          "text": "/* like ssl3_get_record, send alert using remote version number */"
+        },
+        {
+          "term": "version",
+          "line": 1897,
+          "text": "s->version = s->client_version = clienthello->legacy_version;"
+        },
+        {
+          "term": "version",
+          "line": 1899,
+          "text": "SSLfatal(s, SSL_AD_PROTOCOL_VERSION, protverr);"
+        },
+        {
+          "term": "version",
+          "line": 1955,
+          "text": "} else if (SSL_CIPHER_get_id(c) == SSL3_CK_FALLBACK_SCSV && !ssl_check_version_downgrade(s)) {"
+        },
+        {
+          "term": "version",
+          "line": 1958,
+          "text": "* a higher version.  We should fail if the current version"
+        },
+        {
+          "term": "version",
+          "line": 2003,
+          "text": "* Versions before 0.9.7 always allow clients to resume sessions in"
+        },
+        {
+          "term": "version",
+          "line": 2008,
+          "text": "* this for security won't even compile against older library versions)."
+        },
+        {
+          "term": "version",
+          "line": 2136,
+          "text": "&& s->version >= TLS1_VERSION"
+        },
+        {
+          "term": "legacy_version",
+          "line": 1897,
+          "text": "s->version = s->client_version = clienthello->legacy_version;"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_supported_versions",
+      "line_range": [
+        2157,
+        2191
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ServerHello",
+          "supported_versions",
+          "version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2171,
+          "text": "* a ServerHello is TLSv1.3 therefore we shouldn't be getting anything else."
+        },
+        {
+          "term": "version",
+          "line": 2157,
+          "text": "int tls_parse_stoc_supported_versions(SSL_CONNECTION *s, PACKET *pkt,"
+        },
+        {
+          "term": "version",
+          "line": 2161,
+          "text": "unsigned int version;"
+        },
+        {
+          "term": "version",
+          "line": 2163,
+          "text": "if (!PACKET_get_net_2(pkt, &version)"
+        },
+        {
+          "term": "version",
+          "line": 2170,
+          "text": "* The only protocol version we support which is valid in this extension in"
+        },
+        {
+          "term": "version",
+          "line": 2173,
+          "text": "if (version != TLS1_3_VERSION) {"
+        },
+        {
+          "term": "version",
+          "line": 2175,
+          "text": "SSL_R_BAD_PROTOCOL_VERSION_NUMBER);"
+        },
+        {
+          "term": "version",
+          "line": 2183,
+          "text": "/* We just set it here. We validate it in ssl_choose_client_version */"
+        },
+        {
+          "term": "version",
+          "line": 2184,
+          "text": "s->version = version;"
+        },
+        {
+          "term": "version",
+          "line": 2185,
+          "text": "if (!ssl_set_record_protocol_version(s, version)) {"
+        },
+        {
+          "term": "supported_versions",
+          "line": 2157,
+          "text": "int tls_parse_stoc_supported_versions(SSL_CONNECTION *s, PACKET *pkt,"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "supported_versions",
+          "version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1159,
+          "text": "if (!WPACKET_put_bytes_u8(&hrrpkt, SSL3_MT_SERVER_HELLO)"
+        },
+        {
+          "term": "version",
+          "line": 1012,
+          "text": "unsigned int format, version, key_share, group_id;"
+        },
+        {
+          "term": "version",
+          "line": 1085,
+          "text": "if (format != COOKIE_STATE_FORMAT_VERSION)"
+        },
+        {
+          "term": "version",
+          "line": 1093,
+          "text": "/* Check the version number is sane */"
+        },
+        {
+          "term": "version",
+          "line": 1094,
+          "text": "if (!PACKET_get_net_2(&cookie, &version)) {"
+        },
+        {
+          "term": "version",
+          "line": 1098,
+          "text": "if (version != TLS1_3_VERSION) {"
+        },
+        {
+          "term": "version",
+          "line": 1100,
+          "text": "SSL_R_BAD_PROTOCOL_VERSION_NUMBER);"
+        },
+        {
+          "term": "version",
+          "line": 1161,
+          "text": "|| !WPACKET_put_bytes_u16(&hrrpkt, TLS1_2_VERSION)"
+        },
+        {
+          "term": "version",
+          "line": 1173,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_supported_versions)"
+        },
+        {
+          "term": "version",
+          "line": 1175,
+          "text": "|| !WPACKET_put_bytes_u16(&hrrpkt, s->version)"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1173,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_supported_versions)"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_hello",
+      "line_range": [
+        1619,
+        1846
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "legacy_version",
+          "version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1633,
+          "text": "* the ServerHello.random (or ECH extension if HRR) to signal to the client"
+        },
+        {
+          "term": "version",
+          "line": 1756,
+          "text": "if (!PACKET_get_net_2(pkt, &clienthello->legacy_version)) {"
+        },
+        {
+          "term": "legacy_version",
+          "line": 1756,
+          "text": "if (!PACKET_get_net_2(pkt, &clienthello->legacy_version)) {"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 27,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1821,
+          "text": "* ServerHello.random confirmation trick. If that is good"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1967,
+          "text": "* In TLSv1.3 a ServerHello message signals a key change so the end of"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1702,
+          "text": "MSG_PROCESS_RETURN tls_process_server_hello(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1810,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1811,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1838,
+          "text": "prelude[0] = SSL3_MT_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1956,
+          "text": "context = SSL_CONNECTION_IS_TLS13(s) ? SSL_EXT_TLS1_3_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1957,
+          "text": ": SSL_EXT_TLS1_2_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1978,
+          "text": "SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "version",
+          "line": 1709,
+          "text": "unsigned int sversion;"
+        },
+        {
+          "term": "version",
+          "line": 1736,
+          "text": "if (!PACKET_get_net_2(pkt, &sversion)) {"
+        },
+        {
+          "term": "version",
+          "line": 1742,
+          "text": "if (s->version == TLS1_3_VERSION"
+        },
+        {
+          "term": "version",
+          "line": 1743,
+          "text": "&& sversion == TLS1_2_VERSION"
+        },
+        {
+          "term": "version",
+          "line": 1752,
+          "text": "if (!ssl_set_record_protocol_version(s, s->version)) {"
+        },
+        {
+          "term": "version",
+          "line": 1916,
+          "text": "if (!ssl_choose_client_version(s, sversion, extensions)) {"
+        },
+        {
+          "term": "version",
+          "line": 1953,
+          "text": "* Now we have chosen the version we need to check again that the extensions"
+        },
+        {
+          "term": "version",
+          "line": 1954,
+          "text": "* are appropriate for this version."
+        },
+        {
+          "term": "version",
+          "line": 1996,
+          "text": "if (s->version >= TLS1_VERSION"
+        },
+        {
+          "term": "version",
+          "line": 2051,
+          "text": "s->session->ssl_version = s->version;"
+        },
+        {
+          "term": "version",
+          "line": 2067,
+          "text": "/* Session version and negotiated protocol version should match */"
+        },
+        {
+          "term": "version",
+          "line": 2068,
+          "text": "if (s->version != s->session->ssl_version) {"
+        },
+        {
+          "term": "version",
+          "line": 2069,
+          "text": "SSLfatal(s, SSL_AD_PROTOCOL_VERSION,"
+        },
+        {
+          "term": "version",
+          "line": 2070,
+          "text": "SSL_R_SSL_SESSION_VERSION_MISMATCH);"
+        },
+        {
+          "term": "version",
+          "line": 2074,
+          "text": "* Now that we know the version, update the check to see if it's an allowed"
+        },
+        {
+          "term": "version",
+          "line": 2075,
+          "text": "* version."
+        },
+        {
+          "term": "version",
+          "line": 2077,
+          "text": "s->s3.tmp.min_ver = s->version;"
+        },
+        {
+          "term": "version",
+          "line": 2078,
+          "text": "s->s3.tmp.max_ver = s->version;"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/quic/quic_port.c",
+      "function": "port_send_version_negotiation",
+      "line_range": [
+        1309,
+        1379
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 21,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "field_names"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "supported_versions",
+          "version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "version",
+          "line": 1309,
+          "text": "static void port_send_version_negotiation(QUIC_PORT *port, BIO_ADDR *peer,"
+        },
+        {
+          "term": "version",
+          "line": 1316,
+          "text": "uint32_t supported_versions[1];"
+        },
+        {
+          "term": "version",
+          "line": 1328,
+          "text": "* This is our list of supported protocol versions"
+        },
+        {
+          "term": "version",
+          "line": 1329,
+          "text": "* Currently only QUIC_VERSION_1"
+        },
+        {
+          "term": "version",
+          "line": 1331,
+          "text": "supported_versions[0] = QUIC_VERSION_1;"
+        },
+        {
+          "term": "version",
+          "line": 1335,
+          "text": "* Note: Version negotiation packets, must, unlike"
+        },
+        {
+          "term": "version",
+          "line": 1336,
+          "text": "* other packet types have a version of 0"
+        },
+        {
+          "term": "version",
+          "line": 1338,
+          "text": "hdr.type = QUIC_PKT_TYPE_VERSION_NEG;"
+        },
+        {
+          "term": "version",
+          "line": 1339,
+          "text": "hdr.version = 0;"
+        },
+        {
+          "term": "version",
+          "line": 1342,
+          "text": "hdr.len = sizeof(supported_versions);"
+        },
+        {
+          "term": "version",
+          "line": 1343,
+          "text": "hdr.data = (unsigned char *)supported_versions;"
+        },
+        {
+          "term": "version",
+          "line": 1358,
+          "text": "* Add the array of supported versions to the end of the packet"
+        },
+        {
+          "term": "version",
+          "line": 1360,
+          "text": "for (i = 0; i < OSSL_NELEM(supported_versions); i++) {"
+        },
+        {
+          "term": "version",
+          "line": 1361,
+          "text": "if (!WPACKET_put_bytes_u32(&wpkt, supported_versions[i]))"
+        },
+        {
+          "term": "version",
+          "line": 1378,
+          "text": "\"port version negotiation send failed\");"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1316,
+          "text": "uint32_t supported_versions[1];"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1331,
+          "text": "supported_versions[0] = QUIC_VERSION_1;"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1342,
+          "text": "hdr.len = sizeof(supported_versions);"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1343,
+          "text": "hdr.data = (unsigned char *)supported_versions;"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1360,
+          "text": "for (i = 0; i < OSSL_NELEM(supported_versions); i++) {"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1361,
+          "text": "if (!WPACKET_put_bytes_u32(&wpkt, supported_versions[i]))"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_construct_ctos_supported_versions",
+      "line_range": [
+        733,
+        782
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "field_names"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "supported_versions",
+          "version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "version",
+          "line": 733,
+          "text": "EXT_RETURN tls_construct_ctos_supported_versions(SSL_CONNECTION *s, WPACKET *pkt,"
+        },
+        {
+          "term": "version",
+          "line": 737,
+          "text": "int currv, min_version, max_version, reason;"
+        },
+        {
+          "term": "version",
+          "line": 739,
+          "text": "reason = ssl_get_min_max_version(s, &min_version, &max_version, NULL);"
+        },
+        {
+          "term": "version",
+          "line": 749,
+          "text": "if (max_version < TLS1_3_VERSION)"
+        },
+        {
+          "term": "version",
+          "line": 755,
+          "text": "if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_supported_versions)"
+        },
+        {
+          "term": "version",
+          "line": 762,
+          "text": "/* RFC 8701: prepend a GREASE version value */"
+        },
+        {
+          "term": "version",
+          "line": 765,
+          "text": "ossl_grease_value(s, OSSL_GREASE_VERSION))) {"
+        },
+        {
+          "term": "version",
+          "line": 770,
+          "text": "for (currv = max_version; currv >= min_version; currv--) {"
+        },
+        {
+          "term": "supported_versions",
+          "line": 733,
+          "text": "EXT_RETURN tls_construct_ctos_supported_versions(SSL_CONNECTION *s, WPACKET *pkt,"
+        },
+        {
+          "term": "supported_versions",
+          "line": 755,
+          "text": "if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_supported_versions)"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-1-prior-tls13-set-version-no-extension_candidate_1.c",
+    "locations/code/rfc8446-4-2-1-prior-tls13-set-version-no-extension_candidate_2.c",
+    "locations/code/rfc8446-4-2-1-prior-tls13-set-version-no-extension_candidate_3.c",
+    "locations/code/rfc8446-4-2-1-prior-tls13-set-version-no-extension_candidate_4.c",
+    "locations/code/rfc8446-4-2-1-prior-tls13-set-version-no-extension_candidate_5.c",
+    "locations/code/rfc8446-4-2-1-prior-tls13-set-version-no-extension_candidate_6.c",
+    "locations/code/rfc8446-4-2-1-prior-tls13-set-version-no-extension_candidate_7.c",
+    "locations/code/rfc8446-4-2-1-prior-tls13-set-version-no-extension_candidate_8.c",
+    "locations/code/rfc8446-4-2-1-prior-tls13-set-version-no-extension_candidate_9.c",
+    "locations/code/rfc8446-4-2-1-prior-tls13-set-version-no-extension_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 2883,
+    "files_with_hits": 249,
+    "functions_identified": 469,
+    "null_scope_hits": 1313,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1880
+  }
+}

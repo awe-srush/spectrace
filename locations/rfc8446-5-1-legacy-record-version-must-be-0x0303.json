@@ -1,0 +1,27 @@
+{
+  "rule_id": "rfc8446-5.1-legacy-record-version-must-be-0x0303",
+  "rule_type": "value_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "legacy_record_version",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "legacy_record_version",
+        "LegacyRecordVersion"
+      ]
+    }
+  ],
+  "candidates": [],
+  "scoped_code_files": [],
+  "stats": {
+    "total_grep_hits": 0,
+    "files_with_hits": 0,
+    "functions_identified": 0,
+    "null_scope_hits": 0,
+    "top_k_returned": 0,
+    "total_lines_in_top_k": 0
+  }
+}

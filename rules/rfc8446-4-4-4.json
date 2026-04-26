@@ -1,0 +1,77 @@
+[
+  {
+    "rule_id": "rfc8446-4.4.4-must-verify-finished-contents",
+    "source_section": "4.4.4",
+    "source_text": "Recipients of Finished messages MUST verify that the contents are correct and if incorrect MUST terminate the connection with a \"decrypt_error\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Recipients MUST verify Finished message contents and terminate with decrypt_error if incorrect.",
+    "entity": "both",
+    "applies_when": "Endpoint receives Finished message",
+    "target_message": "Finished",
+    "target_field": "verify_data",
+    "expected_value": "matches computed HMAC value",
+    "related_fields": [],
+    "violation_alert": "decrypt_error",
+    "violation_alert_source": "4.4.4",
+    "protocol_keywords": {
+      "message_types": [
+        "Finished"
+      ],
+      "field_names": [
+        "verify_data"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "decrypt_error"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify implementation checks verify_data and sends correct alert on mismatch.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specified alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.4-records-after-finished-must-be-encrypted",
+    "source_section": "4.4.4",
+    "source_text": "Any records following a Finished message MUST be encrypted under the appropriate application traffic key as described in Section 7.2.",
+    "normative_keyword": "MUST",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "All records following a Finished message MUST be encrypted under the appropriate application traffic key.",
+    "entity": "both",
+    "applies_when": "After Finished message is sent/received",
+    "target_message": "Finished",
+    "target_field": null,
+    "expected_value": "subsequent records use application traffic keys",
+    "related_fields": [],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "Finished"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "key transition",
+        "application traffic"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify key change occurs after Finished.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "7.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

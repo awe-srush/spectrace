@@ -1,0 +1,125 @@
+[
+  {
+    "rule_id": "rfc8446-8.2-bloom-filter-must-reject-0rtt-not-abort",
+    "source_section": "8.2",
+    "source_text": "Servers MAY also implement data stores with false positives, such as Bloom filters, in which case they MUST respond to apparent replay by rejecting 0-RTT but MUST NOT abort the handshake.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Servers using false-positive stores (Bloom filters) MUST reject 0-RTT on apparent replay but MUST NOT abort the handshake.",
+    "entity": "server",
+    "applies_when": "Server uses probabilistic data store for anti-replay and detects apparent duplicate",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": "reject 0-RTT, continue with 1-RTT handshake",
+    "related_fields": [
+      "early_data"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "early_data",
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT",
+        "anti-replay",
+        "Bloom filter"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can test by replaying 0-RTT and verifying server falls back to 1-RTT.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST and MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-8.2-must-derive-storage-key-from-validated-sections",
+    "source_section": "8.2",
+    "source_text": "The server MUST derive the storage key only from validated sections of the ClientHello.",
+    "normative_keyword": "MUST",
+    "rule_type": "algorithmic",
+    "rule_statement": "Anti-replay storage key MUST be derived only from validated sections of the ClientHello (e.g., validated binder or random).",
+    "entity": "server",
+    "applies_when": "Server stores ClientHello for anti-replay",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": "storage key from validated binder or ClientHello.random",
+    "related_fields": [
+      "PskBinderEntry",
+      "ClientHello.random"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "random"
+      ],
+      "extension_names": [
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT",
+        "anti-replay"
+      ]
+    },
+    "checkability": "low",
+    "checkability_rationale": "Internal implementation detail; hard to verify externally.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "4.2.11"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-8.2-should-reject-0rtt-during-startup-overlap",
+    "source_section": "8.2",
+    "source_text": "When implementations are freshly started, they SHOULD reject 0-RTT as long as any portion of their recording window overlaps the startup time.",
+    "normative_keyword": "SHOULD",
+    "rule_type": "conditional_action",
+    "rule_statement": "Freshly started implementations SHOULD reject 0-RTT while their recording window overlaps startup time.",
+    "entity": "server",
+    "applies_when": "Server has recently started and recording window overlaps startup",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": "0-RTT rejected during startup overlap period",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "early_data"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT",
+        "anti-replay",
+        "server startup"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can test by restarting server and attempting 0-RTT.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit SHOULD.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

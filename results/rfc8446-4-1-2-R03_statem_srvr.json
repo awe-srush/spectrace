@@ -1,0 +1,108 @@
+{
+  "rule_id": "rfc8446-4.1.2-R03",
+  "source_file": "ssl/statem/statem_srvr.c",
+  "primary_function": "ossl_statem_server_read_transition",
+  "judgment": "conforms",
+  "confidence": "high",
+  "reasoning": "The rule requires that when a TLS 1.3 server receives a ClientHello outside the initial handshake, it MUST terminate with an 'unexpected_message' alert. The enforcement happens at the state machine transition layer: (1) ossl_statem_server_read_transition checks SSL_CONNECTION_IS_TLS13(s) and delegates to ossl_statem_server13_read_transition. (2) In ossl_statem_server13_read_transition, when in state TLS_ST_OK (post-handshake), only SSL3_MT_KEY_UPDATE and certificate messages are accepted; SSL3_MT_CLIENT_HELLO is not in the allowed transitions, so the function returns 0. (3) Back in ossl_statem_server_read_transition, the failure leads to SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE) at line 312, which is the correct 'unexpected_message' alert. (4) SSL3_AD_UNEXPECTED_MESSAGE maps directly to the 'unexpected_message' alert as confirmed by ssl_stat.c. Additionally, tls_process_client_hello has a safety assertion ossl_assert(!SSL_CONNECTION_IS_TLS13(s)) at the renegotiation check, confirming that TLS 1.3 post-handshake ClientHellos should never reach message processing \u2014 they are rejected at the transition layer with the correct alert.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [
+      196,
+      197,
+      198,
+      312
+    ],
+    "key_code_snippet": "if (SSL_CONNECTION_IS_TLS13(s)) {\n    if (!ossl_statem_server13_read_transition(s, mt))\n        goto err;\n    return 1;\n}\n// ...\nerr:\nSSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);\nreturn 0;",
+    "expected_behavior": "Server must send 'unexpected_message' alert when receiving ClientHello after TLS 1.3 handshake completion",
+    "paths_checked": 1,
+    "paths_conforming": 1,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "ossl_statem_server_read_transition",
+    "ossl_statem_server13_read_transition",
+    "ossl_statem_server13_write_transition",
+    "ossl_statem_server_write_transition",
+    "tls_process_client_hello",
+    "tls_early_post_process_client_hello",
+    "read_state_machine",
+    "state_machine",
+    "ssl3_read_bytes"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 11,
+  "tools_used": [
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_assert"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL_IS_FIRST_HANDSHAKE"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL_IS_FIRST_HANDSHAKE"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ssl3_read_bytes"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server13_write_transition"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server_read_transition"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server13_read_transition"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "state_machine"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "read_state_machine"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL3_AD_UNEXPECTED_MESSAGE"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL_AD_UNEXPECTED_MESSAGE"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 214675,
+    "output": 4040
+  }
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.8.1-must-validate-dh-public-value",
+    "source_section": "4.2.8.1",
+    "source_text": "Peers MUST validate each other's public value Y by ensuring that 1 < Y < p-1.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "For finite field DH, peers MUST validate that the peer's public value Y satisfies 1 < Y < p-1.",
+    "entity": "both",
+    "applies_when": "Processing a finite field DH key_share",
+    "target_message": null,
+    "target_field": "extensions.key_share.key_exchange",
+    "expected_value": "1 < Y < p-1",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.2.8.1",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "ServerHello"
+      ],
+      "field_names": [
+        "key_exchange"
+      ],
+      "extension_names": [
+        "key_share"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "DHE",
+        "FFDHE"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can send Y=0, Y=1, or Y=p-1 and verify peer rejects.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with exact bounds.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.8.1-must-abort-invalid-dh-value",
+    "source_section": "4.2.8.1",
+    "source_text": "If Y is not within the proper range, the receiving peer MUST terminate the connection with an \"illegal_parameter\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If DH public value Y fails validation (not 1 < Y < p-1), the peer MUST abort with illegal_parameter.",
+    "entity": "both",
+    "applies_when": "Receiving DH key_share with Y outside valid range",
+    "target_message": null,
+    "target_field": "extensions.key_share.key_exchange",
+    "expected_value": "abort with illegal_parameter alert",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.2.8.1",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "ServerHello"
+      ],
+      "field_names": [
+        "key_exchange"
+      ],
+      "extension_names": [
+        "key_share"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "DHE",
+        "FFDHE"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can send invalid Y values and verify illegal_parameter response.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specified alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

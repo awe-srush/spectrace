@@ -1,0 +1,726 @@
+{
+  "rule_id": "rfc8446-4.4.3-sha1-must-not-be-used",
+  "rule_type": "value_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "CertificateVerify",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateVerify",
+        "certificate_verify"
+      ]
+    },
+    {
+      "term": "algorithm",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "algorithm"
+      ]
+    },
+    {
+      "term": "illegal_parameter",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "illegal_parameter",
+        "IllegalParameter"
+      ]
+    },
+    {
+      "term": "SHA-1",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "SHA-1"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_post_process_server_rpk",
+      "line_range": [
+        2285,
+        2350
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateVerify",
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 2340,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 2306,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2327,
+          "text": "if ((clu->amask & sc->s3.tmp.new_cipher->algorithm_auth) == 0) {"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2293,
+          "text": "SSLfatal(sc, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2317,
+          "text": "SSLfatal(sc, SSL_AD_ILLEGAL_PARAMETER, SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2328,
+          "text": "SSLfatal(sc, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_RPK_TYPE);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_post_process_server_certificate",
+      "line_range": [
+        2450,
+        2544
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateVerify",
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 2535,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 2484,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2517,
+          "text": "if ((clu->amask & s->s3.tmp.new_cipher->algorithm_auth) == 0) {"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2508,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2518,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CERTIFICATE_TYPE);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "algorithm",
+          "line": 1925,
+          "text": "SSL_R_INVALID_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2088,
+          "text": "SSL_R_UNSUPPORTED_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2102,
+          "text": "SSL_R_OLD_SESSION_COMPRESSION_ALGORITHM_NOT_RETURNED);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2117,
+          "text": "SSL_R_UNSUPPORTED_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1776,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_TLS_SESSION_ID_TOO_LONG);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1893,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_ECH_REQUIRED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1924,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1933,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_INVALID_SESSION_ID);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1959,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2031,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2087,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2101,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2108,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COMPRESSION_DISABLED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2116,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "algorithm",
+          "line": 2089,
+          "text": "SSL_R_REQUIRED_COMPRESSION_ALGORITHM_MISSING);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2194,
+          "text": "* algorithms from the client, starting at q."
+        },
+        {
+          "term": "algorithm",
+          "line": 2205,
+          "text": "SSL_R_INVALID_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2214,
+          "text": "/* Perform sanity checks on resumed compression algorithm */"
+        },
+        {
+          "term": "algorithm",
+          "line": 2231,
+          "text": "SSL_R_INVALID_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2241,
+          "text": "SSL_R_REQUIRED_COMPRESSION_ALGORITHM_MISSING);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1891,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, protverr);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1985,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_CIPHER);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2071,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2088,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2204,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2240,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/t1_lib.c",
+      "function": "tls12_check_peer_sigalg",
+      "line_range": [
+        2854,
+        2989
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "algorithm",
+          "line": 2930,
+          "text": "/* For TLS 1.3 or Suite B check curve matches signature algorithm */"
+        },
+        {
+          "term": "algorithm",
+          "line": 2976,
+          "text": "* Make sure security callback allows algorithm. For historical"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2869,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2880,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2889,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2897,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2909,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2917,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2925,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2935,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CURVE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2942,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CURVE);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "crypto/crmf/crmf_pbm.c",
+      "function": "OSSL_CRMF_pbm_new",
+      "line_range": [
+        117,
+        225
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "SHA-1",
+          "algorithm"
+        ]
+      },
+      "hits": [
+        {
+          "term": "algorithm",
+          "line": 135,
+          "text": "|| pbmp->mac->algorithm == NULL || msg == NULL || sec == NULL) {"
+        },
+        {
+          "term": "algorithm",
+          "line": 143,
+          "text": "* owf identifies the hash algorithm and associated parameters used to"
+        },
+        {
+          "term": "algorithm",
+          "line": 147,
+          "text": "OBJ_obj2txt(mdname, sizeof(mdname), pbmp->owf->algorithm, 0);"
+        },
+        {
+          "term": "algorithm",
+          "line": 149,
+          "text": "ERR_raise(ERR_LIB_CRMF, CRMF_R_UNSUPPORTED_ALGORITHM);"
+        },
+        {
+          "term": "algorithm",
+          "line": 185,
+          "text": "* mac identifies the algorithm and associated parameters of the MAC"
+        },
+        {
+          "term": "algorithm",
+          "line": 189,
+          "text": "mac_nid = OBJ_obj2nid(pbmp->mac->algorithm);"
+        },
+        {
+          "term": "algorithm",
+          "line": 195,
+          "text": "ERR_raise(ERR_LIB_CRMF, CRMF_R_UNSUPPORTED_ALGORITHM);"
+        },
+        {
+          "term": "algorithm",
+          "line": 221,
+          "text": "if (OBJ_obj2txt(buf, sizeof(buf), pbmp->mac->algorithm, 0))"
+        },
+        {
+          "term": "SHA-1",
+          "line": 145,
+          "text": "* support SHA-1."
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "set_client_ciphersuite",
+      "line_range": [
+        1624,
+        1700
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "algorithm",
+          "line": 1671,
+          "text": "const EVP_MD *md = ssl_md(sctx, c->algorithm2);"
+        },
+        {
+          "term": "algorithm",
+          "line": 1682,
+          "text": "|| md != ssl_md(sctx, s->session->cipher->algorithm2)) {"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1635,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_UNKNOWN_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1643,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1651,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1658,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1683,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1692,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "crypto/cmp/cmp_local.h",
+      "function": "ossl_cmp_rootcakeyupdate_st",
+      "line_range": [
+        736,
+        793
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "SHA-1",
+          "algorithm"
+        ]
+      },
+      "hits": [
+        {
+          "term": "algorithm",
+          "line": 746,
+          "text": "*           owf                 AlgorithmIdentifier,"
+        },
+        {
+          "term": "algorithm",
+          "line": 753,
+          "text": "*           mac                 AlgorithmIdentifier"
+        },
+        {
+          "term": "algorithm",
+          "line": 761,
+          "text": "*           owf                 AlgorithmIdentifier,"
+        },
+        {
+          "term": "algorithm",
+          "line": 763,
+          "text": "*           mac                 AlgorithmIdentifier"
+        },
+        {
+          "term": "algorithm",
+          "line": 773,
+          "text": "*           hashAlg         [0] AlgorithmIdentifier         OPTIONAL,"
+        },
+        {
+          "term": "SHA-1",
+          "line": 747,
+          "text": "*           -- AlgId for a One-Way Function (SHA-1 recommended)"
+        },
+        {
+          "term": "SHA-1",
+          "line": 762,
+          "text": "*           -- AlgId for a One-Way Function (SHA-1 recommended)"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls13_process_compressed_certificate",
+      "line_range": [
+        2856,
+        2941
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "algorithm",
+          "line": 2878,
+          "text": "/* If we have a prefs list, make sure the algorithm is in it */"
+        },
+        {
+          "term": "algorithm",
+          "line": 2887,
+          "text": "SSLfatal(sc, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2892,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2906,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2887,
+          "text": "SSLfatal(sc, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_ske_ecdhe",
+      "line_range": [
+        2742,
+        2799
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "algorithm",
+          "line": 2790,
+          "text": "if (s->s3.tmp.new_cipher->algorithm_auth & SSL_aECDSA)"
+        },
+        {
+          "term": "algorithm",
+          "line": 2792,
+          "text": "else if (s->s3.tmp.new_cipher->algorithm_auth & SSL_aRSA)"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2762,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CURVE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2781,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_ECPOINT);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-4-3-sha1-must-not-be-used_candidate_1.c",
+    "locations/code/rfc8446-4-4-3-sha1-must-not-be-used_candidate_2.c",
+    "locations/code/rfc8446-4-4-3-sha1-must-not-be-used_candidate_3.c",
+    "locations/code/rfc8446-4-4-3-sha1-must-not-be-used_candidate_4.c",
+    "locations/code/rfc8446-4-4-3-sha1-must-not-be-used_candidate_5.c",
+    "locations/code/rfc8446-4-4-3-sha1-must-not-be-used_candidate_6.c",
+    "locations/code/rfc8446-4-4-3-sha1-must-not-be-used_candidate_7.c",
+    "locations/code/rfc8446-4-4-3-sha1-must-not-be-used_candidate_8.c",
+    "locations/code/rfc8446-4-4-3-sha1-must-not-be-used_candidate_9.c",
+    "locations/code/rfc8446-4-4-3-sha1-must-not-be-used_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1768,
+    "files_with_hits": 250,
+    "functions_identified": 516,
+    "null_scope_hits": 608,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1656
+  }
+}

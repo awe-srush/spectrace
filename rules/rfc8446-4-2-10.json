@@ -1,0 +1,328 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.10-client-must-supply-psk-and-early-data",
+    "source_section": "4.2.10",
+    "source_text": "If the client opts to do so, it MUST supply both the \"pre_shared_key\" and \"early_data\" extensions.",
+    "normative_keyword": "MUST",
+    "rule_type": "presence_requirement",
+    "rule_statement": "If the client sends early data (0-RTT), it MUST include both the pre_shared_key and early_data extensions in ClientHello.",
+    "entity": "client",
+    "applies_when": "Client sends 0-RTT application data",
+    "target_message": "ClientHello",
+    "target_field": "extensions",
+    "expected_value": "both pre_shared_key and early_data extensions present",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "pre_shared_key",
+        "early_data"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT",
+        "early data"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct presence check of both extensions when 0-RTT is used.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.10-first-psk-for-early-data",
+    "source_section": "4.2.10",
+    "source_text": "The PSK used to encrypt the early data MUST be the first PSK listed in the client's \"pre_shared_key\" extension.",
+    "normative_keyword": "MUST",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "The PSK used for early data encryption MUST be the first identity in the client's pre_shared_key extension.",
+    "entity": "client",
+    "applies_when": "Client sends 0-RTT data",
+    "target_message": "ClientHello",
+    "target_field": "pre_shared_key.identities",
+    "expected_value": "first identity is the one used for 0-RTT",
+    "related_fields": [
+      "early_data"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "identities"
+      ],
+      "extension_names": [
+        "pre_shared_key",
+        "early_data"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT",
+        "early data"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify the first PSK identity is used for 0-RTT key derivation.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.10-server-validate-ticket-age",
+    "source_section": "4.2.10",
+    "source_text": "For PSKs provisioned via NewSessionTicket, a server MUST validate that the ticket age for the selected PSK identity (computed by subtracting ticket_age_add from PskIdentity.obfuscated_ticket_age modulo 2^32) is within a small tolerance of the time since the ticket was issued (see Section 8).",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "For ticket-based PSKs, the server MUST validate that the ticket age is within a small tolerance of the time since the ticket was issued.",
+    "entity": "server",
+    "applies_when": "Server processes a PSK identity from NewSessionTicket for 0-RTT",
+    "target_message": "ClientHello",
+    "target_field": "pre_shared_key.identities.obfuscated_ticket_age",
+    "expected_value": "within tolerance of actual ticket age",
+    "related_fields": [
+      "ticket_age_add"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "NewSessionTicket"
+      ],
+      "field_names": [
+        "obfuscated_ticket_age",
+        "ticket_age_add"
+      ],
+      "extension_names": [
+        "pre_shared_key",
+        "early_data"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT",
+        "ticket age validation",
+        "PSK resumption"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify arithmetic and tolerance check in server's 0-RTT acceptance code.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specific computation.",
+    "cross_section_context_used": [
+      "8"
+    ],
+    "ambiguity_notes": "The 'small tolerance' is not precisely defined in this section.",
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.10-client-must-not-early-data-after-hrr",
+    "source_section": "4.2.10",
+    "source_text": "A client MUST NOT include the \"early_data\" extension in its followup ClientHello.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "presence_requirement",
+    "rule_statement": "A client MUST NOT include the early_data extension in its second ClientHello (after HelloRetryRequest).",
+    "entity": "client",
+    "applies_when": "Client constructs second ClientHello after HelloRetryRequest",
+    "target_message": "ClientHello",
+    "target_field": "extensions",
+    "expected_value": "no early_data extension",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "HelloRetryRequest"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "early_data"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "after HelloRetryRequest",
+        "0-RTT rejected"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify extension is removed from second ClientHello.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.10-server-accept-early-data-conditions",
+    "source_section": "4.2.10",
+    "source_text": "In order to accept early data, the server MUST have accepted a PSK cipher suite and selected the first key offered in the client's \"pre_shared_key\" extension. In addition, it MUST verify that the following values are the same as those associated with the selected PSK: The TLS version number, The selected cipher suite, The selected ALPN protocol, if any",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "To accept early data, the server MUST have selected the first PSK and MUST verify that TLS version, cipher suite, and ALPN protocol match those associated with the PSK.",
+    "entity": "server",
+    "applies_when": "Server considers accepting 0-RTT early data",
+    "target_message": "EncryptedExtensions",
+    "target_field": "extensions.early_data",
+    "expected_value": "version, cipher suite, and ALPN match PSK-associated values",
+    "related_fields": [
+      "pre_shared_key",
+      "cipher_suite",
+      "ALPN"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "EncryptedExtensions",
+        "ClientHello"
+      ],
+      "field_names": [
+        "selected_identity",
+        "cipher_suite"
+      ],
+      "extension_names": [
+        "early_data",
+        "pre_shared_key",
+        "application_layer_protocol_negotiation"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT acceptance"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server checks version/cipher/ALPN consistency before accepting early data.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with enumerated conditions.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.10-server-must-not-accept-on-check-fail",
+    "source_section": "4.2.10",
+    "source_text": "If any of these checks fail, the server MUST NOT respond with the extension and must discard all the first-flight data using one of the first two mechanisms listed above (thus falling back to 1-RTT or 2-RTT).",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "conditional_action",
+    "rule_statement": "If version/cipher/ALPN checks fail for early data, the server MUST NOT respond with the early_data extension and must fall back to 1-RTT or 2-RTT.",
+    "entity": "server",
+    "applies_when": "Server's 0-RTT validation checks fail",
+    "target_message": "EncryptedExtensions",
+    "target_field": "extensions",
+    "expected_value": "no early_data extension; discard 0-RTT data",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "EncryptedExtensions"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "early_data"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT rejection",
+        "fallback to 1-RTT"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server omits early_data extension and discards first-flight data on validation failure.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.10-server-must-terminate-on-decrypt-fail",
+    "source_section": "4.2.10",
+    "source_text": "If the server chooses to accept the \"early_data\" extension, then it MUST comply with the same error-handling requirements specified for all records when processing early data records. Specifically, if the server fails to decrypt a 0-RTT record following an accepted \"early_data\" extension, it MUST terminate the connection with a \"bad_record_mac\" alert as per Section 5.2.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If the server accepted early data but fails to decrypt a 0-RTT record, it MUST terminate the connection with a bad_record_mac alert.",
+    "entity": "server",
+    "applies_when": "Server accepted early_data but fails to decrypt a 0-RTT record",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": "bad_record_mac",
+    "violation_alert_source": "4.2.10",
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [
+        "early_data"
+      ],
+      "alert_names": [
+        "bad_record_mac"
+      ],
+      "modes_or_conditions": [
+        "0-RTT",
+        "decryption failure"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server sends bad_record_mac on 0-RTT decrypt failure after acceptance.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specific alert.",
+    "cross_section_context_used": [
+      "5.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.10-server-must-behave-one-of-three-ways",
+    "source_section": "4.2.10",
+    "source_text": "A server which receives an \"early_data\" extension MUST behave in one of three ways:",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "A server receiving early_data MUST either: ignore and do 1-RTT, send HelloRetryRequest, or accept by including early_data in EncryptedExtensions.",
+    "entity": "server",
+    "applies_when": "Server receives ClientHello with early_data extension",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": "one of three defined behaviors",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "EncryptedExtensions",
+        "HelloRetryRequest"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "early_data"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT",
+        "early data"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify server follows one of the three paths, but proving no other path exists is broader.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with enumerated options.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

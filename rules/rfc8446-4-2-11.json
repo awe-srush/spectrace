@@ -1,0 +1,337 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.11-external-psk-hash-must-be-set",
+    "source_section": "4.2.11",
+    "source_text": "For externally established PSKs, the Hash algorithm MUST be set when the PSK is established or default to SHA-256 if no such algorithm is defined.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "For externally established PSKs, the Hash algorithm MUST be set at provisioning time, defaulting to SHA-256 if undefined.",
+    "entity": "both",
+    "applies_when": "External PSK is provisioned",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "Hash algorithm defined (default SHA-256)",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "external PSK",
+        "PSK provisioning"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify code associates a hash with external PSKs, but provisioning is external.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with default.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.11-server-must-ensure-compatible-psk-cipher",
+    "source_section": "4.2.11",
+    "source_text": "The server MUST ensure that it selects a compatible PSK (if any) and cipher suite.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "The server MUST select a PSK and cipher suite that are compatible (same hash algorithm).",
+    "entity": "server",
+    "applies_when": "Server selects a PSK for key establishment",
+    "target_message": "ServerHello",
+    "target_field": null,
+    "expected_value": "PSK hash matches cipher suite hash",
+    "related_fields": [
+      "cipher_suite",
+      "pre_shared_key.selected_identity"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello"
+      ],
+      "field_names": [
+        "selected_identity",
+        "cipher_suite"
+      ],
+      "extension_names": [
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "PSK selection"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server checks hash compatibility between PSK and cipher suite.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.11-server-must-validate-binder",
+    "source_section": "4.2.11",
+    "source_text": "Prior to accepting PSK key establishment, the server MUST validate the corresponding binder value (see Section 4.2.11.2 below). If this value is not present or does not validate, the server MUST abort the handshake.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Before accepting PSK, the server MUST validate the binder value. If absent or invalid, it MUST abort the handshake.",
+    "entity": "server",
+    "applies_when": "Server considers accepting PSK key establishment",
+    "target_message": "ClientHello",
+    "target_field": "pre_shared_key.binders",
+    "expected_value": "valid HMAC binder for selected PSK",
+    "related_fields": [
+      "pre_shared_key.identities"
+    ],
+    "violation_alert": "decrypt_error",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "binders",
+        "identities"
+      ],
+      "extension_names": [
+        "pre_shared_key"
+      ],
+      "alert_names": [
+        "decrypt_error"
+      ],
+      "modes_or_conditions": [
+        "PSK binder validation"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server computes and compares binder HMAC before accepting PSK.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with abort requirement.",
+    "cross_section_context_used": [
+      "4.2.11.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.11-client-verify-selected-identity-range",
+    "source_section": "4.2.11",
+    "source_text": "Clients MUST verify that the server's selected_identity is within the range supplied by the client, that the server selected a cipher suite indicating a Hash associated with the PSK, and that a server \"key_share\" extension is present if required by the ClientHello \"psk_key_exchange_modes\" extension. If these values are not consistent, the client MUST abort the handshake with an \"illegal_parameter\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "Clients MUST verify: selected_identity is in range, cipher suite hash matches PSK, and key_share is present if required by psk_key_exchange_modes. If inconsistent, abort with illegal_parameter.",
+    "entity": "client",
+    "applies_when": "Client receives ServerHello with pre_shared_key extension",
+    "target_message": "ServerHello",
+    "target_field": "pre_shared_key.selected_identity",
+    "expected_value": "valid index, matching hash, key_share if required",
+    "related_fields": [
+      "cipher_suite",
+      "key_share",
+      "psk_key_exchange_modes"
+    ],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.2.11",
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello",
+        "ClientHello"
+      ],
+      "field_names": [
+        "selected_identity",
+        "cipher_suite"
+      ],
+      "extension_names": [
+        "pre_shared_key",
+        "key_share",
+        "psk_key_exchange_modes"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "PSK"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify all three checks are performed and alert is sent on failure.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specific alert and enumerated checks.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.11-early-data-selected-identity-zero",
+    "source_section": "4.2.11",
+    "source_text": "If the server supplies an \"early_data\" extension, the client MUST verify that the server's selected_identity is 0. If any other value is returned, the client MUST abort the handshake with an \"illegal_parameter\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "If the server accepts early data, the client MUST verify selected_identity is 0. If not, abort with illegal_parameter.",
+    "entity": "client",
+    "applies_when": "Client receives EncryptedExtensions with early_data and ServerHello with pre_shared_key",
+    "target_message": "ServerHello",
+    "target_field": "pre_shared_key.selected_identity",
+    "expected_value": "0",
+    "related_fields": [
+      "early_data"
+    ],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.2.11",
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello",
+        "EncryptedExtensions"
+      ],
+      "field_names": [
+        "selected_identity"
+      ],
+      "extension_names": [
+        "pre_shared_key",
+        "early_data"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "0-RTT",
+        "early data acceptance"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct value comparison of selected_identity against 0.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with exact value and alert.",
+    "cross_section_context_used": [
+      "4.2.10"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.11-psk-must-be-last-extension",
+    "source_section": "4.2.11",
+    "source_text": "The \"pre_shared_key\" extension MUST be the last extension in the ClientHello (this facilitates implementation as described below).",
+    "normative_keyword": "MUST",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "The pre_shared_key extension MUST be the last extension in the ClientHello.",
+    "entity": "client",
+    "applies_when": "Client includes pre_shared_key in ClientHello",
+    "target_message": "ClientHello",
+    "target_field": "extensions",
+    "expected_value": "pre_shared_key is last in extensions list",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.2.11",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "extensions"
+      ],
+      "extension_names": [
+        "pre_shared_key"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "PSK"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify ordering of extensions in ClientHello construction.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.11-server-must-check-psk-is-last",
+    "source_section": "4.2.11",
+    "source_text": "Servers MUST check that it is the last extension and otherwise fail the handshake with an \"illegal_parameter\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "Servers MUST verify that pre_shared_key is the last extension in ClientHello, and abort with illegal_parameter if it is not.",
+    "entity": "server",
+    "applies_when": "Server receives ClientHello with pre_shared_key extension",
+    "target_message": "ClientHello",
+    "target_field": "extensions",
+    "expected_value": "pre_shared_key is last extension",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.2.11",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "extensions"
+      ],
+      "extension_names": [
+        "pre_shared_key"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "PSK"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server parsing checks extension ordering.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specific alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.11-server-must-ignore-external-ticket-age",
+    "source_section": "4.2.11",
+    "source_text": "For identities established externally, an obfuscated_ticket_age of 0 SHOULD be used, and servers MUST ignore the value.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "Servers MUST ignore the obfuscated_ticket_age value for externally established PSK identities.",
+    "entity": "server",
+    "applies_when": "Server processes an externally established PSK identity",
+    "target_message": "ClientHello",
+    "target_field": "pre_shared_key.identities.obfuscated_ticket_age",
+    "expected_value": "ignored for external PSKs",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "obfuscated_ticket_age"
+      ],
+      "extension_names": [
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "external PSK"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify server doesn't use ticket age for external PSK validation, but external vs ticket PSK distinction may be implicit.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

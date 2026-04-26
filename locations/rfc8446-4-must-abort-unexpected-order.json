@@ -1,0 +1,1343 @@
+{
+  "rule_id": "rfc8446-4-must-abort-unexpected-order",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "ServerHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ServerHello",
+        "server_hello"
+      ]
+    },
+    {
+      "term": "EncryptedExtensions",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "EncryptedExtensions",
+        "encrypted_extensions"
+      ]
+    },
+    {
+      "term": "Certificate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Certificate"
+      ]
+    },
+    {
+      "term": "CertificateVerify",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateVerify",
+        "certificate_verify"
+      ]
+    },
+    {
+      "term": "Finished",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Finished"
+      ]
+    },
+    {
+      "term": "unexpected_message",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unexpected_message",
+        "UnexpectedMessage"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_read_transition",
+      "line_range": [
+        94,
+        216
+      ],
+      "distinct_terms_matched": 6,
+      "hit_count": 21,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "ClientHello",
+          "EncryptedExtensions",
+          "Finished",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 110,
+          "text": "* This must a ClientHello following a HelloRetryRequest, so the only"
+        },
+        {
+          "term": "ServerHello",
+          "line": 111,
+          "text": "* thing we can get now is a ServerHello."
+        },
+        {
+          "term": "ServerHello",
+          "line": 113,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 120,
+          "text": "if (mt == SSL3_MT_ENCRYPTED_EXTENSIONS) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 121,
+          "text": "st->hand_state = TLS_ST_CR_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 126,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "Certificate",
+          "line": 133,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 137,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 142,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 143,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 152,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 158,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 167,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 189,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 167,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Finished",
+          "line": 128,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 129,
+          "text": "st->hand_state = TLS_ST_CR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 174,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 175,
+          "text": "st->hand_state = TLS_ST_CR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 201,
+          "text": "* message here after the swap, or do it after the clientFinished?"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_handshake",
+      "line_range": [
+        1625,
+        1738
+      ],
+      "distinct_terms_matched": 6,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "ClientHello",
+          "EncryptedExtensions",
+          "Finished",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1656,
+          "text": "case SSL3_MT_CLIENT_HELLO:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1657,
+          "text": "if (!ssl_print_client_hello(bio, sc, indent + 2, msg, msglen))"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1666,
+          "text": "case SSL3_MT_SERVER_HELLO:"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1667,
+          "text": "if (!ssl_print_server_hello(bio, indent + 2, msg, msglen))"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1716,
+          "text": "case SSL3_MT_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1718,
+          "text": "SSL3_MT_ENCRYPTED_EXTENSIONS, &msg, &msglen))"
+        },
+        {
+          "term": "Certificate",
+          "line": 1681,
+          "text": "case SSL3_MT_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1682,
+          "text": "if (!ssl_print_certificates(bio, sc, server, indent + 2, msg, msglen))"
+        },
+        {
+          "term": "Certificate",
+          "line": 1686,
+          "text": "case SSL3_MT_COMPRESSED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1687,
+          "text": "if (!ssl_print_compressed_certificates(bio, sc, server, indent + 2, msg, msglen))"
+        },
+        {
+          "term": "Certificate",
+          "line": 1691,
+          "text": "case SSL3_MT_CERTIFICATE_VERIFY:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1696,
+          "text": "case SSL3_MT_CERTIFICATE_REQUEST:"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 1691,
+          "text": "case SSL3_MT_CERTIFICATE_VERIFY:"
+        },
+        {
+          "term": "Finished",
+          "line": 1701,
+          "text": "case SSL3_MT_FINISHED:"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_read_transition",
+      "line_range": [
+        190,
+        314
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 21,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "ClientHello",
+          "Finished",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 207,
+          "text": "if (mt == SSL3_MT_CLIENT_HELLO) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 216,
+          "text": "* 1) We didn't request a Certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 218,
+          "text": "* 2) We did request one and we allow no Certificate to be returned"
+        },
+        {
+          "term": "Certificate",
+          "line": 226,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 242,
+          "text": "* We should only process a CertificateVerify message if we have"
+        },
+        {
+          "term": "Certificate",
+          "line": 243,
+          "text": "* received a Certificate from the client. If so then |s->session->peer|"
+        },
+        {
+          "term": "Certificate",
+          "line": 244,
+          "text": "* will be non NULL. In some instances a CertificateVerify message is"
+        },
+        {
+          "term": "Certificate",
+          "line": 245,
+          "text": "* not required even if the peer has sent a Certificate (e.g. such as in"
+        },
+        {
+          "term": "Certificate",
+          "line": 253,
+          "text": "* pub key in a certificate, the CertificateVerify message is"
+        },
+        {
+          "term": "Certificate",
+          "line": 255,
+          "text": "* its key from the certificate for key exchange."
+        },
+        {
+          "term": "Certificate",
+          "line": 261,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 242,
+          "text": "* We should only process a CertificateVerify message if we have"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 244,
+          "text": "* will be non NULL. In some instances a CertificateVerify message is"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 253,
+          "text": "* pub key in a certificate, the CertificateVerify message is"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 261,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Finished",
+          "line": 284,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 285,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 295,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 296,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 302,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 312,
+          "text": "SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_construct_message",
+      "line_range": [
+        1225,
+        1324
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 17,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "EncryptedExtensions",
+          "Finished",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1256,
+          "text": "*confunc = tls_construct_server_hello;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1257,
+          "text": "*mt = SSL3_MT_SERVER_HELLO;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1312,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1313,
+          "text": "*confunc = tls_construct_encrypted_extensions;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1314,
+          "text": "*mt = SSL3_MT_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1261,
+          "text": "*confunc = tls_construct_server_certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1262,
+          "text": "*mt = SSL3_MT_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1267,
+          "text": "*confunc = tls_construct_server_compressed_certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1268,
+          "text": "*mt = SSL3_MT_COMPRESSED_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1274,
+          "text": "*mt = SSL3_MT_CERTIFICATE_VERIFY;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1283,
+          "text": "*confunc = tls_construct_certificate_request;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1284,
+          "text": "*mt = SSL3_MT_CERTIFICATE_REQUEST;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1299,
+          "text": "*mt = SSL3_MT_CERTIFICATE_STATUS;"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 1274,
+          "text": "*mt = SSL3_MT_CERTIFICATE_VERIFY;"
+        },
+        {
+          "term": "Finished",
+          "line": 1302,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 1303,
+          "text": "*confunc = tls_construct_finished;"
+        },
+        {
+          "term": "Finished",
+          "line": 1304,
+          "text": "*mt = SSL3_MT_FINISHED;"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_read_transition",
+      "line_range": [
+        227,
+        408
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "ClientHello",
+          "Finished",
+          "ServerHello",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 233,
+          "text": "* Note that after writing the first ClientHello we don't know what version"
+        },
+        {
+          "term": "ServerHello",
+          "line": 263,
+          "text": "* data. The only thing allowed now is a ServerHello or a"
+        },
+        {
+          "term": "ServerHello",
+          "line": 295,
+          "text": "* the next server message after the ServerHello to determine if"
+        },
+        {
+          "term": "ServerHello",
+          "line": 247,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "ServerHello",
+          "line": 266,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 303,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 317,
+          "text": "} else if (mt == SSL3_MT_CERTIFICATE_REQUEST"
+        },
+        {
+          "term": "Certificate",
+          "line": 332,
+          "text": "* The CertificateStatus message is optional even if"
+        },
+        {
+          "term": "Certificate",
+          "line": 335,
+          "text": "if (s->ext.status_expected && mt == SSL3_MT_CERTIFICATE_STATUS) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 354,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "Finished",
+          "line": 370,
+          "text": "case TLS_ST_CW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 390,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 391,
+          "text": "st->hand_state = TLS_ST_CR_FINISHED;"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 406,
+          "text": "SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_max_message_size",
+      "line_range": [
+        1011,
+        1068
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "EncryptedExtensions",
+          "Finished",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1021,
+          "text": "return SERVER_HELLO_MAX_LENGTH;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1048,
+          "text": "return SERVER_HELLO_DONE_MAX_LENGTH;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1062,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1063,
+          "text": "return ENCRYPTED_EXTENSIONS_MAX_LENGTH;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1031,
+          "text": "return CERTIFICATE_VERIFY_MAX_LENGTH;"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 1031,
+          "text": "return CERTIFICATE_VERIFY_MAX_LENGTH;"
+        },
+        {
+          "term": "Finished",
+          "line": 1059,
+          "text": "case TLS_ST_CR_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 1060,
+          "text": "return FINISHED_MAX_LENGTH;"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 56,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "Finished",
+          "ServerHello",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1860,
+          "text": "CLIENTHELLO_MSG *clienthello = s->clienthello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1866,
+          "text": "/* Finished parsing the ClientHello, now we can start processing it */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1867,
+          "text": "/* Give the ClientHello callback a crack at things */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1869,
+          "text": "/* A failure in the ClientHello callback terminates the connection. */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1884,
+          "text": "memcpy(s->s3.client_random, clienthello->random, SSL3_RANDOM_SIZE);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1887,
+          "text": "protverr = ssl_choose_server_version(s, clienthello, &dgrd);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1897,
+          "text": "s->version = s->client_version = clienthello->legacy_version;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1903,
+          "text": "/* TLSv1.3 specifies that a ClientHello must end on a record boundary */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1914,
+          "text": "if (sctx->app_verify_cookie_cb(ussl, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1915,
+          "text": "(unsigned int)clienthello->dtls_cookie_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1923,
+          "text": "} else if (s->d1->cookie_len != clienthello->dtls_cookie_len"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1924,
+          "text": "|| memcmp(clienthello->dtls_cookie, s->d1->cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1936,
+          "text": "if (!ssl_cache_cipherlist(s, &clienthello->ciphersuites)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1937,
+          "text": "|| !ossl_bytes_to_cipher_list(s, &clienthello->ciphersuites, &ciphers, &scsvs, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1994,
+          "text": "clienthello->pre_proc_exts, NULL, 0)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2000,
+          "text": "* We don't allow resumption in a backwards compatible ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2021,
+          "text": "i = ssl_get_prev_session(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2038,
+          "text": "memcpy(s->tmp_session_id, s->clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2039,
+          "text": "s->clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2040,
+          "text": "s->tmp_session_id_len = s->clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2080,
+          "text": "if (clienthello->compressions_len == 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2085,
+          "text": "if (memchr(clienthello->compressions, 0,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2086,
+          "text": "clienthello->compressions_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2094,
+          "text": "ssl_check_for_safari(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2098,
+          "text": "clienthello->pre_proc_exts, NULL, 0, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2161,
+          "text": "* If the ClientHello contains both a Session ID and a PAC-Opaque in"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2166,
+          "text": "if (clienthello->session_id_len > 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2167,
+          "text": "memcpy(s->session->session_id, clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2168,
+          "text": "clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2169,
+          "text": "s->session->session_id_length = clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2201,
+          "text": "* a TLSv1.3 ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2203,
+          "text": "if (clienthello->compressions_len != 1) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2235,
+          "text": "for (k = 0; k < clienthello->compressions_len; k++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2236,
+          "text": "if (clienthello->compressions[k] == comp_id)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2239,
+          "text": "if (k >= clienthello->compressions_len) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2255,
+          "text": "for (o = 0; o < clienthello->compressions_len; o++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2256,
+          "text": "if (v == clienthello->compressions[o]) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2304,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2305,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2306,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2311,
+          "text": "if (clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2312,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2313,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2314,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1848,
+          "text": "static int tls_early_post_process_client_hello(SSL_CONNECTION *s)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1868,
+          "text": "if (sctx->client_hello_cb != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1870,
+          "text": "switch (sctx->client_hello_cb(ussl, &al, sctx->client_hello_cb_arg)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1871,
+          "text": "case SSL_CLIENT_HELLO_SUCCESS:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1873,
+          "text": "case SSL_CLIENT_HELLO_RETRY:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1874,
+          "text": "s->rwstate = SSL_CLIENT_HELLO_CB;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1876,
+          "text": "case SSL_CLIENT_HELLO_ERROR:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1993,
+          "text": "SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2097,
+          "text": "if (!tls_parse_all_extensions(s, SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2164,
+          "text": "* ServerHello."
+        },
+        {
+          "term": "Finished",
+          "line": 1866,
+          "text": "/* Finished parsing the ClientHello, now we can start processing it */"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1906,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_NOT_ON_RECORD_BOUNDARY);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_read_transition",
+      "line_range": [
+        74,
+        179
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 16,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "ClientHello",
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 89,
+          "text": "if (mt == SSL3_MT_CLIENT_HELLO) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 107,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 112,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 113,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 134,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 162,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 163,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 134,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Finished",
+          "line": 105,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 119,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 120,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 129,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 130,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 142,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 143,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_add",
+      "line_range": [
+        173,
+        321
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 15,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "ClientHello",
+          "EncryptedExtensions",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 192,
+          "text": "/* Only send extensions present in ClientHello/CertificateRequest */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 235,
+          "text": "if (s->clienthello == NULL"
+        },
+        {
+          "term": "ClientHello",
+          "line": 236,
+          "text": "|| s->clienthello->pre_proc_exts == NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 240,
+          "text": "raws = s->clienthello->pre_proc_exts;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 241,
+          "text": "for (j = 0; j != (int)s->clienthello->pre_proc_exts_len; j++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 265,
+          "text": "* We skip it if the callback is absent - except for a ClientHello where"
+        },
+        {
+          "term": "ClientHello",
+          "line": 198,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0"
+        },
+        {
+          "term": "ClientHello",
+          "line": 268,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) == 0 && meth->add_cb == NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 297,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0) {"
+        },
+        {
+          "term": "ServerHello",
+          "line": 312,
+          "text": "* is not an error if the extension is present in ServerHello."
+        },
+        {
+          "term": "ServerHello",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        },
+        {
+          "term": "Certificate",
+          "line": 180,
+          "text": "int for_comp = (context & SSL_EXT_TLS1_3_CERTIFICATE_COMPRESSION) != 0;"
+        },
+        {
+          "term": "Certificate",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        },
+        {
+          "term": "Certificate",
+          "line": 192,
+          "text": "/* Only send extensions present in ClientHello/CertificateRequest */"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_post_work",
+      "line_range": [
+        1002,
+        1215
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "ClientHello",
+          "EncryptedExtensions",
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1032,
+          "text": "* The next message should be another ClientHello which we need to"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1175,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1170,
+          "text": "|| (s->options & SSL_OP_NO_TX_CERTIFICATE_COMPRESSION) != 0)"
+        },
+        {
+          "term": "Certificate",
+          "line": 1171,
+          "text": "s->ext.compress_certificate_from_peer[0] = TLSEXT_comp_cert_none;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1176,
+          "text": "if (!s->hit && !send_certificate_request(s)) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 1178,
+          "text": "|| (s->options & SSL_OP_NO_TX_CERTIFICATE_COMPRESSION) != 0)"
+        },
+        {
+          "term": "Certificate",
+          "line": 1179,
+          "text": "s->ext.compress_certificate_from_peer[0] = TLSEXT_comp_cert_none;"
+        },
+        {
+          "term": "Finished",
+          "line": 1017,
+          "text": "if (!ssl3_init_finished_mac(s)) {"
+        },
+        {
+          "term": "Finished",
+          "line": 1026,
+          "text": "/* HelloVerifyRequest resets Finished MAC */"
+        },
+        {
+          "term": "Finished",
+          "line": 1027,
+          "text": "if (s->version != DTLS1_BAD_VER && !ssl3_init_finished_mac(s)) {"
+        },
+        {
+          "term": "Finished",
+          "line": 1137,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 1156,
+          "text": "|| !tls13_store_server_finished_hash(s)"
+        },
+        {
+          "term": "Finished",
+          "line": 1214,
+          "text": "return WORK_FINISHED_CONTINUE;"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-must-abort-unexpected-order_candidate_1.c",
+    "locations/code/rfc8446-4-must-abort-unexpected-order_candidate_2.c",
+    "locations/code/rfc8446-4-must-abort-unexpected-order_candidate_3.c",
+    "locations/code/rfc8446-4-must-abort-unexpected-order_candidate_4.c",
+    "locations/code/rfc8446-4-must-abort-unexpected-order_candidate_5.c",
+    "locations/code/rfc8446-4-must-abort-unexpected-order_candidate_6.c",
+    "locations/code/rfc8446-4-must-abort-unexpected-order_candidate_7.c",
+    "locations/code/rfc8446-4-must-abort-unexpected-order_candidate_8.c",
+    "locations/code/rfc8446-4-must-abort-unexpected-order_candidate_9.c",
+    "locations/code/rfc8446-4-must-abort-unexpected-order_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 2677,
+    "files_with_hits": 175,
+    "functions_identified": 492,
+    "null_scope_hits": 985,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1641
+  }
+}

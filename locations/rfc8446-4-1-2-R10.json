@@ -1,0 +1,922 @@
+{
+  "rule_id": "rfc8446-4.1.2-R10",
+  "rule_type": "behavioral_tolerance",
+  "checkability": "low",
+  "search_terms": [
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "cipher_suites",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "cipher_suites",
+        "CipherSuites"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 55,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cipher_suites"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1860,
+          "text": "CLIENTHELLO_MSG *clienthello = s->clienthello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1866,
+          "text": "/* Finished parsing the ClientHello, now we can start processing it */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1867,
+          "text": "/* Give the ClientHello callback a crack at things */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1869,
+          "text": "/* A failure in the ClientHello callback terminates the connection. */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1884,
+          "text": "memcpy(s->s3.client_random, clienthello->random, SSL3_RANDOM_SIZE);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1887,
+          "text": "protverr = ssl_choose_server_version(s, clienthello, &dgrd);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1897,
+          "text": "s->version = s->client_version = clienthello->legacy_version;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1903,
+          "text": "/* TLSv1.3 specifies that a ClientHello must end on a record boundary */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1914,
+          "text": "if (sctx->app_verify_cookie_cb(ussl, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1915,
+          "text": "(unsigned int)clienthello->dtls_cookie_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1923,
+          "text": "} else if (s->d1->cookie_len != clienthello->dtls_cookie_len"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1924,
+          "text": "|| memcmp(clienthello->dtls_cookie, s->d1->cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1936,
+          "text": "if (!ssl_cache_cipherlist(s, &clienthello->ciphersuites)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1937,
+          "text": "|| !ossl_bytes_to_cipher_list(s, &clienthello->ciphersuites, &ciphers, &scsvs, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1994,
+          "text": "clienthello->pre_proc_exts, NULL, 0)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2000,
+          "text": "* We don't allow resumption in a backwards compatible ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2021,
+          "text": "i = ssl_get_prev_session(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2038,
+          "text": "memcpy(s->tmp_session_id, s->clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2039,
+          "text": "s->clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2040,
+          "text": "s->tmp_session_id_len = s->clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2080,
+          "text": "if (clienthello->compressions_len == 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2085,
+          "text": "if (memchr(clienthello->compressions, 0,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2086,
+          "text": "clienthello->compressions_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2094,
+          "text": "ssl_check_for_safari(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2098,
+          "text": "clienthello->pre_proc_exts, NULL, 0, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2161,
+          "text": "* If the ClientHello contains both a Session ID and a PAC-Opaque in"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2166,
+          "text": "if (clienthello->session_id_len > 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2167,
+          "text": "memcpy(s->session->session_id, clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2168,
+          "text": "clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2169,
+          "text": "s->session->session_id_length = clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2201,
+          "text": "* a TLSv1.3 ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2203,
+          "text": "if (clienthello->compressions_len != 1) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2235,
+          "text": "for (k = 0; k < clienthello->compressions_len; k++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2236,
+          "text": "if (clienthello->compressions[k] == comp_id)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2239,
+          "text": "if (k >= clienthello->compressions_len) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2255,
+          "text": "for (o = 0; o < clienthello->compressions_len; o++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2256,
+          "text": "if (v == clienthello->compressions[o]) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2304,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2305,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2306,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2311,
+          "text": "if (clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2312,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2313,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2314,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1848,
+          "text": "static int tls_early_post_process_client_hello(SSL_CONNECTION *s)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1868,
+          "text": "if (sctx->client_hello_cb != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1870,
+          "text": "switch (sctx->client_hello_cb(ussl, &al, sctx->client_hello_cb_arg)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1871,
+          "text": "case SSL_CLIENT_HELLO_SUCCESS:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1873,
+          "text": "case SSL_CLIENT_HELLO_RETRY:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1874,
+          "text": "s->rwstate = SSL_CLIENT_HELLO_CB;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1876,
+          "text": "case SSL_CLIENT_HELLO_ERROR:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1993,
+          "text": "SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2097,
+          "text": "if (!tls_parse_all_extensions(s, SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 1936,
+          "text": "if (!ssl_cache_cipherlist(s, &clienthello->ciphersuites)"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 1937,
+          "text": "|| !ossl_bytes_to_cipher_list(s, &clienthello->ciphersuites, &ciphers, &scsvs, 1)) {"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_hello",
+      "line_range": [
+        1619,
+        1846
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 31,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cipher_suites"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1623,
+          "text": "CLIENTHELLO_MSG *clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1727,
+          "text": "/* Check if this is actually an unexpected renegotiation ClientHello */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1745,
+          "text": "clienthello = OPENSSL_zalloc(sizeof(*clienthello));"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1746,
+          "text": "if (clienthello == NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1752,
+          "text": "* First, parse the raw ClientHello data into the CLIENTHELLO_MSG structure."
+        },
+        {
+          "term": "ClientHello",
+          "line": 1756,
+          "text": "if (!PACKET_get_net_2(pkt, &clienthello->legacy_version)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1761,
+          "text": "if (!PACKET_copy_bytes(pkt, clienthello->random, SSL3_RANDOM_SIZE)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1763,
+          "text": "|| !PACKET_copy_all(&session_id, clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1765,
+          "text": "&clienthello->session_id_len)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1775,
+          "text": "if (!PACKET_copy_all(&cookie, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1777,
+          "text": "&clienthello->dtls_cookie_len)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1782,
+          "text": "* If we require cookies and this ClientHello doesn't contain one,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1787,
+          "text": "if (clienthello->dtls_cookie_len == 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1788,
+          "text": "OPENSSL_free(clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1794,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &clienthello->ciphersuites)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1806,
+          "text": "PACKET_null_init(&clienthello->extensions);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1808,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &clienthello->extensions)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1815,
+          "text": "if (!PACKET_copy_all(&compression, clienthello->compressions,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1817,
+          "text": "&clienthello->compressions_len)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1823,
+          "text": "extensions = clienthello->extensions;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1825,
+          "text": "&clienthello->pre_proc_exts,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1826,
+          "text": "&clienthello->pre_proc_exts_len, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1830,
+          "text": "s->clienthello = clienthello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1835,
+          "text": "if (clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1836,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1837,
+          "text": "OPENSSL_free(clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1839,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1619,
+          "text": "MSG_PROCESS_RETURN tls_process_client_hello(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1676,
+          "text": "if (!WPACKET_put_bytes_u8(&inner, SSL3_MT_CLIENT_HELLO)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1824,
+          "text": "if (!tls_collect_extensions(s, &extensions, SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 1794,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &clienthello->ciphersuites)) {"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/ssl_lib.c",
+      "function": "SSL_client_hello_get0_ciphers",
+      "line_range": [
+        7022,
+        7034
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cipher_suites"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 7029,
+          "text": "if (sc->clienthello == NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 7032,
+          "text": "*out = PACKET_data(&sc->clienthello->ciphersuites);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 7033,
+          "text": "return PACKET_remaining(&sc->clienthello->ciphersuites);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 7022,
+          "text": "size_t SSL_client_hello_get0_ciphers(SSL *s, const unsigned char **out)"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 7032,
+          "text": "*out = PACKET_data(&sc->clienthello->ciphersuites);"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 7033,
+          "text": "return PACKET_remaining(&sc->clienthello->ciphersuites);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/ssl_lib.c",
+      "function": "ossl_ssl_connection_free",
+      "line_range": [
+        1493,
+        1598
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cipher_suites"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1557,
+          "text": "if (s->clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1558,
+          "text": "OPENSSL_free(s->clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1559,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 1517,
+          "text": "sk_SSL_CIPHER_free(s->tls13_ciphersuites);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_read_transition",
+      "line_range": [
+        190,
+        314
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cipher_suites"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 207,
+          "text": "if (mt == SSL3_MT_CLIENT_HELLO) {"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 252,
+          "text": "* For the ECDH ciphersuites when the client sends its ECDH"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 254,
+          "text": "* not sent. Also for GOST ciphersuites when the client uses"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_read_transition",
+      "line_range": [
+        227,
+        408
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cipher_suites"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 233,
+          "text": "* Note that after writing the first ClientHello we don't know what version"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 309,
+          "text": "/* SKE is optional for some PSK ciphersuites */"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 343,
+          "text": "/* SKE is optional for some PSK ciphersuites */"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_client_hello",
+      "line_range": [
+        1027,
+        1082
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cipher_suites"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1027,
+          "text": "static int ssl_print_client_hello(BIO *bio, const SSL_CONNECTION *sc, int indent,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1078,
+          "text": "if (!ssl_print_extensions(bio, indent, 0, SSL3_MT_CLIENT_HELLO, &msg,"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 1049,
+          "text": "BIO_printf(bio, \"cipher_suites (len=%d)\\n\", (int)len);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/t1_lib.c",
+      "function": "tls12_sigalg_allowed",
+      "line_range": [
+        3488,
+        3558
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cipher_suites"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 3500,
+          "text": "* At some point we should fully axe DSA/etc. in ClientHello as per TLS 1.3"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 3529,
+          "text": "* ciphersuites enabled."
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "crypto/rsa/rsa_pk1.c",
+      "function": "ossl_rsa_padding_check_PKCS1_type_2_TLS",
+      "line_range": [
+        546,
+        639
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cipher_suites"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 599,
+          "text": "* ClientHello to detect version rollback attacks (strangely, the"
+        },
+        {
+          "term": "cipher_suites",
+          "line": 600,
+          "text": "* protocol does not offer such protection for DH ciphersuites)."
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_construct_client_hello",
+      "line_range": [
+        1198,
+        1379
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 16,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1361,
+          "text": "if (s->clienthello != NULL"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1362,
+          "text": "&& s->clienthello->pre_proc_exts != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1363,
+          "text": "OPENSSL_free(s->clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1364,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1365,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1373,
+          "text": "if (s->clienthello != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1374,
+          "text": "OPENSSL_free(s->clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1375,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1376,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1198,
+          "text": "__owur CON_FUNC_RETURN tls_construct_client_hello(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1207,
+          "text": "int mt = SSL3_MT_CLIENT_HELLO, rv = 0;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1211,
+          "text": "int protverr = ssl_set_client_hello_version(s);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1219,
+          "text": "return tls_construct_client_hello_aux(s, pkt);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1292,
+          "text": "|| tls_construct_client_hello_aux(s, &inner) != 1"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1328,
+          "text": "if (!tls_process_client_hello(s, &rpkt)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1344,
+          "text": "rv = tls_construct_client_hello_aux(s, pkt);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-1-2-R10_candidate_1.c",
+    "locations/code/rfc8446-4-1-2-R10_candidate_2.c",
+    "locations/code/rfc8446-4-1-2-R10_candidate_3.c",
+    "locations/code/rfc8446-4-1-2-R10_candidate_4.c",
+    "locations/code/rfc8446-4-1-2-R10_candidate_5.c",
+    "locations/code/rfc8446-4-1-2-R10_candidate_6.c",
+    "locations/code/rfc8446-4-1-2-R10_candidate_7.c",
+    "locations/code/rfc8446-4-1-2-R10_candidate_8.c",
+    "locations/code/rfc8446-4-1-2-R10_candidate_9.c",
+    "locations/code/rfc8446-4-1-2-R10_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 502,
+    "files_with_hits": 31,
+    "functions_identified": 124,
+    "null_scope_hits": 121,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1527
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "rule_id": "rfc8446-4.1.3-random-overwrite-downgrade",
+  "source_file": "ssl/statem/statem_srvr.c",
+  "primary_function": "tls_early_post_process_client_hello",
+  "judgment": "conforms",
+  "confidence": "high",
+  "reasoning": "The downgrade sentinel is set in ssl_fill_hello_random (ssl/s3_lib.c:5253-5288), called from tls_early_post_process_client_hello at line 2112 with the dgrd value determined by ssl_choose_server_version. The flow is: (1) dgrd is initialized to DOWNGRADE_NONE at line 1861; (2) ssl_choose_server_version calls check_for_downgrade which sets dgrd = DOWNGRADE_TO_1_2 when negotiating TLS 1.2 with TLS 1.3 supported, or dgrd = DOWNGRADE_TO_1_1 when negotiating below TLS 1.2 with TLS 1.2 supported; (3) ssl_fill_hello_random fills the full 32-byte random with random data via RAND_bytes_ex, then overwrites the last sizeof(tls12downgrade) (8) bytes with tls12downgrade if DOWNGRADE_TO_1_2, or last sizeof(tls11downgrade) (8) bytes with tls11downgrade if DOWNGRADE_TO_1_1. This satisfies both requirements: the last 8 bytes are set to the downgrade sentinel, and the remaining bytes are random. The tls_construct_server_hello function then simply copies s->s3.server_random (already filled with the sentinel) into the ServerHello packet at line 2595.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [
+      5277,
+      5280,
+      5281,
+      5282,
+      5283,
+      5284
+    ],
+    "key_code_snippet": "if (dgrd == DOWNGRADE_TO_1_2)\n    memcpy(result + len - sizeof(tls12downgrade), tls12downgrade,\n        sizeof(tls12downgrade));\nelse if (dgrd == DOWNGRADE_TO_1_1)\n    memcpy(result + len - sizeof(tls11downgrade), tls11downgrade,\n        sizeof(tls11downgrade));",
+    "expected_behavior": "When the server negotiates TLS 1.2 or TLS 1.1, the last 8 bytes of the ServerHello random field must be overwritten with the appropriate downgrade sentinel value (tls12downgrade or tls11downgrade).",
+    "paths_checked": 2,
+    "paths_conforming": 2,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "ssl_fill_hello_random",
+    "check_for_downgrade",
+    "ssl_choose_server_version"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 5,
+  "tools_used": [
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ssl_fill_hello_random"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "DOWNGRADE"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "check_for_downgrade"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls12downgrade"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ssl_choose_server_version"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 84780,
+    "output": 2273
+  }
+}

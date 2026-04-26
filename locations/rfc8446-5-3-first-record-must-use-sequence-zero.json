@@ -1,0 +1,397 @@
+{
+  "rule_id": "rfc8446-5.3-first-record-must-use-sequence-zero",
+  "rule_type": "value_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "sequence_number",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "sequence_number",
+        "SequenceNumber"
+      ]
+    },
+    {
+      "term": "bad_record_mac",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "bad_record_mac",
+        "BadRecordMac"
+      ]
+    },
+    {
+      "term": "key change",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "key change"
+      ]
+    },
+    {
+      "term": "nonce construction",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "nonce construction"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls_get_more_records",
+      "line_range": [
+        543,
+        939
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "bad_record_mac"
+        ]
+      },
+      "hits": [
+        {
+          "term": "bad_record_mac",
+          "line": 752,
+          "text": "RLAYERfatal(rl, SSL_AD_BAD_RECORD_MAC,"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 753,
+          "text": "SSL_R_DECRYPTION_FAILED_OR_BAD_RECORD_MAC);"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 819,
+          "text": "RLAYERfatal(rl, SSL_AD_BAD_RECORD_MAC,"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 820,
+          "text": "SSL_R_DECRYPTION_FAILED_OR_BAD_RECORD_MAC);"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 862,
+          "text": "* SSL 3.0 only has 'bad_record_mac'.  But unless a decryption"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 867,
+          "text": "RLAYERfatal(rl, SSL_AD_BAD_RECORD_MAC,"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 868,
+          "text": "SSL_R_DECRYPTION_FAILED_OR_BAD_RECORD_MAC);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/quic/qlog_event_helpers.c",
+      "function": "log_frame_actual",
+      "line_range": [
+        206,
+        484
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "sequence_number"
+        ]
+      },
+      "hits": [
+        {
+          "term": "sequence_number",
+          "line": 400,
+          "text": "QLOG_U64(\"sequence_number\", f.seq_num);"
+        },
+        {
+          "term": "sequence_number",
+          "line": 414,
+          "text": "QLOG_U64(\"sequence_number\", seq_num);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/record/methods/ktls_meth.c",
+      "function": "ktls_read_n",
+      "line_range": [
+        344,
+        371
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "bad_record_mac"
+        ]
+      },
+      "hits": [
+        {
+          "term": "bad_record_mac",
+          "line": 354,
+          "text": "RLAYERfatal(rl, SSL_AD_BAD_RECORD_MAC,"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 355,
+          "text": "SSL_R_DECRYPTION_FAILED_OR_BAD_RECORD_MAC);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/record/methods/dtls_meth.c",
+      "function": "dtls_process_record",
+      "line_range": [
+        108,
+        281
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "bad_record_mac"
+        ]
+      },
+      "hits": [
+        {
+          "term": "bad_record_mac",
+          "line": 173,
+          "text": "RLAYERfatal(rl, SSL_AD_BAD_RECORD_MAC,"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 174,
+          "text": "SSL_R_DECRYPTION_FAILED_OR_BAD_RECORD_MAC);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/t1_enc.c",
+      "function": "tls1_alert_code",
+      "line_range": [
+        527,
+        605
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "bad_record_mac"
+        ]
+      },
+      "hits": [
+        {
+          "term": "bad_record_mac",
+          "line": 534,
+          "text": "case SSL_AD_BAD_RECORD_MAC:"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 535,
+          "text": "return SSL3_AD_BAD_RECORD_MAC;"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/d1_lib.c",
+      "function": "DTLSv1_listen",
+      "line_range": [
+        407,
+        843
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "sequence_number"
+        ]
+      },
+      "hits": [
+        {
+          "term": "sequence_number",
+          "line": 564,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_INVALID_SEQUENCE_NUMBER);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/t1_trce.c",
+      "function": "SSL_trace",
+      "line_range": [
+        1740,
+        1819
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "sequence_number"
+        ]
+      },
+      "hits": [
+        {
+          "term": "sequence_number",
+          "line": 1779,
+          "text": "\"  epoch=%d, sequence_number=%04x%04x%04x\\n\","
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_alert_desc_string",
+      "line_range": [
+        273,
+        343
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "bad_record_mac"
+        ]
+      },
+      "hits": [
+        {
+          "term": "bad_record_mac",
+          "line": 280,
+          "text": "case SSL3_AD_BAD_RECORD_MAC:"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_alert_desc_string_long",
+      "line_range": [
+        345,
+        417
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "bad_record_mac"
+        ]
+      },
+      "hits": [
+        {
+          "term": "bad_record_mac",
+          "line": 352,
+          "text": "case SSL3_AD_BAD_RECORD_MAC:"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_end_of_early_data",
+      "line_range": [
+        4718,
+        4748
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "key change"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key change",
+          "line": 4732,
+          "text": "* EndOfEarlyData signals a key change so the end of the message must be on"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-3-first-record-must-use-sequence-zero_candidate_1.c",
+    "locations/code/rfc8446-5-3-first-record-must-use-sequence-zero_candidate_2.c",
+    "locations/code/rfc8446-5-3-first-record-must-use-sequence-zero_candidate_3.c",
+    "locations/code/rfc8446-5-3-first-record-must-use-sequence-zero_candidate_4.c",
+    "locations/code/rfc8446-5-3-first-record-must-use-sequence-zero_candidate_5.c",
+    "locations/code/rfc8446-5-3-first-record-must-use-sequence-zero_candidate_6.c",
+    "locations/code/rfc8446-5-3-first-record-must-use-sequence-zero_candidate_7.c",
+    "locations/code/rfc8446-5-3-first-record-must-use-sequence-zero_candidate_8.c",
+    "locations/code/rfc8446-5-3-first-record-must-use-sequence-zero_candidate_9.c",
+    "locations/code/rfc8446-5-3-first-record-must-use-sequence-zero_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 27,
+    "files_with_hits": 13,
+    "functions_identified": 13,
+    "null_scope_hits": 4,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1649
+  }
+}

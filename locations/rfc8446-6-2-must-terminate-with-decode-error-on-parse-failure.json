@@ -1,0 +1,692 @@
+{
+  "rule_id": "rfc8446-6.2-must-terminate-with-decode-error-on-parse-failure",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "decode_error",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "decode_error",
+        "DecodeError"
+      ]
+    },
+    {
+      "term": "syntax error",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "syntax error"
+      ]
+    },
+    {
+      "term": "parsing failure",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "parsing failure"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_rpk",
+      "line_range": [
+        1114,
+        1310
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 1203,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_INVALID_CONTEXT);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1209,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_INVALID_CONTEXT);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1214,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_INVALID_CONTEXT);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1220,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_INVALID_CONTEXT);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1228,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1249,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1254,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_EMPTY_RAW_PUBLIC_KEY);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1262,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1268,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1280,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_BAD_LENGTH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1285,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/ech/ech_store.c",
+      "function": "ech_decode_one_entry",
+      "line_range": [
+        333,
+        475
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 363,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 370,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 380,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 396,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 410,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 416,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 421,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 427,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 438,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 443,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 458,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/ech/ech_internal.c",
+      "function": "ech_decode_inbound_ech",
+      "line_range": [
+        1246,
+        1411
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 1276,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1284,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1289,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1295,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1304,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1312,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1344,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1369,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1383,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1399,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 1731,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1737,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1758,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1763,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1770,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1781,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1786,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1795,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_LENGTH);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/t1_lib.c",
+      "function": "gid_cb",
+      "line_range": [
+        1291,
+        1605
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "syntax error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "syntax error",
+          "line": 1320,
+          "text": "/* tuple delimiter not allowed here -> syntax error */"
+        },
+        {
+          "term": "syntax error",
+          "line": 1324,
+          "text": "return -1; /* Not a valid prefix for a single group name-> syntax error */"
+        },
+        {
+          "term": "syntax error",
+          "line": 1328,
+          "text": "return -1; /* Only single key share prefix allowed -> syntax error */"
+        },
+        {
+          "term": "syntax error",
+          "line": 1335,
+          "text": "return -1; /* Only single remove group prefix allowed -> syntax error */"
+        },
+        {
+          "term": "syntax error",
+          "line": 1342,
+          "text": "return -1; /* Only single ? allowed -> syntax error */"
+        },
+        {
+          "term": "syntax error",
+          "line": 1366,
+          "text": "return -1; /* removal or ignore not allowed here -> syntax error */"
+        },
+        {
+          "term": "syntax error",
+          "line": 1413,
+          "text": "return -1; /* Seems we have prefxes without a group name -> syntax error */"
+        },
+        {
+          "term": "syntax error",
+          "line": 1440,
+          "text": "return -1; /* group name to long  -> syntax error */"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_certificate",
+      "line_range": [
+        3940,
+        4131
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 3981,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_INVALID_CONTEXT);"
+        },
+        {
+          "term": "decode_error",
+          "line": 3987,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 3994,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_CERT_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 4001,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, ERR_R_X509_LIB);"
+        },
+        {
+          "term": "decode_error",
+          "line": 4005,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, ERR_R_ASN1_LIB);"
+        },
+        {
+          "term": "decode_error",
+          "line": 4010,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_CERT_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 4019,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_LENGTH);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_status_request",
+      "line_range": [
+        337,
+        446
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 361,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 374,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 400,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 408,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 414,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 429,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 440,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 1031,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1040,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1081,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1095,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1105,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1111,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1130,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_hello",
+      "line_range": [
+        1619,
+        1846
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 1757,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_TOO_SHORT);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1766,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1772,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1795,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1800,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1810,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_psk",
+      "line_range": [
+        1318,
+        1566
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 1340,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1352,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1454,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1536,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1542,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1548,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-6-2-must-terminate-with-decode-error-on-parse-failure_candidate_1.c",
+    "locations/code/rfc8446-6-2-must-terminate-with-decode-error-on-parse-failure_candidate_2.c",
+    "locations/code/rfc8446-6-2-must-terminate-with-decode-error-on-parse-failure_candidate_3.c",
+    "locations/code/rfc8446-6-2-must-terminate-with-decode-error-on-parse-failure_candidate_4.c",
+    "locations/code/rfc8446-6-2-must-terminate-with-decode-error-on-parse-failure_candidate_5.c",
+    "locations/code/rfc8446-6-2-must-terminate-with-decode-error-on-parse-failure_candidate_6.c",
+    "locations/code/rfc8446-6-2-must-terminate-with-decode-error-on-parse-failure_candidate_7.c",
+    "locations/code/rfc8446-6-2-must-terminate-with-decode-error-on-parse-failure_candidate_8.c",
+    "locations/code/rfc8446-6-2-must-terminate-with-decode-error-on-parse-failure_candidate_9.c",
+    "locations/code/rfc8446-6-2-must-terminate-with-decode-error-on-parse-failure_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 318,
+    "files_with_hits": 55,
+    "functions_identified": 135,
+    "null_scope_hits": 27,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 2313
+  }
+}

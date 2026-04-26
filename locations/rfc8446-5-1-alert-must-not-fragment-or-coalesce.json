@@ -1,0 +1,632 @@
+{
+  "rule_id": "rfc8446-5.1-alert-must-not-fragment-or-coalesce",
+  "rule_type": "message_construction",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ContentType",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "ContentType",
+        "content_type"
+      ]
+    },
+    {
+      "term": "decode_error",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "decode_error",
+        "DecodeError"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "crypto/cms/cms_ess.c",
+      "function": "ossl_cms_Receipt_verify",
+      "line_range": [
+        256,
+        377
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 281,
+          "text": "if (OBJ_obj2nid(CMS_get0_eContentType(cms)) != NID_id_smime_ct_receipt) {"
+        },
+        {
+          "term": "ContentType",
+          "line": 344,
+          "text": "OBJ_nid2obj(NID_pkcs9_contentType),"
+        },
+        {
+          "term": "ContentType",
+          "line": 353,
+          "text": "if (OBJ_cmp(octype, rct->contentType)) {"
+        },
+        {
+          "term": "ContentType",
+          "line": 347,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_NO_CONTENT_TYPE);"
+        },
+        {
+          "term": "ContentType",
+          "line": 354,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_CONTENT_TYPE_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 296,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_RECEIPT_DECODE_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "crypto/pkcs12/p12_add.c",
+      "function": "PKCS12_unpack_p7data",
+      "line_range": [
+        75,
+        90
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 78,
+          "text": "ERR_raise(ERR_LIB_PKCS12, PKCS12_R_CONTENT_TYPE_NOT_DATA);"
+        },
+        {
+          "term": "decode_error",
+          "line": 83,
+          "text": "ERR_raise(ERR_LIB_PKCS12, PKCS12_R_DECODE_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "crypto/pkcs12/p12_add.c",
+      "function": "PKCS12_unpack_authsafes",
+      "line_range": [
+        191,
+        224
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 199,
+          "text": "ERR_raise(ERR_LIB_PKCS12, PKCS12_R_CONTENT_TYPE_NOT_DATA);"
+        },
+        {
+          "term": "decode_error",
+          "line": 204,
+          "text": "ERR_raise(ERR_LIB_PKCS12, PKCS12_R_DECODE_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "crypto/pkcs12/p12_mutl.c",
+      "function": "pkcs12_gen_mac",
+      "line_range": [
+        175,
+        302
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 200,
+          "text": "ERR_raise(ERR_LIB_PKCS12, PKCS12_R_CONTENT_TYPE_NOT_DATA);"
+        },
+        {
+          "term": "decode_error",
+          "line": 205,
+          "text": "ERR_raise(ERR_LIB_PKCS12, PKCS12_R_DECODE_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_rpk",
+      "line_range": [
+        1114,
+        1310
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 1203,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_INVALID_CONTEXT);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1209,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_INVALID_CONTEXT);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1214,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_INVALID_CONTEXT);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1220,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_INVALID_CONTEXT);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1228,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1249,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1254,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_EMPTY_RAW_PUBLIC_KEY);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1262,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1268,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1280,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_BAD_LENGTH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1285,
+          "text": "SSLfatal(sc, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/ech/ech_store.c",
+      "function": "ech_decode_one_entry",
+      "line_range": [
+        333,
+        475
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 363,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 370,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 380,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 396,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 410,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 416,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 421,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 427,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 438,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 443,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        },
+        {
+          "term": "decode_error",
+          "line": 458,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_ECH_DECODE_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "crypto/cms/cms_lib.c",
+      "function": "cms_get0_econtent_type",
+      "line_range": [
+        311,
+        340
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 313,
+          "text": "switch (OBJ_obj2nid(cms->contentType)) {"
+        },
+        {
+          "term": "ContentType",
+          "line": 316,
+          "text": "return &cms->d.signedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 319,
+          "text": "return &cms->d.envelopedData->encryptedContentInfo->contentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 322,
+          "text": "return &cms->d.digestedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 325,
+          "text": "return &cms->d.encryptedData->encryptedContentInfo->contentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 329,
+          "text": "->contentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 331,
+          "text": "return &cms->d.authenticatedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 334,
+          "text": "return &cms->d.compressedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 311,
+          "text": "static ASN1_OBJECT **cms_get0_econtent_type(CMS_ContentInfo *cms)"
+        },
+        {
+          "term": "ContentType",
+          "line": 337,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_UNSUPPORTED_CONTENT_TYPE);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/ech/ech_internal.c",
+      "function": "ech_decode_inbound_ech",
+      "line_range": [
+        1246,
+        1411
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 1276,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1284,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1289,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1295,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1304,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1312,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1344,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1369,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1383,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1399,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 1731,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1737,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1758,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1763,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1770,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1781,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1786,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 1795,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_LENGTH);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_certificate",
+      "line_range": [
+        3940,
+        4131
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decode_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "decode_error",
+          "line": 3981,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_INVALID_CONTEXT);"
+        },
+        {
+          "term": "decode_error",
+          "line": 3987,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 3994,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_CERT_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 4001,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, ERR_R_X509_LIB);"
+        },
+        {
+          "term": "decode_error",
+          "line": 4005,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, ERR_R_ASN1_LIB);"
+        },
+        {
+          "term": "decode_error",
+          "line": 4010,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_CERT_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "decode_error",
+          "line": 4019,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_LENGTH);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-1-alert-must-not-fragment-or-coalesce_candidate_1.c",
+    "locations/code/rfc8446-5-1-alert-must-not-fragment-or-coalesce_candidate_2.c",
+    "locations/code/rfc8446-5-1-alert-must-not-fragment-or-coalesce_candidate_3.c",
+    "locations/code/rfc8446-5-1-alert-must-not-fragment-or-coalesce_candidate_4.c",
+    "locations/code/rfc8446-5-1-alert-must-not-fragment-or-coalesce_candidate_5.c",
+    "locations/code/rfc8446-5-1-alert-must-not-fragment-or-coalesce_candidate_6.c",
+    "locations/code/rfc8446-5-1-alert-must-not-fragment-or-coalesce_candidate_7.c",
+    "locations/code/rfc8446-5-1-alert-must-not-fragment-or-coalesce_candidate_8.c",
+    "locations/code/rfc8446-5-1-alert-must-not-fragment-or-coalesce_candidate_9.c",
+    "locations/code/rfc8446-5-1-alert-must-not-fragment-or-coalesce_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 499,
+    "files_with_hits": 86,
+    "functions_identified": 208,
+    "null_scope_hits": 71,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1529
+  }
+}

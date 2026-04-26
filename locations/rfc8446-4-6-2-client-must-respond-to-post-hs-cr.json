@@ -1,0 +1,1079 @@
+{
+  "rule_id": "rfc8446-4.6.2-client-must-respond-to-post-hs-cr",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "CertificateRequest",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateRequest",
+        "certificate_request"
+      ]
+    },
+    {
+      "term": "Certificate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Certificate"
+      ]
+    },
+    {
+      "term": "CertificateVerify",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateVerify",
+        "certificate_verify"
+      ]
+    },
+    {
+      "term": "Finished",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Finished"
+      ]
+    },
+    {
+      "term": "post_handshake_auth",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "post_handshake_auth",
+        "PostHandshakeAuth"
+      ]
+    },
+    {
+      "term": "post-handshake authentication",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "post-handshake authentication"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_certificate_request",
+      "line_range": [
+        2959,
+        3081
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 19,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "CertificateVerify",
+          "Finished",
+          "post_handshake_auth"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2962,
+          "text": "/* Clear certificate validity flags */"
+        },
+        {
+          "term": "Certificate",
+          "line": 2985,
+          "text": "/* Free and zero certificate types: it is not present in TLS 1.3 */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3019,
+          "text": "/* get the certificate types */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3039,
+          "text": "* Despite this being for certificates, preserve compatibility"
+        },
+        {
+          "term": "Certificate",
+          "line": 3065,
+          "text": "/* we should setup a certificate to return.... */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3069,
+          "text": "* In TLSv1.3 we don't prepare the client certificate yet. We wait until"
+        },
+        {
+          "term": "Certificate",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "Certificate",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "Certificate",
+          "line": 3073,
+          "text": "* SSL_get1_peer_certificate() returns something sensible in"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "Finished",
+          "line": 2982,
+          "text": "return MSG_PROCESS_FINISHED_READING;"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 3077,
+          "text": "&& s->post_handshake_auth != SSL_PHA_REQUESTED)"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_read_transition",
+      "line_range": [
+        94,
+        216
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 19,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "CertificateVerify",
+          "Finished",
+          "post_handshake_auth"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 133,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 189,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 133,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 137,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 142,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 143,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 152,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 158,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 167,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 189,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 167,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Finished",
+          "line": 128,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 129,
+          "text": "st->hand_state = TLS_ST_CR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 174,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 175,
+          "text": "st->hand_state = TLS_ST_CR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 201,
+          "text": "* message here after the swap, or do it after the clientFinished?"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 195,
+          "text": "&& s->post_handshake_auth == SSL_PHA_EXT_SENT) {"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 196,
+          "text": "s->post_handshake_auth = SSL_PHA_REQUESTED;"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_write_transition",
+      "line_range": [
+        422,
+        518
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "CertificateVerify",
+          "Finished",
+          "post_handshake_auth"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 446,
+          "text": "* We should only get here if we received a CertificateRequest after"
+        },
+        {
+          "term": "Certificate",
+          "line": 446,
+          "text": "* We should only get here if we received a CertificateRequest after"
+        },
+        {
+          "term": "Certificate",
+          "line": 493,
+          "text": "/* If a non-empty Certificate we also send CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 493,
+          "text": "/* If a non-empty Certificate we also send CertificateVerify */"
+        },
+        {
+          "term": "Finished",
+          "line": 457,
+          "text": "case TLS_ST_CR_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 459,
+          "text": "|| s->early_data_state == SSL_EARLY_DATA_FINISHED_WRITING)"
+        },
+        {
+          "term": "Finished",
+          "line": 465,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 484,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 495,
+          "text": ": TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 499,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 505,
+          "text": "case TLS_ST_CW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 516,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 438,
+          "text": "if (s->post_handshake_auth == SSL_PHA_REQUESTED) {"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_certificate",
+      "line_range": [
+        3940,
+        4131
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 18,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "post-handshake authentication",
+          "post_handshake_auth"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 3940,
+          "text": "MSG_PROCESS_RETURN tls_process_client_certificate(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3965,
+          "text": "SSLfatal(s, SSL_AD_UNSUPPORTED_CERTIFICATE,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3966,
+          "text": "SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4023,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE, &rawexts,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4025,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4042,
+          "text": "/* Fail only if we required a certificate */"
+        },
+        {
+          "term": "Certificate",
+          "line": 4044,
+          "text": "SSLfatal(s, SSL_AD_CERTIFICATE_REQUIRED,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4045,
+          "text": "SSL_R_PEER_DID_NOT_RETURN_A_CERTIFICATE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4048,
+          "text": "/* No client certificate so digest cached records */"
+        },
+        {
+          "term": "Certificate",
+          "line": 4058,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4064,
+          "text": "SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4073,
+          "text": "* a new certificate is received via post-handshake authentication, as the"
+        },
+        {
+          "term": "Certificate",
+          "line": 4109,
+          "text": "* certificate, while we do include it in statem_clnt.c"
+        },
+        {
+          "term": "Certificate",
+          "line": 4112,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 4112,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 4058,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 4077,
+          "text": "if (s->post_handshake_auth == SSL_PHA_REQUESTED) {"
+        },
+        {
+          "term": "post-handshake authentication",
+          "line": 4073,
+          "text": "* a new certificate is received via post-handshake authentication, as the"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_read_transition",
+      "line_range": [
+        74,
+        179
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 16,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "Finished",
+          "post_handshake_auth"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 107,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 112,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 113,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 134,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 162,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 163,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 134,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Finished",
+          "line": 105,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 119,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 120,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 129,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 130,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 142,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 143,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 156,
+          "text": "if (s->post_handshake_auth == SSL_PHA_REQUESTED) {"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_write_transition",
+      "line_range": [
+        582,
+        715
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "Finished",
+          "post_handshake_auth"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 637,
+          "text": "else if (send_certificate_request(s))"
+        },
+        {
+          "term": "Certificate",
+          "line": 637,
+          "text": "else if (send_certificate_request(s))"
+        },
+        {
+          "term": "Finished",
+          "line": 611,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 636,
+          "text": "st->hand_state = TLS_ST_SW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 663,
+          "text": "st->hand_state = TLS_ST_SW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 666,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 672,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 674,
+          "text": "case TLS_ST_SR_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 677,
+          "text": "* Technically we have finished the handshake at this point, but we're"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 602,
+          "text": "if (s->post_handshake_auth == SSL_PHA_REQUEST_PENDING) {"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 647,
+          "text": "if (s->post_handshake_auth == SSL_PHA_REQUEST_PENDING) {"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 648,
+          "text": "s->post_handshake_auth = SSL_PHA_REQUESTED;"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 681,
+          "text": "if (s->post_handshake_auth == SSL_PHA_REQUESTED) {"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 682,
+          "text": "s->post_handshake_auth = SSL_PHA_EXT_RECEIVED;"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_construct_message",
+      "line_range": [
+        1225,
+        1324
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "CertificateVerify",
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1283,
+          "text": "*confunc = tls_construct_certificate_request;"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1284,
+          "text": "*mt = SSL3_MT_CERTIFICATE_REQUEST;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1261,
+          "text": "*confunc = tls_construct_server_certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1262,
+          "text": "*mt = SSL3_MT_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1267,
+          "text": "*confunc = tls_construct_server_compressed_certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1268,
+          "text": "*mt = SSL3_MT_COMPRESSED_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1274,
+          "text": "*mt = SSL3_MT_CERTIFICATE_VERIFY;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1283,
+          "text": "*confunc = tls_construct_certificate_request;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1284,
+          "text": "*mt = SSL3_MT_CERTIFICATE_REQUEST;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1299,
+          "text": "*mt = SSL3_MT_CERTIFICATE_STATUS;"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 1274,
+          "text": "*mt = SSL3_MT_CERTIFICATE_VERIFY;"
+        },
+        {
+          "term": "Finished",
+          "line": 1302,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 1303,
+          "text": "*confunc = tls_construct_finished;"
+        },
+        {
+          "term": "Finished",
+          "line": 1304,
+          "text": "*mt = SSL3_MT_FINISHED;"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_post_work",
+      "line_range": [
+        1002,
+        1215
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "Finished",
+          "post_handshake_auth"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1176,
+          "text": "if (!s->hit && !send_certificate_request(s)) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 1170,
+          "text": "|| (s->options & SSL_OP_NO_TX_CERTIFICATE_COMPRESSION) != 0)"
+        },
+        {
+          "term": "Certificate",
+          "line": 1171,
+          "text": "s->ext.compress_certificate_from_peer[0] = TLSEXT_comp_cert_none;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1176,
+          "text": "if (!s->hit && !send_certificate_request(s)) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 1178,
+          "text": "|| (s->options & SSL_OP_NO_TX_CERTIFICATE_COMPRESSION) != 0)"
+        },
+        {
+          "term": "Certificate",
+          "line": 1179,
+          "text": "s->ext.compress_certificate_from_peer[0] = TLSEXT_comp_cert_none;"
+        },
+        {
+          "term": "Finished",
+          "line": 1017,
+          "text": "if (!ssl3_init_finished_mac(s)) {"
+        },
+        {
+          "term": "Finished",
+          "line": 1026,
+          "text": "/* HelloVerifyRequest resets Finished MAC */"
+        },
+        {
+          "term": "Finished",
+          "line": 1027,
+          "text": "if (s->version != DTLS1_BAD_VER && !ssl3_init_finished_mac(s)) {"
+        },
+        {
+          "term": "Finished",
+          "line": 1137,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 1156,
+          "text": "|| !tls13_store_server_finished_hash(s)"
+        },
+        {
+          "term": "Finished",
+          "line": 1214,
+          "text": "return WORK_FINISHED_CONTINUE;"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 1165,
+          "text": "if (s->post_handshake_auth == SSL_PHA_REQUEST_PENDING) {"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_rpk",
+      "line_range": [
+        3855,
+        3938
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "post-handshake authentication",
+          "post_handshake_auth"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 3869,
+          "text": "SSLfatal(sc, SSL_AD_CERTIFICATE_REQUIRED,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3870,
+          "text": "SSL_R_PEER_DID_NOT_RETURN_A_CERTIFICATE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 3876,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 3885,
+          "text": "* a new RPK (or certificate) is received via post-handshake authentication,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3921,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 3921,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 3876,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "post_handshake_auth",
+          "line": 3889,
+          "text": "if (sc->post_handshake_auth == SSL_PHA_REQUESTED) {"
+        },
+        {
+          "term": "post-handshake authentication",
+          "line": 3885,
+          "text": "* a new RPK (or certificate) is received via post-handshake authentication,"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_handshake",
+      "line_range": [
+        1625,
+        1738
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "CertificateVerify",
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1696,
+          "text": "case SSL3_MT_CERTIFICATE_REQUEST:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1681,
+          "text": "case SSL3_MT_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1682,
+          "text": "if (!ssl_print_certificates(bio, sc, server, indent + 2, msg, msglen))"
+        },
+        {
+          "term": "Certificate",
+          "line": 1686,
+          "text": "case SSL3_MT_COMPRESSED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1687,
+          "text": "if (!ssl_print_compressed_certificates(bio, sc, server, indent + 2, msg, msglen))"
+        },
+        {
+          "term": "Certificate",
+          "line": 1691,
+          "text": "case SSL3_MT_CERTIFICATE_VERIFY:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1696,
+          "text": "case SSL3_MT_CERTIFICATE_REQUEST:"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 1691,
+          "text": "case SSL3_MT_CERTIFICATE_VERIFY:"
+        },
+        {
+          "term": "Finished",
+          "line": 1701,
+          "text": "case SSL3_MT_FINISHED:"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-6-2-client-must-respond-to-post-hs-cr_candidate_1.c",
+    "locations/code/rfc8446-4-6-2-client-must-respond-to-post-hs-cr_candidate_2.c",
+    "locations/code/rfc8446-4-6-2-client-must-respond-to-post-hs-cr_candidate_3.c",
+    "locations/code/rfc8446-4-6-2-client-must-respond-to-post-hs-cr_candidate_4.c",
+    "locations/code/rfc8446-4-6-2-client-must-respond-to-post-hs-cr_candidate_5.c",
+    "locations/code/rfc8446-4-6-2-client-must-respond-to-post-hs-cr_candidate_6.c",
+    "locations/code/rfc8446-4-6-2-client-must-respond-to-post-hs-cr_candidate_7.c",
+    "locations/code/rfc8446-4-6-2-client-must-respond-to-post-hs-cr_candidate_8.c",
+    "locations/code/rfc8446-4-6-2-client-must-respond-to-post-hs-cr_candidate_9.c",
+    "locations/code/rfc8446-4-6-2-client-must-respond-to-post-hs-cr_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 2183,
+    "files_with_hits": 171,
+    "functions_identified": 423,
+    "null_scope_hits": 846,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1287
+  }
+}

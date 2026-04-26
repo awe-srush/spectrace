@@ -1,0 +1,42 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.7-client-must-not-act-before-handshake",
+    "source_section": "4.2.7",
+    "source_text": "Clients MUST NOT act upon any information found in \"supported_groups\" prior to successful completion of the handshake but MAY use the information learned from a successfully completed handshake to change what groups they use in their \"key_share\" extension in subsequent connections.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "Clients MUST NOT act upon server's supported_groups information until the handshake has successfully completed.",
+    "entity": "client",
+    "applies_when": "Client receives supported_groups from server in EncryptedExtensions",
+    "target_message": "EncryptedExtensions",
+    "target_field": null,
+    "expected_value": "information not used until handshake complete",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "EncryptedExtensions",
+        "ClientHello"
+      ],
+      "field_names": [
+        "named_group_list"
+      ],
+      "extension_names": [
+        "supported_groups",
+        "key_share"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "subsequent connections"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify client doesn't modify behavior based on server groups until handshake is done, but timing is subtle.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

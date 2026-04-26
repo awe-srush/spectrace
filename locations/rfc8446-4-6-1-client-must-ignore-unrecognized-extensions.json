@@ -1,0 +1,682 @@
+{
+  "rule_id": "rfc8446-4.6.1-client-must-ignore-unrecognized-extensions",
+  "rule_type": "behavioral_tolerance",
+  "checkability": "medium",
+  "search_terms": [
+    {
+      "term": "NewSessionTicket",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "NewSessionTicket",
+        "new_session_ticket"
+      ]
+    },
+    {
+      "term": "extensions",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "extensions"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions.c",
+      "function": "tls_collect_extensions",
+      "line_range": [
+        805,
+        927
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 20,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "NewSessionTicket",
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "NewSessionTicket",
+          "line": 864,
+          "text": "* extensions can be sent in the NewSessionTicket. We only do this for"
+        },
+        {
+          "term": "NewSessionTicket",
+          "line": 876,
+          "text": "&& (context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST | SSL_EXT_TLS1_3_NEW_SESSION_TICKET)) == 0"
+        },
+        {
+          "term": "extensions",
+          "line": 805,
+          "text": "int tls_collect_extensions(SSL_CONNECTION *s, PACKET *packet,"
+        },
+        {
+          "term": "extensions",
+          "line": 809,
+          "text": "PACKET extensions = *packet;"
+        },
+        {
+          "term": "extensions",
+          "line": 813,
+          "text": "RAW_EXTENSION *raw_extensions = NULL;"
+        },
+        {
+          "term": "extensions",
+          "line": 819,
+          "text": "* Initialise server side custom extensions. Client side is done during"
+        },
+        {
+          "term": "extensions",
+          "line": 820,
+          "text": "* construction of extensions for the ClientHello."
+        },
+        {
+          "term": "extensions",
+          "line": 831,
+          "text": "raw_extensions = OPENSSL_calloc(num_exts, sizeof(*raw_extensions));"
+        },
+        {
+          "term": "extensions",
+          "line": 832,
+          "text": "if (raw_extensions == NULL) {"
+        },
+        {
+          "term": "extensions",
+          "line": 838,
+          "text": "while (PACKET_remaining(&extensions) > 0) {"
+        },
+        {
+          "term": "extensions",
+          "line": 843,
+          "text": "if (!PACKET_get_net_2(&extensions, &type) || !PACKET_get_length_prefixed_2(&extensions, &extension)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 849,
+          "text": "* extensions that we recognise. We also have a special case for the"
+        },
+        {
+          "term": "extensions",
+          "line": 852,
+          "text": "if (!verify_extension(s, context, type, exts, raw_extensions, &thisex)"
+        },
+        {
+          "term": "extensions",
+          "line": 856,
+          "text": "&& PACKET_remaining(&extensions) != 0)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 860,
+          "text": "idx = (unsigned int)(thisex - raw_extensions);"
+        },
+        {
+          "term": "extensions",
+          "line": 864,
+          "text": "* extensions can be sent in the NewSessionTicket. We only do this for"
+        },
+        {
+          "term": "extensions",
+          "line": 865,
+          "text": "* the built-in extensions. Custom extensions have a different but"
+        },
+        {
+          "term": "extensions",
+          "line": 905,
+          "text": "* Initialise all known extensions relevant to this context,"
+        },
+        {
+          "term": "extensions",
+          "line": 919,
+          "text": "*res = raw_extensions;"
+        },
+        {
+          "term": "extensions",
+          "line": 925,
+          "text": "OPENSSL_free(raw_extensions);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/extensions.c",
+      "function": "tls_construct_extensions",
+      "line_range": [
+        1051,
+        1172
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "NewSessionTicket",
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "NewSessionTicket",
+          "line": 1143,
+          "text": "&& (context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST | SSL_EXT_TLS1_3_NEW_SESSION_TICKET)) != 0)"
+        },
+        {
+          "term": "extensions",
+          "line": 1051,
+          "text": "int tls_construct_extensions(SSL_CONNECTION *s, WPACKET *pkt,"
+        },
+        {
+          "term": "extensions",
+          "line": 1065,
+          "text": "* If extensions are of zero length then we don't even add the"
+        },
+        {
+          "term": "extensions",
+          "line": 1066,
+          "text": "* extensions length bytes to a ClientHello/ServerHello"
+        },
+        {
+          "term": "extensions",
+          "line": 1086,
+          "text": "/* Add custom extensions first */"
+        },
+        {
+          "term": "extensions",
+          "line": 1104,
+          "text": "* to-be-ECH-compressed extensions, and then go around again"
+        },
+        {
+          "term": "extensions",
+          "line": 1107,
+          "text": "* extensions are contiguous in the encoding. The actual"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_new_session_ticket",
+      "line_range": [
+        3083,
+        3250
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "NewSessionTicket",
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "NewSessionTicket",
+          "line": 3119,
+          "text": "* time a NewSessionTicket arrives because those messages arrive"
+        },
+        {
+          "term": "NewSessionTicket",
+          "line": 3083,
+          "text": "MSG_PROCESS_RETURN tls_process_new_session_ticket(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "NewSessionTicket",
+          "line": 3180,
+          "text": "SSL_EXT_TLS1_3_NEW_SESSION_TICKET, &exts,"
+        },
+        {
+          "term": "NewSessionTicket",
+          "line": 3183,
+          "text": "SSL_EXT_TLS1_3_NEW_SESSION_TICKET,"
+        },
+        {
+          "term": "extensions",
+          "line": 3179,
+          "text": "if (!tls_collect_extensions(s, &extpkt,"
+        },
+        {
+          "term": "extensions",
+          "line": 3182,
+          "text": "|| !tls_parse_all_extensions(s,"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_construct_new_session_ticket",
+      "line_range": [
+        4485,
+        4623
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "NewSessionTicket",
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "NewSessionTicket",
+          "line": 4514,
+          "text": "* If we already sent one NewSessionTicket, or we resumed then"
+        },
+        {
+          "term": "NewSessionTicket",
+          "line": 4485,
+          "text": "CON_FUNC_RETURN tls_construct_new_session_ticket(SSL_CONNECTION *s, WPACKET *pkt)"
+        },
+        {
+          "term": "NewSessionTicket",
+          "line": 4611,
+          "text": "SSL_EXT_TLS1_3_NEW_SESSION_TICKET,"
+        },
+        {
+          "term": "extensions",
+          "line": 4610,
+          "text": "if (!tls_construct_extensions(s, pkt,"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_construct_message",
+      "line_range": [
+        1225,
+        1324
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "NewSessionTicket",
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "NewSessionTicket",
+          "line": 1293,
+          "text": "*confunc = tls_construct_new_session_ticket;"
+        },
+        {
+          "term": "extensions",
+          "line": 1312,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "extensions",
+          "line": 1313,
+          "text": "*confunc = tls_construct_encrypted_extensions;"
+        },
+        {
+          "term": "extensions",
+          "line": 1314,
+          "text": "*mt = SSL3_MT_ENCRYPTED_EXTENSIONS;"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_post_work",
+      "line_range": [
+        1002,
+        1215
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "NewSessionTicket",
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "NewSessionTicket",
+          "line": 1199,
+          "text": "* NewSessionTicket and behave as if we were successful. This is"
+        },
+        {
+          "term": "NewSessionTicket",
+          "line": 1202,
+          "text": "* waiting to read our post-handshake NewSessionTickets."
+        },
+        {
+          "term": "extensions",
+          "line": 1175,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_process_message",
+      "line_range": [
+        1073,
+        1131
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "NewSessionTicket",
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "NewSessionTicket",
+          "line": 1117,
+          "text": "return tls_process_new_session_ticket(s, pkt);"
+        },
+        {
+          "term": "extensions",
+          "line": 1125,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "extensions",
+          "line": 1126,
+          "text": "return tls_process_encrypted_extensions(s, pkt);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 16,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "extensions",
+          "line": 1711,
+          "text": "RAW_EXTENSION *extensions = NULL;"
+        },
+        {
+          "term": "extensions",
+          "line": 1790,
+          "text": "/* TLS extensions */"
+        },
+        {
+          "term": "extensions",
+          "line": 1800,
+          "text": "if (!tls_collect_extensions(s, &extpkt, SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST,"
+        },
+        {
+          "term": "extensions",
+          "line": 1801,
+          "text": "&extensions, NULL, 1)"
+        },
+        {
+          "term": "extensions",
+          "line": 1804,
+          "text": "extensions, NULL, 0)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 1809,
+          "text": "if (!tls_collect_extensions(s, &extpkt,"
+        },
+        {
+          "term": "extensions",
+          "line": 1812,
+          "text": "&extensions, NULL, 1)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 1916,
+          "text": "if (!ssl_choose_client_version(s, sversion, extensions)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 1946,
+          "text": "ret = tls_process_as_hello_retry_request(s, extensions);"
+        },
+        {
+          "term": "extensions",
+          "line": 1947,
+          "text": "OPENSSL_free(extensions);"
+        },
+        {
+          "term": "extensions",
+          "line": 1953,
+          "text": "* Now we have chosen the version we need to check again that the extensions"
+        },
+        {
+          "term": "extensions",
+          "line": 1958,
+          "text": "if (!tls_validate_all_contexts(s, context, extensions)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 1979,
+          "text": "extensions, NULL, 0)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 2124,
+          "text": "if (!tls_parse_all_extensions(s, context, extensions, NULL, 0, 1)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 2197,
+          "text": "OPENSSL_free(extensions);"
+        },
+        {
+          "term": "extensions",
+          "line": 2200,
+          "text": "OPENSSL_free(extensions);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_rpk",
+      "line_range": [
+        1114,
+        1310
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "extensions",
+          "line": 1119,
+          "text": "PACKET extensions;"
+        },
+        {
+          "term": "extensions",
+          "line": 1146,
+          "text": "*       Extension extensions<0..2^16-1>;"
+        },
+        {
+          "term": "extensions",
+          "line": 1190,
+          "text": "* are no (TLS 1.3 only) per-certificate extensions either, because the"
+        },
+        {
+          "term": "extensions",
+          "line": 1194,
+          "text": "* the TLS 1.3 message just prepends the length of the RPK+extensions,"
+        },
+        {
+          "term": "extensions",
+          "line": 1277,
+          "text": "/* Process the Extensions block */"
+        },
+        {
+          "term": "extensions",
+          "line": 1283,
+          "text": "if (!PACKET_as_length_prefixed_2(pkt, &extensions)"
+        },
+        {
+          "term": "extensions",
+          "line": 1288,
+          "text": "if (!tls_collect_extensions(sc, &extensions, SSL_EXT_TLS1_3_RAW_PUBLIC_KEY,"
+        },
+        {
+          "term": "extensions",
+          "line": 1294,
+          "text": "if (!tls_parse_all_extensions(sc, SSL_EXT_TLS1_3_RAW_PUBLIC_KEY,"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ssl_check_for_safari",
+      "line_range": [
+        1547,
+        1613
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "extensions",
+          "line": 1550,
+          "text": "static const unsigned char kSafariExtensionsBlock[] = {"
+        },
+        {
+          "term": "extensions",
+          "line": 1588,
+          "text": "/* Length of the common prefix (first two extensions). */"
+        },
+        {
+          "term": "extensions",
+          "line": 1589,
+          "text": "static const size_t kSafariCommonExtensionsLength = 18;"
+        },
+        {
+          "term": "extensions",
+          "line": 1594,
+          "text": "tmppkt = hello->extensions;"
+        },
+        {
+          "term": "extensions",
+          "line": 1608,
+          "text": "? sizeof(kSafariExtensionsBlock)"
+        },
+        {
+          "term": "extensions",
+          "line": 1609,
+          "text": ": kSafariCommonExtensionsLength;"
+        },
+        {
+          "term": "extensions",
+          "line": 1611,
+          "text": "s->s3.is_probably_safari = PACKET_equal(&tmppkt, kSafariExtensionsBlock,"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-6-1-client-must-ignore-unrecognized-extensions_candidate_1.c",
+    "locations/code/rfc8446-4-6-1-client-must-ignore-unrecognized-extensions_candidate_2.c",
+    "locations/code/rfc8446-4-6-1-client-must-ignore-unrecognized-extensions_candidate_3.c",
+    "locations/code/rfc8446-4-6-1-client-must-ignore-unrecognized-extensions_candidate_4.c",
+    "locations/code/rfc8446-4-6-1-client-must-ignore-unrecognized-extensions_candidate_5.c",
+    "locations/code/rfc8446-4-6-1-client-must-ignore-unrecognized-extensions_candidate_6.c",
+    "locations/code/rfc8446-4-6-1-client-must-ignore-unrecognized-extensions_candidate_7.c",
+    "locations/code/rfc8446-4-6-1-client-must-ignore-unrecognized-extensions_candidate_8.c",
+    "locations/code/rfc8446-4-6-1-client-must-ignore-unrecognized-extensions_candidate_9.c",
+    "locations/code/rfc8446-4-6-1-client-must-ignore-unrecognized-extensions_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 695,
+    "files_with_hits": 88,
+    "functions_identified": 264,
+    "null_scope_hits": 196,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1690
+  }
+}

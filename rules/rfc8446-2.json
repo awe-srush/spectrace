@@ -1,0 +1,88 @@
+[
+  {
+    "rule_id": "rfc8446-2-app-data-must-not-precede-finished",
+    "source_section": "2",
+    "source_text": "Application Data MUST NOT be sent prior to sending the Finished message, except as specified in Section 2.3.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "Application Data MUST NOT be sent before the Finished message, except for 0-RTT early data (\u00a72.3).",
+    "entity": "both",
+    "applies_when": "Sending data during handshake",
+    "target_message": "Finished",
+    "target_field": null,
+    "expected_value": "no application_data records before Finished (except 0-RTT)",
+    "related_fields": [
+      "early_data"
+    ],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "Finished"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "early_data"
+      ],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "0-RTT"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can send application data before Finished and verify unexpected_message.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT with clear exception.",
+    "cross_section_context_used": [
+      "2.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-2-server-key-share-must-be-in-client-group",
+    "source_section": "2",
+    "source_text": "the server's share MUST be in the same group as one of the client's shares.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "The server's key_share MUST use the same group as one of the client's offered key_share entries.",
+    "entity": "server",
+    "applies_when": "Server selects key_share for (EC)DHE",
+    "target_message": "ServerHello",
+    "target_field": "extensions.key_share",
+    "expected_value": "server key_share group matches one of client's key_share groups",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.2.8",
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello",
+        "ClientHello"
+      ],
+      "field_names": [
+        "named_group"
+      ],
+      "extension_names": [
+        "key_share"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "ECDHE",
+        "DHE"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server's selected group matches one of client's offers.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "4.2.8"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

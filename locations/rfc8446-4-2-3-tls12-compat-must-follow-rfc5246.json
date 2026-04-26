@@ -1,0 +1,352 @@
+{
+  "rule_id": "rfc8446-4.2.3-tls12-compat-must-follow-rfc5246",
+  "rule_type": "behavioral_tolerance",
+  "checkability": "low",
+  "search_terms": [
+    {
+      "term": "signature_algorithms",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "signature_algorithms",
+        "SignatureAlgorithms"
+      ]
+    },
+    {
+      "term": "TLS 1.2 negotiation",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "TLS 1.2 negotiation"
+      ]
+    },
+    {
+      "term": "backward compatibility",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "backward compatibility"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "crypto/ocsp/ocsp_vfy.c",
+      "function": "OCSP_request_verify",
+      "line_range": [
+        377,
+        411
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "backward compatibility"
+        ]
+      },
+      "hits": [
+        {
+          "term": "backward compatibility",
+          "line": 392,
+          "text": "return 0; /* not returning -1 here for backward compatibility*/"
+        },
+        {
+          "term": "backward compatibility",
+          "line": 398,
+          "text": "return 0; /* not returning -1 here for backward compatibility*/"
+        },
+        {
+          "term": "backward compatibility",
+          "line": 404,
+          "text": "return 0; /* not returning 'ret' here for backward compatibility*/"
+        },
+        {
+          "term": "backward compatibility",
+          "line": 410,
+          "text": "/* using '> 0' here to avoid breaking backward compatibility returning -1 */"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_set_server_sigalgs",
+      "line_range": [
+        3107,
+        3162
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature_algorithms",
+          "line": 3160,
+          "text": "SSL_R_NO_SHARED_SIGNATURE_ALGORITHMS);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_check_sig_alg",
+      "line_range": [
+        4119,
+        4184
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature_algorithms",
+          "line": 4133,
+          "text": "* advertised as being supported in the \"signature_algorithms\""
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/t1_lib.c",
+      "function": "check_cert_usable",
+      "line_range": [
+        4691,
+        4742
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature_algorithms",
+          "line": 4713,
+          "text": "* The TLS 1.3 signature_algorithms_cert extension places restrictions"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/t1_lib.c",
+      "function": "find_sig_alg",
+      "line_range": [
+        4787,
+        4834
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature_algorithms",
+          "line": 4807,
+          "text": "/* Check that we have a cert, and signature_algorithms_cert */"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_set_groups_list",
+      "line_range": [
+        1711,
+        1830
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "backward compatibility"
+        ]
+      },
+      "hits": [
+        {
+          "term": "backward compatibility",
+          "line": 1787,
+          "text": "* For backward compatibility we let the rest of the code know that a key share"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ssl_check_for_safari",
+      "line_range": [
+        1547,
+        1613
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature_algorithms",
+          "line": 1572,
+          "text": "0x0d, /* signature_algorithms */"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_construct_ctos_sig_algs",
+      "line_range": [
+        429,
+        482
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature_algorithms",
+          "line": 458,
+          "text": "if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_signature_algorithms)"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "add_key_share",
+      "line_range": [
+        818,
+        875
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "backward compatibility"
+        ]
+      },
+      "hits": [
+        {
+          "term": "backward compatibility",
+          "line": 857,
+          "text": "/* For backward compatibility, we use the first valid group to add a key share */"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "SSL_extension_supported",
+      "line_range": [
+        621,
+        670
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature_algorithms",
+          "line": 637,
+          "text": "case TLSEXT_TYPE_signature_algorithms:"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-3-tls12-compat-must-follow-rfc5246_candidate_1.c",
+    "locations/code/rfc8446-4-2-3-tls12-compat-must-follow-rfc5246_candidate_2.c",
+    "locations/code/rfc8446-4-2-3-tls12-compat-must-follow-rfc5246_candidate_3.c",
+    "locations/code/rfc8446-4-2-3-tls12-compat-must-follow-rfc5246_candidate_4.c",
+    "locations/code/rfc8446-4-2-3-tls12-compat-must-follow-rfc5246_candidate_5.c",
+    "locations/code/rfc8446-4-2-3-tls12-compat-must-follow-rfc5246_candidate_6.c",
+    "locations/code/rfc8446-4-2-3-tls12-compat-must-follow-rfc5246_candidate_7.c",
+    "locations/code/rfc8446-4-2-3-tls12-compat-must-follow-rfc5246_candidate_8.c",
+    "locations/code/rfc8446-4-2-3-tls12-compat-must-follow-rfc5246_candidate_9.c",
+    "locations/code/rfc8446-4-2-3-tls12-compat-must-follow-rfc5246_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 44,
+    "files_with_hits": 23,
+    "functions_identified": 26,
+    "null_scope_hits": 15,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 606
+  }
+}

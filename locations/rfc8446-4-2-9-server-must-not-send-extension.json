@@ -1,0 +1,494 @@
+{
+  "rule_id": "rfc8446-4.2.9-server-must-not-send-extension",
+  "rule_type": "presence_requirement",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ServerHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ServerHello",
+        "server_hello"
+      ]
+    },
+    {
+      "term": "EncryptedExtensions",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "EncryptedExtensions",
+        "encrypted_extensions"
+      ]
+    },
+    {
+      "term": "psk_key_exchange_modes",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "psk_key_exchange_modes",
+        "PskKeyExchangeModes"
+      ]
+    },
+    {
+      "term": "unsupported_extension",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unsupported_extension",
+        "UnsupportedExtension"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_parse",
+      "line_range": [
+        113,
+        167
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "ServerHello",
+          "unsupported_extension"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 137,
+          "text": "* If it's ServerHello or EncryptedExtensions we can't have any"
+        },
+        {
+          "term": "ServerHello",
+          "line": 123,
+          "text": "if ((context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_2_SERVER_HELLO)) != 0)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 135,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS)) != 0) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 137,
+          "text": "* If it's ServerHello or EncryptedExtensions we can't have any"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 135,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS)) != 0) {"
+        },
+        {
+          "term": "unsupported_extension",
+          "line": 141,
+          "text": "SSLfatal(s, TLS1_AD_UNSUPPORTED_EXTENSION, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_construct_message",
+      "line_range": [
+        1225,
+        1324
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1256,
+          "text": "*confunc = tls_construct_server_hello;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1257,
+          "text": "*mt = SSL3_MT_SERVER_HELLO;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1312,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1313,
+          "text": "*confunc = tls_construct_encrypted_extensions;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1314,
+          "text": "*mt = SSL3_MT_ENCRYPTED_EXTENSIONS;"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_read_transition",
+      "line_range": [
+        94,
+        216
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 111,
+          "text": "* thing we can get now is a ServerHello."
+        },
+        {
+          "term": "ServerHello",
+          "line": 113,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 120,
+          "text": "if (mt == SSL3_MT_ENCRYPTED_EXTENSIONS) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 121,
+          "text": "st->hand_state = TLS_ST_CR_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 126,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_max_message_size",
+      "line_range": [
+        1011,
+        1068
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1021,
+          "text": "return SERVER_HELLO_MAX_LENGTH;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1048,
+          "text": "return SERVER_HELLO_DONE_MAX_LENGTH;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1062,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1063,
+          "text": "return ENCRYPTED_EXTENSIONS_MAX_LENGTH;"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_handshake",
+      "line_range": [
+        1625,
+        1738
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1666,
+          "text": "case SSL3_MT_SERVER_HELLO:"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1667,
+          "text": "if (!ssl_print_server_hello(bio, indent + 2, msg, msglen))"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1716,
+          "text": "case SSL3_MT_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1718,
+          "text": "SSL3_MT_ENCRYPTED_EXTENSIONS, &msg, &msglen))"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_add",
+      "line_range": [
+        173,
+        321
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 312,
+          "text": "* is not an error if the extension is present in ServerHello."
+        },
+        {
+          "term": "ServerHello",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_process_message",
+      "line_range": [
+        1073,
+        1131
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1085,
+          "text": "return tls_process_server_hello(s, pkt);"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1125,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1126,
+          "text": "return tls_process_encrypted_extensions(s, pkt);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_npn",
+      "line_range": [
+        1938,
+        1989
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "unsupported_extension"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1974,
+          "text": "* a single Serverhello"
+        },
+        {
+          "term": "unsupported_extension",
+          "line": 1952,
+          "text": "SSLfatal(s, SSL_AD_UNSUPPORTED_EXTENSION, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_sct",
+      "line_range": [
+        1854,
+        1914
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "unsupported_extension"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1888,
+          "text": "ENDPOINT role = (context & SSL_EXT_TLS1_2_SERVER_HELLO) != 0"
+        },
+        {
+          "term": "unsupported_extension",
+          "line": 1900,
+          "text": "SSLfatal(s, TLS1_AD_UNSUPPORTED_EXTENSION, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions.c",
+      "function": "tls_collect_extensions",
+      "line_range": [
+        805,
+        927
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "unsupported_extension"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 882,
+          "text": "&& !((context & SSL_EXT_TLS1_2_SERVER_HELLO) != 0"
+        },
+        {
+          "term": "unsupported_extension",
+          "line": 886,
+          "text": "SSLfatal(s, SSL_AD_UNSUPPORTED_EXTENSION,"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-9-server-must-not-send-extension_candidate_1.c",
+    "locations/code/rfc8446-4-2-9-server-must-not-send-extension_candidate_2.c",
+    "locations/code/rfc8446-4-2-9-server-must-not-send-extension_candidate_3.c",
+    "locations/code/rfc8446-4-2-9-server-must-not-send-extension_candidate_4.c",
+    "locations/code/rfc8446-4-2-9-server-must-not-send-extension_candidate_5.c",
+    "locations/code/rfc8446-4-2-9-server-must-not-send-extension_candidate_6.c",
+    "locations/code/rfc8446-4-2-9-server-must-not-send-extension_candidate_7.c",
+    "locations/code/rfc8446-4-2-9-server-must-not-send-extension_candidate_8.c",
+    "locations/code/rfc8446-4-2-9-server-must-not-send-extension_candidate_9.c",
+    "locations/code/rfc8446-4-2-9-server-must-not-send-extension_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 168,
+    "files_with_hits": 23,
+    "functions_identified": 51,
+    "null_scope_hits": 62,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 894
+  }
+}

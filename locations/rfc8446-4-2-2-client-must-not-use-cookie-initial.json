@@ -1,0 +1,1520 @@
+{
+  "rule_id": "rfc8446-4.2.2-client-must-not-use-cookie-initial",
+  "rule_type": "presence_requirement",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "cookie",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "cookie"
+      ]
+    },
+    {
+      "term": "initial ClientHello",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "initial ClientHello",
+        "initial client_hello"
+      ]
+    },
+    {
+      "term": "new connection",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "new connection"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/d1_lib.c",
+      "function": "DTLSv1_listen",
+      "line_range": [
+        407,
+        843
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 37,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cookie",
+          "initial ClientHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 445,
+          "text": "* requires the MAC to be calculated *including* the first ClientHello"
+        },
+        {
+          "term": "ClientHello",
+          "line": 536,
+          "text": "/* This is an initial ClientHello so the epoch has to be 0 */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 569,
+          "text": "* We don't support fragment reassembly for ClientHellos whilst"
+        },
+        {
+          "term": "ClientHello",
+          "line": 571,
+          "text": "* against the whole point of the ClientHello/HelloVerifyRequest"
+        },
+        {
+          "term": "ClientHello",
+          "line": 572,
+          "text": "* mechanism). Instead we only look at the first ClientHello fragment"
+        },
+        {
+          "term": "ClientHello",
+          "line": 576,
+          "text": "/* Non initial ClientHello fragment (or bad fragment) */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 604,
+          "text": "* ClientHello fragment. Either way we can't handle it."
+        },
+        {
+          "term": "ClientHello",
+          "line": 646,
+          "text": "* There was no cookie in the ClientHello so we need to send a"
+        },
+        {
+          "term": "ClientHello",
+          "line": 677,
+          "text": "* received ClientHello"
+        },
+        {
+          "term": "ClientHello",
+          "line": 557,
+          "text": "if (msgtype != SSL3_MT_CLIENT_HELLO) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 577,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_FRAGMENTED_CLIENT_HELLO);"
+        },
+        {
+          "term": "cookie",
+          "line": 410,
+          "text": "unsigned char cookie[DTLS1_COOKIE_LENGTH];"
+        },
+        {
+          "term": "cookie",
+          "line": 415,
+          "text": "unsigned int rectype, versmajor, versminor, msgseq, msgtype, clientvers, cookielen;"
+        },
+        {
+          "term": "cookie",
+          "line": 418,
+          "text": "PACKET pkt, msgpkt, msgpayload, session, cookiepkt;"
+        },
+        {
+          "term": "cookie",
+          "line": 446,
+          "text": "* (without the cookie). Since DTLSv1_listen is stateless that cannot be"
+        },
+        {
+          "term": "cookie",
+          "line": 447,
+          "text": "* supported. DTLS1_BAD_VER must use cookies in a stateful manner (e.g. via"
+        },
+        {
+          "term": "cookie",
+          "line": 573,
+          "text": "* and require that the cookie must be contained within it."
+        },
+        {
+          "term": "cookie",
+          "line": 601,
+          "text": "|| !PACKET_get_length_prefixed_1(&msgpayload, &cookiepkt)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 603,
+          "text": "* Could be malformed or the cookie does not fit within the initial"
+        },
+        {
+          "term": "cookie",
+          "line": 611,
+          "text": "* Check if we have a cookie or not. If not we need to send a"
+        },
+        {
+          "term": "cookie",
+          "line": 614,
+          "text": "if (PACKET_remaining(&cookiepkt) == 0) {"
+        },
+        {
+          "term": "cookie",
+          "line": 618,
+          "text": "* We have a cookie, so lets check it."
+        },
+        {
+          "term": "cookie",
+          "line": 620,
+          "text": "if (ssl->ctx->app_verify_cookie_cb == NULL) {"
+        },
+        {
+          "term": "cookie",
+          "line": 621,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_NO_VERIFY_COOKIE_CALLBACK);"
+        },
+        {
+          "term": "cookie",
+          "line": 626,
+          "text": "if (ssl->ctx->app_verify_cookie_cb(ssl, PACKET_data(&cookiepkt),"
+        },
+        {
+          "term": "cookie",
+          "line": 627,
+          "text": "(unsigned int)PACKET_remaining(&cookiepkt))"
+        },
+        {
+          "term": "cookie",
+          "line": 630,
+          "text": "* We treat invalid cookies in the same was as no cookie as"
+        },
+        {
+          "term": "cookie",
+          "line": 635,
+          "text": "/* Cookie verification succeeded */"
+        },
+        {
+          "term": "cookie",
+          "line": 646,
+          "text": "* There was no cookie in the ClientHello so we need to send a"
+        },
+        {
+          "term": "cookie",
+          "line": 651,
+          "text": "/* Generate the cookie */"
+        },
+        {
+          "term": "cookie",
+          "line": 652,
+          "text": "if (ssl->ctx->app_gen_cookie_cb == NULL || ssl->ctx->app_gen_cookie_cb(ssl, cookie, &cookielen) == 0 || cookielen > 255) {"
+        },
+        {
+          "term": "cookie",
+          "line": 653,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_COOKIE_GEN_CALLBACK_FAILURE);"
+        },
+        {
+          "term": "cookie",
+          "line": 710,
+          "text": "|| !dtls_raw_hello_verify_request(&wpkt, cookie, cookielen)"
+        },
+        {
+          "term": "cookie",
+          "line": 798,
+          "text": "* We are doing cookie exchange, so make sure we set that option in the"
+        },
+        {
+          "term": "cookie",
+          "line": 801,
+          "text": "SSL_set_options(ssl, SSL_OP_COOKIE_EXCHANGE);"
+        },
+        {
+          "term": "initial ClientHello",
+          "line": 536,
+          "text": "/* This is an initial ClientHello so the epoch has to be 0 */"
+        },
+        {
+          "term": "initial ClientHello",
+          "line": 576,
+          "text": "/* Non initial ClientHello fragment (or bad fragment) */"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_construct_stoc_cookie",
+      "line_range": [
+        2085,
+        2215
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 27,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ClientHello",
+          "cookie",
+          "initial ClientHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2128,
+          "text": "* Get the hash of the initial ClientHello. ssl_handshake_hash() operates"
+        },
+        {
+          "term": "cookie",
+          "line": 2085,
+          "text": "EXT_RETURN tls_construct_stoc_cookie(SSL_CONNECTION *s, WPACKET *pkt,"
+        },
+        {
+          "term": "cookie",
+          "line": 2090,
+          "text": "unsigned char *hashval1, *hashval2, *appcookie1, *appcookie2, *cookie;"
+        },
+        {
+          "term": "cookie",
+          "line": 2092,
+          "text": "size_t startlen, ciphlen, totcookielen, hashlen, hmaclen, appcookielen;"
+        },
+        {
+          "term": "cookie",
+          "line": 2103,
+          "text": "if (sctx->gen_stateless_cookie_cb == NULL) {"
+        },
+        {
+          "term": "cookie",
+          "line": 2104,
+          "text": "SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_NO_COOKIE_CALLBACK_SET);"
+        },
+        {
+          "term": "cookie",
+          "line": 2108,
+          "text": "if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_cookie)"
+        },
+        {
+          "term": "cookie",
+          "line": 2112,
+          "text": "|| !WPACKET_reserve_bytes(pkt, MAX_COOKIE_SIZE, &cookie)"
+        },
+        {
+          "term": "cookie",
+          "line": 2113,
+          "text": "|| !WPACKET_put_bytes_u16(pkt, COOKIE_STATE_FORMAT_VERSION)"
+        },
+        {
+          "term": "cookie",
+          "line": 2142,
+          "text": "|| !WPACKET_reserve_bytes(pkt, SSL_COOKIE_LENGTH, &appcookie1)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 2147,
+          "text": "/* Generate the application cookie */"
+        },
+        {
+          "term": "cookie",
+          "line": 2148,
+          "text": "if (sctx->gen_stateless_cookie_cb(ussl, appcookie1,"
+        },
+        {
+          "term": "cookie",
+          "line": 2149,
+          "text": "&appcookielen)"
+        },
+        {
+          "term": "cookie",
+          "line": 2151,
+          "text": "SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_COOKIE_GEN_CALLBACK_FAILURE);"
+        },
+        {
+          "term": "cookie",
+          "line": 2155,
+          "text": "if (!WPACKET_allocate_bytes(pkt, appcookielen, &appcookie2)"
+        },
+        {
+          "term": "cookie",
+          "line": 2156,
+          "text": "|| !ossl_assert(appcookie1 == appcookie2)"
+        },
+        {
+          "term": "cookie",
+          "line": 2158,
+          "text": "|| !WPACKET_get_total_written(pkt, &totcookielen)"
+        },
+        {
+          "term": "cookie",
+          "line": 2165,
+          "text": "totcookielen -= startlen;"
+        },
+        {
+          "term": "cookie",
+          "line": 2166,
+          "text": "if (!ossl_assert(totcookielen <= MAX_COOKIE_SIZE - SHA256_DIGEST_LENGTH)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 2171,
+          "text": "/* HMAC the cookie */"
+        },
+        {
+          "term": "cookie",
+          "line": 2175,
+          "text": "s->session_ctx->ext.cookie_hmac_key,"
+        },
+        {
+          "term": "cookie",
+          "line": 2176,
+          "text": "sizeof(s->session_ctx->ext.cookie_hmac_key));"
+        },
+        {
+          "term": "cookie",
+          "line": 2185,
+          "text": "|| EVP_DigestSign(hctx, hmac, &hmaclen, cookie,"
+        },
+        {
+          "term": "cookie",
+          "line": 2186,
+          "text": "totcookielen)"
+        },
+        {
+          "term": "cookie",
+          "line": 2192,
+          "text": "if (!ossl_assert(totcookielen + hmaclen <= MAX_COOKIE_SIZE)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 2199,
+          "text": "|| !ossl_assert(cookie == hmac - totcookielen)"
+        },
+        {
+          "term": "initial ClientHello",
+          "line": 2128,
+          "text": "* Get the hash of the initial ClientHello. ssl_handshake_hash() operates"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_dtls.c",
+      "function": "dtls_get_reassembled_message",
+      "line_range": [
+        868,
+        1085
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cookie",
+          "initial ClientHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 978,
+          "text": "* While listening, we accept seq 1 (ClientHello with cookie)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 979,
+          "text": "* although we're still expecting seq 0 (ClientHello)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 991,
+          "text": "* We received a ClientHello and sent back a HelloVerifyRequest. We"
+        },
+        {
+          "term": "ClientHello",
+          "line": 992,
+          "text": "* now seem to have received a retransmitted initial ClientHello. That"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1063,
+          "text": "* We got a new ClientHello with a message sequence of 0."
+        },
+        {
+          "term": "ClientHello",
+          "line": 1065,
+          "text": "* We process it like this is the first time we've seen a ClientHello"
+        },
+        {
+          "term": "ClientHello",
+          "line": 985,
+          "text": "|| p[0] != SSL3_MT_CLIENT_HELLO"
+        },
+        {
+          "term": "cookie",
+          "line": 978,
+          "text": "* While listening, we accept seq 1 (ClientHello with cookie)"
+        },
+        {
+          "term": "initial ClientHello",
+          "line": 992,
+          "text": "* now seem to have received a retransmitted initial ClientHello. That"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "create_synthetic_message_hash",
+      "line_range": [
+        2624,
+        2676
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cookie",
+          "initial ClientHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2637,
+          "text": "/* Get the hash of the initial ClientHello */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2664,
+          "text": "* receiving a ClientHello2 with a cookie."
+        },
+        {
+          "term": "cookie",
+          "line": 2664,
+          "text": "* receiving a ClientHello2 with a cookie."
+        },
+        {
+          "term": "initial ClientHello",
+          "line": 2637,
+          "text": "/* Get the hash of the initial ClientHello */"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 65,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cookie"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1860,
+          "text": "CLIENTHELLO_MSG *clienthello = s->clienthello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1866,
+          "text": "/* Finished parsing the ClientHello, now we can start processing it */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1867,
+          "text": "/* Give the ClientHello callback a crack at things */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1869,
+          "text": "/* A failure in the ClientHello callback terminates the connection. */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1884,
+          "text": "memcpy(s->s3.client_random, clienthello->random, SSL3_RANDOM_SIZE);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1887,
+          "text": "protverr = ssl_choose_server_version(s, clienthello, &dgrd);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1897,
+          "text": "s->version = s->client_version = clienthello->legacy_version;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1903,
+          "text": "/* TLSv1.3 specifies that a ClientHello must end on a record boundary */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1914,
+          "text": "if (sctx->app_verify_cookie_cb(ussl, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1915,
+          "text": "(unsigned int)clienthello->dtls_cookie_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1923,
+          "text": "} else if (s->d1->cookie_len != clienthello->dtls_cookie_len"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1924,
+          "text": "|| memcmp(clienthello->dtls_cookie, s->d1->cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1936,
+          "text": "if (!ssl_cache_cipherlist(s, &clienthello->ciphersuites)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1937,
+          "text": "|| !ossl_bytes_to_cipher_list(s, &clienthello->ciphersuites, &ciphers, &scsvs, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1994,
+          "text": "clienthello->pre_proc_exts, NULL, 0)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2000,
+          "text": "* We don't allow resumption in a backwards compatible ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2021,
+          "text": "i = ssl_get_prev_session(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2038,
+          "text": "memcpy(s->tmp_session_id, s->clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2039,
+          "text": "s->clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2040,
+          "text": "s->tmp_session_id_len = s->clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2080,
+          "text": "if (clienthello->compressions_len == 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2085,
+          "text": "if (memchr(clienthello->compressions, 0,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2086,
+          "text": "clienthello->compressions_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2094,
+          "text": "ssl_check_for_safari(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2098,
+          "text": "clienthello->pre_proc_exts, NULL, 0, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2161,
+          "text": "* If the ClientHello contains both a Session ID and a PAC-Opaque in"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2166,
+          "text": "if (clienthello->session_id_len > 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2167,
+          "text": "memcpy(s->session->session_id, clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2168,
+          "text": "clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2169,
+          "text": "s->session->session_id_length = clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2201,
+          "text": "* a TLSv1.3 ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2203,
+          "text": "if (clienthello->compressions_len != 1) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2235,
+          "text": "for (k = 0; k < clienthello->compressions_len; k++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2236,
+          "text": "if (clienthello->compressions[k] == comp_id)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2239,
+          "text": "if (k >= clienthello->compressions_len) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2255,
+          "text": "for (o = 0; o < clienthello->compressions_len; o++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2256,
+          "text": "if (v == clienthello->compressions[o]) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2304,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2305,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2306,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2311,
+          "text": "if (clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2312,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2313,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2314,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1848,
+          "text": "static int tls_early_post_process_client_hello(SSL_CONNECTION *s)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1868,
+          "text": "if (sctx->client_hello_cb != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1870,
+          "text": "switch (sctx->client_hello_cb(ussl, &al, sctx->client_hello_cb_arg)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1871,
+          "text": "case SSL_CLIENT_HELLO_SUCCESS:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1873,
+          "text": "case SSL_CLIENT_HELLO_RETRY:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1874,
+          "text": "s->rwstate = SSL_CLIENT_HELLO_CB;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1876,
+          "text": "case SSL_CLIENT_HELLO_ERROR:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1993,
+          "text": "SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2097,
+          "text": "if (!tls_parse_all_extensions(s, SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "cookie",
+          "line": 1911,
+          "text": "/* Empty cookie was already handled above by returning early. */"
+        },
+        {
+          "term": "cookie",
+          "line": 1912,
+          "text": "if (SSL_get_options(ssl) & SSL_OP_COOKIE_EXCHANGE) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1913,
+          "text": "if (sctx->app_verify_cookie_cb != NULL) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1914,
+          "text": "if (sctx->app_verify_cookie_cb(ussl, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "cookie",
+          "line": 1915,
+          "text": "(unsigned int)clienthello->dtls_cookie_len)"
+        },
+        {
+          "term": "cookie",
+          "line": 1918,
+          "text": "SSL_R_COOKIE_MISMATCH);"
+        },
+        {
+          "term": "cookie",
+          "line": 1920,
+          "text": "/* else cookie verification succeeded */"
+        },
+        {
+          "term": "cookie",
+          "line": 1923,
+          "text": "} else if (s->d1->cookie_len != clienthello->dtls_cookie_len"
+        },
+        {
+          "term": "cookie",
+          "line": 1924,
+          "text": "|| memcmp(clienthello->dtls_cookie, s->d1->cookie,"
+        },
+        {
+          "term": "cookie",
+          "line": 1925,
+          "text": "s->d1->cookie_len)"
+        },
+        {
+          "term": "cookie",
+          "line": 1927,
+          "text": "SSLfatal(s, SSL_AD_HANDSHAKE_FAILURE, SSL_R_COOKIE_MISMATCH);"
+        },
+        {
+          "term": "cookie",
+          "line": 1930,
+          "text": "s->d1->cookie_verified = 1;"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_hello",
+      "line_range": [
+        1619,
+        1846
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 41,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cookie"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1623,
+          "text": "CLIENTHELLO_MSG *clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1727,
+          "text": "/* Check if this is actually an unexpected renegotiation ClientHello */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1745,
+          "text": "clienthello = OPENSSL_zalloc(sizeof(*clienthello));"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1746,
+          "text": "if (clienthello == NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1752,
+          "text": "* First, parse the raw ClientHello data into the CLIENTHELLO_MSG structure."
+        },
+        {
+          "term": "ClientHello",
+          "line": 1756,
+          "text": "if (!PACKET_get_net_2(pkt, &clienthello->legacy_version)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1761,
+          "text": "if (!PACKET_copy_bytes(pkt, clienthello->random, SSL3_RANDOM_SIZE)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1763,
+          "text": "|| !PACKET_copy_all(&session_id, clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1765,
+          "text": "&clienthello->session_id_len)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1775,
+          "text": "if (!PACKET_copy_all(&cookie, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1777,
+          "text": "&clienthello->dtls_cookie_len)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1782,
+          "text": "* If we require cookies and this ClientHello doesn't contain one,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1787,
+          "text": "if (clienthello->dtls_cookie_len == 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1788,
+          "text": "OPENSSL_free(clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1794,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &clienthello->ciphersuites)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1806,
+          "text": "PACKET_null_init(&clienthello->extensions);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1808,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &clienthello->extensions)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1815,
+          "text": "if (!PACKET_copy_all(&compression, clienthello->compressions,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1817,
+          "text": "&clienthello->compressions_len)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1823,
+          "text": "extensions = clienthello->extensions;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1825,
+          "text": "&clienthello->pre_proc_exts,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1826,
+          "text": "&clienthello->pre_proc_exts_len, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1830,
+          "text": "s->clienthello = clienthello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1835,
+          "text": "if (clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1836,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1837,
+          "text": "OPENSSL_free(clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1839,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1619,
+          "text": "MSG_PROCESS_RETURN tls_process_client_hello(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1676,
+          "text": "if (!WPACKET_put_bytes_u8(&inner, SSL3_MT_CLIENT_HELLO)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1824,
+          "text": "if (!tls_collect_extensions(s, &extensions, SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "cookie",
+          "line": 1621,
+          "text": "/* |cookie| will only be initialized for DTLS. */"
+        },
+        {
+          "term": "cookie",
+          "line": 1622,
+          "text": "PACKET session_id, compression, extensions, cookie;"
+        },
+        {
+          "term": "cookie",
+          "line": 1754,
+          "text": "PACKET_null_init(&cookie);"
+        },
+        {
+          "term": "cookie",
+          "line": 1771,
+          "text": "if (!PACKET_get_length_prefixed_1(pkt, &cookie)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1775,
+          "text": "if (!PACKET_copy_all(&cookie, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "cookie",
+          "line": 1776,
+          "text": "DTLS1_COOKIE_LENGTH,"
+        },
+        {
+          "term": "cookie",
+          "line": 1777,
+          "text": "&clienthello->dtls_cookie_len)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1782,
+          "text": "* If we require cookies and this ClientHello doesn't contain one,"
+        },
+        {
+          "term": "cookie",
+          "line": 1784,
+          "text": "* So check cookie length..."
+        },
+        {
+          "term": "cookie",
+          "line": 1786,
+          "text": "if (SSL_get_options(SSL_CONNECTION_GET_SSL(s)) & SSL_OP_COOKIE_EXCHANGE) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1787,
+          "text": "if (clienthello->dtls_cookie_len == 0) {"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 35,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ClientHello",
+          "cookie"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1152,
+          "text": "* ClientHello so we can add it to the transcript hash."
+        },
+        {
+          "term": "ClientHello",
+          "line": 1212,
+          "text": "/* Act as if this ClientHello came after a HelloRetryRequest */"
+        },
+        {
+          "term": "cookie",
+          "line": 1008,
+          "text": "int tls_parse_ctos_cookie(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,"
+        },
+        {
+          "term": "cookie",
+          "line": 1015,
+          "text": "PACKET cookie, raw, chhash, appcookie;"
+        },
+        {
+          "term": "cookie",
+          "line": 1025,
+          "text": "/* Ignore any cookie if we're not set up to verify it */"
+        },
+        {
+          "term": "cookie",
+          "line": 1026,
+          "text": "if (sctx->verify_stateless_cookie_cb == NULL"
+        },
+        {
+          "term": "cookie",
+          "line": 1030,
+          "text": "if (!PACKET_as_length_prefixed_2(pkt, &cookie)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1035,
+          "text": "raw = cookie;"
+        },
+        {
+          "term": "cookie",
+          "line": 1045,
+          "text": "/* Verify the HMAC of the cookie */"
+        },
+        {
+          "term": "cookie",
+          "line": 1049,
+          "text": "s->session_ctx->ext.cookie_hmac_key,"
+        },
+        {
+          "term": "cookie",
+          "line": 1050,
+          "text": "sizeof(s->session_ctx->ext.cookie_hmac_key));"
+        },
+        {
+          "term": "cookie",
+          "line": 1076,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COOKIE_MISMATCH);"
+        },
+        {
+          "term": "cookie",
+          "line": 1080,
+          "text": "if (!PACKET_get_net_2(&cookie, &format)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1084,
+          "text": "/* Check the cookie format is something we recognise. Ignore it if not */"
+        },
+        {
+          "term": "cookie",
+          "line": 1085,
+          "text": "if (format != COOKIE_STATE_FORMAT_VERSION)"
+        },
+        {
+          "term": "cookie",
+          "line": 1094,
+          "text": "if (!PACKET_get_net_2(&cookie, &version)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1104,
+          "text": "if (!PACKET_get_net_2(&cookie, &group_id)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1109,
+          "text": "ciphdata = PACKET_data(&cookie);"
+        },
+        {
+          "term": "cookie",
+          "line": 1110,
+          "text": "if (!PACKET_forward(&cookie, 2)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1119,
+          "text": "* in the cookie. Something must have changed."
+        },
+        {
+          "term": "cookie",
+          "line": 1125,
+          "text": "if (!PACKET_get_1(&cookie, &key_share)"
+        },
+        {
+          "term": "cookie",
+          "line": 1126,
+          "text": "|| !PACKET_get_net_8(&cookie, &tm)"
+        },
+        {
+          "term": "cookie",
+          "line": 1127,
+          "text": "|| !PACKET_get_length_prefixed_2(&cookie, &chhash)"
+        },
+        {
+          "term": "cookie",
+          "line": 1128,
+          "text": "|| !PACKET_get_length_prefixed_1(&cookie, &appcookie)"
+        },
+        {
+          "term": "cookie",
+          "line": 1129,
+          "text": "|| PACKET_remaining(&cookie) != SHA256_DIGEST_LENGTH) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1134,
+          "text": "/* We tolerate a cookie age of up to 10 minutes (= 60 * 10 seconds) */"
+        },
+        {
+          "term": "cookie",
+          "line": 1137,
+          "text": "/* Cookie is stale. Ignore it */"
+        },
+        {
+          "term": "cookie",
+          "line": 1141,
+          "text": "/* Verify the app cookie */"
+        },
+        {
+          "term": "cookie",
+          "line": 1142,
+          "text": "if (sctx->verify_stateless_cookie_cb(SSL_CONNECTION_GET_USER_SSL(s),"
+        },
+        {
+          "term": "cookie",
+          "line": 1143,
+          "text": "PACKET_data(&appcookie),"
+        },
+        {
+          "term": "cookie",
+          "line": 1144,
+          "text": "PACKET_remaining(&appcookie))"
+        },
+        {
+          "term": "cookie",
+          "line": 1146,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COOKIE_MISMATCH);"
+        },
+        {
+          "term": "cookie",
+          "line": 1191,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_cookie)"
+        },
+        {
+          "term": "cookie",
+          "line": 1194,
+          "text": "|| !WPACKET_close(&hrrpkt) /* cookie extension */"
+        },
+        {
+          "term": "cookie",
+          "line": 1215,
+          "text": "s->ext.cookieok = 1;"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions.c",
+      "function": "tls_collect_extensions",
+      "line_range": [
+        805,
+        927
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cookie"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 820,
+          "text": "* construction of extensions for the ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 850,
+          "text": "* PSK extension, which must be the last one in the ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 863,
+          "text": "* be sent in the ClientHello and CertificateRequest. Unsolicited"
+        },
+        {
+          "term": "ClientHello",
+          "line": 823,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0 && s->ext.ech.attempted == 0)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 826,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 855,
+          "text": "&& (context & SSL_EXT_CLIENT_HELLO) != 0"
+        },
+        {
+          "term": "ClientHello",
+          "line": 876,
+          "text": "&& (context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST | SSL_EXT_TLS1_3_NEW_SESSION_TICKET)) == 0"
+        },
+        {
+          "term": "cookie",
+          "line": 868,
+          "text": "* - The HRR cookie extension is unsolicited"
+        },
+        {
+          "term": "cookie",
+          "line": 877,
+          "text": "&& type != TLSEXT_TYPE_cookie"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_dtls.c",
+      "function": "dtls1_retrieve_buffered_fragment",
+      "line_range": [
+        553,
+        664
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cookie"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 595,
+          "text": "* We have fragments for a ClientHello without a cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 598,
+          "text": "* retransmission of the original ClientHello"
+        },
+        {
+          "term": "ClientHello",
+          "line": 605,
+          "text": "* We have fragments for both a ClientHello without"
+        },
+        {
+          "term": "ClientHello",
+          "line": 646,
+          "text": "* We got a new ClientHello with a message sequence of 0."
+        },
+        {
+          "term": "ClientHello",
+          "line": 649,
+          "text": "* ClientHello from the client."
+        },
+        {
+          "term": "cookie",
+          "line": 595,
+          "text": "* We have fragments for a ClientHello without a cookie,"
+        },
+        {
+          "term": "cookie",
+          "line": 606,
+          "text": "* cookie and one with. Ditch the one without."
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/record/rec_layer_s3.c",
+      "function": "ssl3_read_bytes",
+      "line_range": [
+        627,
+        1128
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "initial ClientHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 844,
+          "text": "* initial ClientHello. Therefore |type| should always be equal to"
+        },
+        {
+          "term": "ClientHello",
+          "line": 856,
+          "text": "* with. We shouldn't be receiving anything other than a ClientHello"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1028,
+          "text": "* Unexpected handshake message (ClientHello, NewSessionTicket (TLS1.3) or"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1110,
+          "text": "* plaintext ClientHello but gets a record which appears to be"
+        },
+        {
+          "term": "initial ClientHello",
+          "line": 844,
+          "text": "* initial ClientHello. Therefore |type| should always be equal to"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-2-client-must-not-use-cookie-initial_candidate_1.c",
+    "locations/code/rfc8446-4-2-2-client-must-not-use-cookie-initial_candidate_2.c",
+    "locations/code/rfc8446-4-2-2-client-must-not-use-cookie-initial_candidate_3.c",
+    "locations/code/rfc8446-4-2-2-client-must-not-use-cookie-initial_candidate_4.c",
+    "locations/code/rfc8446-4-2-2-client-must-not-use-cookie-initial_candidate_5.c",
+    "locations/code/rfc8446-4-2-2-client-must-not-use-cookie-initial_candidate_6.c",
+    "locations/code/rfc8446-4-2-2-client-must-not-use-cookie-initial_candidate_7.c",
+    "locations/code/rfc8446-4-2-2-client-must-not-use-cookie-initial_candidate_8.c",
+    "locations/code/rfc8446-4-2-2-client-must-not-use-cookie-initial_candidate_9.c",
+    "locations/code/rfc8446-4-2-2-client-must-not-use-cookie-initial_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 635,
+    "files_with_hits": 27,
+    "functions_identified": 98,
+    "null_scope_hits": 163,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 2486
+  }
+}

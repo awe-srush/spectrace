@@ -1,0 +1,343 @@
+{
+  "rule_id": "rfc8446-6.2-must-send-specified-alert-if-any",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "AlertDescription",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "AlertDescription",
+        "alert_description"
+      ]
+    },
+    {
+      "term": "fatal error",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "fatal error"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/record/rec_layer_d1.c",
+      "function": "dtls1_read_bytes",
+      "line_range": [
+        197,
+        605
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "fatal error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "fatal error",
+          "line": 239,
+          "text": "/* dtls1_handle_timeout() has failed with a fatal error */"
+        },
+        {
+          "term": "fatal error",
+          "line": 512,
+          "text": "/* Fail if we encountered a fatal error */"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/t1_lib.c",
+      "function": "tls_decrypt_ticket",
+      "line_range": [
+        3222,
+        3485
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "fatal error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "fatal error",
+          "line": 3243,
+          "text": "* one (TLSv1.2 and below), or treated as a fatal error in TLSv1.3"
+        },
+        {
+          "term": "fatal error",
+          "line": 3420,
+          "text": "* If set, the decrypt_ticket_cb() is called unless a fatal error was"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "crypto/x509/x_pubkey.c",
+      "function": "x509_pubkey_ex_d2i_ex",
+      "line_range": [
+        126,
+        237
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "fatal error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "fatal error",
+          "line": 167,
+          "text": "* Opportunistically decode the key but remove any non fatal errors"
+        },
+        {
+          "term": "fatal error",
+          "line": 178,
+          "text": "/* -1 indicates a fatal error, like malloc failure */"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/s3_enc.c",
+      "function": "ssl3_finish_mac",
+      "line_range": [
+        52,
+        75
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "fatal error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "fatal error",
+          "line": 57,
+          "text": "/* Note: this writes to a memory BIO so a failure is a fatal error */"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_set_server_sigalgs",
+      "line_range": [
+        3107,
+        3162
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "fatal error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "fatal error",
+          "line": 3158,
+          "text": "/* Fatal error if no shared signature algorithms */"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem.c",
+      "function": "state_machine",
+      "line_range": [
+        357,
+        534
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "fatal error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "fatal error",
+          "line": 412,
+          "text": "* Fatal errors in this block don't send an alert because we have"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "extract_keyshares",
+      "line_range": [
+        668,
+        782
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "fatal error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "fatal error",
+          "line": 778,
+          "text": "/* Fatal error -> free any allocated memory and return 0 */"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_key_share",
+      "line_range": [
+        830,
+        1006
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "fatal error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "fatal error",
+          "line": 898,
+          "text": "if (ks_extraction_result == EXTRACTION_FAILURE) /* Fatal error during tests */"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_construct_client_certificate",
+      "line_range": [
+        4192,
+        4251
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "fatal error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "fatal error",
+          "line": 4243,
+          "text": "* This is a fatal error, which leaves enc_write_ctx in an inconsistent"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_construct_client_compressed_certificate",
+      "line_range": [
+        4254,
+        4352
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "fatal error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "fatal error",
+          "line": 4333,
+          "text": "* This is a fatal error, which leaves sc->enc_write_ctx in an"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-6-2-must-send-specified-alert-if-any_candidate_1.c",
+    "locations/code/rfc8446-6-2-must-send-specified-alert-if-any_candidate_2.c",
+    "locations/code/rfc8446-6-2-must-send-specified-alert-if-any_candidate_3.c",
+    "locations/code/rfc8446-6-2-must-send-specified-alert-if-any_candidate_4.c",
+    "locations/code/rfc8446-6-2-must-send-specified-alert-if-any_candidate_5.c",
+    "locations/code/rfc8446-6-2-must-send-specified-alert-if-any_candidate_6.c",
+    "locations/code/rfc8446-6-2-must-send-specified-alert-if-any_candidate_7.c",
+    "locations/code/rfc8446-6-2-must-send-specified-alert-if-any_candidate_8.c",
+    "locations/code/rfc8446-6-2-must-send-specified-alert-if-any_candidate_9.c",
+    "locations/code/rfc8446-6-2-must-send-specified-alert-if-any_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 53,
+    "files_with_hits": 26,
+    "functions_identified": 24,
+    "null_scope_hits": 26,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1494
+  }
+}

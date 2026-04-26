@@ -1,0 +1,1152 @@
+{
+  "rule_id": "rfc8446-5.1-key-change-messages-must-align-record-boundary",
+  "rule_type": "message_construction",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "EndOfEarlyData",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "EndOfEarlyData",
+        "end_of_early_data"
+      ]
+    },
+    {
+      "term": "ServerHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ServerHello",
+        "server_hello"
+      ]
+    },
+    {
+      "term": "Finished",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Finished"
+      ]
+    },
+    {
+      "term": "KeyUpdate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "KeyUpdate",
+        "key_update"
+      ]
+    },
+    {
+      "term": "unexpected_message",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unexpected_message",
+        "UnexpectedMessage"
+      ]
+    },
+    {
+      "term": "key change",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "key change"
+      ]
+    },
+    {
+      "term": "record boundary",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "record boundary"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 57,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "Finished",
+          "ServerHello",
+          "record boundary",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1860,
+          "text": "CLIENTHELLO_MSG *clienthello = s->clienthello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1866,
+          "text": "/* Finished parsing the ClientHello, now we can start processing it */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1867,
+          "text": "/* Give the ClientHello callback a crack at things */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1869,
+          "text": "/* A failure in the ClientHello callback terminates the connection. */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1884,
+          "text": "memcpy(s->s3.client_random, clienthello->random, SSL3_RANDOM_SIZE);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1887,
+          "text": "protverr = ssl_choose_server_version(s, clienthello, &dgrd);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1897,
+          "text": "s->version = s->client_version = clienthello->legacy_version;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1903,
+          "text": "/* TLSv1.3 specifies that a ClientHello must end on a record boundary */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1914,
+          "text": "if (sctx->app_verify_cookie_cb(ussl, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1915,
+          "text": "(unsigned int)clienthello->dtls_cookie_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1923,
+          "text": "} else if (s->d1->cookie_len != clienthello->dtls_cookie_len"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1924,
+          "text": "|| memcmp(clienthello->dtls_cookie, s->d1->cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1936,
+          "text": "if (!ssl_cache_cipherlist(s, &clienthello->ciphersuites)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1937,
+          "text": "|| !ossl_bytes_to_cipher_list(s, &clienthello->ciphersuites, &ciphers, &scsvs, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1994,
+          "text": "clienthello->pre_proc_exts, NULL, 0)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2000,
+          "text": "* We don't allow resumption in a backwards compatible ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2021,
+          "text": "i = ssl_get_prev_session(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2038,
+          "text": "memcpy(s->tmp_session_id, s->clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2039,
+          "text": "s->clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2040,
+          "text": "s->tmp_session_id_len = s->clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2080,
+          "text": "if (clienthello->compressions_len == 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2085,
+          "text": "if (memchr(clienthello->compressions, 0,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2086,
+          "text": "clienthello->compressions_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2094,
+          "text": "ssl_check_for_safari(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2098,
+          "text": "clienthello->pre_proc_exts, NULL, 0, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2161,
+          "text": "* If the ClientHello contains both a Session ID and a PAC-Opaque in"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2166,
+          "text": "if (clienthello->session_id_len > 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2167,
+          "text": "memcpy(s->session->session_id, clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2168,
+          "text": "clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2169,
+          "text": "s->session->session_id_length = clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2201,
+          "text": "* a TLSv1.3 ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2203,
+          "text": "if (clienthello->compressions_len != 1) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2235,
+          "text": "for (k = 0; k < clienthello->compressions_len; k++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2236,
+          "text": "if (clienthello->compressions[k] == comp_id)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2239,
+          "text": "if (k >= clienthello->compressions_len) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2255,
+          "text": "for (o = 0; o < clienthello->compressions_len; o++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2256,
+          "text": "if (v == clienthello->compressions[o]) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2304,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2305,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2306,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2311,
+          "text": "if (clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2312,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2313,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2314,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1848,
+          "text": "static int tls_early_post_process_client_hello(SSL_CONNECTION *s)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1868,
+          "text": "if (sctx->client_hello_cb != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1870,
+          "text": "switch (sctx->client_hello_cb(ussl, &al, sctx->client_hello_cb_arg)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1871,
+          "text": "case SSL_CLIENT_HELLO_SUCCESS:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1873,
+          "text": "case SSL_CLIENT_HELLO_RETRY:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1874,
+          "text": "s->rwstate = SSL_CLIENT_HELLO_CB;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1876,
+          "text": "case SSL_CLIENT_HELLO_ERROR:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1993,
+          "text": "SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2097,
+          "text": "if (!tls_parse_all_extensions(s, SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2164,
+          "text": "* ServerHello."
+        },
+        {
+          "term": "Finished",
+          "line": 1866,
+          "text": "/* Finished parsing the ClientHello, now we can start processing it */"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1906,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_NOT_ON_RECORD_BOUNDARY);"
+        },
+        {
+          "term": "record boundary",
+          "line": 1903,
+          "text": "/* TLSv1.3 specifies that a ClientHello must end on a record boundary */"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "ServerHello",
+          "key change",
+          "record boundary",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2055,
+          "text": "* echo of what we originally sent in the ClientHello and should not be"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1821,
+          "text": "* ServerHello.random confirmation trick. If that is good"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1967,
+          "text": "* In TLSv1.3 a ServerHello message signals a key change so the end of"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1702,
+          "text": "MSG_PROCESS_RETURN tls_process_server_hello(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1810,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1811,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1838,
+          "text": "prelude[0] = SSL3_MT_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1956,
+          "text": "context = SSL_CONNECTION_IS_TLS13(s) ? SSL_EXT_TLS1_3_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1957,
+          "text": ": SSL_EXT_TLS1_2_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1978,
+          "text": "SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1747,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1971,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "key change",
+          "line": 1967,
+          "text": "* In TLSv1.3 a ServerHello message signals a key change so the end of"
+        },
+        {
+          "term": "record boundary",
+          "line": 1968,
+          "text": "* the message must be on a record boundary."
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_key_update",
+      "line_range": [
+        698,
+        741
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "KeyUpdate",
+          "key change",
+          "record boundary",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 740,
+          "text": "return MSG_PROCESS_FINISHED_READING;"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 703,
+          "text": "* A KeyUpdate message signals a key change so the end of the message must"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 729,
+          "text": "* to additionally send a KeyUpdate message. However that message should"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 698,
+          "text": "MSG_PROCESS_RETURN tls_process_key_update(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 713,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_KEY_UPDATE);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 721,
+          "text": "if (updatetype != SSL_KEY_UPDATE_NOT_REQUESTED"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 722,
+          "text": "&& updatetype != SSL_KEY_UPDATE_REQUESTED) {"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_UPDATE);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 732,
+          "text": "if (updatetype == SSL_KEY_UPDATE_REQUESTED)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 733,
+          "text": "s->key_update = SSL_KEY_UPDATE_NOT_REQUESTED;"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 707,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_NOT_ON_RECORD_BOUNDARY);"
+        },
+        {
+          "term": "key change",
+          "line": 703,
+          "text": "* A KeyUpdate message signals a key change so the end of the message must"
+        },
+        {
+          "term": "record boundary",
+          "line": 704,
+          "text": "* be on a record boundary."
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_handshake",
+      "line_range": [
+        1625,
+        1738
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "EndOfEarlyData",
+          "Finished",
+          "KeyUpdate",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1656,
+          "text": "case SSL3_MT_CLIENT_HELLO:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1657,
+          "text": "if (!ssl_print_client_hello(bio, sc, indent + 2, msg, msglen))"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 1705,
+          "text": "case SSL3_MT_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1666,
+          "text": "case SSL3_MT_SERVER_HELLO:"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1667,
+          "text": "if (!ssl_print_server_hello(bio, indent + 2, msg, msglen))"
+        },
+        {
+          "term": "Finished",
+          "line": 1701,
+          "text": "case SSL3_MT_FINISHED:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 1722,
+          "text": "case SSL3_MT_KEY_UPDATE:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 1728,
+          "text": "ssl_key_update_tbl))"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_end_of_early_data",
+      "line_range": [
+        4718,
+        4748
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EndOfEarlyData",
+          "Finished",
+          "key change",
+          "record boundary",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EndOfEarlyData",
+          "line": 4732,
+          "text": "* EndOfEarlyData signals a key change so the end of the message must be on"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 4718,
+          "text": "MSG_PROCESS_RETURN tls_process_end_of_early_data(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "Finished",
+          "line": 4740,
+          "text": "s->early_data_state = SSL_EARLY_DATA_FINISHED_READING;"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 4736,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_NOT_ON_RECORD_BOUNDARY);"
+        },
+        {
+          "term": "key change",
+          "line": 4732,
+          "text": "* EndOfEarlyData signals a key change so the end of the message must be on"
+        },
+        {
+          "term": "record boundary",
+          "line": 4733,
+          "text": "* a record boundary."
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_read_transition",
+      "line_range": [
+        74,
+        179
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "EndOfEarlyData",
+          "Finished",
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 89,
+          "text": "if (mt == SSL3_MT_CLIENT_HELLO) {"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 96,
+          "text": "if (mt == SSL3_MT_END_OF_EARLY_DATA) {"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 97,
+          "text": "st->hand_state = TLS_ST_SR_END_OF_EARLY_DATA;"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 104,
+          "text": "case TLS_ST_SR_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "Finished",
+          "line": 105,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 119,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 120,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 129,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 130,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 142,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 143,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 170,
+          "text": "if (mt == SSL3_MT_KEY_UPDATE && !SSL_IS_QUIC_HANDSHAKE(s)) {"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 171,
+          "text": "st->hand_state = TLS_ST_SR_KEY_UPDATE;"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_finished",
+      "line_range": [
+        828,
+        959
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Finished",
+          "key change",
+          "record boundary",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 828,
+          "text": "MSG_PROCESS_RETURN tls_process_finished(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "Finished",
+          "line": 854,
+          "text": "* In TLSv1.3 a Finished message signals a key change so the end of the"
+        },
+        {
+          "term": "Finished",
+          "line": 892,
+          "text": "* Copy the finished so we can use it for renegotiation checks"
+        },
+        {
+          "term": "Finished",
+          "line": 899,
+          "text": "memcpy(s->s3.previous_client_finished, s->s3.tmp.peer_finish_md,"
+        },
+        {
+          "term": "Finished",
+          "line": 901,
+          "text": "s->s3.previous_client_finished_len = md_len;"
+        },
+        {
+          "term": "Finished",
+          "line": 903,
+          "text": "memcpy(s->s3.previous_server_finished, s->s3.tmp.peer_finish_md,"
+        },
+        {
+          "term": "Finished",
+          "line": 905,
+          "text": "s->s3.previous_server_finished_len = md_len;"
+        },
+        {
+          "term": "Finished",
+          "line": 927,
+          "text": "if (!tls13_store_server_finished_hash(s)) {"
+        },
+        {
+          "term": "Finished",
+          "line": 958,
+          "text": "return MSG_PROCESS_FINISHED_READING;"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 859,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_NOT_ON_RECORD_BOUNDARY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 865,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_GOT_A_FIN_BEFORE_A_CCS);"
+        },
+        {
+          "term": "key change",
+          "line": 854,
+          "text": "* In TLSv1.3 a Finished message signals a key change so the end of the"
+        },
+        {
+          "term": "record boundary",
+          "line": 855,
+          "text": "* message must be on a record boundary."
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_construct_message",
+      "line_range": [
+        931,
+        1005
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "EndOfEarlyData",
+          "Finished",
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 951,
+          "text": "*confunc = tls_construct_client_hello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 952,
+          "text": "*mt = SSL3_MT_CLIENT_HELLO;"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 955,
+          "text": "case TLS_ST_CW_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 956,
+          "text": "*confunc = tls_construct_end_of_early_data;"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 957,
+          "text": "*mt = SSL3_MT_END_OF_EARLY_DATA;"
+        },
+        {
+          "term": "Finished",
+          "line": 993,
+          "text": "case TLS_ST_CW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 994,
+          "text": "*confunc = tls_construct_finished;"
+        },
+        {
+          "term": "Finished",
+          "line": 995,
+          "text": "*mt = SSL3_MT_FINISHED;"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 998,
+          "text": "case TLS_ST_CW_KEY_UPDATE:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 999,
+          "text": "*confunc = tls_construct_key_update;"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 1000,
+          "text": "*mt = SSL3_MT_KEY_UPDATE;"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_read_transition",
+      "line_range": [
+        94,
+        216
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "Finished",
+          "KeyUpdate",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 110,
+          "text": "* This must a ClientHello following a HelloRetryRequest, so the only"
+        },
+        {
+          "term": "ServerHello",
+          "line": 111,
+          "text": "* thing we can get now is a ServerHello."
+        },
+        {
+          "term": "ServerHello",
+          "line": 113,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "Finished",
+          "line": 128,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 129,
+          "text": "st->hand_state = TLS_ST_CR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 174,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 175,
+          "text": "st->hand_state = TLS_ST_CR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 201,
+          "text": "* message here after the swap, or do it after the clientFinished?"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 185,
+          "text": "if (mt == SSL3_MT_KEY_UPDATE && !SSL_IS_QUIC_HANDSHAKE(s)) {"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 186,
+          "text": "st->hand_state = TLS_ST_CR_KEY_UPDATE;"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_read_transition",
+      "line_range": [
+        227,
+        408
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "Finished",
+          "ServerHello",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 233,
+          "text": "* Note that after writing the first ClientHello we don't know what version"
+        },
+        {
+          "term": "ServerHello",
+          "line": 263,
+          "text": "* data. The only thing allowed now is a ServerHello or a"
+        },
+        {
+          "term": "ServerHello",
+          "line": 295,
+          "text": "* the next server message after the ServerHello to determine if"
+        },
+        {
+          "term": "ServerHello",
+          "line": 247,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "ServerHello",
+          "line": 266,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "Finished",
+          "line": 370,
+          "text": "case TLS_ST_CW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 390,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 391,
+          "text": "st->hand_state = TLS_ST_CR_FINISHED;"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 406,
+          "text": "SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-1-key-change-messages-must-align-record-boundary_candidate_1.c",
+    "locations/code/rfc8446-5-1-key-change-messages-must-align-record-boundary_candidate_2.c",
+    "locations/code/rfc8446-5-1-key-change-messages-must-align-record-boundary_candidate_3.c",
+    "locations/code/rfc8446-5-1-key-change-messages-must-align-record-boundary_candidate_4.c",
+    "locations/code/rfc8446-5-1-key-change-messages-must-align-record-boundary_candidate_5.c",
+    "locations/code/rfc8446-5-1-key-change-messages-must-align-record-boundary_candidate_6.c",
+    "locations/code/rfc8446-5-1-key-change-messages-must-align-record-boundary_candidate_7.c",
+    "locations/code/rfc8446-5-1-key-change-messages-must-align-record-boundary_candidate_8.c",
+    "locations/code/rfc8446-5-1-key-change-messages-must-align-record-boundary_candidate_9.c",
+    "locations/code/rfc8446-5-1-key-change-messages-must-align-record-boundary_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1194,
+    "files_with_hits": 76,
+    "functions_identified": 249,
+    "null_scope_hits": 281,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1778
+  }
+}

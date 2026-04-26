@@ -1,0 +1,40 @@
+[
+  {
+    "rule_id": "rfc8446-7.2-should-delete-old-traffic-secret",
+    "source_section": "7.2",
+    "source_text": "Once client_/server_application_traffic_secret_N+1 and its associated traffic keys have been computed, implementations SHOULD delete client_/server_application_traffic_secret_N and its associated traffic keys.",
+    "normative_keyword": "SHOULD",
+    "rule_type": "conditional_action",
+    "rule_statement": "After computing traffic_secret_N+1, implementations SHOULD delete traffic_secret_N and its keys.",
+    "entity": "both",
+    "applies_when": "New application traffic secret has been computed after key update",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "old traffic secret and keys deleted",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "KeyUpdate"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "key update",
+        "secret erasure",
+        "forward secrecy"
+      ]
+    },
+    "checkability": "low",
+    "checkability_rationale": "Internal memory management; cannot be verified externally.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit SHOULD.",
+    "cross_section_context_used": [
+      "4.6.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

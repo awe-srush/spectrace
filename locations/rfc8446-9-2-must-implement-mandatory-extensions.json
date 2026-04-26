@@ -1,0 +1,1055 @@
+{
+  "rule_id": "rfc8446-9.2-must-implement-mandatory-extensions",
+  "rule_type": "presence_requirement",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "supported_versions",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "supported_versions",
+        "SupportedVersions"
+      ]
+    },
+    {
+      "term": "cookie",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "cookie"
+      ]
+    },
+    {
+      "term": "signature_algorithms",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "signature_algorithms",
+        "SignatureAlgorithms"
+      ]
+    },
+    {
+      "term": "signature_algorithms_cert",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "signature_algorithms_cert",
+        "SignatureAlgorithmsCert"
+      ]
+    },
+    {
+      "term": "supported_groups",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "supported_groups",
+        "SupportedGroups"
+      ]
+    },
+    {
+      "term": "key_share",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "key_share",
+        "KeyShare"
+      ]
+    },
+    {
+      "term": "server_name",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "server_name",
+        "ServerName"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "SSL_extension_supported",
+      "line_range": [
+        621,
+        670
+      ],
+      "distinct_terms_matched": 6,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "cookie",
+          "key_share",
+          "server_name",
+          "signature_algorithms",
+          "supported_groups",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "supported_versions",
+          "line": 651,
+          "text": "case TLSEXT_TYPE_supported_versions:"
+        },
+        {
+          "term": "cookie",
+          "line": 654,
+          "text": "case TLSEXT_TYPE_cookie:"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 637,
+          "text": "case TLSEXT_TYPE_signature_algorithms:"
+        },
+        {
+          "term": "supported_groups",
+          "line": 627,
+          "text": "case TLSEXT_TYPE_supported_groups:"
+        },
+        {
+          "term": "key_share",
+          "line": 628,
+          "text": "case TLSEXT_TYPE_key_share:"
+        },
+        {
+          "term": "server_name",
+          "line": 635,
+          "text": "case TLSEXT_TYPE_server_name:"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 40,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ClientHello",
+          "cookie",
+          "key_share",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1152,
+          "text": "* ClientHello so we can add it to the transcript hash."
+        },
+        {
+          "term": "ClientHello",
+          "line": 1212,
+          "text": "/* Act as if this ClientHello came after a HelloRetryRequest */"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1173,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_supported_versions)"
+        },
+        {
+          "term": "cookie",
+          "line": 1008,
+          "text": "int tls_parse_ctos_cookie(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,"
+        },
+        {
+          "term": "cookie",
+          "line": 1015,
+          "text": "PACKET cookie, raw, chhash, appcookie;"
+        },
+        {
+          "term": "cookie",
+          "line": 1025,
+          "text": "/* Ignore any cookie if we're not set up to verify it */"
+        },
+        {
+          "term": "cookie",
+          "line": 1026,
+          "text": "if (sctx->verify_stateless_cookie_cb == NULL"
+        },
+        {
+          "term": "cookie",
+          "line": 1030,
+          "text": "if (!PACKET_as_length_prefixed_2(pkt, &cookie)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1035,
+          "text": "raw = cookie;"
+        },
+        {
+          "term": "cookie",
+          "line": 1045,
+          "text": "/* Verify the HMAC of the cookie */"
+        },
+        {
+          "term": "cookie",
+          "line": 1049,
+          "text": "s->session_ctx->ext.cookie_hmac_key,"
+        },
+        {
+          "term": "cookie",
+          "line": 1050,
+          "text": "sizeof(s->session_ctx->ext.cookie_hmac_key));"
+        },
+        {
+          "term": "cookie",
+          "line": 1076,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COOKIE_MISMATCH);"
+        },
+        {
+          "term": "cookie",
+          "line": 1080,
+          "text": "if (!PACKET_get_net_2(&cookie, &format)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1084,
+          "text": "/* Check the cookie format is something we recognise. Ignore it if not */"
+        },
+        {
+          "term": "cookie",
+          "line": 1085,
+          "text": "if (format != COOKIE_STATE_FORMAT_VERSION)"
+        },
+        {
+          "term": "cookie",
+          "line": 1094,
+          "text": "if (!PACKET_get_net_2(&cookie, &version)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1104,
+          "text": "if (!PACKET_get_net_2(&cookie, &group_id)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1109,
+          "text": "ciphdata = PACKET_data(&cookie);"
+        },
+        {
+          "term": "cookie",
+          "line": 1110,
+          "text": "if (!PACKET_forward(&cookie, 2)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1119,
+          "text": "* in the cookie. Something must have changed."
+        },
+        {
+          "term": "cookie",
+          "line": 1125,
+          "text": "if (!PACKET_get_1(&cookie, &key_share)"
+        },
+        {
+          "term": "cookie",
+          "line": 1126,
+          "text": "|| !PACKET_get_net_8(&cookie, &tm)"
+        },
+        {
+          "term": "cookie",
+          "line": 1127,
+          "text": "|| !PACKET_get_length_prefixed_2(&cookie, &chhash)"
+        },
+        {
+          "term": "cookie",
+          "line": 1128,
+          "text": "|| !PACKET_get_length_prefixed_1(&cookie, &appcookie)"
+        },
+        {
+          "term": "cookie",
+          "line": 1129,
+          "text": "|| PACKET_remaining(&cookie) != SHA256_DIGEST_LENGTH) {"
+        },
+        {
+          "term": "cookie",
+          "line": 1134,
+          "text": "/* We tolerate a cookie age of up to 10 minutes (= 60 * 10 seconds) */"
+        },
+        {
+          "term": "cookie",
+          "line": 1137,
+          "text": "/* Cookie is stale. Ignore it */"
+        },
+        {
+          "term": "cookie",
+          "line": 1141,
+          "text": "/* Verify the app cookie */"
+        },
+        {
+          "term": "cookie",
+          "line": 1142,
+          "text": "if (sctx->verify_stateless_cookie_cb(SSL_CONNECTION_GET_USER_SSL(s),"
+        },
+        {
+          "term": "cookie",
+          "line": 1143,
+          "text": "PACKET_data(&appcookie),"
+        },
+        {
+          "term": "cookie",
+          "line": 1144,
+          "text": "PACKET_remaining(&appcookie))"
+        },
+        {
+          "term": "cookie",
+          "line": 1146,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COOKIE_MISMATCH);"
+        },
+        {
+          "term": "cookie",
+          "line": 1191,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_cookie)"
+        },
+        {
+          "term": "cookie",
+          "line": 1194,
+          "text": "|| !WPACKET_close(&hrrpkt) /* cookie extension */"
+        },
+        {
+          "term": "cookie",
+          "line": 1215,
+          "text": "s->ext.cookieok = 1;"
+        },
+        {
+          "term": "key_share",
+          "line": 1012,
+          "text": "unsigned int format, version, key_share, group_id;"
+        },
+        {
+          "term": "key_share",
+          "line": 1125,
+          "text": "if (!PACKET_get_1(&cookie, &key_share)"
+        },
+        {
+          "term": "key_share",
+          "line": 1181,
+          "text": "if (key_share) {"
+        },
+        {
+          "term": "key_share",
+          "line": 1182,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_key_share)"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/ssl_lib.c",
+      "function": "ossl_ssl_connection_free",
+      "line_range": [
+        1493,
+        1598
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cookie",
+          "key_share",
+          "supported_groups"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1557,
+          "text": "if (s->clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1558,
+          "text": "OPENSSL_free(s->clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1559,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "cookie",
+          "line": 1556,
+          "text": "OPENSSL_free(s->ext.tls13_cookie);"
+        },
+        {
+          "term": "supported_groups",
+          "line": 1536,
+          "text": "OPENSSL_free(s->ext.supportedgroups);"
+        },
+        {
+          "term": "supported_groups",
+          "line": 1539,
+          "text": "OPENSSL_free(s->ext.peer_supportedgroups);"
+        },
+        {
+          "term": "key_share",
+          "line": 1537,
+          "text": "OPENSSL_free(s->ext.keyshares);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_extension",
+      "line_range": [
+        763,
+        972
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "key_share",
+          "signature_algorithms",
+          "supported_groups",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "supported_versions",
+          "line": 912,
+          "text": "case TLSEXT_TYPE_supported_versions:"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 824,
+          "text": "case TLSEXT_TYPE_signature_algorithms:"
+        },
+        {
+          "term": "supported_groups",
+          "line": 797,
+          "text": "case TLSEXT_TYPE_supported_groups:"
+        },
+        {
+          "term": "key_share",
+          "line": 873,
+          "text": "case TLSEXT_TYPE_key_share:"
+        },
+        {
+          "term": "key_share",
+          "line": 877,
+          "text": "/* We assume this is an HRR, otherwise this is an invalid key_share */"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_construct_stoc_cookie",
+      "line_range": [
+        2085,
+        2215
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 27,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ClientHello",
+          "cookie",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2128,
+          "text": "* Get the hash of the initial ClientHello. ssl_handshake_hash() operates"
+        },
+        {
+          "term": "cookie",
+          "line": 2085,
+          "text": "EXT_RETURN tls_construct_stoc_cookie(SSL_CONNECTION *s, WPACKET *pkt,"
+        },
+        {
+          "term": "cookie",
+          "line": 2090,
+          "text": "unsigned char *hashval1, *hashval2, *appcookie1, *appcookie2, *cookie;"
+        },
+        {
+          "term": "cookie",
+          "line": 2092,
+          "text": "size_t startlen, ciphlen, totcookielen, hashlen, hmaclen, appcookielen;"
+        },
+        {
+          "term": "cookie",
+          "line": 2103,
+          "text": "if (sctx->gen_stateless_cookie_cb == NULL) {"
+        },
+        {
+          "term": "cookie",
+          "line": 2104,
+          "text": "SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_NO_COOKIE_CALLBACK_SET);"
+        },
+        {
+          "term": "cookie",
+          "line": 2108,
+          "text": "if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_cookie)"
+        },
+        {
+          "term": "cookie",
+          "line": 2112,
+          "text": "|| !WPACKET_reserve_bytes(pkt, MAX_COOKIE_SIZE, &cookie)"
+        },
+        {
+          "term": "cookie",
+          "line": 2113,
+          "text": "|| !WPACKET_put_bytes_u16(pkt, COOKIE_STATE_FORMAT_VERSION)"
+        },
+        {
+          "term": "cookie",
+          "line": 2142,
+          "text": "|| !WPACKET_reserve_bytes(pkt, SSL_COOKIE_LENGTH, &appcookie1)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 2147,
+          "text": "/* Generate the application cookie */"
+        },
+        {
+          "term": "cookie",
+          "line": 2148,
+          "text": "if (sctx->gen_stateless_cookie_cb(ussl, appcookie1,"
+        },
+        {
+          "term": "cookie",
+          "line": 2149,
+          "text": "&appcookielen)"
+        },
+        {
+          "term": "cookie",
+          "line": 2151,
+          "text": "SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_COOKIE_GEN_CALLBACK_FAILURE);"
+        },
+        {
+          "term": "cookie",
+          "line": 2155,
+          "text": "if (!WPACKET_allocate_bytes(pkt, appcookielen, &appcookie2)"
+        },
+        {
+          "term": "cookie",
+          "line": 2156,
+          "text": "|| !ossl_assert(appcookie1 == appcookie2)"
+        },
+        {
+          "term": "cookie",
+          "line": 2158,
+          "text": "|| !WPACKET_get_total_written(pkt, &totcookielen)"
+        },
+        {
+          "term": "cookie",
+          "line": 2165,
+          "text": "totcookielen -= startlen;"
+        },
+        {
+          "term": "cookie",
+          "line": 2166,
+          "text": "if (!ossl_assert(totcookielen <= MAX_COOKIE_SIZE - SHA256_DIGEST_LENGTH)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 2171,
+          "text": "/* HMAC the cookie */"
+        },
+        {
+          "term": "cookie",
+          "line": 2175,
+          "text": "s->session_ctx->ext.cookie_hmac_key,"
+        },
+        {
+          "term": "cookie",
+          "line": 2176,
+          "text": "sizeof(s->session_ctx->ext.cookie_hmac_key));"
+        },
+        {
+          "term": "cookie",
+          "line": 2185,
+          "text": "|| EVP_DigestSign(hctx, hmac, &hmaclen, cookie,"
+        },
+        {
+          "term": "cookie",
+          "line": 2186,
+          "text": "totcookielen)"
+        },
+        {
+          "term": "cookie",
+          "line": 2192,
+          "text": "if (!ossl_assert(totcookielen + hmaclen <= MAX_COOKIE_SIZE)) {"
+        },
+        {
+          "term": "cookie",
+          "line": 2199,
+          "text": "|| !ossl_assert(cookie == hmac - totcookielen)"
+        },
+        {
+          "term": "key_share",
+          "line": 2118,
+          "text": "/* Is there a key_share extension present in this HRR? */"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/s3_lib.c",
+      "function": "ssl3_ctrl",
+      "line_range": [
+        3953,
+        4380
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 18,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "key_share",
+          "server_name",
+          "supported_groups"
+        ]
+      },
+      "hits": [
+        {
+          "term": "supported_groups",
+          "line": 4013,
+          "text": "return ssl_set_tmp_ecdh_groups(&sc->ext.supportedgroups,"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4014,
+          "text": "&sc->ext.supportedgroups_len,"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4214,
+          "text": "clist = sc->ext.peer_supportedgroups;"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4215,
+          "text": "clistlen = sc->ext.peer_supportedgroups_len;"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4234,
+          "text": "return tls1_set_groups(&sc->ext.supportedgroups,"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4235,
+          "text": "&sc->ext.supportedgroups_len,"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4244,
+          "text": "&sc->ext.supportedgroups,"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4245,
+          "text": "&sc->ext.supportedgroups_len,"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4367,
+          "text": "*(uint16_t **)parg = (uint16_t *)sc->ext.peer_supportedgroups;"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4369,
+          "text": "return (int)sc->ext.peer_supportedgroups_len;"
+        },
+        {
+          "term": "key_share",
+          "line": 4015,
+          "text": "&sc->ext.keyshares,"
+        },
+        {
+          "term": "key_share",
+          "line": 4016,
+          "text": "&sc->ext.keyshares_len,"
+        },
+        {
+          "term": "key_share",
+          "line": 4236,
+          "text": "&sc->ext.keyshares,"
+        },
+        {
+          "term": "key_share",
+          "line": 4237,
+          "text": "&sc->ext.keyshares_len,"
+        },
+        {
+          "term": "key_share",
+          "line": 4246,
+          "text": "&sc->ext.keyshares,"
+        },
+        {
+          "term": "key_share",
+          "line": 4247,
+          "text": "&sc->ext.keyshares_len,"
+        },
+        {
+          "term": "server_name",
+          "line": 4042,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_TLS_EXT_INVALID_SERVERNAME);"
+        },
+        {
+          "term": "server_name",
+          "line": 4050,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_TLS_EXT_INVALID_SERVERNAME_TYPE);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/s3_lib.c",
+      "function": "ssl3_ctx_ctrl",
+      "line_range": [
+        4417,
+        4657
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "key_share",
+          "server_name",
+          "supported_groups"
+        ]
+      },
+      "hits": [
+        {
+          "term": "supported_groups",
+          "line": 4452,
+          "text": "return ssl_set_tmp_ecdh_groups(&ctx->ext.supportedgroups,"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4453,
+          "text": "&ctx->ext.supportedgroups_len,"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4551,
+          "text": "return tls1_set_groups(&ctx->ext.supportedgroups,"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4552,
+          "text": "&ctx->ext.supportedgroups_len,"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4561,
+          "text": "&ctx->ext.supportedgroups,"
+        },
+        {
+          "term": "supported_groups",
+          "line": 4562,
+          "text": "&ctx->ext.supportedgroups_len,"
+        },
+        {
+          "term": "key_share",
+          "line": 4454,
+          "text": "&ctx->ext.keyshares,"
+        },
+        {
+          "term": "key_share",
+          "line": 4455,
+          "text": "&ctx->ext.keyshares_len,"
+        },
+        {
+          "term": "key_share",
+          "line": 4553,
+          "text": "&ctx->ext.keyshares,"
+        },
+        {
+          "term": "key_share",
+          "line": 4554,
+          "text": "&ctx->ext.keyshares_len,"
+        },
+        {
+          "term": "key_share",
+          "line": 4563,
+          "text": "&ctx->ext.keyshares,"
+        },
+        {
+          "term": "key_share",
+          "line": 4564,
+          "text": "&ctx->ext.keyshares_len,"
+        },
+        {
+          "term": "server_name",
+          "line": 4461,
+          "text": "case SSL_CTRL_SET_TLSEXT_SERVERNAME_ARG:"
+        },
+        {
+          "term": "server_name",
+          "line": 4462,
+          "text": "ctx->ext.servername_arg = parg;"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_key_share",
+      "line_range": [
+        2193,
+        2367
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ClientHello",
+          "key_share",
+          "supported_groups"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2234,
+          "text": "* already sent in the first ClientHello"
+        },
+        {
+          "term": "supported_groups",
+          "line": 2244,
+          "text": "tls1_get_supported_groups(s, &pgroups, &num_groups);"
+        },
+        {
+          "term": "key_share",
+          "line": 2193,
+          "text": "int tls_parse_stoc_key_share(SSL_CONNECTION *s, PACKET *pkt,"
+        },
+        {
+          "term": "key_share",
+          "line": 2219,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2233,
+          "text": "* It is an error if the HelloRetryRequest wants a key_share that we"
+        },
+        {
+          "term": "key_share",
+          "line": 2238,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2253,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2289,
+          "text": "* key_share!"
+        },
+        {
+          "term": "key_share",
+          "line": 2291,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2320,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2342,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2260,
+          "text": "/* The initial keyshares are obsolete now, hence free memory */"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_as_hello_retry_request",
+      "line_range": [
+        2204,
+        2263
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "cookie",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2233,
+          "text": "* ClientHello will not change"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2241,
+          "text": "* a synthetic message_hash in place of ClientHello1."
+        },
+        {
+          "term": "cookie",
+          "line": 2230,
+          "text": "if (s->ext.tls13_cookie_len == 0 && s->s3.tmp.pkey != NULL) {"
+        },
+        {
+          "term": "cookie",
+          "line": 2232,
+          "text": "* We didn't receive a cookie or a new key_share so the next"
+        },
+        {
+          "term": "key_share",
+          "line": 2232,
+          "text": "* We didn't receive a cookie or a new key_share so the next"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ssl_check_for_safari",
+      "line_range": [
+        1547,
+        1613
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "server_name",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1548,
+          "text": "const CLIENTHELLO_MSG *hello)"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 1572,
+          "text": "0x0d, /* signature_algorithms */"
+        },
+        {
+          "term": "server_name",
+          "line": 1602,
+          "text": "if (type != TLSEXT_TYPE_server_name)"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-9-2-must-implement-mandatory-extensions_candidate_1.c",
+    "locations/code/rfc8446-9-2-must-implement-mandatory-extensions_candidate_2.c",
+    "locations/code/rfc8446-9-2-must-implement-mandatory-extensions_candidate_3.c",
+    "locations/code/rfc8446-9-2-must-implement-mandatory-extensions_candidate_4.c",
+    "locations/code/rfc8446-9-2-must-implement-mandatory-extensions_candidate_5.c",
+    "locations/code/rfc8446-9-2-must-implement-mandatory-extensions_candidate_6.c",
+    "locations/code/rfc8446-9-2-must-implement-mandatory-extensions_candidate_7.c",
+    "locations/code/rfc8446-9-2-must-implement-mandatory-extensions_candidate_8.c",
+    "locations/code/rfc8446-9-2-must-implement-mandatory-extensions_candidate_9.c",
+    "locations/code/rfc8446-9-2-must-implement-mandatory-extensions_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1144,
+    "files_with_hits": 32,
+    "functions_identified": 170,
+    "null_scope_hits": 298,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1680
+  }
+}

@@ -1,0 +1,455 @@
+[
+  {
+    "rule_id": "rfc8446-4.1.4-hrr-must-contain-supported-versions",
+    "source_section": "4.1.4",
+    "source_text": "The server's extensions MUST contain \"supported_versions\".",
+    "normative_keyword": "MUST",
+    "rule_type": "presence_requirement",
+    "rule_statement": "The HelloRetryRequest extensions MUST contain the supported_versions extension.",
+    "entity": "server",
+    "applies_when": "Server sends a HelloRetryRequest",
+    "target_message": "HelloRetryRequest",
+    "target_field": "extensions",
+    "expected_value": "supported_versions extension present",
+    "related_fields": [],
+    "violation_alert": "missing_extension",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "HelloRetryRequest"
+      ],
+      "field_names": [
+        "extensions"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [
+        "missing_extension"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct check for presence of supported_versions in HelloRetryRequest extensions.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST requirement.",
+    "cross_section_context_used": [
+      "4.2.1"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.4-hrr-no-unadvertised-extensions",
+    "source_section": "4.1.4",
+    "source_text": "As with the ServerHello, a HelloRetryRequest MUST NOT contain any extensions that were not first offered by the client in its ClientHello, with the exception of optionally the \"cookie\" (see Section 4.2.2) extension.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "presence_requirement",
+    "rule_statement": "A HelloRetryRequest MUST NOT contain any extensions not first offered in the ClientHello, except for the optional cookie extension.",
+    "entity": "server",
+    "applies_when": "Server constructs HelloRetryRequest extensions",
+    "target_message": "HelloRetryRequest",
+    "target_field": "extensions",
+    "expected_value": "only extensions from ClientHello + optional cookie",
+    "related_fields": [
+      "ClientHello.extensions"
+    ],
+    "violation_alert": "unsupported_extension",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "HelloRetryRequest",
+        "ClientHello"
+      ],
+      "field_names": [
+        "extensions"
+      ],
+      "extension_names": [
+        "cookie"
+      ],
+      "alert_names": [
+        "unsupported_extension"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify each extension in HRR was either in ClientHello or is cookie.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT with clear exception.",
+    "cross_section_context_used": [
+      "4.2.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.4-client-check-hrr-fields",
+    "source_section": "4.1.4",
+    "source_text": "Upon receipt of a HelloRetryRequest, the client MUST check the legacy_version, legacy_session_id_echo, cipher_suite, and legacy_compression_method as specified in Section 4.1.3 and then process the extensions, starting with determining the version using \"supported_versions\".",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "Upon receipt of a HelloRetryRequest, the client MUST validate legacy_version, legacy_session_id_echo, cipher_suite, and legacy_compression_method per the ServerHello rules in \u00a74.1.3.",
+    "entity": "client",
+    "applies_when": "Client receives a HelloRetryRequest",
+    "target_message": "HelloRetryRequest",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [
+      "legacy_version",
+      "legacy_session_id_echo",
+      "cipher_suite",
+      "legacy_compression_method"
+    ],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.1.3",
+    "protocol_keywords": {
+      "message_types": [
+        "HelloRetryRequest",
+        "ServerHello"
+      ],
+      "field_names": [
+        "legacy_version",
+        "legacy_session_id_echo",
+        "cipher_suite",
+        "legacy_compression_method"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Each field check is a direct value or membership comparison.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST referencing concrete validation rules.",
+    "cross_section_context_used": [
+      "4.1.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.4-hrr-no-change-abort",
+    "source_section": "4.1.4",
+    "source_text": "Clients MUST abort the handshake with an \"illegal_parameter\" alert if the HelloRetryRequest would not result in any change in the ClientHello.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "The client MUST abort the handshake with an illegal_parameter alert if the HelloRetryRequest would not result in any change to the ClientHello.",
+    "entity": "client",
+    "applies_when": "Client receives HelloRetryRequest that would not change its ClientHello",
+    "target_message": "HelloRetryRequest",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.1.4",
+    "protocol_keywords": {
+      "message_types": [
+        "HelloRetryRequest",
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "no change in ClientHello"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Requires determining whether the HRR extensions would cause any modification to the next ClientHello, which depends on client state.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specific alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": "What constitutes 'no change' depends on the specific extensions in the HRR and whether the client already satisfies them.",
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.4-second-hrr-abort",
+    "source_section": "4.1.4",
+    "source_text": "If a client receives a second HelloRetryRequest in the same connection (i.e., where the ClientHello was itself in response to a HelloRetryRequest), it MUST abort the handshake with an \"unexpected_message\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If a client receives a second HelloRetryRequest in the same connection, it MUST abort the handshake with an unexpected_message alert.",
+    "entity": "client",
+    "applies_when": "Client receives a second HelloRetryRequest in the same handshake",
+    "target_message": "HelloRetryRequest",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "4.1.4",
+    "protocol_keywords": {
+      "message_types": [
+        "HelloRetryRequest",
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "second HelloRetryRequest"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify that a state flag tracks whether an HRR was already received and aborts on the second.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specific alert and clear trigger condition.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.4-client-process-all-extensions",
+    "source_section": "4.1.4",
+    "source_text": "Otherwise, the client MUST process all extensions in the HelloRetryRequest and send a second updated ClientHello.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "After validating the HelloRetryRequest, the client MUST process all extensions and send an updated second ClientHello.",
+    "entity": "client",
+    "applies_when": "Client receives a valid first HelloRetryRequest",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "HelloRetryRequest",
+        "ClientHello"
+      ],
+      "field_names": [
+        "extensions"
+      ],
+      "extension_names": [
+        "supported_versions",
+        "cookie",
+        "key_share"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify that the client sends a second ClientHello after HRR, but 'process all extensions' is broad.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST requirement.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.4-cipher-suite-not-offered-abort",
+    "source_section": "4.1.4",
+    "source_text": "A client which receives a cipher suite that was not offered MUST abort the handshake.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "A client receiving a cipher suite in HelloRetryRequest that was not offered in its ClientHello MUST abort the handshake.",
+    "entity": "client",
+    "applies_when": "Client receives HelloRetryRequest with a cipher_suite not in its ClientHello.cipher_suites",
+    "target_message": "HelloRetryRequest",
+    "target_field": "cipher_suite",
+    "expected_value": "must be from ClientHello.cipher_suites",
+    "related_fields": [
+      "ClientHello.cipher_suites"
+    ],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.1.3",
+    "protocol_keywords": {
+      "message_types": [
+        "HelloRetryRequest",
+        "ClientHello"
+      ],
+      "field_names": [
+        "cipher_suite",
+        "cipher_suites"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct membership check of HRR cipher suite against offered list.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.4-server-same-cipher-suite",
+    "source_section": "4.1.4",
+    "source_text": "Servers MUST ensure that they negotiate the same cipher suite when receiving a conformant updated ClientHello (if the server selects the cipher suite as the first step in the negotiation, then this will happen automatically).",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "Servers MUST negotiate the same cipher suite when receiving a conformant updated ClientHello (after HelloRetryRequest) as they did in the original negotiation.",
+    "entity": "server",
+    "applies_when": "Server receives the second ClientHello after sending HelloRetryRequest",
+    "target_message": "ServerHello",
+    "target_field": "cipher_suite",
+    "expected_value": "same as in HelloRetryRequest",
+    "related_fields": [
+      "HelloRetryRequest.cipher_suite"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello",
+        "HelloRetryRequest",
+        "ClientHello"
+      ],
+      "field_names": [
+        "cipher_suite"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "updated ClientHello"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server selects same cipher suite in both HRR and final ServerHello.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.4-client-check-sh-cipher-matches-hrr",
+    "source_section": "4.1.4",
+    "source_text": "Upon receiving the ServerHello, clients MUST check that the cipher suite supplied in the ServerHello is the same as that in the HelloRetryRequest and otherwise abort the handshake with an \"illegal_parameter\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "Clients MUST verify that the cipher suite in the ServerHello matches the cipher suite from the HelloRetryRequest, and abort with illegal_parameter if they differ.",
+    "entity": "client",
+    "applies_when": "Client receives ServerHello after a HelloRetryRequest exchange",
+    "target_message": "ServerHello",
+    "target_field": "cipher_suite",
+    "expected_value": "must equal HelloRetryRequest.cipher_suite",
+    "related_fields": [
+      "HelloRetryRequest.cipher_suite"
+    ],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.1.4",
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello",
+        "HelloRetryRequest"
+      ],
+      "field_names": [
+        "cipher_suite"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "after HelloRetryRequest"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct equality comparison of cipher suite values between two messages.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specific alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.4-selected-version-retained",
+    "source_section": "4.1.4",
+    "source_text": "The value of selected_version in the HelloRetryRequest \"supported_versions\" extension MUST be retained in the ServerHello, and a client MUST abort the handshake with an \"illegal_parameter\" alert if the value changes.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "The selected_version in the HelloRetryRequest supported_versions extension MUST be retained in the ServerHello. The client MUST abort with illegal_parameter if it changes.",
+    "entity": "both",
+    "applies_when": "HelloRetryRequest was sent; client receives subsequent ServerHello",
+    "target_message": "ServerHello",
+    "target_field": "supported_versions.selected_version",
+    "expected_value": "must equal HelloRetryRequest.supported_versions.selected_version",
+    "related_fields": [
+      "HelloRetryRequest.supported_versions.selected_version"
+    ],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.1.4",
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello",
+        "HelloRetryRequest"
+      ],
+      "field_names": [
+        "selected_version"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "after HelloRetryRequest"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct value comparison of selected_version between HRR and ServerHello.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specific alert and clear comparison.",
+    "cross_section_context_used": [
+      "4.2.1"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.4-client-should-not-offer-mismatched-psk-hash",
+    "source_section": "4.1.4",
+    "source_text": "In addition, in its updated ClientHello, the client SHOULD NOT offer any pre-shared keys associated with a hash other than that of the selected cipher suite.",
+    "normative_keyword": "SHOULD NOT",
+    "rule_type": "presence_requirement",
+    "rule_statement": "In the updated ClientHello after HRR, the client SHOULD NOT offer pre-shared keys associated with a hash algorithm other than that of the selected cipher suite.",
+    "entity": "client",
+    "applies_when": "Client constructs updated ClientHello after HelloRetryRequest",
+    "target_message": "ClientHello",
+    "target_field": "pre_shared_key",
+    "expected_value": "only PSKs matching the selected cipher suite's hash",
+    "related_fields": [
+      "cipher_suite"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "HelloRetryRequest"
+      ],
+      "field_names": [
+        "pre_shared_key"
+      ],
+      "extension_names": [
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "updated ClientHello",
+        "after HelloRetryRequest"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify PSK identities offered are filtered by hash, but SHOULD NOT allows deviation.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit SHOULD NOT with clear rationale.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

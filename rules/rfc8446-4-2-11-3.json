@@ -1,0 +1,43 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.11.3-server-must-process-ch-then-send-immediately",
+    "source_section": "4.2.11.3",
+    "source_text": "when accepting \"early_data\", servers MUST process the client's ClientHello and then immediately send their flight of messages, rather than waiting for the client's EndOfEarlyData message before sending its ServerHello.",
+    "normative_keyword": "MUST",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "When accepting early_data, servers MUST send their flight immediately after processing ClientHello, not wait for EndOfEarlyData.",
+    "entity": "server",
+    "applies_when": "Server accepts 0-RTT early_data",
+    "target_message": "ServerHello",
+    "target_field": null,
+    "expected_value": "server flight sent immediately after ClientHello processing, before EndOfEarlyData",
+    "related_fields": [
+      "early_data",
+      "EndOfEarlyData"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "ServerHello",
+        "EndOfEarlyData"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "early_data"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can observe server sends ServerHello before receiving EndOfEarlyData in 0-RTT flow.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

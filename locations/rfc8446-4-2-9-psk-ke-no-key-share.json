@@ -1,0 +1,1002 @@
+{
+  "rule_id": "rfc8446-4.2.9-psk-ke-no-key-share",
+  "rule_type": "presence_requirement",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ServerHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ServerHello",
+        "server_hello"
+      ]
+    },
+    {
+      "term": "key_share",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "key_share",
+        "KeyShare"
+      ]
+    },
+    {
+      "term": "pre_shared_key",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "pre_shared_key",
+        "PreSharedKey"
+      ]
+    },
+    {
+      "term": "psk_ke",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "psk_ke",
+        "PskKe"
+      ]
+    },
+    {
+      "term": "PSK-only",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "PSK-only"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions.c",
+      "function": "final_key_share",
+      "line_range": [
+        1639,
+        1779
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 20,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "key_share",
+          "psk_ke"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_share",
+          "line": 1639,
+          "text": "static int final_key_share(SSL_CONNECTION *s, unsigned int context, int sent)"
+        },
+        {
+          "term": "key_share",
+          "line": 1645,
+          "text": "/* Nothing to do for key_share in an HRR */"
+        },
+        {
+          "term": "key_share",
+          "line": 1653,
+          "text": "*     we have no key_share"
+        },
+        {
+          "term": "key_share",
+          "line": 1656,
+          "text": "*      OR the kex_mode doesn't allow non key_share resumes)"
+        },
+        {
+          "term": "key_share",
+          "line": 1663,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_NO_SUITABLE_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 1667,
+          "text": "SSLfatal(s, SSL_AD_MISSING_EXTENSION, SSL_R_NO_SUITABLE_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 1676,
+          "text": "*         we have a suitable key_share"
+        },
+        {
+          "term": "key_share",
+          "line": 1686,
+          "text": "*             the client sent a key_share extension"
+        },
+        {
+          "term": "key_share",
+          "line": 1689,
+          "text": "*              OR the kex_mode allows key_share resumes)"
+        },
+        {
+          "term": "key_share",
+          "line": 1697,
+          "text": "*             the kex_mode doesn't allow non key_share resumes"
+        },
+        {
+          "term": "key_share",
+          "line": 1707,
+          "text": "/* We have a suitable key_share */"
+        },
+        {
+          "term": "key_share",
+          "line": 1723,
+          "text": "/* No suitable key_share */"
+        },
+        {
+          "term": "key_share",
+          "line": 1728,
+          "text": "/* Did we detect group overlap in tls_parse_ctos_key_share ? */"
+        },
+        {
+          "term": "key_share",
+          "line": 1740,
+          "text": "SSL_R_NO_SUITABLE_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 1761,
+          "text": "* We have a key_share so don't send any more HelloRetryRequest"
+        },
+        {
+          "term": "key_share",
+          "line": 1768,
+          "text": "* For a client side resumption with no key_share we need to generate"
+        },
+        {
+          "term": "key_share",
+          "line": 1769,
+          "text": "* the handshake secret (otherwise this is done during key_share"
+        },
+        {
+          "term": "psk_ke",
+          "line": 1662,
+          "text": "if ((s->ext.psk_kex_mode & TLSEXT_KEX_MODE_FLAG_KE) == 0) {"
+        },
+        {
+          "term": "psk_ke",
+          "line": 1726,
+          "text": "|| (s->ext.psk_kex_mode & TLSEXT_KEX_MODE_FLAG_KE_DHE) != 0)) {"
+        },
+        {
+          "term": "psk_ke",
+          "line": 1737,
+          "text": "|| (s->ext.psk_kex_mode & TLSEXT_KEX_MODE_FLAG_KE) == 0) {"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_key_share",
+      "line_range": [
+        830,
+        1006
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 17,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "key_share",
+          "psk_ke"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_share",
+          "line": 830,
+          "text": "int tls_parse_ctos_key_share(SSL_CONNECTION *s, PACKET *pkt,"
+        },
+        {
+          "term": "key_share",
+          "line": 834,
+          "text": "PACKET key_share_list;"
+        },
+        {
+          "term": "key_share",
+          "line": 858,
+          "text": "if (!PACKET_as_length_prefixed_2(pkt, &key_share_list)) {"
+        },
+        {
+          "term": "key_share",
+          "line": 880,
+          "text": "if (s->s3.group_id != 0 && PACKET_remaining(&key_share_list) == 0) {"
+        },
+        {
+          "term": "key_share",
+          "line": 883,
+          "text": "* requesting a new key_share. If we haven't got one then that is an"
+        },
+        {
+          "term": "key_share",
+          "line": 886,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 892,
+          "text": "&key_share_list,"
+        },
+        {
+          "term": "key_share",
+          "line": 840,
+          "text": "uint16_t *keyshares_arr = NULL;"
+        },
+        {
+          "term": "key_share",
+          "line": 841,
+          "text": "size_t keyshares_cnt = 0;"
+        },
+        {
+          "term": "key_share",
+          "line": 891,
+          "text": "ks_extraction_result = extract_keyshares(s,"
+        },
+        {
+          "term": "key_share",
+          "line": 895,
+          "text": "&keyshares_arr, &encoded_pubkey_arr,"
+        },
+        {
+          "term": "key_share",
+          "line": 896,
+          "text": "&keyshares_cnt);"
+        },
+        {
+          "term": "key_share",
+          "line": 907,
+          "text": "*              keyshares_arr[keyshares_cnt], encoded_pubkey_arr[keyshares_cnt]"
+        },
+        {
+          "term": "key_share",
+          "line": 931,
+          "text": "keyshares_arr, keyshares_cnt,"
+        },
+        {
+          "term": "key_share",
+          "line": 970,
+          "text": "keyshares_arr, keyshares_cnt,"
+        },
+        {
+          "term": "key_share",
+          "line": 999,
+          "text": "OPENSSL_free(keyshares_arr);"
+        },
+        {
+          "term": "psk_ke",
+          "line": 849,
+          "text": "if (s->hit && (s->ext.psk_kex_mode & TLSEXT_KEX_MODE_FLAG_KE_DHE) == 0)"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_construct_stoc_key_share",
+      "line_range": [
+        1947,
+        2083
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "key_share",
+          "psk_ke"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_share",
+          "line": 1947,
+          "text": "EXT_RETURN tls_construct_stoc_key_share(SSL_CONNECTION *s, WPACKET *pkt,"
+        },
+        {
+          "term": "key_share",
+          "line": 1959,
+          "text": "/* Original key_share was acceptable so don't ask for another one */"
+        },
+        {
+          "term": "key_share",
+          "line": 1962,
+          "text": "if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_key_share)"
+        },
+        {
+          "term": "key_share",
+          "line": 1974,
+          "text": "/* No key_share received from client - must be resuming */"
+        },
+        {
+          "term": "key_share",
+          "line": 1992,
+          "text": "if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_key_share)"
+        },
+        {
+          "term": "psk_ke",
+          "line": 1982,
+          "text": "if (s->hit && (s->ext.psk_kex_mode & TLSEXT_KEX_MODE_FLAG_KE_DHE) == 0) {"
+        },
+        {
+          "term": "psk_ke",
+          "line": 1987,
+          "text": "* tls_parse_ctos_psk_kex_modes()."
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1159,
+          "text": "if (!WPACKET_put_bytes_u8(&hrrpkt, SSL3_MT_SERVER_HELLO)"
+        },
+        {
+          "term": "key_share",
+          "line": 1012,
+          "text": "unsigned int format, version, key_share, group_id;"
+        },
+        {
+          "term": "key_share",
+          "line": 1125,
+          "text": "if (!PACKET_get_1(&cookie, &key_share)"
+        },
+        {
+          "term": "key_share",
+          "line": 1181,
+          "text": "if (key_share) {"
+        },
+        {
+          "term": "key_share",
+          "line": 1182,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_key_share)"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_extension",
+      "line_range": [
+        763,
+        972
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "key_share",
+          "psk_ke"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_share",
+          "line": 873,
+          "text": "case TLSEXT_TYPE_key_share:"
+        },
+        {
+          "term": "key_share",
+          "line": 877,
+          "text": "/* We assume this is an HRR, otherwise this is an invalid key_share */"
+        },
+        {
+          "term": "psk_ke",
+          "line": 932,
+          "text": "case TLSEXT_TYPE_psk_kex_modes:"
+        },
+        {
+          "term": "psk_ke",
+          "line": 939,
+          "text": "ssl_psk_kex_modes_tbl);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "SSL_extension_supported",
+      "line_range": [
+        621,
+        670
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "key_share",
+          "psk_ke"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_share",
+          "line": 628,
+          "text": "case TLSEXT_TYPE_key_share:"
+        },
+        {
+          "term": "psk_ke",
+          "line": 653,
+          "text": "case TLSEXT_TYPE_psk_kex_modes:"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_psk",
+      "line_range": [
+        1318,
+        1566
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "pre_shared_key",
+          "psk_ke"
+        ]
+      },
+      "hits": [
+        {
+          "term": "pre_shared_key",
+          "line": 1345,
+          "text": "for (id = 0; PACKET_remaining(&identities) != 0 && id < MAX_PRE_SHARED_KEYS; id++) {"
+        },
+        {
+          "term": "psk_ke",
+          "line": 1334,
+          "text": "if ((s->ext.psk_kex_mode"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "extract_keyshares",
+      "line_range": [
+        668,
+        782
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 32,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_share",
+          "line": 668,
+          "text": "static KS_EXTRACTION_RESULT extract_keyshares(SSL_CONNECTION *s, PACKET *key_share_list,"
+        },
+        {
+          "term": "key_share",
+          "line": 675,
+          "text": "size_t key_share_pos = 0;"
+        },
+        {
+          "term": "key_share",
+          "line": 676,
+          "text": "size_t previous_key_share_pos = 0;"
+        },
+        {
+          "term": "key_share",
+          "line": 684,
+          "text": "* sensible number (MAX_KEY_SHARES == 16). Any keyshares over this limit are"
+        },
+        {
+          "term": "key_share",
+          "line": 689,
+          "text": "*keyshares_arr = OPENSSL_malloc_array(MAX_KEY_SHARES,"
+        },
+        {
+          "term": "key_share",
+          "line": 695,
+          "text": "*encoded_pubkey_arr = OPENSSL_malloc_array(MAX_KEY_SHARES,"
+        },
+        {
+          "term": "key_share",
+          "line": 704,
+          "text": "* MAX_KEY_SHARES regardless of whether we include them in keyshares_arr or"
+        },
+        {
+          "term": "key_share",
+          "line": 707,
+          "text": "for (i = 0; PACKET_remaining(key_share_list) > 0 && i < MAX_KEY_SHARES; i++) {"
+        },
+        {
+          "term": "key_share",
+          "line": 709,
+          "text": "if (!PACKET_get_net_2(key_share_list, &group_id)"
+        },
+        {
+          "term": "key_share",
+          "line": 710,
+          "text": "|| !PACKET_get_length_prefixed_2(key_share_list, &encoded_pubkey)"
+        },
+        {
+          "term": "key_share",
+          "line": 717,
+          "text": "* If we sent an HRR then the key_share sent back MUST be for the group"
+        },
+        {
+          "term": "key_share",
+          "line": 718,
+          "text": "* we requested, and must be the only key_share sent."
+        },
+        {
+          "term": "key_share",
+          "line": 722,
+          "text": "|| PACKET_remaining(key_share_list) != 0)) {"
+        },
+        {
+          "term": "key_share",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 735,
+          "text": "if (!check_in_list(s, group_id, clntgroups, clnt_num_groups, 0, &key_share_pos)) {"
+        },
+        {
+          "term": "key_share",
+          "line": 736,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 740,
+          "text": "if (key_share_pos < previous_key_share_pos)"
+        },
+        {
+          "term": "key_share",
+          "line": 743,
+          "text": "previous_key_share_pos = key_share_pos;"
+        },
+        {
+          "term": "key_share",
+          "line": 668,
+          "text": "static KS_EXTRACTION_RESULT extract_keyshares(SSL_CONNECTION *s, PACKET *key_share_list,"
+        },
+        {
+          "term": "key_share",
+          "line": 671,
+          "text": "uint16_t **keyshares_arr, PACKET **encoded_pubkey_arr,"
+        },
+        {
+          "term": "key_share",
+          "line": 672,
+          "text": "size_t *keyshares_cnt)"
+        },
+        {
+          "term": "key_share",
+          "line": 681,
+          "text": "* Theoretically there is no limit on the number of keyshares as long as"
+        },
+        {
+          "term": "key_share",
+          "line": 683,
+          "text": "* keyshare to confirm the groups are valid, so we restrict this to a"
+        },
+        {
+          "term": "key_share",
+          "line": 684,
+          "text": "* sensible number (MAX_KEY_SHARES == 16). Any keyshares over this limit are"
+        },
+        {
+          "term": "key_share",
+          "line": 689,
+          "text": "*keyshares_arr = OPENSSL_malloc_array(MAX_KEY_SHARES,"
+        },
+        {
+          "term": "key_share",
+          "line": 690,
+          "text": "sizeof(**keyshares_arr));"
+        },
+        {
+          "term": "key_share",
+          "line": 691,
+          "text": "if (*keyshares_arr == NULL) {"
+        },
+        {
+          "term": "key_share",
+          "line": 704,
+          "text": "* MAX_KEY_SHARES regardless of whether we include them in keyshares_arr or"
+        },
+        {
+          "term": "key_share",
+          "line": 729,
+          "text": "* RFC 8446 also mandates that clients send keyshares in the same"
+        },
+        {
+          "term": "key_share",
+          "line": 771,
+          "text": "(*keyshares_arr)[*keyshares_cnt] = group_id;"
+        },
+        {
+          "term": "key_share",
+          "line": 772,
+          "text": "(*encoded_pubkey_arr)[(*keyshares_cnt)++] = encoded_pubkey;"
+        },
+        {
+          "term": "key_share",
+          "line": 779,
+          "text": "OPENSSL_free(*keyshares_arr);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/t1_lib.c",
+      "function": "gid_cb",
+      "line_range": [
+        1291,
+        1605
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 30,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_share",
+          "line": 1326,
+          "text": "case KEY_SHARE_INDICATOR_CHARACTER:"
+        },
+        {
+          "term": "key_share",
+          "line": 1378,
+          "text": "!= KEY_SHARE_INDICATOR_CHARACTER)"
+        },
+        {
+          "term": "key_share",
+          "line": 1379,
+          "text": "restored_default_group_string[restored_prefix_index++] = KEY_SHARE_INDICATOR_CHARACTER;"
+        },
+        {
+          "term": "key_share",
+          "line": 1301,
+          "text": "int add_keyshare = 0;"
+        },
+        {
+          "term": "key_share",
+          "line": 1327,
+          "text": "if (add_keyshare)"
+        },
+        {
+          "term": "key_share",
+          "line": 1329,
+          "text": "add_keyshare = 1;"
+        },
+        {
+          "term": "key_share",
+          "line": 1369,
+          "text": "* First, we restore any keyshare prefix in a new zero-terminated string"
+        },
+        {
+          "term": "key_share",
+          "line": 1375,
+          "text": "if (add_keyshare"
+        },
+        {
+          "term": "key_share",
+          "line": 1376,
+          "text": "/* Remark: we tolerate a duplicated keyshare indicator here */"
+        },
+        {
+          "term": "key_share",
+          "line": 1466,
+          "text": "/* If unknown, next known tuple element gets a keyshare */"
+        },
+        {
+          "term": "key_share",
+          "line": 1467,
+          "text": "if (add_keyshare && !remove_group && garg->want_keyshare == 0)"
+        },
+        {
+          "term": "key_share",
+          "line": 1468,
+          "text": "garg->want_keyshare = 1;"
+        },
+        {
+          "term": "key_share",
+          "line": 1488,
+          "text": "/* If unknown, next known tuple element gets a keyshare */"
+        },
+        {
+          "term": "key_share",
+          "line": 1489,
+          "text": "if (add_keyshare && !remove_group && garg->want_keyshare == 0)"
+        },
+        {
+          "term": "key_share",
+          "line": 1490,
+          "text": "garg->want_keyshare = 1;"
+        },
+        {
+          "term": "key_share",
+          "line": 1494,
+          "text": "/* Remove group (and keyshare) from anywhere in the list if present, ignore if not present */"
+        },
+        {
+          "term": "key_share",
+          "line": 1498,
+          "text": "size_t ks_check_idx = 0; /* Index after last known retained keyshare */"
+        },
+        {
+          "term": "key_share",
+          "line": 1501,
+          "text": "k = 0; /* keyshare index */"
+        },
+        {
+          "term": "key_share",
+          "line": 1507,
+          "text": "/* Skip keyshare slots associated with groups prior to that removed */"
+        },
+        {
+          "term": "key_share",
+          "line": 1510,
+          "text": "/* Skip each retained keyshare as we go */"
+        },
+        {
+          "term": "key_share",
+          "line": 1529,
+          "text": "/* Handle keyshare removal */"
+        },
+        {
+          "term": "key_share",
+          "line": 1534,
+          "text": "* Simply drop the group's keyshare unless it is the last one in a"
+        },
+        {
+          "term": "key_share",
+          "line": 1538,
+          "text": "* one keyshare belonging to the tuple is retained, so we drop this"
+        },
+        {
+          "term": "key_share",
+          "line": 1542,
+          "text": "* Otherwise, iterate through the tuple check whether any keyshares"
+        },
+        {
+          "term": "key_share",
+          "line": 1544,
+          "text": "* of these, if any, is at index `k+1` in the keyshare list, which"
+        },
+        {
+          "term": "key_share",
+          "line": 1552,
+          "text": "/* Removing the first keyshare of an already completed tuple */"
+        },
+        {
+          "term": "key_share",
+          "line": 1554,
+          "text": "/* Any other keyshares for the same tuple? */"
+        },
+        {
+          "term": "key_share",
+          "line": 1559,
+          "text": "/* Float keyshare to first group when no others found */"
+        },
+        {
+          "term": "key_share",
+          "line": 1597,
+          "text": "if (add_keyshare) {"
+        },
+        {
+          "term": "key_share",
+          "line": 1599,
+          "text": "garg->want_keyshare = -1;"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_construct_ctos_key_share",
+      "line_range": [
+        878,
+        988
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 17,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_share",
+          "line": 878,
+          "text": "EXT_RETURN tls_construct_ctos_key_share(SSL_CONNECTION *s, WPACKET *pkt,"
+        },
+        {
+          "term": "key_share",
+          "line": 893,
+          "text": "/* key_share extension */"
+        },
+        {
+          "term": "key_share",
+          "line": 894,
+          "text": "if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_key_share)"
+        },
+        {
+          "term": "key_share",
+          "line": 924,
+          "text": "SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_NO_SUITABLE_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 934,
+          "text": "if (!add_key_share(s, pkt, group_id, 0)) {"
+        },
+        {
+          "term": "key_share",
+          "line": 953,
+          "text": "SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_NO_SUITABLE_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 956,
+          "text": "if (!add_key_share(s, pkt, group_id, valid_keyshare)) {"
+        },
+        {
+          "term": "key_share",
+          "line": 968,
+          "text": "SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_NO_SUITABLE_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 887,
+          "text": "size_t valid_keyshare = 0;"
+        },
+        {
+          "term": "key_share",
+          "line": 897,
+          "text": "/* KeyShare list sub-packet */"
+        },
+        {
+          "term": "key_share",
+          "line": 916,
+          "text": "tls1_get_requested_keyshare_groups(s, &pgroups, &num_groups);"
+        },
+        {
+          "term": "key_share",
+          "line": 922,
+          "text": "/* If neither the default nor the keyshares have any entry --> fatal */"
+        },
+        {
+          "term": "key_share",
+          "line": 938,
+          "text": "valid_keyshare++;"
+        },
+        {
+          "term": "key_share",
+          "line": 956,
+          "text": "if (!add_key_share(s, pkt, group_id, valid_keyshare)) {"
+        },
+        {
+          "term": "key_share",
+          "line": 960,
+          "text": "valid_keyshare++;"
+        },
+        {
+          "term": "key_share",
+          "line": 966,
+          "text": "if (valid_keyshare == 0) {"
+        },
+        {
+          "term": "key_share",
+          "line": 974,
+          "text": "if (s->ext.ech.ch_depth == 1 && ossl_ech_stash_keyshares(s) != 1) {"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-9-psk-ke-no-key-share_candidate_1.c",
+    "locations/code/rfc8446-4-2-9-psk-ke-no-key-share_candidate_2.c",
+    "locations/code/rfc8446-4-2-9-psk-ke-no-key-share_candidate_3.c",
+    "locations/code/rfc8446-4-2-9-psk-ke-no-key-share_candidate_4.c",
+    "locations/code/rfc8446-4-2-9-psk-ke-no-key-share_candidate_5.c",
+    "locations/code/rfc8446-4-2-9-psk-ke-no-key-share_candidate_6.c",
+    "locations/code/rfc8446-4-2-9-psk-ke-no-key-share_candidate_7.c",
+    "locations/code/rfc8446-4-2-9-psk-ke-no-key-share_candidate_8.c",
+    "locations/code/rfc8446-4-2-9-psk-ke-no-key-share_candidate_9.c",
+    "locations/code/rfc8446-4-2-9-psk-ke-no-key-share_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 414,
+    "files_with_hits": 22,
+    "functions_identified": 85,
+    "null_scope_hits": 108,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1717
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "rule_id": "rfc8446-4.1.4-hrr-must-contain-supported-versions",
+  "source_file": "ssl/statem/extensions.c",
+  "primary_function": "final_supported_versions",
+  "judgment": "conforms",
+  "confidence": "high",
+  "reasoning": "The function `final_supported_versions` (lines 1627-1637) is registered as the `final` callback for the `supported_versions` extension in the `ext_defs` array (line 386). The `tls_parse_all_extensions` function (lines 990-1024) iterates over all extension definitions and calls each `final` callback when `fin=1`, passing `exts[i].present` as the `sent` parameter. When processing a HelloRetryRequest on the client side, `tls_process_as_hello_retry_request` calls `tls_parse_all_extensions(s, SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST, ...)` (statem_clnt.c:2224). The `final_supported_versions` callback checks: `if (!sent && context == SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST)` \u2014 meaning if the `supported_versions` extension was NOT present (`!sent`) in a HelloRetryRequest (`context == SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST`), it calls `SSLfatal` with `TLS13_AD_MISSING_EXTENSION` and `SSL_R_MISSING_SUPPORTED_VERSIONS_EXTENSION` and returns 0 (failure). This enforces the RFC 8446 requirement that HelloRetryRequest MUST contain the `supported_versions` extension by treating its absence as a fatal error. The alert type `TLS13_AD_MISSING_EXTENSION` corresponds to the `missing_extension` alert specified in RFC 8446 section 6.2.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [
+      1630,
+      1631,
+      1632,
+      1633
+    ],
+    "key_code_snippet": "if (!sent && context == SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST) {\n    SSLfatal(s, TLS13_AD_MISSING_EXTENSION,\n        SSL_R_MISSING_SUPPORTED_VERSIONS_EXTENSION);\n    return 0;\n}",
+    "expected_behavior": "When a HelloRetryRequest is received without the supported_versions extension, the implementation must treat it as a fatal error (missing_extension alert).",
+    "paths_checked": 1,
+    "paths_conforming": 1,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "final_supported_versions",
+    "tls_parse_all_extensions",
+    "tls_construct_ctos_supported_versions"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 10,
+  "tools_used": [
+    {
+      "tool": "get_callers",
+      "input": {
+        "function_name": "final_supported_versions"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLS13_AD_MISSING_EXTENSION"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "final_supported_versions"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls_construct_ctos_supported_versions"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "final_supported_versions, final"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls_ext_final_fn"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls_parse_all_extensions"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls_parse_all_extensions"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "ext_defs"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 64538,
+    "output": 1588
+  }
+}

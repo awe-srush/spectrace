@@ -1,0 +1,691 @@
+{
+  "rule_id": "rfc8446-4.2.3-pss-rsae-oid",
+  "rule_type": "value_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "Certificate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Certificate"
+      ]
+    },
+    {
+      "term": "signature_algorithms",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "signature_algorithms",
+        "SignatureAlgorithms"
+      ]
+    },
+    {
+      "term": "RSASSA-PSS RSAE",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "RSASSA-PSS RSAE"
+      ]
+    },
+    {
+      "term": "X.509",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "X.509"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_rpk",
+      "line_range": [
+        1114,
+        1310
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 25,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "X.509"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 1127,
+          "text": "* TLS 1.3 Certificate message:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1135,
+          "text": "*   } CertificateType;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1138,
+          "text": "*       select (certificate_type) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 1147,
+          "text": "*   } CertificateEntry;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1150,
+          "text": "*       opaque certificate_request_context<0..2^8-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1151,
+          "text": "*       CertificateEntry certificate_list<0..2^24-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1152,
+          "text": "*   } Certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1154,
+          "text": "* The client MUST send a Certificate message if and only if the server"
+        },
+        {
+          "term": "Certificate",
+          "line": 1155,
+          "text": "* has requested client authentication via a CertificateRequest message"
+        },
+        {
+          "term": "Certificate",
+          "line": 1157,
+          "text": "* suitable certificate is available, the client MUST send a Certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 1158,
+          "text": "* message containing no certificates (i.e., with the \"certificate_list\""
+        },
+        {
+          "term": "Certificate",
+          "line": 1162,
+          "text": "* TLS 1.2 Certificate message:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1169,
+          "text": "*       select(certificate_type){"
+        },
+        {
+          "term": "Certificate",
+          "line": 1171,
+          "text": "*            // certificate type defined in this document."
+        },
+        {
+          "term": "Certificate",
+          "line": 1175,
+          "text": "*           // X.509 certificate defined in RFC 5246"
+        },
+        {
+          "term": "Certificate",
+          "line": 1177,
+          "text": "*             ASN.1Cert certificate_list<0..2^24-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1179,
+          "text": "*           // Additional certificate type based on"
+        },
+        {
+          "term": "Certificate",
+          "line": 1180,
+          "text": "*           // \"TLS Certificate Types\" subregistry"
+        },
+        {
+          "term": "Certificate",
+          "line": 1182,
+          "text": "*   } Certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1188,
+          "text": "* Certificate message has a 3-byte length that is zero in the client to"
+        },
+        {
+          "term": "Certificate",
+          "line": 1190,
+          "text": "* are no (TLS 1.3 only) per-certificate extensions either, because the"
+        },
+        {
+          "term": "Certificate",
+          "line": 1191,
+          "text": "* [CertificateEntry] list is empty."
+        },
+        {
+          "term": "Certificate",
+          "line": 1198,
+          "text": "* must match the value recorded in the certificate request in the client"
+        },
+        {
+          "term": "X.509",
+          "line": 1175,
+          "text": "*           // X.509 certificate defined in RFC 5246"
+        },
+        {
+          "term": "X.509",
+          "line": 1176,
+          "text": "*           case X.509:"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_certificate_request",
+      "line_range": [
+        2959,
+        3081
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2962,
+          "text": "/* Clear certificate validity flags */"
+        },
+        {
+          "term": "Certificate",
+          "line": 2985,
+          "text": "/* Free and zero certificate types: it is not present in TLS 1.3 */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3019,
+          "text": "/* get the certificate types */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3039,
+          "text": "* Despite this being for certificates, preserve compatibility"
+        },
+        {
+          "term": "Certificate",
+          "line": 3065,
+          "text": "/* we should setup a certificate to return.... */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3069,
+          "text": "* In TLSv1.3 we don't prepare the client certificate yet. We wait until"
+        },
+        {
+          "term": "Certificate",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "Certificate",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "Certificate",
+          "line": 3073,
+          "text": "* SSL_get1_peer_certificate() returns something sensible in"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 3044,
+          "text": "SSL_R_SIGNATURE_ALGORITHMS_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/ssl_lib.c",
+      "function": "dane_tlsa_add",
+      "line_range": [
+        265,
+        444
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "X.509"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 288,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_DANE_TLSA_BAD_CERTIFICATE_USAGE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 331,
+          "text": "/* Validate and cache full certificate or public key */"
+        },
+        {
+          "term": "Certificate",
+          "line": 342,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_DANE_TLSA_BAD_CERTIFICATE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 348,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_DANE_TLSA_BAD_CERTIFICATE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 354,
+          "text": "* The Full(0) certificate decodes to a seemingly valid X.509"
+        },
+        {
+          "term": "Certificate",
+          "line": 356,
+          "text": "* formed.  However, we don't actually need the certificate for"
+        },
+        {
+          "term": "Certificate",
+          "line": 358,
+          "text": "* certificate is always presented by the peer.  We discard the"
+        },
+        {
+          "term": "Certificate",
+          "line": 359,
+          "text": "* certificate, and just use the TLSA data as an opaque blob"
+        },
+        {
+          "term": "Certificate",
+          "line": 371,
+          "text": "* records that contain full certificates of trust-anchors that are"
+        },
+        {
+          "term": "Certificate",
+          "line": 373,
+          "text": "* the chain with untrusted Full(0) certificates from DNS, in case"
+        },
+        {
+          "term": "X.509",
+          "line": 354,
+          "text": "* The Full(0) certificate decodes to a seemingly valid X.509"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_check_sig_alg",
+      "line_range": [
+        4119,
+        4184
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 4129,
+          "text": "* The signatures on certificates that are self-signed or certificates"
+        },
+        {
+          "term": "Certificate",
+          "line": 4131,
+          "text": "* certification path (see [RFC5280], Section 3.2).  A certificate that"
+        },
+        {
+          "term": "Certificate",
+          "line": 4167,
+          "text": "* Accept RSA PKCS#1 signatures in certificates when the signature"
+        },
+        {
+          "term": "Certificate",
+          "line": 4171,
+          "text": "* points, and we're doing strict checking of the certificate chain (in"
+        },
+        {
+          "term": "Certificate",
+          "line": 4173,
+          "text": "* certificates in the chain, but the TLS requirement on PSS should not"
+        },
+        {
+          "term": "Certificate",
+          "line": 4174,
+          "text": "* extend to certificates.  Though the peer can in fact list the legacy"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 4133,
+          "text": "* advertised as being supported in the \"signature_algorithms\""
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/t1_lib.c",
+      "function": "check_cert_usable",
+      "line_range": [
+        4691,
+        4742
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 4714,
+          "text": "* on the sigalg with which the certificate was signed (by its issuer)."
+        },
+        {
+          "term": "Certificate",
+          "line": 4729,
+          "text": "* signing certificate."
+        },
+        {
+          "term": "Certificate",
+          "line": 4738,
+          "text": "* Without signat_algorithms_cert, any certificate for which we have"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 4713,
+          "text": "* The TLS 1.3 signature_algorithms_cert extension places restrictions"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "SSL_extension_supported",
+      "line_range": [
+        621,
+        670
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 645,
+          "text": "case TLSEXT_TYPE_signed_certificate_timestamp:"
+        },
+        {
+          "term": "Certificate",
+          "line": 656,
+          "text": "case TLSEXT_TYPE_certificate_authorities:"
+        },
+        {
+          "term": "Certificate",
+          "line": 659,
+          "text": "case TLSEXT_TYPE_compress_certificate:"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 637,
+          "text": "case TLSEXT_TYPE_signature_algorithms:"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_cert_request",
+      "line_range": [
+        1488,
+        1575
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 1498,
+          "text": "SSL3_MT_CERTIFICATE_REQUEST, &msg, &msglen))"
+        },
+        {
+          "term": "Certificate",
+          "line": 1509,
+          "text": "BIO_printf(bio, \"certificate_types (len=%d)\\n\", (int)xlen);"
+        },
+        {
+          "term": "Certificate",
+          "line": 1544,
+          "text": "BIO_printf(bio, \"certificate_authorities (len=%d)\\n\", (int)xlen);"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 1524,
+          "text": "BIO_printf(bio, \"signature_algorithms (len=%d)\\n\", (int)xlen);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_set_server_sigalgs",
+      "line_range": [
+        3107,
+        3162
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 3116,
+          "text": "/* Clear certificate validity flags */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3127,
+          "text": "* the default algorithm for each certificate type"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 3160,
+          "text": "SSL_R_NO_SHARED_SIGNATURE_ALGORITHMS);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/t1_lib.c",
+      "function": "find_sig_alg",
+      "line_range": [
+        4787,
+        4834
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 4796,
+          "text": "/* Look for a shared sigalgs matching possible certificates */"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 4807,
+          "text": "/* Check that we have a cert, and signature_algorithms_cert */"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_extension",
+      "line_range": [
+        763,
+        972
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 775,
+          "text": "case TLSEXT_TYPE_compress_certificate:"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 824,
+          "text": "case TLSEXT_TYPE_signature_algorithms:"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-3-pss-rsae-oid_candidate_1.c",
+    "locations/code/rfc8446-4-2-3-pss-rsae-oid_candidate_2.c",
+    "locations/code/rfc8446-4-2-3-pss-rsae-oid_candidate_3.c",
+    "locations/code/rfc8446-4-2-3-pss-rsae-oid_candidate_4.c",
+    "locations/code/rfc8446-4-2-3-pss-rsae-oid_candidate_5.c",
+    "locations/code/rfc8446-4-2-3-pss-rsae-oid_candidate_6.c",
+    "locations/code/rfc8446-4-2-3-pss-rsae-oid_candidate_7.c",
+    "locations/code/rfc8446-4-2-3-pss-rsae-oid_candidate_8.c",
+    "locations/code/rfc8446-4-2-3-pss-rsae-oid_candidate_9.c",
+    "locations/code/rfc8446-4-2-3-pss-rsae-oid_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1714,
+    "files_with_hits": 147,
+    "functions_identified": 318,
+    "null_scope_hits": 797,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1070
+  }
+}

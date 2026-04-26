@@ -1,0 +1,111 @@
+[
+  {
+    "rule_id": "rfc8446-5.3-first-record-must-use-sequence-zero",
+    "source_section": "5.3",
+    "source_text": "Each sequence number is set to zero at the beginning of a connection and whenever the key is changed; the first record transmitted under a particular traffic key MUST use sequence number 0.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "The first record under a particular traffic key MUST use sequence number 0.",
+    "entity": "both",
+    "applies_when": "First record after connection start or key change",
+    "target_message": null,
+    "target_field": "sequence_number",
+    "expected_value": "0",
+    "related_fields": [],
+    "violation_alert": "bad_record_mac",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [
+        "sequence_number"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "bad_record_mac"
+      ],
+      "modes_or_conditions": [
+        "key change",
+        "nonce construction"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Incorrect sequence number would cause AEAD decryption failure.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-5.3-must-rekey-or-terminate-on-sequence-wrap",
+    "source_section": "5.3",
+    "source_text": "If a TLS implementation would need to wrap a sequence number, it MUST either rekey (Section 4.6.3) or terminate the connection.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If a sequence number would wrap, the implementation MUST rekey or terminate the connection.",
+    "entity": "both",
+    "applies_when": "Sequence number approaches 2^64 - 1",
+    "target_message": null,
+    "target_field": "sequence_number",
+    "expected_value": "rekey or terminate before wrap",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "KeyUpdate"
+      ],
+      "field_names": [
+        "sequence_number"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "sequence number wrap",
+        "key update"
+      ]
+    },
+    "checkability": "low",
+    "checkability_rationale": "Requires sending 2^64 records to trigger; impractical to test directly.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "4.6.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-5.3-aead-nmax-less-than-8-must-not-be-used",
+    "source_section": "5.3",
+    "source_text": "An AEAD algorithm where N_MAX is less than 8 bytes MUST NOT be used with TLS.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "value_constraint",
+    "rule_statement": "AEAD algorithms with N_MAX < 8 bytes MUST NOT be used with TLS.",
+    "entity": "both",
+    "applies_when": "Selecting AEAD algorithm for TLS",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "AEAD N_MAX >= 8",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "AEAD",
+        "nonce construction"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Property of algorithm selection rather than runtime behavior.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

@@ -1,0 +1,99 @@
+{
+  "rule_id": "rfc8446-4.6.3-must-terminate-if-ku-before-finished",
+  "source_file": "ssl/record/rec_layer_s3.c",
+  "primary_function": "ssl3_read_bytes",
+  "judgment": "conforms",
+  "confidence": "high",
+  "reasoning": "The TLS 1.3 state machine enforces that KeyUpdate (SSL3_MT_KEY_UPDATE) is only a valid transition from state TLS_ST_OK, which is reached only after the handshake (including Finished) is complete. In ossl_statem_client13_read_transition (ssl/statem/statem_clnt.c, lines 180-195), SSL3_MT_KEY_UPDATE is only accepted in the 'case TLS_ST_OK:' branch. Similarly, in ossl_statem_server13_read_transition (ssl/statem/statem_srvr.c, lines 148-170), SSL3_MT_KEY_UPDATE is only accepted in 'case TLS_ST_OK:'. If a KeyUpdate arrives in any other state (i.e., before Finished), the function returns 0 (no valid transition). The callers \u2014 ossl_statem_client_read_transition (statem_clnt.c line 406) and ossl_statem_server_read_transition (statem_srvr.c line 312) \u2014 both have 'err:' labels that call SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE) and return 0. This causes the connection to be terminated with an unexpected_message alert, exactly as required by RFC 8446 section 4.6.3.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [
+      185,
+      395,
+      406,
+      170,
+      312
+    ],
+    "key_code_snippet": "case TLS_ST_OK:\n    if (mt == SSL3_MT_KEY_UPDATE && !SSL_IS_QUIC_HANDSHAKE(s)) {\n        st->hand_state = TLS_ST_CR_KEY_UPDATE;\n        return 1;\n    }\n    ...\nerr:\n    /* No valid transition found */\n    SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);\n    return 0;",
+    "expected_behavior": "If KeyUpdate is received before the Finished message (i.e., before state TLS_ST_OK), the implementation must terminate with an unexpected_message alert.",
+    "paths_checked": 2,
+    "paths_conforming": 2,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "tls_process_key_update",
+    "ossl_statem_client13_read_transition",
+    "ossl_statem_server13_read_transition",
+    "ossl_statem_client_read_transition",
+    "ossl_statem_server_read_transition"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 10,
+  "tools_used": [
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "KeyUpdate"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL_R_UNEXPECTED_MESSAGE"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls_process_key_update"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL3_MT_KEY_UPDATE"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_client13_read_transition"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server13_read_transition"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_client_read_transition"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLS_ST_OK"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server_read_transition"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "read_transition"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 86281,
+    "output": 1814
+  }
+}

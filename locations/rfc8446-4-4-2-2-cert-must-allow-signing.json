@@ -1,0 +1,1098 @@
+{
+  "rule_id": "rfc8446-4.4.2.2-cert-must-allow-signing",
+  "rule_type": "value_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "Certificate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Certificate"
+      ]
+    },
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "digitalSignature",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "digitalSignature",
+        "digital_signature"
+      ]
+    },
+    {
+      "term": "Key Usage",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "Key Usage"
+      ]
+    },
+    {
+      "term": "signature_algorithms",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "signature_algorithms",
+        "SignatureAlgorithms"
+      ]
+    },
+    {
+      "term": "signature_algorithms_cert",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "signature_algorithms_cert",
+        "SignatureAlgorithmsCert"
+      ]
+    },
+    {
+      "term": "bad_certificate",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "bad_certificate",
+        "BadCertificate"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "crypto/x509/x509_txt.c",
+      "function": "X509_verify_cert_error_string",
+      "line_range": [
+        21,
+        242
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 45,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "Key Usage",
+          "digitalSignature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 27,
+          "text": "return \"unspecified certificate verification error\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 29,
+          "text": "return \"unable to get issuer certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 31,
+          "text": "return \"unable to get certificate CRL\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 33,
+          "text": "return \"unable to decrypt certificate's signature\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 39,
+          "text": "return \"certificate signature failure\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 43,
+          "text": "return \"certificate is not yet valid or the system clock is incorrect\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 45,
+          "text": "return \"certificate has expired\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 51,
+          "text": "return \"format error in certificate's notBefore field\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 53,
+          "text": "return \"format error in certificate's notAfter field\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 61,
+          "text": "return \"self-signed certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 63,
+          "text": "return \"self-signed certificate in certificate chain\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 65,
+          "text": "return \"unable to get local issuer certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 67,
+          "text": "return \"unable to verify the first certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 69,
+          "text": "return \"certificate chain too long\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 71,
+          "text": "return \"certificate revoked\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 73,
+          "text": "return \"issuer certificate doesn't have a public key\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 77,
+          "text": "return \"unsuitable certificate purpose\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 79,
+          "text": "return \"certificate not trusted\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 81,
+          "text": "return \"certificate rejected\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 89,
+          "text": "return \"key usage does not include certificate signing\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 91,
+          "text": "return \"unable to get CRL issuer certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 99,
+          "text": "return \"invalid non-CA certificate (has CA markings)\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 104,
+          "text": "case X509_V_ERR_PROXY_CERTIFICATES_NOT_ALLOWED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 105,
+          "text": "return \"proxy certificates not allowed, please set the appropriate flag\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 107,
+          "text": "return \"invalid or inconsistent certificate extension\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 109,
+          "text": "return \"invalid or inconsistent certificate policy extension\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 137,
+          "text": "return \"Suite B: certificate version invalid\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "return \"EE certificate key too weak\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 159,
+          "text": "return \"CA certificate key too weak\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 163,
+          "text": "return \"invalid certificate verification context\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 165,
+          "text": "return \"issuer certificate lookup error\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 167,
+          "text": "return \"Certificate Transparency required, but no valid SCTs found\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 185,
+          "text": "return \"no OCSP response available for certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 187,
+          "text": "return \"Cannot find certificate signature algorithm\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 193,
+          "text": "return \"invalid CA certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 223,
+          "text": "return \"Certificate public key has explicit ECC parameters\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 231,
+          "text": "return \"Certificate includes more than one instance of a particular extension\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 240,
+          "text": "return \"unknown certificate verification error\";"
+        },
+        {
+          "term": "digitalSignature",
+          "line": 102,
+          "text": "case X509_V_ERR_KEYUSAGE_NO_DIGITAL_SIGNATURE:"
+        },
+        {
+          "term": "Key Usage",
+          "line": 89,
+          "text": "return \"key usage does not include certificate signing\";"
+        },
+        {
+          "term": "Key Usage",
+          "line": 95,
+          "text": "return \"key usage does not include CRL signing\";"
+        },
+        {
+          "term": "Key Usage",
+          "line": 103,
+          "text": "return \"key usage does not include digital signature\";"
+        },
+        {
+          "term": "Key Usage",
+          "line": 197,
+          "text": "return \"Path length given without key usage keyCertSign\";"
+        },
+        {
+          "term": "Key Usage",
+          "line": 199,
+          "text": "return \"Key usage keyCertSign invalid for non-CA cert\";"
+        },
+        {
+          "term": "Key Usage",
+          "line": 219,
+          "text": "return \"CA cert does not include key usage extension\";"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "crypto/x509/v3_purp.c",
+      "function": "check_purpose_timestamp_sign",
+      "line_range": [
+        1003,
+        1043
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "Key Usage",
+          "digitalSignature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 1009,
+          "text": "* If non_leaf is true we must check if this is a valid CA certificate."
+        },
+        {
+          "term": "Certificate",
+          "line": 1020,
+          "text": "* Publicly\u2010Trusted Code Signing Certificates, Version 3.0.0,"
+        },
+        {
+          "term": "Certificate",
+          "line": 1021,
+          "text": "* Section 7.1.2.3: Code signing and Timestamp Certificate are not checked."
+        },
+        {
+          "term": "digitalSignature",
+          "line": 1025,
+          "text": "* if Key Usage is present, it must be one of digitalSignature"
+        },
+        {
+          "term": "digitalSignature",
+          "line": 1030,
+          "text": "&& ((x->ex_kusage & ~(KU_NON_REPUDIATION | KU_DIGITAL_SIGNATURE)) || !(x->ex_kusage & (KU_NON_REPUDIATION | KU_DIGITAL_SIGNATURE))))"
+        },
+        {
+          "term": "Key Usage",
+          "line": 1016,
+          "text": "* Key Usage is checked according to RFC 5280 and"
+        },
+        {
+          "term": "Key Usage",
+          "line": 1017,
+          "text": "* Extended Key Usage attributes is checked according to RFC 3161."
+        },
+        {
+          "term": "Key Usage",
+          "line": 1024,
+          "text": "* Check the optional key usage field:"
+        },
+        {
+          "term": "Key Usage",
+          "line": 1025,
+          "text": "* if Key Usage is present, it must be one of digitalSignature"
+        },
+        {
+          "term": "Key Usage",
+          "line": 1033,
+          "text": "/* Only timestamp key usage is permitted and it's required. */"
+        },
+        {
+          "term": "Key Usage",
+          "line": 1037,
+          "text": "/* Extended Key Usage MUST be critical */"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "crypto/x509/v3_purp.c",
+      "function": "check_purpose_code_sign",
+      "line_range": [
+        1045,
+        1096
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "Key Usage",
+          "digitalSignature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 1051,
+          "text": "* If non_leaf is true we must check if this is a valid CA certificate."
+        },
+        {
+          "term": "Certificate",
+          "line": 1062,
+          "text": "* Publicly\u2010Trusted Code Signing Certificates, Version 3.0.0,"
+        },
+        {
+          "term": "Certificate",
+          "line": 1063,
+          "text": "* Section 7.1.2.3: Code signing and Timestamp Certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 1066,
+          "text": "* The certificatePolicies, cRLDistributionPoints (CDP), and"
+        },
+        {
+          "term": "digitalSignature",
+          "line": 1072,
+          "text": "if ((x->ex_kusage & KU_DIGITAL_SIGNATURE) == 0)"
+        },
+        {
+          "term": "Key Usage",
+          "line": 1058,
+          "text": "* Check the key usage and extended key usage fields:"
+        },
+        {
+          "term": "Key Usage",
+          "line": 1065,
+          "text": "* Checking covers Key Usage and Extended Key Usage attributes."
+        },
+        {
+          "term": "Key Usage",
+          "line": 1069,
+          "text": "/* Key Usage */"
+        },
+        {
+          "term": "Key Usage",
+          "line": 1077,
+          "text": "/* Key Usage MUST be critical */"
+        },
+        {
+          "term": "Key Usage",
+          "line": 1087,
+          "text": "/* Extended Key Usage */"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/t1_lib.c",
+      "function": "check_cert_usable",
+      "line_range": [
+        4691,
+        4742
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms",
+          "signature_algorithms_cert"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 4714,
+          "text": "* on the sigalg with which the certificate was signed (by its issuer)."
+        },
+        {
+          "term": "Certificate",
+          "line": 4729,
+          "text": "* signing certificate."
+        },
+        {
+          "term": "Certificate",
+          "line": 4738,
+          "text": "* Without signat_algorithms_cert, any certificate for which we have"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 4713,
+          "text": "* The TLS 1.3 signature_algorithms_cert extension places restrictions"
+        },
+        {
+          "term": "signature_algorithms_cert",
+          "line": 4713,
+          "text": "* The TLS 1.3 signature_algorithms_cert extension places restrictions"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/ssl_lib.c",
+      "function": "ssl_set_masks",
+      "line_range": [
+        4777,
+        4898
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "Key Usage",
+          "digitalSignature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 4827,
+          "text": "* If we only have an RSA-PSS certificate allow RSA authentication"
+        },
+        {
+          "term": "Certificate",
+          "line": 4859,
+          "text": "* An ECC certificate may be usable for ECDH and/or ECDSA cipher suites"
+        },
+        {
+          "term": "digitalSignature",
+          "line": 4865,
+          "text": "ecdsa_ok = ex_kusage & X509v3_KU_DIGITAL_SIGNATURE;"
+        },
+        {
+          "term": "Key Usage",
+          "line": 4860,
+          "text": "* depending on the key usage extension."
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/t1_lib.c",
+      "function": "find_sig_alg",
+      "line_range": [
+        4787,
+        4834
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms",
+          "signature_algorithms_cert"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 4796,
+          "text": "/* Look for a shared sigalgs matching possible certificates */"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 4807,
+          "text": "/* Check that we have a cert, and signature_algorithms_cert */"
+        },
+        {
+          "term": "signature_algorithms_cert",
+          "line": 4807,
+          "text": "/* Check that we have a cert, and signature_algorithms_cert */"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/t1_enc.c",
+      "function": "tls1_alert_code",
+      "line_range": [
+        527,
+        605
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 24,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "bad_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 544,
+          "text": "case SSL_AD_NO_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 546,
+          "text": "case SSL_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 547,
+          "text": "return SSL3_AD_BAD_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 548,
+          "text": "case SSL_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 549,
+          "text": "return SSL3_AD_UNSUPPORTED_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 550,
+          "text": "case SSL_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 551,
+          "text": "return SSL3_AD_CERTIFICATE_REVOKED;"
+        },
+        {
+          "term": "Certificate",
+          "line": 552,
+          "text": "case SSL_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 553,
+          "text": "return SSL3_AD_CERTIFICATE_EXPIRED;"
+        },
+        {
+          "term": "Certificate",
+          "line": 554,
+          "text": "case SSL_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "Certificate",
+          "line": 555,
+          "text": "return SSL3_AD_CERTIFICATE_UNKNOWN;"
+        },
+        {
+          "term": "Certificate",
+          "line": 580,
+          "text": "case SSL_AD_CERTIFICATE_UNOBTAINABLE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 581,
+          "text": "return TLS1_AD_CERTIFICATE_UNOBTAINABLE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 584,
+          "text": "case SSL_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 585,
+          "text": "return TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 586,
+          "text": "case SSL_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 587,
+          "text": "return TLS1_AD_BAD_CERTIFICATE_HASH_VALUE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 594,
+          "text": "case SSL_AD_CERTIFICATE_REQUIRED:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 546,
+          "text": "case SSL_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 547,
+          "text": "return SSL3_AD_BAD_CERTIFICATE;"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 584,
+          "text": "case SSL_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 585,
+          "text": "return TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE;"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 586,
+          "text": "case SSL_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 587,
+          "text": "return TLS1_AD_BAD_CERTIFICATE_HASH_VALUE;"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_alert_desc_string_long",
+      "line_range": [
+        345,
+        417
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 21,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "bad_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 358,
+          "text": "case SSL3_AD_NO_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 359,
+          "text": "return \"no certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 360,
+          "text": "case SSL3_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 361,
+          "text": "return \"bad certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 362,
+          "text": "case SSL3_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 363,
+          "text": "return \"unsupported certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 364,
+          "text": "case SSL3_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 365,
+          "text": "return \"certificate revoked\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 366,
+          "text": "case SSL3_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 367,
+          "text": "return \"certificate expired\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 368,
+          "text": "case SSL3_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "Certificate",
+          "line": 369,
+          "text": "return \"certificate unknown\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 398,
+          "text": "case TLS1_AD_CERTIFICATE_UNOBTAINABLE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 399,
+          "text": "return \"certificate unobtainable\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 402,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 403,
+          "text": "return \"bad certificate status response\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 404,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 405,
+          "text": "return \"bad certificate hash value\";"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 360,
+          "text": "case SSL3_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 402,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 404,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls13_process_compressed_certificate",
+      "line_range": [
+        2856,
+        2941
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "bad_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2856,
+          "text": "MSG_PROCESS_RETURN tls13_process_compressed_certificate(SSL_CONNECTION *sc,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2875,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2892,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2906,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2913,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_DECOMPRESSION);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2919,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_EXCESSIVE_MESSAGE_SIZE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2934,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_DECOMPRESSION);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2875,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2892,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2906,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2913,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_DECOMPRESSION);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2919,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_EXCESSIVE_MESSAGE_SIZE);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2934,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_DECOMPRESSION);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_certificate_request",
+      "line_range": [
+        2959,
+        3081
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2962,
+          "text": "/* Clear certificate validity flags */"
+        },
+        {
+          "term": "Certificate",
+          "line": 2985,
+          "text": "/* Free and zero certificate types: it is not present in TLS 1.3 */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3019,
+          "text": "/* get the certificate types */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3039,
+          "text": "* Despite this being for certificates, preserve compatibility"
+        },
+        {
+          "term": "Certificate",
+          "line": 3065,
+          "text": "/* we should setup a certificate to return.... */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3069,
+          "text": "* In TLSv1.3 we don't prepare the client certificate yet. We wait until"
+        },
+        {
+          "term": "Certificate",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "Certificate",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "Certificate",
+          "line": 3073,
+          "text": "* SSL_get1_peer_certificate() returns something sensible in"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 3044,
+          "text": "SSL_R_SIGNATURE_ALGORITHMS_ERROR);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-4-2-2-cert-must-allow-signing_candidate_1.c",
+    "locations/code/rfc8446-4-4-2-2-cert-must-allow-signing_candidate_2.c",
+    "locations/code/rfc8446-4-4-2-2-cert-must-allow-signing_candidate_3.c",
+    "locations/code/rfc8446-4-4-2-2-cert-must-allow-signing_candidate_4.c",
+    "locations/code/rfc8446-4-4-2-2-cert-must-allow-signing_candidate_5.c",
+    "locations/code/rfc8446-4-4-2-2-cert-must-allow-signing_candidate_6.c",
+    "locations/code/rfc8446-4-4-2-2-cert-must-allow-signing_candidate_7.c",
+    "locations/code/rfc8446-4-4-2-2-cert-must-allow-signing_candidate_8.c",
+    "locations/code/rfc8446-4-4-2-2-cert-must-allow-signing_candidate_9.c",
+    "locations/code/rfc8446-4-4-2-2-cert-must-allow-signing_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 2180,
+    "files_with_hits": 147,
+    "functions_identified": 386,
+    "null_scope_hits": 906,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 898
+  }
+}

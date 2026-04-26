@@ -1,0 +1,40 @@
+[
+  {
+    "rule_id": "rfc8446-5.5-should-key-update-before-limits",
+    "source_section": "5.5",
+    "source_text": "Implementations SHOULD do a key update as described in Section 4.6.3 prior to reaching these limits.",
+    "normative_keyword": "SHOULD",
+    "rule_type": "conditional_action",
+    "rule_statement": "Implementations SHOULD perform a key update before reaching cryptographic usage limits for the AEAD algorithm.",
+    "entity": "both",
+    "applies_when": "Approaching AEAD usage limits (e.g., ~2^24.5 records for AES-GCM)",
+    "target_message": "KeyUpdate",
+    "target_field": null,
+    "expected_value": "key update performed before limit reached",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "KeyUpdate"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "key update",
+        "AEAD limits",
+        "AES-GCM"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify key update happens but reaching actual limits requires many records.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit SHOULD.",
+    "cross_section_context_used": [
+      "4.6.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

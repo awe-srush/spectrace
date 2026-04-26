@@ -1,0 +1,80 @@
+{
+  "rule_id": "rfc8446-4.2.11-server-must-ensure-compatible-psk-cipher",
+  "source_file": "ssl/statem/extensions_srvr.c",
+  "primary_function": "tls_parse_ctos_psk",
+  "judgment": "conforms",
+  "confidence": "high",
+  "reasoning": "The function tls_parse_ctos_psk explicitly checks hash compatibility between the PSK and the selected cipher suite before accepting any PSK identity. At lines 1504-1522, after locating a candidate PSK session, the code retrieves the hash digest (md) associated with the PSK's cipher via ssl_md(sctx, sess->cipher->algorithm2), then retrieves the hash of the server's selected cipher suite via ssl_md(sctx, s->s3.tmp.new_cipher->algorithm2), and compares them using EVP_MD_is_a(). If the hashes do not match, the PSK session is freed and set to NULL, s->ext.early_data_ok is cleared, and the loop continues to the next PSK identity via continue. Only if the hashes match does the loop break and the PSK session is retained. After the loop, if sess == NULL (no compatible PSK found), the function returns 1 without setting a PSK, falling back to a non-PSK handshake. This ensures that only a PSK whose hash is compatible with the selected cipher suite is ever used, satisfying the RFC 8446 section 4.2.11 requirement that the server MUST ensure a compatible PSK (if any) and cipher suite.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [
+      1504,
+      1505,
+      1506,
+      1507,
+      1508,
+      1509,
+      1510,
+      1511,
+      1512,
+      1513,
+      1514,
+      1515,
+      1516,
+      1517,
+      1518,
+      1519,
+      1520,
+      1521,
+      1522
+    ],
+    "key_code_snippet": "md = ssl_md(sctx, sess->cipher->algorithm2);\nif (md == NULL) {\n    SSLfatal(s, SSL_AD_INTERNAL_ERROR, ERR_R_INTERNAL_ERROR);\n    goto err;\n}\nif (!EVP_MD_is_a(md,\n        EVP_MD_get0_name(ssl_md(sctx,\n            s->s3.tmp.new_cipher->algorithm2)))) {\n    /* The ciphersuite is not compatible with this session. */\n    SSL_SESSION_free(sess);\n    sess = NULL;\n    s->ext.early_data_ok = 0;\n    s->ext.ticket_expected = 1;\n    continue;\n}\nbreak;",
+    "expected_behavior": "Server must only select a PSK whose hash algorithm matches the hash algorithm of the selected cipher suite.",
+    "paths_checked": 2,
+    "paths_conforming": 2,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "ssl_md",
+    "ssl3_choose_cipher"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 5,
+  "tools_used": [
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ssl_md"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "new_cipher"
+      }
+    },
+    {
+      "tool": "get_callers",
+      "input": {
+        "function_name": "tls_parse_ctos_psk"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "algorithm2"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ssl3_choose_cipher"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 46235,
+    "output": 2626
+  }
+}

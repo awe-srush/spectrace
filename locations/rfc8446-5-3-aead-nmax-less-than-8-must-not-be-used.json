@@ -1,0 +1,622 @@
+{
+  "rule_id": "rfc8446-5.3-aead-nmax-less-than-8-must-not-be-used",
+  "rule_type": "value_constraint",
+  "checkability": "medium",
+  "search_terms": [
+    {
+      "term": "AEAD",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "AEAD"
+      ]
+    },
+    {
+      "term": "nonce construction",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "nonce construction"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "crypto/evp/evp_enc.c",
+      "function": "EVP_CIPHER_CTX_ctrl",
+      "line_range": [
+        924,
+        1127
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "AEAD"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AEAD",
+          "line": 972,
+          "text": "case EVP_CTRL_AEAD_SET_IVLEN:"
+        },
+        {
+          "term": "AEAD",
+          "line": 988,
+          "text": "case EVP_CTRL_AEAD_SET_IV_FIXED:"
+        },
+        {
+          "term": "AEAD",
+          "line": 990,
+          "text": "OSSL_CIPHER_PARAM_AEAD_TLS1_IV_FIXED, ptr, sz);"
+        },
+        {
+          "term": "AEAD",
+          "line": 997,
+          "text": "OSSL_CIPHER_PARAM_AEAD_TLS1_GET_IV_GEN, ptr, sz);"
+        },
+        {
+          "term": "AEAD",
+          "line": 1003,
+          "text": "OSSL_CIPHER_PARAM_AEAD_TLS1_SET_IV_INV, ptr, sz);"
+        },
+        {
+          "term": "AEAD",
+          "line": 1019,
+          "text": "case EVP_CTRL_AEAD_GET_TAG:"
+        },
+        {
+          "term": "AEAD",
+          "line": 1021,
+          "text": "case EVP_CTRL_AEAD_SET_TAG:"
+        },
+        {
+          "term": "AEAD",
+          "line": 1022,
+          "text": "params[0] = OSSL_PARAM_construct_octet_string(OSSL_CIPHER_PARAM_AEAD_TAG,"
+        },
+        {
+          "term": "AEAD",
+          "line": 1025,
+          "text": "case EVP_CTRL_AEAD_TLS1_AAD:"
+        },
+        {
+          "term": "AEAD",
+          "line": 1027,
+          "text": "params[0] = OSSL_PARAM_construct_octet_string(OSSL_CIPHER_PARAM_AEAD_TLS1_AAD,"
+        },
+        {
+          "term": "AEAD",
+          "line": 1032,
+          "text": "params[0] = OSSL_PARAM_construct_size_t(OSSL_CIPHER_PARAM_AEAD_TLS1_AAD_PAD, &sz);"
+        },
+        {
+          "term": "AEAD",
+          "line": 1108,
+          "text": "case EVP_CTRL_AEAD_SET_MAC_KEY:"
+        },
+        {
+          "term": "AEAD",
+          "line": 1112,
+          "text": "OSSL_CIPHER_PARAM_AEAD_MAC_KEY, ptr, sz);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "crypto/hpke/hpke.c",
+      "function": "hpke_do_middle",
+      "line_range": [
+        654,
+        804
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "AEAD"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AEAD",
+          "line": 662,
+          "text": "const OSSL_HPKE_AEAD_INFO *aead_info = NULL;"
+        },
+        {
+          "term": "AEAD",
+          "line": 679,
+          "text": "aead_info = ossl_HPKE_AEAD_INFO_find_id(ctx->suite.aead_id);"
+        },
+        {
+          "term": "AEAD",
+          "line": 680,
+          "text": "if (aead_info == NULL) {"
+        },
+        {
+          "term": "AEAD",
+          "line": 718,
+          "text": "suitebuf[4] = ctx->suite.aead_id / 256;"
+        },
+        {
+          "term": "AEAD",
+          "line": 719,
+          "text": "suitebuf[5] = ctx->suite.aead_id % 256;"
+        },
+        {
+          "term": "AEAD",
+          "line": 755,
+          "text": "if (ctx->suite.aead_id != OSSL_HPKE_AEAD_ID_EXPORTONLY) {"
+        },
+        {
+          "term": "AEAD",
+          "line": 756,
+          "text": "/* we only need nonce/key for non export AEADs */"
+        },
+        {
+          "term": "AEAD",
+          "line": 757,
+          "text": "ctx->noncelen = aead_info->Nn;"
+        },
+        {
+          "term": "AEAD",
+          "line": 770,
+          "text": "ctx->keylen = aead_info->Nk;"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/record/methods/tls1_meth.c",
+      "function": "tls1_set_crypto_state",
+      "line_range": [
+        19,
+        168
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "AEAD"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AEAD",
+          "line": 60,
+          "text": "* If we have an AEAD Cipher, then there is no separate MAC, so we can skip"
+        },
+        {
+          "term": "AEAD",
+          "line": 63,
+          "text": "if ((EVP_CIPHER_get_flags(ciph) & EVP_CIPH_FLAG_AEAD_CIPHER) == 0) {"
+        },
+        {
+          "term": "AEAD",
+          "line": 110,
+          "text": "|| EVP_CIPHER_CTX_ctrl(ciph_ctx, EVP_CTRL_AEAD_SET_IVLEN, 12,"
+        },
+        {
+          "term": "AEAD",
+          "line": 113,
+          "text": "|| EVP_CIPHER_CTX_ctrl(ciph_ctx, EVP_CTRL_AEAD_SET_TAG,"
+        },
+        {
+          "term": "AEAD",
+          "line": 129,
+          "text": "/* Needed for \"composite\" AEADs, such as RC4-HMAC-MD5 */"
+        },
+        {
+          "term": "AEAD",
+          "line": 130,
+          "text": "if ((EVP_CIPHER_get_flags(ciph) & EVP_CIPH_FLAG_AEAD_CIPHER) != 0"
+        },
+        {
+          "term": "AEAD",
+          "line": 132,
+          "text": "&& EVP_CIPHER_CTX_ctrl(ciph_ctx, EVP_CTRL_AEAD_SET_MAC_KEY,"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "crypto/hpke/hpke.c",
+      "function": "OSSL_HPKE_CTX_new",
+      "line_range": [
+        811,
+        860
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "AEAD"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AEAD",
+          "line": 817,
+          "text": "const OSSL_HPKE_AEAD_INFO *aead_info;"
+        },
+        {
+          "term": "AEAD",
+          "line": 823,
+          "text": "if (hpke_suite_check(suite, &kem_info, &kdf_info, &aead_info) != 1) {"
+        },
+        {
+          "term": "AEAD",
+          "line": 840,
+          "text": "if (suite.aead_id != OSSL_HPKE_AEAD_ID_EXPORTONLY) {"
+        },
+        {
+          "term": "AEAD",
+          "line": 841,
+          "text": "ctx->aead_ciph = EVP_CIPHER_fetch(libctx, aead_info->name, propq);"
+        },
+        {
+          "term": "AEAD",
+          "line": 842,
+          "text": "if (ctx->aead_ciph == NULL) {"
+        },
+        {
+          "term": "AEAD",
+          "line": 852,
+          "text": "ctx->aead_info = aead_info;"
+        },
+        {
+          "term": "AEAD",
+          "line": 856,
+          "text": "EVP_CIPHER_free(ctx->aead_ciph);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "crypto/cms/cms_enc.c",
+      "function": "ossl_cms_EncryptedContent_init_bio",
+      "line_range": [
+        25,
+        212
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "AEAD"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AEAD",
+          "line": 33,
+          "text": "evp_cipher_aead_asn1_params aparams;"
+        },
+        {
+          "term": "AEAD",
+          "line": 106,
+          "text": "if ((EVP_CIPHER_get_flags(cipher) & EVP_CIPH_FLAG_AEAD_CIPHER)) {"
+        },
+        {
+          "term": "AEAD",
+          "line": 108,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_CIPHER_AEAD_IN_ENVELOPED_DATA);"
+        },
+        {
+          "term": "AEAD",
+          "line": 113,
+          "text": "&& EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_AEAD_SET_TAG,"
+        },
+        {
+          "term": "AEAD",
+          "line": 116,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_CIPHER_AEAD_SET_TAG_ERROR);"
+        },
+        {
+          "term": "AEAD",
+          "line": 176,
+          "text": "if ((EVP_CIPHER_get_flags(cipher) & EVP_CIPH_FLAG_AEAD_CIPHER)) {"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "crypto/hpke/hpke.c",
+      "function": "hpke_aead_enc",
+      "line_range": [
+        219,
+        291
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "AEAD"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AEAD",
+          "line": 219,
+          "text": "static int hpke_aead_enc(OSSL_HPKE_CTX *hctx, const unsigned char *iv,"
+        },
+        {
+          "term": "AEAD",
+          "line": 228,
+          "text": "unsigned char tag[EVP_MAX_AEAD_TAG_LENGTH];"
+        },
+        {
+          "term": "AEAD",
+          "line": 230,
+          "text": "taglen = hctx->aead_info->taglen;"
+        },
+        {
+          "term": "AEAD",
+          "line": 244,
+          "text": "if (EVP_EncryptInit_ex(ctx, hctx->aead_ciph, NULL, NULL, NULL) != 1) {"
+        },
+        {
+          "term": "AEAD",
+          "line": 248,
+          "text": "if (EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_AEAD_SET_IVLEN,"
+        },
+        {
+          "term": "AEAD",
+          "line": 278,
+          "text": "if (EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_AEAD_GET_TAG, (int)taglen, tag) != 1) {"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "crypto/hpke/hpke.c",
+      "function": "hpke_suite_check",
+      "line_range": [
+        317,
+        342
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "AEAD"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AEAD",
+          "line": 320,
+          "text": "const OSSL_HPKE_AEAD_INFO **aead_info)"
+        },
+        {
+          "term": "AEAD",
+          "line": 324,
+          "text": "const OSSL_HPKE_AEAD_INFO *aead_info_;"
+        },
+        {
+          "term": "AEAD",
+          "line": 326,
+          "text": "/* check KEM, KDF and AEAD are supported here */"
+        },
+        {
+          "term": "AEAD",
+          "line": 331,
+          "text": "if ((aead_info_ = ossl_HPKE_AEAD_INFO_find_id(suite.aead_id)) == NULL)"
+        },
+        {
+          "term": "AEAD",
+          "line": 338,
+          "text": "if (aead_info != NULL)"
+        },
+        {
+          "term": "AEAD",
+          "line": 339,
+          "text": "*aead_info = aead_info_;"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "crypto/hpke/hpke.c",
+      "function": "hpke_aead_dec",
+      "line_range": [
+        141,
+        205
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "AEAD"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AEAD",
+          "line": 141,
+          "text": "static int hpke_aead_dec(OSSL_HPKE_CTX *hctx, const unsigned char *iv,"
+        },
+        {
+          "term": "AEAD",
+          "line": 151,
+          "text": "taglen = hctx->aead_info->taglen;"
+        },
+        {
+          "term": "AEAD",
+          "line": 161,
+          "text": "if (EVP_DecryptInit_ex(ctx, hctx->aead_ciph, NULL, NULL, NULL) != 1) {"
+        },
+        {
+          "term": "AEAD",
+          "line": 165,
+          "text": "if (EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_AEAD_SET_IVLEN,"
+        },
+        {
+          "term": "AEAD",
+          "line": 188,
+          "text": "if (!EVP_CIPHER_CTX_ctrl(ctx, EVP_CTRL_AEAD_SET_TAG,"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "crypto/hpke/hpke.c",
+      "function": "hpke_random_suite",
+      "line_range": [
+        351,
+        373
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "AEAD"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AEAD",
+          "line": 357,
+          "text": "const OSSL_HPKE_AEAD_INFO *aead_info = NULL;"
+        },
+        {
+          "term": "AEAD",
+          "line": 359,
+          "text": "/* random kem, kdf and aead */"
+        },
+        {
+          "term": "AEAD",
+          "line": 368,
+          "text": "aead_info = ossl_HPKE_AEAD_INFO_find_random(libctx);"
+        },
+        {
+          "term": "AEAD",
+          "line": 369,
+          "text": "if (aead_info == NULL)"
+        },
+        {
+          "term": "AEAD",
+          "line": 371,
+          "text": "suite->aead_id = aead_info->aead_id;"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "crypto/hpke/hpke_util.c",
+      "function": "ossl_HPKE_AEAD_INFO_find_id",
+      "line_range": [
+        224,
+        234
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "AEAD"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AEAD",
+          "line": 224,
+          "text": "const OSSL_HPKE_AEAD_INFO *ossl_HPKE_AEAD_INFO_find_id(uint16_t aeadid)"
+        },
+        {
+          "term": "AEAD",
+          "line": 226,
+          "text": "int i, sz = OSSL_NELEM(hpke_aead_tab);"
+        },
+        {
+          "term": "AEAD",
+          "line": 229,
+          "text": "if (hpke_aead_tab[i].aead_id == aeadid)"
+        },
+        {
+          "term": "AEAD",
+          "line": 230,
+          "text": "return &hpke_aead_tab[i];"
+        },
+        {
+          "term": "AEAD",
+          "line": 232,
+          "text": "ERR_raise(ERR_LIB_PROV, PROV_R_INVALID_AEAD);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-3-aead-nmax-less-than-8-must-not-be-used_candidate_1.c",
+    "locations/code/rfc8446-5-3-aead-nmax-less-than-8-must-not-be-used_candidate_2.c",
+    "locations/code/rfc8446-5-3-aead-nmax-less-than-8-must-not-be-used_candidate_3.c",
+    "locations/code/rfc8446-5-3-aead-nmax-less-than-8-must-not-be-used_candidate_4.c",
+    "locations/code/rfc8446-5-3-aead-nmax-less-than-8-must-not-be-used_candidate_5.c",
+    "locations/code/rfc8446-5-3-aead-nmax-less-than-8-must-not-be-used_candidate_6.c",
+    "locations/code/rfc8446-5-3-aead-nmax-less-than-8-must-not-be-used_candidate_7.c",
+    "locations/code/rfc8446-5-3-aead-nmax-less-than-8-must-not-be-used_candidate_8.c",
+    "locations/code/rfc8446-5-3-aead-nmax-less-than-8-must-not-be-used_candidate_9.c",
+    "locations/code/rfc8446-5-3-aead-nmax-less-than-8-must-not-be-used_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 354,
+    "files_with_hits": 45,
+    "functions_identified": 66,
+    "null_scope_hits": 178,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 941
+  }
+}

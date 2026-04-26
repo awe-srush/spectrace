@@ -1,0 +1,102 @@
+{
+  "rule_id": "rfc8446-4.6.3-must-terminate-if-ku-before-finished",
+  "source_file": "ssl/statem/statem_lib.c",
+  "primary_function": "tls_process_key_update",
+  "judgment": "conforms",
+  "confidence": "high",
+  "reasoning": "The enforcement of this rule happens at the state machine level, not inside tls_process_key_update itself. In ossl_statem_client13_read_transition (statem_clnt.c lines 180-196), the transition to TLS_ST_CR_KEY_UPDATE is only permitted when the current hand_state is TLS_ST_OK: `case TLS_ST_OK: ... if (mt == SSL3_MT_KEY_UPDATE && !SSL_IS_QUIC_HANDSHAKE(s)) { st->hand_state = TLS_ST_CR_KEY_UPDATE; return 1; }`. The state TLS_ST_OK is only entered after the handshake is complete (including processing Finished). Similarly, in ossl_statem_server13_read_transition (statem_srvr.c lines 148-171), the transition to TLS_ST_SR_KEY_UPDATE is only permitted from TLS_ST_OK. If a KeyUpdate message arrives in any other state (i.e., before Finished has been received and TLS_ST_OK has been reached), the read transition function returns 0, which causes the state machine to generate an unexpected_message alert and terminate the connection. This is the standard OpenSSL state machine behavior when no valid transition is found \u2014 returning 0 from a read_transition function triggers a fatal alert. Therefore, KeyUpdate received before Finished will be rejected with unexpected_message, conforming to RFC 8446 section 4.6.3.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [
+      183,
+      184,
+      185,
+      186,
+      161,
+      162,
+      163,
+      164
+    ],
+    "key_code_snippet": "case TLS_ST_OK:\n    if (mt == SSL3_MT_KEY_UPDATE && !SSL_IS_QUIC_HANDSHAKE(s)) {\n        st->hand_state = TLS_ST_CR_KEY_UPDATE;\n        return 1;\n    }\n    ...\n    break;\n}\n/* No valid transition found */\nreturn 0;",
+    "expected_behavior": "KeyUpdate received before Finished must cause the connection to be terminated with an unexpected_message alert.",
+    "paths_checked": 2,
+    "paths_conforming": 2,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "tls_process_key_update",
+    "ossl_statem_client_process_message",
+    "ossl_statem_server_process_message",
+    "ossl_statem_client13_read_transition",
+    "ossl_statem_server13_read_transition"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 10,
+  "tools_used": [
+    {
+      "tool": "get_callers",
+      "input": {
+        "function_name": "tls_process_key_update"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL_ST_OK"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_client_process_message"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server_process_message"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLS_ST_CR_KEY_UPDATE"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLS_ST_SR_KEY_UPDATE"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_client13_read_transition"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server13_read_transition"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "ossl_statem_server_read_transition"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLS_ST_OK"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 58709,
+    "output": 1538
+  }
+}

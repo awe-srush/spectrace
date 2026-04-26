@@ -1,0 +1,1225 @@
+{
+  "rule_id": "rfc8446-4.6.1-must-use-resumption-sni",
+  "rule_type": "value_constraint",
+  "checkability": "medium",
+  "search_terms": [
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "server_name",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "server_name",
+        "ServerName"
+      ]
+    },
+    {
+      "term": "pre_shared_key",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "pre_shared_key",
+        "PreSharedKey"
+      ]
+    },
+    {
+      "term": "resumption",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "resumption"
+      ]
+    },
+    {
+      "term": "SNI",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "SNI"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions.c",
+      "function": "final_server_name",
+      "line_range": [
+        1262,
+        1361
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ClientHello",
+          "SNI",
+          "resumption",
+          "server_name"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1303,
+          "text": "* If we switched contexts (whether here or in the client_hello callback),"
+        },
+        {
+          "term": "server_name",
+          "line": 1262,
+          "text": "static int final_server_name(SSL_CONNECTION *s, unsigned int context, int sent)"
+        },
+        {
+          "term": "server_name",
+          "line": 1276,
+          "text": "if (sctx->ext.servername_cb != NULL)"
+        },
+        {
+          "term": "server_name",
+          "line": 1277,
+          "text": "ret = sctx->ext.servername_cb(ussl, &altmp,"
+        },
+        {
+          "term": "server_name",
+          "line": 1278,
+          "text": "sctx->ext.servername_arg);"
+        },
+        {
+          "term": "server_name",
+          "line": 1279,
+          "text": "else if (s->session_ctx->ext.servername_cb != NULL)"
+        },
+        {
+          "term": "server_name",
+          "line": 1280,
+          "text": "ret = s->session_ctx->ext.servername_cb(ussl, &altmp,"
+        },
+        {
+          "term": "server_name",
+          "line": 1281,
+          "text": "s->session_ctx->ext.servername_arg);"
+        },
+        {
+          "term": "server_name",
+          "line": 1351,
+          "text": "s->servername_done = 0;"
+        },
+        {
+          "term": "server_name",
+          "line": 1355,
+          "text": "s->servername_done = 0;"
+        },
+        {
+          "term": "resumption",
+          "line": 1317,
+          "text": "* Also, if this is not a resumption, create a new session ID"
+        },
+        {
+          "term": "SNI",
+          "line": 1284,
+          "text": "* For servers, propagate the SNI hostname from the temporary"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_server_name",
+      "line_range": [
+        113,
+        183
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 18,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "SNI",
+          "resumption",
+          "server_name"
+        ]
+      },
+      "hits": [
+        {
+          "term": "server_name",
+          "line": 113,
+          "text": "int tls_parse_ctos_server_name(SSL_CONNECTION *s, PACKET *pkt,"
+        },
+        {
+          "term": "server_name",
+          "line": 127,
+          "text": "* Although the intent was for server_name to be extensible, RFC 4366"
+        },
+        {
+          "term": "server_name",
+          "line": 120,
+          "text": "/* ServerNameList must be at least 1 byte long. */"
+        },
+        {
+          "term": "server_name",
+          "line": 170,
+          "text": "s->servername_done = 1;"
+        },
+        {
+          "term": "server_name",
+          "line": 177,
+          "text": "s->servername_done = (s->session->ext.hostname != NULL)"
+        },
+        {
+          "term": "resumption",
+          "line": 174,
+          "text": "* the initial handshake and the resumption. In TLSv1.3 SNI is not"
+        },
+        {
+          "term": "SNI",
+          "line": 117,
+          "text": "PACKET sni, hostname;"
+        },
+        {
+          "term": "SNI",
+          "line": 119,
+          "text": "if (!PACKET_as_length_prefixed_2(pkt, &sni)"
+        },
+        {
+          "term": "SNI",
+          "line": 121,
+          "text": "|| PACKET_remaining(&sni) == 0) {"
+        },
+        {
+          "term": "SNI",
+          "line": 132,
+          "text": "* SNI types can exist, to simplify parsing."
+        },
+        {
+          "term": "SNI",
+          "line": 134,
+          "text": "* Also note that the RFC permits only one SNI value per type,"
+        },
+        {
+          "term": "SNI",
+          "line": 137,
+          "text": "if (!PACKET_get_1(&sni, &servname_type)"
+        },
+        {
+          "term": "SNI",
+          "line": 139,
+          "text": "|| !PACKET_as_length_prefixed_2(&sni, &hostname)) {"
+        },
+        {
+          "term": "SNI",
+          "line": 145,
+          "text": "* In TLSv1.2 and below the SNI is associated with the session. In TLSv1.3"
+        },
+        {
+          "term": "SNI",
+          "line": 146,
+          "text": "* we always use the SNI value from the handshake."
+        },
+        {
+          "term": "SNI",
+          "line": 160,
+          "text": "* Store the requested SNI in the SSL as temporary storage."
+        },
+        {
+          "term": "SNI",
+          "line": 173,
+          "text": "* In TLSv1.2 and below we should check if the SNI is consistent between"
+        },
+        {
+          "term": "SNI",
+          "line": 174,
+          "text": "* the initial handshake and the resumption. In TLSv1.3 SNI is not"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/ssl_lib.c",
+      "function": "SSL_get_servername",
+      "line_range": [
+        3652,
+        3724
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 18,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "SNI",
+          "resumption",
+          "server_name"
+        ]
+      },
+      "hits": [
+        {
+          "term": "server_name",
+          "line": 3652,
+          "text": "const char *SSL_get_servername(const SSL *s, int type)"
+        },
+        {
+          "term": "server_name",
+          "line": 3679,
+          "text": "* - If a servername was accepted by the server in the original"
+        },
+        {
+          "term": "server_name",
+          "line": 3680,
+          "text": "*   handshake then it will return that servername, or NULL otherwise."
+        },
+        {
+          "term": "server_name",
+          "line": 3683,
+          "text": "* - The function will return the servername requested by the client in"
+        },
+        {
+          "term": "server_name",
+          "line": 3693,
+          "text": "*  - If a servername has been set via a call to"
+        },
+        {
+          "term": "server_name",
+          "line": 3694,
+          "text": "*    SSL_set_tlsext_host_name() then it will return that servername"
+        },
+        {
+          "term": "server_name",
+          "line": 3697,
+          "text": "*    servername accepted by the server then it will return that"
+        },
+        {
+          "term": "server_name",
+          "line": 3698,
+          "text": "*    servername"
+        },
+        {
+          "term": "server_name",
+          "line": 3702,
+          "text": "* - If the session from the original handshake had a servername accepted"
+        },
+        {
+          "term": "server_name",
+          "line": 3703,
+          "text": "*   by the server then it will return that servername."
+        },
+        {
+          "term": "server_name",
+          "line": 3704,
+          "text": "* - Otherwise it returns the servername set via"
+        },
+        {
+          "term": "server_name",
+          "line": 3708,
+          "text": "* - It will return the servername set via SSL_set_tlsext_host_name()"
+        },
+        {
+          "term": "resumption",
+          "line": 3678,
+          "text": "* During/after the handshake (TLSv1.2 or below resumption occurred):"
+        },
+        {
+          "term": "resumption",
+          "line": 3682,
+          "text": "* During/after the handshake (TLSv1.2 or below resumption did not occur):"
+        },
+        {
+          "term": "resumption",
+          "line": 3695,
+          "text": "*  - If one has not been set, but a TLSv1.2 resumption is being"
+        },
+        {
+          "term": "resumption",
+          "line": 3701,
+          "text": "* During/after the handshake (TLSv1.2 or below resumption occurred):"
+        },
+        {
+          "term": "resumption",
+          "line": 3707,
+          "text": "* During/after the handshake (TLSv1.2 or below resumption did not occur):"
+        },
+        {
+          "term": "SNI",
+          "line": 3672,
+          "text": "* In TLSv1.3 on the server SNI is not associated with the session"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_post_process_client_hello",
+      "line_range": [
+        2456,
+        2575
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "SNI",
+          "resumption"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2558,
+          "text": "if ((ret = ssl_check_srp_ext_ClientHello(s)) == 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2456,
+          "text": "WORK_STATE tls_post_process_client_hello(SSL_CONNECTION *s, WORK_STATE wst)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2463,
+          "text": "int rv = tls_early_post_process_client_hello(s);"
+        },
+        {
+          "term": "resumption",
+          "line": 2490,
+          "text": "/* In TLSv1.3 we selected the ciphersuite before resumption */"
+        },
+        {
+          "term": "resumption",
+          "line": 2507,
+          "text": "/* check whether we should disable session resumption */"
+        },
+        {
+          "term": "SNI",
+          "line": 2543,
+          "text": "* Call alpn_select callback if needed.  Has to be done after SNI and"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ssl_check_for_safari",
+      "line_range": [
+        1547,
+        1613
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "SNI",
+          "server_name"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1548,
+          "text": "const CLIENTHELLO_MSG *hello)"
+        },
+        {
+          "term": "server_name",
+          "line": 1602,
+          "text": "if (type != TLSEXT_TYPE_server_name)"
+        },
+        {
+          "term": "SNI",
+          "line": 1591,
+          "text": "PACKET sni, tmppkt;"
+        },
+        {
+          "term": "SNI",
+          "line": 1598,
+          "text": "|| !PACKET_get_length_prefixed_2(&tmppkt, &sni)) {"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 60,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "resumption"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1860,
+          "text": "CLIENTHELLO_MSG *clienthello = s->clienthello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1866,
+          "text": "/* Finished parsing the ClientHello, now we can start processing it */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1867,
+          "text": "/* Give the ClientHello callback a crack at things */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1869,
+          "text": "/* A failure in the ClientHello callback terminates the connection. */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1884,
+          "text": "memcpy(s->s3.client_random, clienthello->random, SSL3_RANDOM_SIZE);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1887,
+          "text": "protverr = ssl_choose_server_version(s, clienthello, &dgrd);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1897,
+          "text": "s->version = s->client_version = clienthello->legacy_version;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1903,
+          "text": "/* TLSv1.3 specifies that a ClientHello must end on a record boundary */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1914,
+          "text": "if (sctx->app_verify_cookie_cb(ussl, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1915,
+          "text": "(unsigned int)clienthello->dtls_cookie_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1923,
+          "text": "} else if (s->d1->cookie_len != clienthello->dtls_cookie_len"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1924,
+          "text": "|| memcmp(clienthello->dtls_cookie, s->d1->cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1936,
+          "text": "if (!ssl_cache_cipherlist(s, &clienthello->ciphersuites)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1937,
+          "text": "|| !ossl_bytes_to_cipher_list(s, &clienthello->ciphersuites, &ciphers, &scsvs, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1994,
+          "text": "clienthello->pre_proc_exts, NULL, 0)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2000,
+          "text": "* We don't allow resumption in a backwards compatible ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2021,
+          "text": "i = ssl_get_prev_session(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2038,
+          "text": "memcpy(s->tmp_session_id, s->clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2039,
+          "text": "s->clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2040,
+          "text": "s->tmp_session_id_len = s->clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2080,
+          "text": "if (clienthello->compressions_len == 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2085,
+          "text": "if (memchr(clienthello->compressions, 0,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2086,
+          "text": "clienthello->compressions_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2094,
+          "text": "ssl_check_for_safari(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2098,
+          "text": "clienthello->pre_proc_exts, NULL, 0, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2161,
+          "text": "* If the ClientHello contains both a Session ID and a PAC-Opaque in"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2166,
+          "text": "if (clienthello->session_id_len > 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2167,
+          "text": "memcpy(s->session->session_id, clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2168,
+          "text": "clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2169,
+          "text": "s->session->session_id_length = clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2201,
+          "text": "* a TLSv1.3 ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2203,
+          "text": "if (clienthello->compressions_len != 1) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2235,
+          "text": "for (k = 0; k < clienthello->compressions_len; k++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2236,
+          "text": "if (clienthello->compressions[k] == comp_id)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2239,
+          "text": "if (k >= clienthello->compressions_len) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2255,
+          "text": "for (o = 0; o < clienthello->compressions_len; o++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2256,
+          "text": "if (v == clienthello->compressions[o]) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2304,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2305,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2306,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2311,
+          "text": "if (clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2312,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2313,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2314,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1848,
+          "text": "static int tls_early_post_process_client_hello(SSL_CONNECTION *s)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1868,
+          "text": "if (sctx->client_hello_cb != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1870,
+          "text": "switch (sctx->client_hello_cb(ussl, &al, sctx->client_hello_cb_arg)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1871,
+          "text": "case SSL_CLIENT_HELLO_SUCCESS:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1873,
+          "text": "case SSL_CLIENT_HELLO_RETRY:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1874,
+          "text": "s->rwstate = SSL_CLIENT_HELLO_CB;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1876,
+          "text": "case SSL_CLIENT_HELLO_ERROR:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1993,
+          "text": "SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2097,
+          "text": "if (!tls_parse_all_extensions(s, SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "resumption",
+          "line": 1970,
+          "text": "/* For TLSv1.3 we must select the ciphersuite *before* session resumption */"
+        },
+        {
+          "term": "resumption",
+          "line": 2000,
+          "text": "* We don't allow resumption in a backwards compatible ClientHello."
+        },
+        {
+          "term": "resumption",
+          "line": 2005,
+          "text": "* ignore resumption requests with flag"
+        },
+        {
+          "term": "resumption",
+          "line": 2006,
+          "text": "* SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION (it's a new flag rather"
+        },
+        {
+          "term": "resumption",
+          "line": 2012,
+          "text": "* SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION setting will be"
+        },
+        {
+          "term": "resumption",
+          "line": 2015,
+          "text": "if (s->new_session && (s->options & SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION)) {"
+        },
+        {
+          "term": "resumption",
+          "line": 2045,
+          "text": "* ciphersuite compatibility with the session as part of resumption."
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_hello",
+      "line_range": [
+        1619,
+        1846
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 32,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "SNI"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1623,
+          "text": "CLIENTHELLO_MSG *clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1727,
+          "text": "/* Check if this is actually an unexpected renegotiation ClientHello */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1745,
+          "text": "clienthello = OPENSSL_zalloc(sizeof(*clienthello));"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1746,
+          "text": "if (clienthello == NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1752,
+          "text": "* First, parse the raw ClientHello data into the CLIENTHELLO_MSG structure."
+        },
+        {
+          "term": "ClientHello",
+          "line": 1756,
+          "text": "if (!PACKET_get_net_2(pkt, &clienthello->legacy_version)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1761,
+          "text": "if (!PACKET_copy_bytes(pkt, clienthello->random, SSL3_RANDOM_SIZE)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1763,
+          "text": "|| !PACKET_copy_all(&session_id, clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1765,
+          "text": "&clienthello->session_id_len)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1775,
+          "text": "if (!PACKET_copy_all(&cookie, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1777,
+          "text": "&clienthello->dtls_cookie_len)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1782,
+          "text": "* If we require cookies and this ClientHello doesn't contain one,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1787,
+          "text": "if (clienthello->dtls_cookie_len == 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1788,
+          "text": "OPENSSL_free(clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1794,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &clienthello->ciphersuites)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1806,
+          "text": "PACKET_null_init(&clienthello->extensions);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1808,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &clienthello->extensions)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1815,
+          "text": "if (!PACKET_copy_all(&compression, clienthello->compressions,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1817,
+          "text": "&clienthello->compressions_len)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1823,
+          "text": "extensions = clienthello->extensions;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1825,
+          "text": "&clienthello->pre_proc_exts,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1826,
+          "text": "&clienthello->pre_proc_exts_len, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1830,
+          "text": "s->clienthello = clienthello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1835,
+          "text": "if (clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1836,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1837,
+          "text": "OPENSSL_free(clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1839,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1619,
+          "text": "MSG_PROCESS_RETURN tls_process_client_hello(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1676,
+          "text": "if (!WPACKET_put_bytes_u8(&inner, SSL3_MT_CLIENT_HELLO)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1824,
+          "text": "if (!tls_collect_extensions(s, &extensions, SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "SNI",
+          "line": 1639,
+          "text": "size_t outersnioffset = 0; /* offset to SNI in outer */"
+        },
+        {
+          "term": "SNI",
+          "line": 1647,
+          "text": "&outersnioffset);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/ech/ech_internal.c",
+      "function": "ech_get_outer_sni",
+      "line_range": [
+        1210,
+        1235
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "SNI",
+          "server_name"
+        ]
+      },
+      "hits": [
+        {
+          "term": "server_name",
+          "line": 1226,
+          "text": "if (tls_parse_ctos_server_name(s, &osni, 0, NULL, 0) != 1)"
+        },
+        {
+          "term": "server_name",
+          "line": 1233,
+          "text": "s->servername_done = 0;"
+        },
+        {
+          "term": "SNI",
+          "line": 1210,
+          "text": "static int ech_get_outer_sni(SSL_CONNECTION *s, char **osni_str,"
+        },
+        {
+          "term": "SNI",
+          "line": 1212,
+          "text": "size_t snioffset)"
+        },
+        {
+          "term": "SNI",
+          "line": 1214,
+          "text": "PACKET wrap, osni;"
+        },
+        {
+          "term": "SNI",
+          "line": 1215,
+          "text": "unsigned int type, osnilen;"
+        },
+        {
+          "term": "SNI",
+          "line": 1217,
+          "text": "if (snioffset >= opl"
+        },
+        {
+          "term": "SNI",
+          "line": 1218,
+          "text": "|| !PACKET_buf_init(&wrap, opd + snioffset, opl - snioffset)"
+        },
+        {
+          "term": "SNI",
+          "line": 1221,
+          "text": "|| !PACKET_get_net_2(&wrap, &osnilen)"
+        },
+        {
+          "term": "SNI",
+          "line": 1222,
+          "text": "|| !PACKET_get_sub_packet(&wrap, &osni, osnilen)) {"
+        },
+        {
+          "term": "SNI",
+          "line": 1226,
+          "text": "if (tls_parse_ctos_server_name(s, &osni, 0, NULL, 0) != 1)"
+        },
+        {
+          "term": "SNI",
+          "line": 1230,
+          "text": "*osni_str = s->ext.ech.outer_hostname = s->ext.hostname;"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/ech/ech_internal.c",
+      "function": "ossl_ech_early_decrypt",
+      "line_range": [
+        1944,
+        2160
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "SNI"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2140,
+          "text": "/* tls_process_client_hello doesn't want the message header, so skip it */"
+        },
+        {
+          "term": "SNI",
+          "line": 1954,
+          "text": "size_t outersnioffset = 0, startofciphertext = 0, lenofciphertext = 0;"
+        },
+        {
+          "term": "SNI",
+          "line": 1956,
+          "text": "char *osni_str = NULL;"
+        },
+        {
+          "term": "SNI",
+          "line": 1969,
+          "text": "&outersnioffset)"
+        },
+        {
+          "term": "SNI",
+          "line": 1993,
+          "text": "if (outersnioffset > 0) { /* Grab the outer SNI for tracing */"
+        },
+        {
+          "term": "SNI",
+          "line": 1994,
+          "text": "if (ech_get_outer_sni(s, &osni_str, opd, opl, outersnioffset) != 1)"
+        },
+        {
+          "term": "SNI",
+          "line": 1997,
+          "text": "if (osni_str == NULL) {"
+        },
+        {
+          "term": "SNI",
+          "line": 2001,
+          "text": "OSSL_TRACE1(TLS, \"EARLY: outer SNI of %s\\n\", osni_str);"
+        },
+        {
+          "term": "SNI",
+          "line": 2003,
+          "text": "OSSL_TRACE(TLS, \"EARLY: no sign of an outer SNI\\n\");"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "resumption"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2055,
+          "text": "* echo of what we originally sent in the ClientHello and should not be"
+        },
+        {
+          "term": "resumption",
+          "line": 1986,
+          "text": "* secret. EAP-FAST (RFC 4851) supports two types of session resumption."
+        },
+        {
+          "term": "resumption",
+          "line": 1987,
+          "text": "* Resumption based on server-side state works with session IDs."
+        },
+        {
+          "term": "resumption",
+          "line": 1988,
+          "text": "* Resumption based on pre-shared Protected Access Credentials (PACs)"
+        },
+        {
+          "term": "resumption",
+          "line": 1992,
+          "text": "* ID alone is not a reliable indicator of session resumption, so we"
+        },
+        {
+          "term": "resumption",
+          "line": 2041,
+          "text": "* overwritten if the server refuses resumption."
+        },
+        {
+          "term": "resumption",
+          "line": 2056,
+          "text": "* used for resumption."
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-6-1-must-use-resumption-sni_candidate_1.c",
+    "locations/code/rfc8446-4-6-1-must-use-resumption-sni_candidate_2.c",
+    "locations/code/rfc8446-4-6-1-must-use-resumption-sni_candidate_3.c",
+    "locations/code/rfc8446-4-6-1-must-use-resumption-sni_candidate_4.c",
+    "locations/code/rfc8446-4-6-1-must-use-resumption-sni_candidate_5.c",
+    "locations/code/rfc8446-4-6-1-must-use-resumption-sni_candidate_6.c",
+    "locations/code/rfc8446-4-6-1-must-use-resumption-sni_candidate_7.c",
+    "locations/code/rfc8446-4-6-1-must-use-resumption-sni_candidate_8.c",
+    "locations/code/rfc8446-4-6-1-must-use-resumption-sni_candidate_9.c",
+    "locations/code/rfc8446-4-6-1-must-use-resumption-sni_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 708,
+    "files_with_hits": 40,
+    "functions_identified": 132,
+    "null_scope_hits": 207,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1873
+  }
+}

@@ -1,0 +1,1104 @@
+{
+  "rule_id": "rfc8446-4.6.2-client-must-send-empty-cert-finished-if-declining",
+  "rule_type": "message_construction",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "Certificate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Certificate"
+      ]
+    },
+    {
+      "term": "Finished",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Finished"
+      ]
+    },
+    {
+      "term": "certificate_list",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "certificate_list",
+        "CertificateList"
+      ]
+    },
+    {
+      "term": "post-handshake authentication",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "post-handshake authentication"
+      ]
+    },
+    {
+      "term": "decline",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "decline"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_rpk",
+      "line_range": [
+        1114,
+        1310
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 27,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "field_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "certificate_list",
+          "decline"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 1127,
+          "text": "* TLS 1.3 Certificate message:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1135,
+          "text": "*   } CertificateType;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1138,
+          "text": "*       select (certificate_type) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 1147,
+          "text": "*   } CertificateEntry;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1150,
+          "text": "*       opaque certificate_request_context<0..2^8-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1151,
+          "text": "*       CertificateEntry certificate_list<0..2^24-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1152,
+          "text": "*   } Certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1154,
+          "text": "* The client MUST send a Certificate message if and only if the server"
+        },
+        {
+          "term": "Certificate",
+          "line": 1155,
+          "text": "* has requested client authentication via a CertificateRequest message"
+        },
+        {
+          "term": "Certificate",
+          "line": 1157,
+          "text": "* suitable certificate is available, the client MUST send a Certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 1158,
+          "text": "* message containing no certificates (i.e., with the \"certificate_list\""
+        },
+        {
+          "term": "Certificate",
+          "line": 1162,
+          "text": "* TLS 1.2 Certificate message:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1169,
+          "text": "*       select(certificate_type){"
+        },
+        {
+          "term": "Certificate",
+          "line": 1171,
+          "text": "*            // certificate type defined in this document."
+        },
+        {
+          "term": "Certificate",
+          "line": 1175,
+          "text": "*           // X.509 certificate defined in RFC 5246"
+        },
+        {
+          "term": "Certificate",
+          "line": 1177,
+          "text": "*             ASN.1Cert certificate_list<0..2^24-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1179,
+          "text": "*           // Additional certificate type based on"
+        },
+        {
+          "term": "Certificate",
+          "line": 1180,
+          "text": "*           // \"TLS Certificate Types\" subregistry"
+        },
+        {
+          "term": "Certificate",
+          "line": 1182,
+          "text": "*   } Certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1188,
+          "text": "* Certificate message has a 3-byte length that is zero in the client to"
+        },
+        {
+          "term": "Certificate",
+          "line": 1190,
+          "text": "* are no (TLS 1.3 only) per-certificate extensions either, because the"
+        },
+        {
+          "term": "Certificate",
+          "line": 1191,
+          "text": "* [CertificateEntry] list is empty."
+        },
+        {
+          "term": "Certificate",
+          "line": 1198,
+          "text": "* must match the value recorded in the certificate request in the client"
+        },
+        {
+          "term": "certificate_list",
+          "line": 1151,
+          "text": "*       CertificateEntry certificate_list<0..2^24-1>;"
+        },
+        {
+          "term": "certificate_list",
+          "line": 1158,
+          "text": "* message containing no certificates (i.e., with the \"certificate_list\""
+        },
+        {
+          "term": "certificate_list",
+          "line": 1177,
+          "text": "*             ASN.1Cert certificate_list<0..2^24-1>;"
+        },
+        {
+          "term": "decline",
+          "line": 1235,
+          "text": "* but that breaks the ability of the client to decline client auth. We"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_state_string_long",
+      "line_range": [
+        15,
+        130
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 23,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 24,
+          "text": "return \"SSLv3/TLS read certificate status\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 30,
+          "text": "return \"SSLv3/TLS write certificate status\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 40,
+          "text": "return \"SSLv3/TLS read server certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 42,
+          "text": "return \"TLSv1.3 read server compressed certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 46,
+          "text": "return \"SSLv3/TLS read server certificate request\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 52,
+          "text": "return \"SSLv3/TLS write client certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 54,
+          "text": "return \"TLSv1.3 write client compressed certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 58,
+          "text": "return \"SSLv3/TLS write certificate verify\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 78,
+          "text": "return \"SSLv3/TLS write certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 80,
+          "text": "return \"TLSv1.3 write server compressed certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 84,
+          "text": "return \"SSLv3/TLS write certificate request\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 90,
+          "text": "return \"SSLv3/TLS read client certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 92,
+          "text": "return \"TLSv1.3 read client compressed certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 96,
+          "text": "return \"SSLv3/TLS read certificate verify\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 106,
+          "text": "return \"TLSv1.3 read server certificate verify\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 108,
+          "text": "return \"TLSv1.3 write server certificate verify\";"
+        },
+        {
+          "term": "Finished",
+          "line": 34,
+          "text": "return \"SSL negotiation finished successfully\";"
+        },
+        {
+          "term": "Finished",
+          "line": 62,
+          "text": "case TLS_ST_CW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 63,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 64,
+          "text": "return \"SSLv3/TLS write finished\";"
+        },
+        {
+          "term": "Finished",
+          "line": 68,
+          "text": "case TLS_ST_CR_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 69,
+          "text": "case TLS_ST_SR_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 70,
+          "text": "return \"SSLv3/TLS read finished\";"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_read_transition",
+      "line_range": [
+        190,
+        314
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 15,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 216,
+          "text": "* 1) We didn't request a Certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 218,
+          "text": "* 2) We did request one and we allow no Certificate to be returned"
+        },
+        {
+          "term": "Certificate",
+          "line": 226,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 242,
+          "text": "* We should only process a CertificateVerify message if we have"
+        },
+        {
+          "term": "Certificate",
+          "line": 243,
+          "text": "* received a Certificate from the client. If so then |s->session->peer|"
+        },
+        {
+          "term": "Certificate",
+          "line": 244,
+          "text": "* will be non NULL. In some instances a CertificateVerify message is"
+        },
+        {
+          "term": "Certificate",
+          "line": 245,
+          "text": "* not required even if the peer has sent a Certificate (e.g. such as in"
+        },
+        {
+          "term": "Certificate",
+          "line": 253,
+          "text": "* pub key in a certificate, the CertificateVerify message is"
+        },
+        {
+          "term": "Certificate",
+          "line": 255,
+          "text": "* its key from the certificate for key exchange."
+        },
+        {
+          "term": "Certificate",
+          "line": 261,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Finished",
+          "line": 284,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 285,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 295,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 296,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 302,
+          "text": "case TLS_ST_SW_FINISHED:"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_certificate",
+      "line_range": [
+        3940,
+        4131
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 15,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "post-handshake authentication"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 3940,
+          "text": "MSG_PROCESS_RETURN tls_process_client_certificate(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3965,
+          "text": "SSLfatal(s, SSL_AD_UNSUPPORTED_CERTIFICATE,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3966,
+          "text": "SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4023,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE, &rawexts,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4025,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4042,
+          "text": "/* Fail only if we required a certificate */"
+        },
+        {
+          "term": "Certificate",
+          "line": 4044,
+          "text": "SSLfatal(s, SSL_AD_CERTIFICATE_REQUIRED,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4045,
+          "text": "SSL_R_PEER_DID_NOT_RETURN_A_CERTIFICATE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4048,
+          "text": "/* No client certificate so digest cached records */"
+        },
+        {
+          "term": "Certificate",
+          "line": 4058,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4064,
+          "text": "SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4073,
+          "text": "* a new certificate is received via post-handshake authentication, as the"
+        },
+        {
+          "term": "Certificate",
+          "line": 4109,
+          "text": "* certificate, while we do include it in statem_clnt.c"
+        },
+        {
+          "term": "Certificate",
+          "line": 4112,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "post-handshake authentication",
+          "line": 4073,
+          "text": "* a new certificate is received via post-handshake authentication, as the"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_read_transition",
+      "line_range": [
+        74,
+        179
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 107,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 112,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 113,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 134,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 162,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 163,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Finished",
+          "line": 105,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 119,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 120,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 129,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 130,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 142,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 143,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_read_transition",
+      "line_range": [
+        94,
+        216
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 133,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 137,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 142,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 143,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 152,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 158,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 167,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 189,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "Finished",
+          "line": 128,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 129,
+          "text": "st->hand_state = TLS_ST_CR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 174,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 175,
+          "text": "st->hand_state = TLS_ST_CR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 201,
+          "text": "* message here after the swap, or do it after the clientFinished?"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_write_transition",
+      "line_range": [
+        524,
+        690
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 616,
+          "text": "* cipher suites with ECDH (rather than ECDSA) certificates. We"
+        },
+        {
+          "term": "Certificate",
+          "line": 617,
+          "text": "* need to skip the certificate verify message when client's"
+        },
+        {
+          "term": "Certificate",
+          "line": 618,
+          "text": "* ECDH public key is sent inside the client certificate."
+        },
+        {
+          "term": "Finished",
+          "line": 548,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 574,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 583,
+          "text": "&& s->early_data_state != SSL_EARLY_DATA_FINISHED_WRITING)"
+        },
+        {
+          "term": "Finished",
+          "line": 591,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 641,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 646,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 653,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 657,
+          "text": "case TLS_ST_CW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 662,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 665,
+          "text": "case TLS_ST_CR_FINISHED:"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_certificate_request",
+      "line_range": [
+        2959,
+        3081
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2962,
+          "text": "/* Clear certificate validity flags */"
+        },
+        {
+          "term": "Certificate",
+          "line": 2985,
+          "text": "/* Free and zero certificate types: it is not present in TLS 1.3 */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3019,
+          "text": "/* get the certificate types */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3039,
+          "text": "* Despite this being for certificates, preserve compatibility"
+        },
+        {
+          "term": "Certificate",
+          "line": 3065,
+          "text": "/* we should setup a certificate to return.... */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3069,
+          "text": "* In TLSv1.3 we don't prepare the client certificate yet. We wait until"
+        },
+        {
+          "term": "Certificate",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "Certificate",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "Certificate",
+          "line": 3073,
+          "text": "* SSL_get1_peer_certificate() returns something sensible in"
+        },
+        {
+          "term": "Finished",
+          "line": 2982,
+          "text": "return MSG_PROCESS_FINISHED_READING;"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_prepare_client_certificate",
+      "line_range": [
+        4113,
+        4190
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 4113,
+          "text": "WORK_STATE tls_prepare_client_certificate(SSL_CONNECTION *s, WORK_STATE wst)"
+        },
+        {
+          "term": "Certificate",
+          "line": 4121,
+          "text": "/* Let cert callback update client certificates if required */"
+        },
+        {
+          "term": "Certificate",
+          "line": 4134,
+          "text": "if (ssl3_check_client_certificate(s)) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 4158,
+          "text": "if (!SSL_use_certificate(ssl, x509)"
+        },
+        {
+          "term": "Certificate",
+          "line": 4168,
+          "text": "if (i && !ssl3_check_client_certificate(s))"
+        },
+        {
+          "term": "Certificate",
+          "line": 4172,
+          "text": "s->ext.compress_certificate_from_peer[0] = TLSEXT_comp_cert_none;"
+        },
+        {
+          "term": "Certificate",
+          "line": 4179,
+          "text": "|| (s->options & SSL_OP_NO_TX_CERTIFICATE_COMPRESSION) != 0)"
+        },
+        {
+          "term": "Certificate",
+          "line": 4180,
+          "text": "s->ext.compress_certificate_from_peer[0] = TLSEXT_comp_cert_none;"
+        },
+        {
+          "term": "Finished",
+          "line": 4136,
+          "text": "return WORK_FINISHED_STOP;"
+        },
+        {
+          "term": "Finished",
+          "line": 4138,
+          "text": "return WORK_FINISHED_CONTINUE;"
+        },
+        {
+          "term": "Finished",
+          "line": 4183,
+          "text": "return WORK_FINISHED_STOP;"
+        },
+        {
+          "term": "Finished",
+          "line": 4184,
+          "text": "return WORK_FINISHED_CONTINUE;"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_post_work",
+      "line_range": [
+        1002,
+        1215
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 1170,
+          "text": "|| (s->options & SSL_OP_NO_TX_CERTIFICATE_COMPRESSION) != 0)"
+        },
+        {
+          "term": "Certificate",
+          "line": 1171,
+          "text": "s->ext.compress_certificate_from_peer[0] = TLSEXT_comp_cert_none;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1176,
+          "text": "if (!s->hit && !send_certificate_request(s)) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 1178,
+          "text": "|| (s->options & SSL_OP_NO_TX_CERTIFICATE_COMPRESSION) != 0)"
+        },
+        {
+          "term": "Certificate",
+          "line": 1179,
+          "text": "s->ext.compress_certificate_from_peer[0] = TLSEXT_comp_cert_none;"
+        },
+        {
+          "term": "Finished",
+          "line": 1017,
+          "text": "if (!ssl3_init_finished_mac(s)) {"
+        },
+        {
+          "term": "Finished",
+          "line": 1026,
+          "text": "/* HelloVerifyRequest resets Finished MAC */"
+        },
+        {
+          "term": "Finished",
+          "line": 1027,
+          "text": "if (s->version != DTLS1_BAD_VER && !ssl3_init_finished_mac(s)) {"
+        },
+        {
+          "term": "Finished",
+          "line": 1137,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 1156,
+          "text": "|| !tls13_store_server_finished_hash(s)"
+        },
+        {
+          "term": "Finished",
+          "line": 1214,
+          "text": "return WORK_FINISHED_CONTINUE;"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-6-2-client-must-send-empty-cert-finished-if-declining_candidate_1.c",
+    "locations/code/rfc8446-4-6-2-client-must-send-empty-cert-finished-if-declining_candidate_2.c",
+    "locations/code/rfc8446-4-6-2-client-must-send-empty-cert-finished-if-declining_candidate_3.c",
+    "locations/code/rfc8446-4-6-2-client-must-send-empty-cert-finished-if-declining_candidate_4.c",
+    "locations/code/rfc8446-4-6-2-client-must-send-empty-cert-finished-if-declining_candidate_5.c",
+    "locations/code/rfc8446-4-6-2-client-must-send-empty-cert-finished-if-declining_candidate_6.c",
+    "locations/code/rfc8446-4-6-2-client-must-send-empty-cert-finished-if-declining_candidate_7.c",
+    "locations/code/rfc8446-4-6-2-client-must-send-empty-cert-finished-if-declining_candidate_8.c",
+    "locations/code/rfc8446-4-6-2-client-must-send-empty-cert-finished-if-declining_candidate_9.c",
+    "locations/code/rfc8446-4-6-2-client-must-send-empty-cert-finished-if-declining_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 2044,
+    "files_with_hits": 171,
+    "functions_identified": 418,
+    "null_scope_hits": 810,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1441
+  }
+}

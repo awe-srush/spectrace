@@ -1,0 +1,40 @@
+[
+  {
+    "rule_id": "rfc8446-2.1-server-must-abort-no-common-params",
+    "source_section": "2.1",
+    "source_text": "If no common cryptographic parameters can be negotiated, the server MUST abort the handshake with an appropriate alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If no common cryptographic parameters can be negotiated, the server MUST abort the handshake with an appropriate alert.",
+    "entity": "server",
+    "applies_when": "Server cannot find common parameters with client after HRR",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "abort with handshake_failure alert",
+    "related_fields": [],
+    "violation_alert": "handshake_failure",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "HelloRetryRequest"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "key_share",
+        "supported_groups"
+      ],
+      "alert_names": [
+        "handshake_failure"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can send ClientHello with no acceptable parameters and verify abort.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": "Alert type not specified; handshake_failure is the appropriate alert per \u00a76.2 descriptions.",
+    "model": "claude-opus-4-6"
+  }
+]

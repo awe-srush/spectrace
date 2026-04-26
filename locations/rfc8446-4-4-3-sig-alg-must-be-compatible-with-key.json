@@ -1,0 +1,1144 @@
+{
+  "rule_id": "rfc8446-4.4.3-sig-alg-must-be-compatible-with-key",
+  "rule_type": "consistency_check",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "CertificateVerify",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateVerify",
+        "certificate_verify"
+      ]
+    },
+    {
+      "term": "Certificate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Certificate"
+      ]
+    },
+    {
+      "term": "algorithm",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "algorithm"
+      ]
+    },
+    {
+      "term": "illegal_parameter",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "illegal_parameter",
+        "IllegalParameter"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_post_process_server_certificate",
+      "line_range": [
+        2450,
+        2544
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 2535,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 2484,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2450,
+          "text": "WORK_STATE tls_post_process_server_certificate(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2467,
+          "text": "* for client side verification of the server certificate to take place."
+        },
+        {
+          "term": "Certificate",
+          "line": 2484,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2492,
+          "text": "* Inconsistency alert: cert_chain does include the peer's certificate,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2508,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2512,
+          "text": "* Check certificate type is consistent with ciphersuite. For TLS 1.3"
+        },
+        {
+          "term": "Certificate",
+          "line": 2513,
+          "text": "* skip check since TLS 1.3 ciphersuites can be used with any certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 2518,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2535,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "algorithm",
+          "line": 2517,
+          "text": "if ((clu->amask & s->s3.tmp.new_cipher->algorithm_auth) == 0) {"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2508,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2518,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CERTIFICATE_TYPE);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_post_process_server_rpk",
+      "line_range": [
+        2285,
+        2350
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 2340,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 2306,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2306,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2317,
+          "text": "SSLfatal(sc, SSL_AD_ILLEGAL_PARAMETER, SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2322,
+          "text": "* Check certificate type is consistent with ciphersuite. For TLS 1.3"
+        },
+        {
+          "term": "Certificate",
+          "line": 2323,
+          "text": "* skip check since TLS 1.3 ciphersuites can be used with any certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 2340,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "algorithm",
+          "line": 2327,
+          "text": "if ((clu->amask & sc->s3.tmp.new_cipher->algorithm_auth) == 0) {"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2293,
+          "text": "SSLfatal(sc, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2317,
+          "text": "SSLfatal(sc, SSL_AD_ILLEGAL_PARAMETER, SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2328,
+          "text": "SSLfatal(sc, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_RPK_TYPE);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_certificate_request",
+      "line_range": [
+        2959,
+        3081
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "algorithm"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "Certificate",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2962,
+          "text": "/* Clear certificate validity flags */"
+        },
+        {
+          "term": "Certificate",
+          "line": 2985,
+          "text": "/* Free and zero certificate types: it is not present in TLS 1.3 */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3019,
+          "text": "/* get the certificate types */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3039,
+          "text": "* Despite this being for certificates, preserve compatibility"
+        },
+        {
+          "term": "Certificate",
+          "line": 3065,
+          "text": "/* we should setup a certificate to return.... */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3069,
+          "text": "* In TLSv1.3 we don't prepare the client certificate yet. We wait until"
+        },
+        {
+          "term": "Certificate",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "Certificate",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "Certificate",
+          "line": 3073,
+          "text": "* SSL_get1_peer_certificate() returns something sensible in"
+        },
+        {
+          "term": "algorithm",
+          "line": 3044,
+          "text": "SSL_R_SIGNATURE_ALGORITHMS_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls13_process_compressed_certificate",
+      "line_range": [
+        2856,
+        2941
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2856,
+          "text": "MSG_PROCESS_RETURN tls13_process_compressed_certificate(SSL_CONNECTION *sc,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2875,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2892,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2906,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2913,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_DECOMPRESSION);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2919,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_EXCESSIVE_MESSAGE_SIZE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2934,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_DECOMPRESSION);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2878,
+          "text": "/* If we have a prefs list, make sure the algorithm is in it */"
+        },
+        {
+          "term": "algorithm",
+          "line": 2887,
+          "text": "SSLfatal(sc, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2892,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2906,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2887,
+          "text": "SSLfatal(sc, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_ske_ecdhe",
+      "line_range": [
+        2742,
+        2799
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2794,
+          "text": "/* else anonymous ECDH, so no certificate or pkey. */"
+        },
+        {
+          "term": "algorithm",
+          "line": 2790,
+          "text": "if (s->s3.tmp.new_cipher->algorithm_auth & SSL_aECDSA)"
+        },
+        {
+          "term": "algorithm",
+          "line": 2792,
+          "text": "else if (s->s3.tmp.new_cipher->algorithm_auth & SSL_aRSA)"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2762,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CURVE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2781,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_ECPOINT);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_ske_dhe",
+      "line_range": [
+        2645,
+        2740
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "algorithm",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2726,
+          "text": "/* else anonymous DH, so no certificate or pkey. */"
+        },
+        {
+          "term": "algorithm",
+          "line": 2724,
+          "text": "if (s->s3.tmp.new_cipher->algorithm_auth & (SSL_aRSA | SSL_aDSS))"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2706,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_DH_VALUE);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "crypto/x509/x509_txt.c",
+      "function": "X509_verify_cert_error_string",
+      "line_range": [
+        21,
+        242
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 49,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "algorithm"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 27,
+          "text": "return \"unspecified certificate verification error\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 29,
+          "text": "return \"unable to get issuer certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 31,
+          "text": "return \"unable to get certificate CRL\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 33,
+          "text": "return \"unable to decrypt certificate's signature\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 39,
+          "text": "return \"certificate signature failure\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 43,
+          "text": "return \"certificate is not yet valid or the system clock is incorrect\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 45,
+          "text": "return \"certificate has expired\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 51,
+          "text": "return \"format error in certificate's notBefore field\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 53,
+          "text": "return \"format error in certificate's notAfter field\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 61,
+          "text": "return \"self-signed certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 63,
+          "text": "return \"self-signed certificate in certificate chain\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 65,
+          "text": "return \"unable to get local issuer certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 67,
+          "text": "return \"unable to verify the first certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 69,
+          "text": "return \"certificate chain too long\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 71,
+          "text": "return \"certificate revoked\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 73,
+          "text": "return \"issuer certificate doesn't have a public key\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 77,
+          "text": "return \"unsuitable certificate purpose\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 79,
+          "text": "return \"certificate not trusted\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 81,
+          "text": "return \"certificate rejected\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 89,
+          "text": "return \"key usage does not include certificate signing\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 91,
+          "text": "return \"unable to get CRL issuer certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 99,
+          "text": "return \"invalid non-CA certificate (has CA markings)\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 104,
+          "text": "case X509_V_ERR_PROXY_CERTIFICATES_NOT_ALLOWED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 105,
+          "text": "return \"proxy certificates not allowed, please set the appropriate flag\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 107,
+          "text": "return \"invalid or inconsistent certificate extension\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 109,
+          "text": "return \"invalid or inconsistent certificate policy extension\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 137,
+          "text": "return \"Suite B: certificate version invalid\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "return \"EE certificate key too weak\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 159,
+          "text": "return \"CA certificate key too weak\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 163,
+          "text": "return \"invalid certificate verification context\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 165,
+          "text": "return \"issuer certificate lookup error\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 167,
+          "text": "return \"Certificate Transparency required, but no valid SCTs found\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 185,
+          "text": "return \"no OCSP response available for certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 187,
+          "text": "return \"Cannot find certificate signature algorithm\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 193,
+          "text": "return \"invalid CA certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 223,
+          "text": "return \"Certificate public key has explicit ECC parameters\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 231,
+          "text": "return \"Certificate includes more than one instance of a particular extension\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 240,
+          "text": "return \"unknown certificate verification error\";"
+        },
+        {
+          "term": "algorithm",
+          "line": 138,
+          "text": "case X509_V_ERR_SUITE_B_INVALID_ALGORITHM:"
+        },
+        {
+          "term": "algorithm",
+          "line": 139,
+          "text": "return \"Suite B: invalid public key algorithm\";"
+        },
+        {
+          "term": "algorithm",
+          "line": 142,
+          "text": "case X509_V_ERR_SUITE_B_INVALID_SIGNATURE_ALGORITHM:"
+        },
+        {
+          "term": "algorithm",
+          "line": 143,
+          "text": "return \"Suite B: invalid signature algorithm\";"
+        },
+        {
+          "term": "algorithm",
+          "line": 161,
+          "text": "return \"CA signature digest algorithm too weak\";"
+        },
+        {
+          "term": "algorithm",
+          "line": 186,
+          "text": "case X509_V_ERR_UNSUPPORTED_SIGNATURE_ALGORITHM:"
+        },
+        {
+          "term": "algorithm",
+          "line": 187,
+          "text": "return \"Cannot find certificate signature algorithm\";"
+        },
+        {
+          "term": "algorithm",
+          "line": 188,
+          "text": "case X509_V_ERR_SIGNATURE_ALGORITHM_MISMATCH:"
+        },
+        {
+          "term": "algorithm",
+          "line": 189,
+          "text": "return \"subject signature algorithm and issuer public key algorithm mismatch\";"
+        },
+        {
+          "term": "algorithm",
+          "line": 190,
+          "text": "case X509_V_ERR_SIGNATURE_ALGORITHM_INCONSISTENCY:"
+        },
+        {
+          "term": "algorithm",
+          "line": 191,
+          "text": "return \"cert info signature and signature algorithm mismatch\";"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/t1_enc.c",
+      "function": "tls1_alert_code",
+      "line_range": [
+        527,
+        605
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 20,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 544,
+          "text": "case SSL_AD_NO_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 546,
+          "text": "case SSL_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 547,
+          "text": "return SSL3_AD_BAD_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 548,
+          "text": "case SSL_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 549,
+          "text": "return SSL3_AD_UNSUPPORTED_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 550,
+          "text": "case SSL_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 551,
+          "text": "return SSL3_AD_CERTIFICATE_REVOKED;"
+        },
+        {
+          "term": "Certificate",
+          "line": 552,
+          "text": "case SSL_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 553,
+          "text": "return SSL3_AD_CERTIFICATE_EXPIRED;"
+        },
+        {
+          "term": "Certificate",
+          "line": 554,
+          "text": "case SSL_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "Certificate",
+          "line": 555,
+          "text": "return SSL3_AD_CERTIFICATE_UNKNOWN;"
+        },
+        {
+          "term": "Certificate",
+          "line": 580,
+          "text": "case SSL_AD_CERTIFICATE_UNOBTAINABLE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 581,
+          "text": "return TLS1_AD_CERTIFICATE_UNOBTAINABLE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 584,
+          "text": "case SSL_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 585,
+          "text": "return TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 586,
+          "text": "case SSL_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 587,
+          "text": "return TLS1_AD_BAD_CERTIFICATE_HASH_VALUE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 594,
+          "text": "case SSL_AD_CERTIFICATE_REQUIRED:"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 556,
+          "text": "case SSL_AD_ILLEGAL_PARAMETER:"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 557,
+          "text": "return SSL3_AD_ILLEGAL_PARAMETER;"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_alert_desc_string_long",
+      "line_range": [
+        345,
+        417
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 19,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 358,
+          "text": "case SSL3_AD_NO_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 359,
+          "text": "return \"no certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 360,
+          "text": "case SSL3_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 361,
+          "text": "return \"bad certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 362,
+          "text": "case SSL3_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 363,
+          "text": "return \"unsupported certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 364,
+          "text": "case SSL3_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 365,
+          "text": "return \"certificate revoked\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 366,
+          "text": "case SSL3_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 367,
+          "text": "return \"certificate expired\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 368,
+          "text": "case SSL3_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "Certificate",
+          "line": 369,
+          "text": "return \"certificate unknown\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 398,
+          "text": "case TLS1_AD_CERTIFICATE_UNOBTAINABLE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 399,
+          "text": "return \"certificate unobtainable\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 402,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 403,
+          "text": "return \"bad certificate status response\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 404,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 405,
+          "text": "return \"bad certificate hash value\";"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 370,
+          "text": "case SSL3_AD_ILLEGAL_PARAMETER:"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_certificate",
+      "line_range": [
+        3940,
+        4131
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 16,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 4112,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 4058,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 3940,
+          "text": "MSG_PROCESS_RETURN tls_process_client_certificate(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3965,
+          "text": "SSLfatal(s, SSL_AD_UNSUPPORTED_CERTIFICATE,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3966,
+          "text": "SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4023,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE, &rawexts,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4025,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4042,
+          "text": "/* Fail only if we required a certificate */"
+        },
+        {
+          "term": "Certificate",
+          "line": 4044,
+          "text": "SSLfatal(s, SSL_AD_CERTIFICATE_REQUIRED,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4045,
+          "text": "SSL_R_PEER_DID_NOT_RETURN_A_CERTIFICATE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4048,
+          "text": "/* No client certificate so digest cached records */"
+        },
+        {
+          "term": "Certificate",
+          "line": 4058,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4064,
+          "text": "SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4073,
+          "text": "* a new certificate is received via post-handshake authentication, as the"
+        },
+        {
+          "term": "Certificate",
+          "line": 4109,
+          "text": "* certificate, while we do include it in statem_clnt.c"
+        },
+        {
+          "term": "Certificate",
+          "line": 4112,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-4-3-sig-alg-must-be-compatible-with-key_candidate_1.c",
+    "locations/code/rfc8446-4-4-3-sig-alg-must-be-compatible-with-key_candidate_2.c",
+    "locations/code/rfc8446-4-4-3-sig-alg-must-be-compatible-with-key_candidate_3.c",
+    "locations/code/rfc8446-4-4-3-sig-alg-must-be-compatible-with-key_candidate_4.c",
+    "locations/code/rfc8446-4-4-3-sig-alg-must-be-compatible-with-key_candidate_5.c",
+    "locations/code/rfc8446-4-4-3-sig-alg-must-be-compatible-with-key_candidate_6.c",
+    "locations/code/rfc8446-4-4-3-sig-alg-must-be-compatible-with-key_candidate_7.c",
+    "locations/code/rfc8446-4-4-3-sig-alg-must-be-compatible-with-key_candidate_8.c",
+    "locations/code/rfc8446-4-4-3-sig-alg-must-be-compatible-with-key_candidate_9.c",
+    "locations/code/rfc8446-4-4-3-sig-alg-must-be-compatible-with-key_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 3387,
+    "files_with_hits": 306,
+    "functions_identified": 749,
+    "null_scope_hits": 1336,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1090
+  }
+}

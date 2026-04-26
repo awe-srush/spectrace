@@ -1,0 +1,1918 @@
+{
+  "rule_id": "rfc8446-4.2.8-R14",
+  "rule_type": "conditional_action",
+  "checkability": "medium",
+  "search_terms": [
+    {
+      "term": "ServerHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ServerHello",
+        "server_hello"
+      ]
+    },
+    {
+      "term": "HelloRetryRequest",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "HelloRetryRequest",
+        "hello_retry_request"
+      ]
+    },
+    {
+      "term": "server_share",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "server_share",
+        "ServerShare"
+      ]
+    },
+    {
+      "term": "selected_group",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "selected_group",
+        "SelectedGroup"
+      ]
+    },
+    {
+      "term": "group",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "group"
+      ]
+    },
+    {
+      "term": "key_share",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "key_share",
+        "KeyShare"
+      ]
+    },
+    {
+      "term": "illegal_parameter",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "illegal_parameter",
+        "IllegalParameter"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 16,
+      "metadata": {
+        "category_breadth": 4,
+        "categories_present": [
+          "alert_names",
+          "extension_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "group",
+          "illegal_parameter",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1159,
+          "text": "if (!WPACKET_put_bytes_u8(&hrrpkt, SSL3_MT_SERVER_HELLO)"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1212,
+          "text": "/* Act as if this ClientHello came after a HelloRetryRequest */"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1213,
+          "text": "s->hello_retry_request = SSL_HRR_PENDING;"
+        },
+        {
+          "term": "group",
+          "line": 1012,
+          "text": "unsigned int format, version, key_share, group_id;"
+        },
+        {
+          "term": "group",
+          "line": 1104,
+          "text": "if (!PACKET_get_net_2(&cookie, &group_id)) {"
+        },
+        {
+          "term": "group",
+          "line": 1114,
+          "text": "if (group_id != s->s3.group_id"
+        },
+        {
+          "term": "group",
+          "line": 1118,
+          "text": "* We chose a different cipher or group id this time around to what is"
+        },
+        {
+          "term": "group",
+          "line": 1184,
+          "text": "|| !WPACKET_put_bytes_u16(&hrrpkt, s->s3.group_id)"
+        },
+        {
+          "term": "key_share",
+          "line": 1012,
+          "text": "unsigned int format, version, key_share, group_id;"
+        },
+        {
+          "term": "key_share",
+          "line": 1125,
+          "text": "if (!PACKET_get_1(&cookie, &key_share)"
+        },
+        {
+          "term": "key_share",
+          "line": 1181,
+          "text": "if (key_share) {"
+        },
+        {
+          "term": "key_share",
+          "line": 1182,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_key_share)"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1076,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COOKIE_MISMATCH);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1099,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1121,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_CIPHER);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1146,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COOKIE_MISMATCH);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_key_share",
+      "line_range": [
+        2193,
+        2367
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 48,
+      "metadata": {
+        "category_breadth": 4,
+        "categories_present": [
+          "alert_names",
+          "extension_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "group",
+          "illegal_parameter",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "HelloRetryRequest",
+          "line": 2233,
+          "text": "* It is an error if the HelloRetryRequest wants a key_share that we"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2223,
+          "text": "if ((context & SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST) != 0) {"
+        },
+        {
+          "term": "group",
+          "line": 2198,
+          "text": "unsigned int group_id;"
+        },
+        {
+          "term": "group",
+          "line": 2201,
+          "text": "const TLS_GROUP_INFO *ginf = NULL;"
+        },
+        {
+          "term": "group",
+          "line": 2211,
+          "text": "/* Which group ID does the server want -> group_id */"
+        },
+        {
+          "term": "group",
+          "line": 2212,
+          "text": "if (!PACKET_get_net_2(pkt, &group_id)) {"
+        },
+        {
+          "term": "group",
+          "line": 2218,
+          "text": "if (ossl_is_grease_value(group_id)) {"
+        },
+        {
+          "term": "group",
+          "line": 2224,
+          "text": "const uint16_t *pgroups = NULL;"
+        },
+        {
+          "term": "group",
+          "line": 2225,
+          "text": "size_t num_groups;"
+        },
+        {
+          "term": "group",
+          "line": 2237,
+          "text": "if (s->s3.tmp.ks_group_id[i] == group_id) {"
+        },
+        {
+          "term": "group",
+          "line": 2243,
+          "text": "/* Validate the selected group is one we support */"
+        },
+        {
+          "term": "group",
+          "line": 2244,
+          "text": "tls1_get_supported_groups(s, &pgroups, &num_groups);"
+        },
+        {
+          "term": "group",
+          "line": 2245,
+          "text": "for (i = 0; i < num_groups; i++) {"
+        },
+        {
+          "term": "group",
+          "line": 2246,
+          "text": "if (group_id == pgroups[i])"
+        },
+        {
+          "term": "group",
+          "line": 2249,
+          "text": "if (i >= num_groups"
+        },
+        {
+          "term": "group",
+          "line": 2250,
+          "text": "|| !tls_group_allowed(s, group_id, SSL_SECOP_CURVE_SUPPORTED)"
+        },
+        {
+          "term": "group",
+          "line": 2251,
+          "text": "|| !tls_valid_group(s, group_id, TLS1_3_VERSION, TLS1_3_VERSION,"
+        },
+        {
+          "term": "group",
+          "line": 2257,
+          "text": "/* Memorize which groupID the server wants */"
+        },
+        {
+          "term": "group",
+          "line": 2258,
+          "text": "s->s3.group_id = group_id;"
+        },
+        {
+          "term": "group",
+          "line": 2274,
+          "text": "* check that the group requested by the server is one we've"
+        },
+        {
+          "term": "group",
+          "line": 2278,
+          "text": "if (s->s3.tmp.ks_group_id[i] == group_id) {"
+        },
+        {
+          "term": "group",
+          "line": 2279,
+          "text": "valid_ks_id = group_id;"
+        },
+        {
+          "term": "group",
+          "line": 2281,
+          "text": "s->s3.group_id = group_id;"
+        },
+        {
+          "term": "group",
+          "line": 2288,
+          "text": "* This isn't for the group that we sent in the original"
+        },
+        {
+          "term": "group",
+          "line": 2294,
+          "text": "/* Retain this group in the SSL_SESSION */"
+        },
+        {
+          "term": "group",
+          "line": 2296,
+          "text": "s->session->kex_group = group_id;"
+        },
+        {
+          "term": "group",
+          "line": 2297,
+          "text": "} else if (group_id != s->session->kex_group) {"
+        },
+        {
+          "term": "group",
+          "line": 2299,
+          "text": "* If this is a resumption but changed what group was used, we need"
+        },
+        {
+          "term": "group",
+          "line": 2300,
+          "text": "* to record the new group in the session, but the session is not"
+        },
+        {
+          "term": "group",
+          "line": 2314,
+          "text": "s->session->kex_group = group_id;"
+        },
+        {
+          "term": "group",
+          "line": 2317,
+          "text": "if ((ginf = tls1_group_id_lookup(SSL_CONNECTION_GET_CTX(s),"
+        },
+        {
+          "term": "group",
+          "line": 2318,
+          "text": "group_id))"
+        },
+        {
+          "term": "key_share",
+          "line": 2193,
+          "text": "int tls_parse_stoc_key_share(SSL_CONNECTION *s, PACKET *pkt,"
+        },
+        {
+          "term": "key_share",
+          "line": 2219,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2233,
+          "text": "* It is an error if the HelloRetryRequest wants a key_share that we"
+        },
+        {
+          "term": "key_share",
+          "line": 2238,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2253,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2289,
+          "text": "* key_share!"
+        },
+        {
+          "term": "key_share",
+          "line": 2291,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2320,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2342,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2260,
+          "text": "/* The initial keyshares are obsolete now, hence free memory */"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2219,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2238,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2253,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2291,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2320,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2342,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/extensions.c",
+      "function": "final_key_share",
+      "line_range": [
+        1639,
+        1779
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 38,
+      "metadata": {
+        "category_breadth": 4,
+        "categories_present": [
+          "alert_names",
+          "extension_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "group",
+          "illegal_parameter",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "HelloRetryRequest",
+          "line": 1681,
+          "text": "*             send a HelloRetryRequest"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1684,
+          "text": "*             we didn't already send a HelloRetryRequest"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1693,
+          "text": "*             send a HelloRetryRequest"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1703,
+          "text": "*             send a HelloRetryRequest"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1730,
+          "text": "/* A shared group exists so send a HelloRetryRequest */"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1761,
+          "text": "* We have a key_share so don't send any more HelloRetryRequest"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1646,
+          "text": "if ((context & SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST) != 0)"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1710,
+          "text": "if (!ossl_assert(s->hello_retry_request == SSL_HRR_NONE)) {"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1719,
+          "text": "s->hello_retry_request = SSL_HRR_PENDING;"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1724,
+          "text": "if (s->hello_retry_request == SSL_HRR_NONE && sent"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1732,
+          "text": "s->hello_retry_request = SSL_HRR_PENDING;"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1746,
+          "text": "if (!ossl_assert(s->hello_retry_request == SSL_HRR_NONE)) {"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1755,
+          "text": "s->hello_retry_request = SSL_HRR_PENDING;"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1764,
+          "text": "if (s->hello_retry_request == SSL_HRR_PENDING)"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1765,
+          "text": "s->hello_retry_request = SSL_HRR_COMPLETE;"
+        },
+        {
+          "term": "group",
+          "line": 1691,
+          "text": "*             a shared group exists"
+        },
+        {
+          "term": "group",
+          "line": 1728,
+          "text": "/* Did we detect group overlap in tls_parse_ctos_key_share ? */"
+        },
+        {
+          "term": "group",
+          "line": 1729,
+          "text": "if (s->s3.group_id_candidate != 0) {"
+        },
+        {
+          "term": "group",
+          "line": 1730,
+          "text": "/* A shared group exists so send a HelloRetryRequest */"
+        },
+        {
+          "term": "group",
+          "line": 1731,
+          "text": "s->s3.group_id = s->s3.group_id_candidate;"
+        },
+        {
+          "term": "key_share",
+          "line": 1639,
+          "text": "static int final_key_share(SSL_CONNECTION *s, unsigned int context, int sent)"
+        },
+        {
+          "term": "key_share",
+          "line": 1645,
+          "text": "/* Nothing to do for key_share in an HRR */"
+        },
+        {
+          "term": "key_share",
+          "line": 1653,
+          "text": "*     we have no key_share"
+        },
+        {
+          "term": "key_share",
+          "line": 1656,
+          "text": "*      OR the kex_mode doesn't allow non key_share resumes)"
+        },
+        {
+          "term": "key_share",
+          "line": 1663,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_NO_SUITABLE_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 1667,
+          "text": "SSLfatal(s, SSL_AD_MISSING_EXTENSION, SSL_R_NO_SUITABLE_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 1676,
+          "text": "*         we have a suitable key_share"
+        },
+        {
+          "term": "key_share",
+          "line": 1686,
+          "text": "*             the client sent a key_share extension"
+        },
+        {
+          "term": "key_share",
+          "line": 1689,
+          "text": "*              OR the kex_mode allows key_share resumes)"
+        },
+        {
+          "term": "key_share",
+          "line": 1697,
+          "text": "*             the kex_mode doesn't allow non key_share resumes"
+        },
+        {
+          "term": "key_share",
+          "line": 1707,
+          "text": "/* We have a suitable key_share */"
+        },
+        {
+          "term": "key_share",
+          "line": 1723,
+          "text": "/* No suitable key_share */"
+        },
+        {
+          "term": "key_share",
+          "line": 1728,
+          "text": "/* Did we detect group overlap in tls_parse_ctos_key_share ? */"
+        },
+        {
+          "term": "key_share",
+          "line": 1740,
+          "text": "SSL_R_NO_SUITABLE_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 1761,
+          "text": "* We have a key_share so don't send any more HelloRetryRequest"
+        },
+        {
+          "term": "key_share",
+          "line": 1768,
+          "text": "* For a client side resumption with no key_share we need to generate"
+        },
+        {
+          "term": "key_share",
+          "line": 1769,
+          "text": "* the handshake secret (otherwise this is done during key_share"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1663,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_NO_SUITABLE_KEY_SHARE);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_key_share",
+      "line_range": [
+        830,
+        1006
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 76,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "extension_names",
+          "field_names"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "group",
+          "illegal_parameter",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "group",
+          "line": 835,
+          "text": "const uint16_t *clntgroups, *srvrgroups;"
+        },
+        {
+          "term": "group",
+          "line": 837,
+          "text": "uint16_t *first_group_in_tuple;"
+        },
+        {
+          "term": "group",
+          "line": 838,
+          "text": "size_t clnt_num_groups, srvr_num_groups, srvr_num_tuples;"
+        },
+        {
+          "term": "group",
+          "line": 842,
+          "text": "/* We conservatively assume that we did not find a suitable group */"
+        },
+        {
+          "term": "group",
+          "line": 843,
+          "text": "uint16_t group_id_candidate = 0;"
+        },
+        {
+          "term": "group",
+          "line": 848,
+          "text": "s->s3.group_id_candidate = 0;"
+        },
+        {
+          "term": "group",
+          "line": 863,
+          "text": "/* Get list of server supported groups and the group tuples */"
+        },
+        {
+          "term": "group",
+          "line": 864,
+          "text": "tls1_get_supported_groups(s, &srvrgroups, &srvr_num_groups);"
+        },
+        {
+          "term": "group",
+          "line": 865,
+          "text": "tls1_get_group_tuples(s, &srvrtuples, &srvr_num_tuples);"
+        },
+        {
+          "term": "group",
+          "line": 866,
+          "text": "/* Get the clients list of supported groups. */"
+        },
+        {
+          "term": "group",
+          "line": 867,
+          "text": "tls1_get_peer_groups(s, &clntgroups, &clnt_num_groups);"
+        },
+        {
+          "term": "group",
+          "line": 869,
+          "text": "if (clnt_num_groups == 0) {"
+        },
+        {
+          "term": "group",
+          "line": 871,
+          "text": "* This can only happen if the supported_groups extension was not sent,"
+        },
+        {
+          "term": "group",
+          "line": 876,
+          "text": "SSL_R_MISSING_SUPPORTED_GROUPS_EXTENSION);"
+        },
+        {
+          "term": "group",
+          "line": 880,
+          "text": "if (s->s3.group_id != 0 && PACKET_remaining(&key_share_list) == 0) {"
+        },
+        {
+          "term": "group",
+          "line": 882,
+          "text": "* If we set a group_id already, then we must have sent an HRR"
+        },
+        {
+          "term": "group",
+          "line": 893,
+          "text": "clntgroups, clnt_num_groups,"
+        },
+        {
+          "term": "group",
+          "line": 894,
+          "text": "srvrgroups, srvr_num_groups,"
+        },
+        {
+          "term": "group",
+          "line": 905,
+          "text": "* which group the server should use for key exchange :"
+        },
+        {
+          "term": "group",
+          "line": 906,
+          "text": "* From client: clntgroups[clnt_num_groups],"
+        },
+        {
+          "term": "group",
+          "line": 908,
+          "text": "* From server: srvrgroups[srvr_num_groups], srvrtuples[srvr_num_tuples]"
+        },
+        {
+          "term": "group",
+          "line": 910,
+          "text": "* Group selection algorithm:"
+        },
+        {
+          "term": "group",
+          "line": 912,
+          "text": "*      key share group(s) overlapping with current tuple?"
+        },
+        {
+          "term": "group",
+          "line": 913,
+          "text": "*         --> Yes: accept group_id for SH"
+        },
+        {
+          "term": "group",
+          "line": 914,
+          "text": "*        --> No: is any of the client supported_groups overlapping with current tuple?"
+        },
+        {
+          "term": "group",
+          "line": 915,
+          "text": "*            --> Yes: memorize group_id for HRR, break"
+        },
+        {
+          "term": "group",
+          "line": 920,
+          "text": "first_group_in_tuple = (uint16_t *)srvrgroups;"
+        },
+        {
+          "term": "group",
+          "line": 922,
+          "text": "size_t number_of_groups_in_tuple = srvrtuples[current_tuple];"
+        },
+        {
+          "term": "group",
+          "line": 923,
+          "text": "int prio_group_idx = 0, candidate_group_idx = 0;"
+        },
+        {
+          "term": "group",
+          "line": 928,
+          "text": "/* Is there overlap with a key share group?  */"
+        },
+        {
+          "term": "group",
+          "line": 930,
+          "text": "first_group_in_tuple, number_of_groups_in_tuple,"
+        },
+        {
+          "term": "group",
+          "line": 932,
+          "text": "&prio_group_idx, &candidate_group_idx,"
+        },
+        {
+          "term": "group",
+          "line": 933,
+          "text": "&group_id_candidate);"
+        },
+        {
+          "term": "group",
+          "line": 934,
+          "text": "if (group_id_candidate > 0) { /* Overlap found -> accept the key share group */"
+        },
+        {
+          "term": "group",
+          "line": 935,
+          "text": "if (!tls_accept_ksgroup(s, group_id_candidate,"
+        },
+        {
+          "term": "group",
+          "line": 936,
+          "text": "&encoded_pubkey_arr[candidate_group_idx]))"
+        },
+        {
+          "term": "group",
+          "line": 943,
+          "text": "* supported_group overlapping with the current tuple?"
+        },
+        {
+          "term": "group",
+          "line": 946,
+          "text": "first_group_in_tuple, number_of_groups_in_tuple,"
+        },
+        {
+          "term": "group",
+          "line": 947,
+          "text": "clntgroups, clnt_num_groups,"
+        },
+        {
+          "term": "group",
+          "line": 948,
+          "text": "&prio_group_idx, &candidate_group_idx,"
+        },
+        {
+          "term": "group",
+          "line": 949,
+          "text": "&group_id_candidate);"
+        },
+        {
+          "term": "group",
+          "line": 950,
+          "text": "if (group_id_candidate > 0) {"
+        },
+        {
+          "term": "group",
+          "line": 953,
+          "text": "* groups overlap hence we can stop searching"
+        },
+        {
+          "term": "group",
+          "line": 954,
+          "text": "* (and report group_id_candidate 'upward' for HRR)"
+        },
+        {
+          "term": "group",
+          "line": 956,
+          "text": "s->s3.group_id_candidate = group_id_candidate;"
+        },
+        {
+          "term": "group",
+          "line": 960,
+          "text": "* Neither key share nor supported_groups overlap current"
+        },
+        {
+          "term": "group",
+          "line": 963,
+          "text": "first_group_in_tuple = &first_group_in_tuple[number_of_groups_in_tuple];"
+        },
+        {
+          "term": "group",
+          "line": 971,
+          "text": "first_group_in_tuple, number_of_groups_in_tuple,"
+        },
+        {
+          "term": "group",
+          "line": 972,
+          "text": "&prio_group_idx, &candidate_group_idx,"
+        },
+        {
+          "term": "group",
+          "line": 973,
+          "text": "&group_id_candidate);"
+        },
+        {
+          "term": "group",
+          "line": 974,
+          "text": "if (group_id_candidate > 0) {"
+        },
+        {
+          "term": "group",
+          "line": 975,
+          "text": "if (!tls_accept_ksgroup(s, group_id_candidate, &encoded_pubkey_arr[prio_group_idx]))"
+        },
+        {
+          "term": "group",
+          "line": 980,
+          "text": "clntgroups, clnt_num_groups,"
+        },
+        {
+          "term": "group",
+          "line": 981,
+          "text": "first_group_in_tuple, number_of_groups_in_tuple,"
+        },
+        {
+          "term": "group",
+          "line": 982,
+          "text": "&prio_group_idx, &candidate_group_idx,"
+        },
+        {
+          "term": "group",
+          "line": 983,
+          "text": "&group_id_candidate);"
+        },
+        {
+          "term": "group",
+          "line": 984,
+          "text": "if (group_id_candidate > 0) {"
+        },
+        {
+          "term": "group",
+          "line": 985,
+          "text": "s->s3.group_id_candidate = group_id_candidate;"
+        },
+        {
+          "term": "group",
+          "line": 988,
+          "text": "first_group_in_tuple = &first_group_in_tuple[number_of_groups_in_tuple];"
+        },
+        {
+          "term": "key_share",
+          "line": 830,
+          "text": "int tls_parse_ctos_key_share(SSL_CONNECTION *s, PACKET *pkt,"
+        },
+        {
+          "term": "key_share",
+          "line": 834,
+          "text": "PACKET key_share_list;"
+        },
+        {
+          "term": "key_share",
+          "line": 858,
+          "text": "if (!PACKET_as_length_prefixed_2(pkt, &key_share_list)) {"
+        },
+        {
+          "term": "key_share",
+          "line": 880,
+          "text": "if (s->s3.group_id != 0 && PACKET_remaining(&key_share_list) == 0) {"
+        },
+        {
+          "term": "key_share",
+          "line": 883,
+          "text": "* requesting a new key_share. If we haven't got one then that is an"
+        },
+        {
+          "term": "key_share",
+          "line": 886,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 892,
+          "text": "&key_share_list,"
+        },
+        {
+          "term": "key_share",
+          "line": 840,
+          "text": "uint16_t *keyshares_arr = NULL;"
+        },
+        {
+          "term": "key_share",
+          "line": 841,
+          "text": "size_t keyshares_cnt = 0;"
+        },
+        {
+          "term": "key_share",
+          "line": 891,
+          "text": "ks_extraction_result = extract_keyshares(s,"
+        },
+        {
+          "term": "key_share",
+          "line": 895,
+          "text": "&keyshares_arr, &encoded_pubkey_arr,"
+        },
+        {
+          "term": "key_share",
+          "line": 896,
+          "text": "&keyshares_cnt);"
+        },
+        {
+          "term": "key_share",
+          "line": 907,
+          "text": "*              keyshares_arr[keyshares_cnt], encoded_pubkey_arr[keyshares_cnt]"
+        },
+        {
+          "term": "key_share",
+          "line": 931,
+          "text": "keyshares_arr, keyshares_cnt,"
+        },
+        {
+          "term": "key_share",
+          "line": 970,
+          "text": "keyshares_arr, keyshares_cnt,"
+        },
+        {
+          "term": "key_share",
+          "line": 999,
+          "text": "OPENSSL_free(keyshares_arr);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 886,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "extract_keyshares",
+      "line_range": [
+        668,
+        782
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 59,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "extension_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "group",
+          "illegal_parameter",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "group",
+          "line": 669,
+          "text": "const uint16_t *clntgroups, size_t clnt_num_groups,"
+        },
+        {
+          "term": "group",
+          "line": 670,
+          "text": "const uint16_t *srvrgroups, size_t srvr_num_groups,"
+        },
+        {
+          "term": "group",
+          "line": 677,
+          "text": "unsigned int group_id = 0;"
+        },
+        {
+          "term": "group",
+          "line": 683,
+          "text": "* keyshare to confirm the groups are valid, so we restrict this to a"
+        },
+        {
+          "term": "group",
+          "line": 688,
+          "text": "/* Prepare memory to hold the extracted key share groups and related pubkeys */"
+        },
+        {
+          "term": "group",
+          "line": 708,
+          "text": "/* Get the group_id for the current share and its encoded_pubkey */"
+        },
+        {
+          "term": "group",
+          "line": 709,
+          "text": "if (!PACKET_get_net_2(key_share_list, &group_id)"
+        },
+        {
+          "term": "group",
+          "line": 717,
+          "text": "* If we sent an HRR then the key_share sent back MUST be for the group"
+        },
+        {
+          "term": "group",
+          "line": 720,
+          "text": "if (s->s3.group_id != 0"
+        },
+        {
+          "term": "group",
+          "line": 721,
+          "text": "&& (group_id != s->s3.group_id"
+        },
+        {
+          "term": "group",
+          "line": 728,
+          "text": "* Check if this share is in supported_groups sent from client"
+        },
+        {
+          "term": "group",
+          "line": 730,
+          "text": "* order as listed in the supported groups extension, but its not"
+        },
+        {
+          "term": "group",
+          "line": 735,
+          "text": "if (!check_in_list(s, group_id, clntgroups, clnt_num_groups, 0, &key_share_pos)) {"
+        },
+        {
+          "term": "group",
+          "line": 741,
+          "text": "OSSL_TRACE1(TLS, \"key share group id %d is out of RFC 8446 order\\n\", group_id);"
+        },
+        {
+          "term": "group",
+          "line": 745,
+          "text": "if (s->s3.group_id != 0) {"
+        },
+        {
+          "term": "group",
+          "line": 749,
+          "text": "* in the list of supported_groups (checked"
+        },
+        {
+          "term": "group",
+          "line": 750,
+          "text": "* above already), hence we accept this key share group"
+        },
+        {
+          "term": "group",
+          "line": 752,
+          "text": "if (!tls_accept_ksgroup(s, s->s3.group_id, &encoded_pubkey))"
+        },
+        {
+          "term": "group",
+          "line": 754,
+          "text": "/* We have selected a key share group via HRR, hence we're done here */"
+        },
+        {
+          "term": "group",
+          "line": 759,
+          "text": "* We tolerate but ignore a group id that we don't think is"
+        },
+        {
+          "term": "group",
+          "line": 762,
+          "text": "if (!check_in_list(s, group_id, srvrgroups, srvr_num_groups, 1, NULL)"
+        },
+        {
+          "term": "group",
+          "line": 763,
+          "text": "|| !tls_group_allowed(s, group_id, SSL_SECOP_CURVE_SUPPORTED)"
+        },
+        {
+          "term": "group",
+          "line": 764,
+          "text": "|| !tls_valid_group(s, group_id, TLS1_3_VERSION, TLS1_3_VERSION,"
+        },
+        {
+          "term": "group",
+          "line": 770,
+          "text": "/* Memorize this key share group ID and its encoded point */"
+        },
+        {
+          "term": "group",
+          "line": 771,
+          "text": "(*keyshares_arr)[*keyshares_cnt] = group_id;"
+        },
+        {
+          "term": "key_share",
+          "line": 668,
+          "text": "static KS_EXTRACTION_RESULT extract_keyshares(SSL_CONNECTION *s, PACKET *key_share_list,"
+        },
+        {
+          "term": "key_share",
+          "line": 675,
+          "text": "size_t key_share_pos = 0;"
+        },
+        {
+          "term": "key_share",
+          "line": 676,
+          "text": "size_t previous_key_share_pos = 0;"
+        },
+        {
+          "term": "key_share",
+          "line": 684,
+          "text": "* sensible number (MAX_KEY_SHARES == 16). Any keyshares over this limit are"
+        },
+        {
+          "term": "key_share",
+          "line": 689,
+          "text": "*keyshares_arr = OPENSSL_malloc_array(MAX_KEY_SHARES,"
+        },
+        {
+          "term": "key_share",
+          "line": 695,
+          "text": "*encoded_pubkey_arr = OPENSSL_malloc_array(MAX_KEY_SHARES,"
+        },
+        {
+          "term": "key_share",
+          "line": 704,
+          "text": "* MAX_KEY_SHARES regardless of whether we include them in keyshares_arr or"
+        },
+        {
+          "term": "key_share",
+          "line": 707,
+          "text": "for (i = 0; PACKET_remaining(key_share_list) > 0 && i < MAX_KEY_SHARES; i++) {"
+        },
+        {
+          "term": "key_share",
+          "line": 709,
+          "text": "if (!PACKET_get_net_2(key_share_list, &group_id)"
+        },
+        {
+          "term": "key_share",
+          "line": 710,
+          "text": "|| !PACKET_get_length_prefixed_2(key_share_list, &encoded_pubkey)"
+        },
+        {
+          "term": "key_share",
+          "line": 717,
+          "text": "* If we sent an HRR then the key_share sent back MUST be for the group"
+        },
+        {
+          "term": "key_share",
+          "line": 718,
+          "text": "* we requested, and must be the only key_share sent."
+        },
+        {
+          "term": "key_share",
+          "line": 722,
+          "text": "|| PACKET_remaining(key_share_list) != 0)) {"
+        },
+        {
+          "term": "key_share",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 735,
+          "text": "if (!check_in_list(s, group_id, clntgroups, clnt_num_groups, 0, &key_share_pos)) {"
+        },
+        {
+          "term": "key_share",
+          "line": 736,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 740,
+          "text": "if (key_share_pos < previous_key_share_pos)"
+        },
+        {
+          "term": "key_share",
+          "line": 743,
+          "text": "previous_key_share_pos = key_share_pos;"
+        },
+        {
+          "term": "key_share",
+          "line": 668,
+          "text": "static KS_EXTRACTION_RESULT extract_keyshares(SSL_CONNECTION *s, PACKET *key_share_list,"
+        },
+        {
+          "term": "key_share",
+          "line": 671,
+          "text": "uint16_t **keyshares_arr, PACKET **encoded_pubkey_arr,"
+        },
+        {
+          "term": "key_share",
+          "line": 672,
+          "text": "size_t *keyshares_cnt)"
+        },
+        {
+          "term": "key_share",
+          "line": 681,
+          "text": "* Theoretically there is no limit on the number of keyshares as long as"
+        },
+        {
+          "term": "key_share",
+          "line": 683,
+          "text": "* keyshare to confirm the groups are valid, so we restrict this to a"
+        },
+        {
+          "term": "key_share",
+          "line": 684,
+          "text": "* sensible number (MAX_KEY_SHARES == 16). Any keyshares over this limit are"
+        },
+        {
+          "term": "key_share",
+          "line": 689,
+          "text": "*keyshares_arr = OPENSSL_malloc_array(MAX_KEY_SHARES,"
+        },
+        {
+          "term": "key_share",
+          "line": 690,
+          "text": "sizeof(**keyshares_arr));"
+        },
+        {
+          "term": "key_share",
+          "line": 691,
+          "text": "if (*keyshares_arr == NULL) {"
+        },
+        {
+          "term": "key_share",
+          "line": 704,
+          "text": "* MAX_KEY_SHARES regardless of whether we include them in keyshares_arr or"
+        },
+        {
+          "term": "key_share",
+          "line": 729,
+          "text": "* RFC 8446 also mandates that clients send keyshares in the same"
+        },
+        {
+          "term": "key_share",
+          "line": 771,
+          "text": "(*keyshares_arr)[*keyshares_cnt] = group_id;"
+        },
+        {
+          "term": "key_share",
+          "line": 772,
+          "text": "(*encoded_pubkey_arr)[(*keyshares_cnt)++] = encoded_pubkey;"
+        },
+        {
+          "term": "key_share",
+          "line": 779,
+          "text": "OPENSSL_free(*keyshares_arr);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 736,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 24,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1821,
+          "text": "* ServerHello.random confirmation trick. If that is good"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1967,
+          "text": "* In TLSv1.3 a ServerHello message signals a key change so the end of"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1702,
+          "text": "MSG_PROCESS_RETURN tls_process_server_hello(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1810,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1811,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1838,
+          "text": "prelude[0] = SSL3_MT_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1956,
+          "text": "context = SSL_CONNECTION_IS_TLS13(s) ? SSL_EXT_TLS1_3_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1957,
+          "text": ": SSL_EXT_TLS1_2_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1978,
+          "text": "SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1746,
+          "text": "if (s->hello_retry_request != SSL_HRR_NONE) {"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1750,
+          "text": "s->hello_retry_request = SSL_HRR_PENDING;"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1800,
+          "text": "if (!tls_collect_extensions(s, &extpkt, SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST,"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1803,
+          "text": "SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST,"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1946,
+          "text": "ret = tls_process_as_hello_retry_request(s, extensions);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1776,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_TLS_SESSION_ID_TOO_LONG);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1893,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_ECH_REQUIRED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1924,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1933,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_INVALID_SESSION_ID);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1959,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2031,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2087,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2101,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2108,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COMPRESSION_DISABLED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2116,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "add_key_share",
+      "line_range": [
+        818,
+        875
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 20,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "group",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "HelloRetryRequest",
+          "line": 825,
+          "text": "if (!ossl_assert(s->hello_retry_request == SSL_HRR_PENDING)"
+        },
+        {
+          "term": "group",
+          "line": 818,
+          "text": "static int add_key_share(SSL_CONNECTION *s, WPACKET *pkt, unsigned int group_id, size_t loop_num)"
+        },
+        {
+          "term": "group",
+          "line": 835,
+          "text": "key_share_key = ssl_generate_pkey_group(s, group_id);"
+        },
+        {
+          "term": "group",
+          "line": 851,
+          "text": "if (!WPACKET_put_bytes_u16(pkt, group_id)"
+        },
+        {
+          "term": "group",
+          "line": 857,
+          "text": "/* For backward compatibility, we use the first valid group to add a key share */"
+        },
+        {
+          "term": "group",
+          "line": 860,
+          "text": "s->s3.group_id = group_id;"
+        },
+        {
+          "term": "group",
+          "line": 864,
+          "text": "s->s3.tmp.ks_group_id[loop_num] = group_id;"
+        },
+        {
+          "term": "key_share",
+          "line": 818,
+          "text": "static int add_key_share(SSL_CONNECTION *s, WPACKET *pkt, unsigned int group_id, size_t loop_num)"
+        },
+        {
+          "term": "key_share",
+          "line": 821,
+          "text": "EVP_PKEY *key_share_key = NULL;"
+        },
+        {
+          "term": "key_share",
+          "line": 831,
+          "text": "* Could happen if we got an HRR that wasn't requesting a new key_share"
+        },
+        {
+          "term": "key_share",
+          "line": 833,
+          "text": "key_share_key = s->s3.tmp.ks_pkey[loop_num];"
+        },
+        {
+          "term": "key_share",
+          "line": 835,
+          "text": "key_share_key = ssl_generate_pkey_group(s, group_id);"
+        },
+        {
+          "term": "key_share",
+          "line": 836,
+          "text": "if (key_share_key == NULL) {"
+        },
+        {
+          "term": "key_share",
+          "line": 843,
+          "text": "encodedlen = EVP_PKEY_get1_encoded_public_key(key_share_key,"
+        },
+        {
+          "term": "key_share",
+          "line": 859,
+          "text": "s->s3.tmp.pkey = key_share_key;"
+        },
+        {
+          "term": "key_share",
+          "line": 862,
+          "text": "/* We ensure in t1_lib.c that the loop number does not exceed OPENSSL_CLIENT_MAX_KEY_SHARES */"
+        },
+        {
+          "term": "key_share",
+          "line": 863,
+          "text": "s->s3.tmp.ks_pkey[loop_num] = key_share_key;"
+        },
+        {
+          "term": "key_share",
+          "line": 871,
+          "text": "if (key_share_key != s->s3.tmp.ks_pkey[loop_num])"
+        },
+        {
+          "term": "key_share",
+          "line": 872,
+          "text": "EVP_PKEY_free(key_share_key);"
+        },
+        {
+          "term": "key_share",
+          "line": 850,
+          "text": "/* Create KeyShareEntry */"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_construct_stoc_key_share",
+      "line_range": [
+        1947,
+        2083
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "group",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "HelloRetryRequest",
+          "line": 1957,
+          "text": "if (s->hello_retry_request == SSL_HRR_PENDING) {"
+        },
+        {
+          "term": "group",
+          "line": 1955,
+          "text": "const TLS_GROUP_INFO *ginf = NULL;"
+        },
+        {
+          "term": "group",
+          "line": 1964,
+          "text": "|| !WPACKET_put_bytes_u16(pkt, s->s3.group_id)"
+        },
+        {
+          "term": "group",
+          "line": 1994,
+          "text": "|| !WPACKET_put_bytes_u16(pkt, s->s3.group_id)) {"
+        },
+        {
+          "term": "group",
+          "line": 1999,
+          "text": "if ((ginf = tls1_group_id_lookup(SSL_CONNECTION_GET_CTX(s),"
+        },
+        {
+          "term": "group",
+          "line": 2000,
+          "text": "s->s3.group_id))"
+        },
+        {
+          "term": "key_share",
+          "line": 1947,
+          "text": "EXT_RETURN tls_construct_stoc_key_share(SSL_CONNECTION *s, WPACKET *pkt,"
+        },
+        {
+          "term": "key_share",
+          "line": 1959,
+          "text": "/* Original key_share was acceptable so don't ask for another one */"
+        },
+        {
+          "term": "key_share",
+          "line": 1962,
+          "text": "if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_key_share)"
+        },
+        {
+          "term": "key_share",
+          "line": 1974,
+          "text": "/* No key_share received from client - must be resuming */"
+        },
+        {
+          "term": "key_share",
+          "line": 1992,
+          "text": "if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_key_share)"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_accept_ksgroup",
+      "line_range": [
+        637,
+        658
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "extension_names",
+          "field_names"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "group",
+          "illegal_parameter",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "group",
+          "line": 637,
+          "text": "static int tls_accept_ksgroup(SSL_CONNECTION *s, uint16_t ksgroup, PACKET *encoded_pubkey)"
+        },
+        {
+          "term": "group",
+          "line": 639,
+          "text": "/* Accept the key share group */"
+        },
+        {
+          "term": "group",
+          "line": 640,
+          "text": "s->s3.group_id = ksgroup;"
+        },
+        {
+          "term": "group",
+          "line": 641,
+          "text": "s->s3.group_id_candidate = ksgroup;"
+        },
+        {
+          "term": "group",
+          "line": 642,
+          "text": "/* Cache the selected group ID in the SSL_SESSION */"
+        },
+        {
+          "term": "group",
+          "line": 643,
+          "text": "s->session->kex_group = ksgroup;"
+        },
+        {
+          "term": "group",
+          "line": 644,
+          "text": "if ((s->s3.peer_tmp = ssl_generate_param_group(s, ksgroup)) == NULL) {"
+        },
+        {
+          "term": "key_share",
+          "line": 654,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 654,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2164,
+          "text": "* ServerHello."
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1978,
+          "text": "if (s->hello_retry_request == SSL_HRR_PENDING"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1891,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, protverr);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1985,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_CIPHER);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2071,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2088,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2204,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2240,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-8-R14_candidate_1.c",
+    "locations/code/rfc8446-4-2-8-R14_candidate_2.c",
+    "locations/code/rfc8446-4-2-8-R14_candidate_3.c",
+    "locations/code/rfc8446-4-2-8-R14_candidate_4.c",
+    "locations/code/rfc8446-4-2-8-R14_candidate_5.c",
+    "locations/code/rfc8446-4-2-8-R14_candidate_6.c",
+    "locations/code/rfc8446-4-2-8-R14_candidate_7.c",
+    "locations/code/rfc8446-4-2-8-R14_candidate_8.c",
+    "locations/code/rfc8446-4-2-8-R14_candidate_9.c",
+    "locations/code/rfc8446-4-2-8-R14_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 3941,
+    "files_with_hits": 111,
+    "functions_identified": 583,
+    "null_scope_hits": 779,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 2008
+  }
+}

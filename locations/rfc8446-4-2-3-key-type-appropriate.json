@@ -1,0 +1,809 @@
+{
+  "rule_id": "rfc8446-4.2.3-key-type-appropriate",
+  "rule_type": "consistency_check",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "Certificate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Certificate"
+      ]
+    },
+    {
+      "term": "CertificateVerify",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateVerify",
+        "certificate_verify"
+      ]
+    },
+    {
+      "term": "signature_algorithms",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "signature_algorithms",
+        "SignatureAlgorithms"
+      ]
+    },
+    {
+      "term": "signature_algorithms_cert",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "signature_algorithms_cert",
+        "SignatureAlgorithmsCert"
+      ]
+    },
+    {
+      "term": "certificate authentication",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "certificate authentication"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_certificate_request",
+      "line_range": [
+        2959,
+        3081
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2962,
+          "text": "/* Clear certificate validity flags */"
+        },
+        {
+          "term": "Certificate",
+          "line": 2985,
+          "text": "/* Free and zero certificate types: it is not present in TLS 1.3 */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3019,
+          "text": "/* get the certificate types */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3039,
+          "text": "* Despite this being for certificates, preserve compatibility"
+        },
+        {
+          "term": "Certificate",
+          "line": 3065,
+          "text": "/* we should setup a certificate to return.... */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3069,
+          "text": "* In TLSv1.3 we don't prepare the client certificate yet. We wait until"
+        },
+        {
+          "term": "Certificate",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "Certificate",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "Certificate",
+          "line": 3073,
+          "text": "* SSL_get1_peer_certificate() returns something sensible in"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 3044,
+          "text": "SSL_R_SIGNATURE_ALGORITHMS_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/t1_lib.c",
+      "function": "check_cert_usable",
+      "line_range": [
+        4691,
+        4742
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms",
+          "signature_algorithms_cert"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 4714,
+          "text": "* on the sigalg with which the certificate was signed (by its issuer)."
+        },
+        {
+          "term": "Certificate",
+          "line": 4729,
+          "text": "* signing certificate."
+        },
+        {
+          "term": "Certificate",
+          "line": 4738,
+          "text": "* Without signat_algorithms_cert, any certificate for which we have"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 4713,
+          "text": "* The TLS 1.3 signature_algorithms_cert extension places restrictions"
+        },
+        {
+          "term": "signature_algorithms_cert",
+          "line": 4713,
+          "text": "* The TLS 1.3 signature_algorithms_cert extension places restrictions"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/t1_lib.c",
+      "function": "find_sig_alg",
+      "line_range": [
+        4787,
+        4834
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms",
+          "signature_algorithms_cert"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 4796,
+          "text": "/* Look for a shared sigalgs matching possible certificates */"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 4807,
+          "text": "/* Check that we have a cert, and signature_algorithms_cert */"
+        },
+        {
+          "term": "signature_algorithms_cert",
+          "line": 4807,
+          "text": "/* Check that we have a cert, and signature_algorithms_cert */"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_certificate",
+      "line_range": [
+        3940,
+        4131
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 16,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 3940,
+          "text": "MSG_PROCESS_RETURN tls_process_client_certificate(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3965,
+          "text": "SSLfatal(s, SSL_AD_UNSUPPORTED_CERTIFICATE,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3966,
+          "text": "SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4023,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE, &rawexts,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4025,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4042,
+          "text": "/* Fail only if we required a certificate */"
+        },
+        {
+          "term": "Certificate",
+          "line": 4044,
+          "text": "SSLfatal(s, SSL_AD_CERTIFICATE_REQUIRED,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4045,
+          "text": "SSL_R_PEER_DID_NOT_RETURN_A_CERTIFICATE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4048,
+          "text": "/* No client certificate so digest cached records */"
+        },
+        {
+          "term": "Certificate",
+          "line": 4058,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4064,
+          "text": "SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4073,
+          "text": "* a new certificate is received via post-handshake authentication, as the"
+        },
+        {
+          "term": "Certificate",
+          "line": 4109,
+          "text": "* certificate, while we do include it in statem_clnt.c"
+        },
+        {
+          "term": "Certificate",
+          "line": 4112,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 4112,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 4058,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_read_transition",
+      "line_range": [
+        190,
+        314
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 216,
+          "text": "* 1) We didn't request a Certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 218,
+          "text": "* 2) We did request one and we allow no Certificate to be returned"
+        },
+        {
+          "term": "Certificate",
+          "line": 226,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 242,
+          "text": "* We should only process a CertificateVerify message if we have"
+        },
+        {
+          "term": "Certificate",
+          "line": 243,
+          "text": "* received a Certificate from the client. If so then |s->session->peer|"
+        },
+        {
+          "term": "Certificate",
+          "line": 244,
+          "text": "* will be non NULL. In some instances a CertificateVerify message is"
+        },
+        {
+          "term": "Certificate",
+          "line": 245,
+          "text": "* not required even if the peer has sent a Certificate (e.g. such as in"
+        },
+        {
+          "term": "Certificate",
+          "line": 253,
+          "text": "* pub key in a certificate, the CertificateVerify message is"
+        },
+        {
+          "term": "Certificate",
+          "line": 255,
+          "text": "* its key from the certificate for key exchange."
+        },
+        {
+          "term": "Certificate",
+          "line": 261,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 242,
+          "text": "* We should only process a CertificateVerify message if we have"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 244,
+          "text": "* will be non NULL. In some instances a CertificateVerify message is"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 253,
+          "text": "* pub key in a certificate, the CertificateVerify message is"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 261,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_post_process_server_certificate",
+      "line_range": [
+        2450,
+        2544
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2450,
+          "text": "WORK_STATE tls_post_process_server_certificate(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2467,
+          "text": "* for client side verification of the server certificate to take place."
+        },
+        {
+          "term": "Certificate",
+          "line": 2484,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2492,
+          "text": "* Inconsistency alert: cert_chain does include the peer's certificate,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2508,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2512,
+          "text": "* Check certificate type is consistent with ciphersuite. For TLS 1.3"
+        },
+        {
+          "term": "Certificate",
+          "line": 2513,
+          "text": "* skip check since TLS 1.3 ciphersuites can be used with any certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 2518,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2535,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 2535,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 2484,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_read_transition",
+      "line_range": [
+        94,
+        216
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 133,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 137,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 142,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 143,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 152,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 158,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 167,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 189,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 167,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_construct_message",
+      "line_range": [
+        1225,
+        1324
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 1261,
+          "text": "*confunc = tls_construct_server_certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1262,
+          "text": "*mt = SSL3_MT_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1267,
+          "text": "*confunc = tls_construct_server_compressed_certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1268,
+          "text": "*mt = SSL3_MT_COMPRESSED_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1274,
+          "text": "*mt = SSL3_MT_CERTIFICATE_VERIFY;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1283,
+          "text": "*confunc = tls_construct_certificate_request;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1284,
+          "text": "*mt = SSL3_MT_CERTIFICATE_REQUEST;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1299,
+          "text": "*mt = SSL3_MT_CERTIFICATE_STATUS;"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 1274,
+          "text": "*mt = SSL3_MT_CERTIFICATE_VERIFY;"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_read_transition",
+      "line_range": [
+        74,
+        179
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 107,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 112,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 113,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 134,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 162,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 163,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 134,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_check_sig_alg",
+      "line_range": [
+        4119,
+        4184
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 4129,
+          "text": "* The signatures on certificates that are self-signed or certificates"
+        },
+        {
+          "term": "Certificate",
+          "line": 4131,
+          "text": "* certification path (see [RFC5280], Section 3.2).  A certificate that"
+        },
+        {
+          "term": "Certificate",
+          "line": 4167,
+          "text": "* Accept RSA PKCS#1 signatures in certificates when the signature"
+        },
+        {
+          "term": "Certificate",
+          "line": 4171,
+          "text": "* points, and we're doing strict checking of the certificate chain (in"
+        },
+        {
+          "term": "Certificate",
+          "line": 4173,
+          "text": "* certificates in the chain, but the TLS requirement on PSS should not"
+        },
+        {
+          "term": "Certificate",
+          "line": 4174,
+          "text": "* extend to certificates.  Though the peer can in fact list the legacy"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 4133,
+          "text": "* advertised as being supported in the \"signature_algorithms\""
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-3-key-type-appropriate_candidate_1.c",
+    "locations/code/rfc8446-4-2-3-key-type-appropriate_candidate_2.c",
+    "locations/code/rfc8446-4-2-3-key-type-appropriate_candidate_3.c",
+    "locations/code/rfc8446-4-2-3-key-type-appropriate_candidate_4.c",
+    "locations/code/rfc8446-4-2-3-key-type-appropriate_candidate_5.c",
+    "locations/code/rfc8446-4-2-3-key-type-appropriate_candidate_6.c",
+    "locations/code/rfc8446-4-2-3-key-type-appropriate_candidate_7.c",
+    "locations/code/rfc8446-4-2-3-key-type-appropriate_candidate_8.c",
+    "locations/code/rfc8446-4-2-3-key-type-appropriate_candidate_9.c",
+    "locations/code/rfc8446-4-2-3-key-type-appropriate_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1705,
+    "files_with_hits": 138,
+    "functions_identified": 317,
+    "null_scope_hits": 762,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1030
+  }
+}

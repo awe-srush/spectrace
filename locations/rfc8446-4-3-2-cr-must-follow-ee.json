@@ -1,0 +1,471 @@
+{
+  "rule_id": "rfc8446-4.3.2-cr-must-follow-ee",
+  "rule_type": "ordering_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "CertificateRequest",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateRequest",
+        "certificate_request"
+      ]
+    },
+    {
+      "term": "EncryptedExtensions",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "EncryptedExtensions",
+        "encrypted_extensions"
+      ]
+    },
+    {
+      "term": "unexpected_message",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unexpected_message",
+        "UnexpectedMessage"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_construct_message",
+      "line_range": [
+        1225,
+        1324
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "EncryptedExtensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1283,
+          "text": "*confunc = tls_construct_certificate_request;"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1284,
+          "text": "*mt = SSL3_MT_CERTIFICATE_REQUEST;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1312,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1313,
+          "text": "*confunc = tls_construct_encrypted_extensions;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1314,
+          "text": "*mt = SSL3_MT_ENCRYPTED_EXTENSIONS;"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_read_transition",
+      "line_range": [
+        94,
+        216
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "EncryptedExtensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 133,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 189,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 120,
+          "text": "if (mt == SSL3_MT_ENCRYPTED_EXTENSIONS) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 121,
+          "text": "st->hand_state = TLS_ST_CR_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 126,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_write_transition",
+      "line_range": [
+        582,
+        715
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "EncryptedExtensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 637,
+          "text": "else if (send_certificate_request(s))"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 624,
+          "text": "st->hand_state = TLS_ST_SW_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 631,
+          "text": "st->hand_state = TLS_ST_SW_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 634,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_parse",
+      "line_range": [
+        113,
+        167
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "EncryptedExtensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 147,
+          "text": "* Extensions received in the ClientHello or CertificateRequest are marked"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 151,
+          "text": "if ((context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST))"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 137,
+          "text": "* If it's ServerHello or EncryptedExtensions we can't have any"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 135,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS)) != 0) {"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_read_transition",
+      "line_range": [
+        227,
+        408
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 317,
+          "text": "} else if (mt == SSL3_MT_CERTIFICATE_REQUEST"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 354,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 406,
+          "text": "SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_process_message",
+      "line_range": [
+        1073,
+        1131
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "EncryptedExtensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1108,
+          "text": "return tls_process_certificate_request(s, pkt);"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1125,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1126,
+          "text": "return tls_process_encrypted_extensions(s, pkt);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_handshake",
+      "line_range": [
+        1625,
+        1738
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "EncryptedExtensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1696,
+          "text": "case SSL3_MT_CERTIFICATE_REQUEST:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1716,
+          "text": "case SSL3_MT_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1718,
+          "text": "SSL3_MT_ENCRYPTED_EXTENSIONS, &msg, &msglen))"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/quic/quic_channel.c",
+      "function": "ch_on_handshake_alert",
+      "line_range": [
+        1246,
+        1284
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1252,
+          "text": "* TLS CertificateRequest messages, and clients MUST treat receipt of such"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1262,
+          "text": "\"CertificateRequest received\");"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1255,
+          "text": "if (alert_code == SSL_AD_UNEXPECTED_MESSAGE"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_post_work",
+      "line_range": [
+        1002,
+        1215
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "EncryptedExtensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1176,
+          "text": "if (!s->hit && !send_certificate_request(s)) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1175,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_add",
+      "line_range": [
+        173,
+        321
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "EncryptedExtensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 192,
+          "text": "/* Only send extensions present in ClientHello/CertificateRequest */"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-3-2-cr-must-follow-ee_candidate_1.c",
+    "locations/code/rfc8446-4-3-2-cr-must-follow-ee_candidate_2.c",
+    "locations/code/rfc8446-4-3-2-cr-must-follow-ee_candidate_3.c",
+    "locations/code/rfc8446-4-3-2-cr-must-follow-ee_candidate_4.c",
+    "locations/code/rfc8446-4-3-2-cr-must-follow-ee_candidate_5.c",
+    "locations/code/rfc8446-4-3-2-cr-must-follow-ee_candidate_6.c",
+    "locations/code/rfc8446-4-3-2-cr-must-follow-ee_candidate_7.c",
+    "locations/code/rfc8446-4-3-2-cr-must-follow-ee_candidate_8.c",
+    "locations/code/rfc8446-4-3-2-cr-must-follow-ee_candidate_9.c",
+    "locations/code/rfc8446-4-3-2-cr-must-follow-ee_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 160,
+    "files_with_hits": 22,
+    "functions_identified": 58,
+    "null_scope_hits": 32,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1169
+  }
+}

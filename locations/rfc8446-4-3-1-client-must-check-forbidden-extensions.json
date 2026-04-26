@@ -1,0 +1,815 @@
+{
+  "rule_id": "rfc8446-4.3.1-client-must-check-forbidden-extensions",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "EncryptedExtensions",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "EncryptedExtensions",
+        "encrypted_extensions"
+      ]
+    },
+    {
+      "term": "extensions",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "extensions"
+      ]
+    },
+    {
+      "term": "illegal_parameter",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "illegal_parameter",
+        "IllegalParameter"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions.c",
+      "function": "final_early_data",
+      "line_range": [
+        1981,
+        2022
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "extensions",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 1987,
+          "text": "if (context == SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS"
+        },
+        {
+          "term": "extensions",
+          "line": 1987,
+          "text": "if (context == SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1995,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EARLY_DATA);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 26,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "extensions",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "extensions",
+          "line": 1711,
+          "text": "RAW_EXTENSION *extensions = NULL;"
+        },
+        {
+          "term": "extensions",
+          "line": 1790,
+          "text": "/* TLS extensions */"
+        },
+        {
+          "term": "extensions",
+          "line": 1800,
+          "text": "if (!tls_collect_extensions(s, &extpkt, SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST,"
+        },
+        {
+          "term": "extensions",
+          "line": 1801,
+          "text": "&extensions, NULL, 1)"
+        },
+        {
+          "term": "extensions",
+          "line": 1804,
+          "text": "extensions, NULL, 0)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 1809,
+          "text": "if (!tls_collect_extensions(s, &extpkt,"
+        },
+        {
+          "term": "extensions",
+          "line": 1812,
+          "text": "&extensions, NULL, 1)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 1916,
+          "text": "if (!ssl_choose_client_version(s, sversion, extensions)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 1946,
+          "text": "ret = tls_process_as_hello_retry_request(s, extensions);"
+        },
+        {
+          "term": "extensions",
+          "line": 1947,
+          "text": "OPENSSL_free(extensions);"
+        },
+        {
+          "term": "extensions",
+          "line": 1953,
+          "text": "* Now we have chosen the version we need to check again that the extensions"
+        },
+        {
+          "term": "extensions",
+          "line": 1958,
+          "text": "if (!tls_validate_all_contexts(s, context, extensions)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 1979,
+          "text": "extensions, NULL, 0)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 2124,
+          "text": "if (!tls_parse_all_extensions(s, context, extensions, NULL, 0, 1)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 2197,
+          "text": "OPENSSL_free(extensions);"
+        },
+        {
+          "term": "extensions",
+          "line": 2200,
+          "text": "OPENSSL_free(extensions);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1776,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_TLS_SESSION_ID_TOO_LONG);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1893,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_ECH_REQUIRED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1924,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1933,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_INVALID_SESSION_ID);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1959,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2031,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2087,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2101,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2108,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COMPRESSION_DISABLED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2116,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/extensions.c",
+      "function": "tls_collect_extensions",
+      "line_range": [
+        805,
+        927
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 19,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "extensions",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "extensions",
+          "line": 805,
+          "text": "int tls_collect_extensions(SSL_CONNECTION *s, PACKET *packet,"
+        },
+        {
+          "term": "extensions",
+          "line": 809,
+          "text": "PACKET extensions = *packet;"
+        },
+        {
+          "term": "extensions",
+          "line": 813,
+          "text": "RAW_EXTENSION *raw_extensions = NULL;"
+        },
+        {
+          "term": "extensions",
+          "line": 819,
+          "text": "* Initialise server side custom extensions. Client side is done during"
+        },
+        {
+          "term": "extensions",
+          "line": 820,
+          "text": "* construction of extensions for the ClientHello."
+        },
+        {
+          "term": "extensions",
+          "line": 831,
+          "text": "raw_extensions = OPENSSL_calloc(num_exts, sizeof(*raw_extensions));"
+        },
+        {
+          "term": "extensions",
+          "line": 832,
+          "text": "if (raw_extensions == NULL) {"
+        },
+        {
+          "term": "extensions",
+          "line": 838,
+          "text": "while (PACKET_remaining(&extensions) > 0) {"
+        },
+        {
+          "term": "extensions",
+          "line": 843,
+          "text": "if (!PACKET_get_net_2(&extensions, &type) || !PACKET_get_length_prefixed_2(&extensions, &extension)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 849,
+          "text": "* extensions that we recognise. We also have a special case for the"
+        },
+        {
+          "term": "extensions",
+          "line": 852,
+          "text": "if (!verify_extension(s, context, type, exts, raw_extensions, &thisex)"
+        },
+        {
+          "term": "extensions",
+          "line": 856,
+          "text": "&& PACKET_remaining(&extensions) != 0)) {"
+        },
+        {
+          "term": "extensions",
+          "line": 860,
+          "text": "idx = (unsigned int)(thisex - raw_extensions);"
+        },
+        {
+          "term": "extensions",
+          "line": 864,
+          "text": "* extensions can be sent in the NewSessionTicket. We only do this for"
+        },
+        {
+          "term": "extensions",
+          "line": 865,
+          "text": "* the built-in extensions. Custom extensions have a different but"
+        },
+        {
+          "term": "extensions",
+          "line": 905,
+          "text": "* Initialise all known extensions relevant to this context,"
+        },
+        {
+          "term": "extensions",
+          "line": 919,
+          "text": "*res = raw_extensions;"
+        },
+        {
+          "term": "extensions",
+          "line": 925,
+          "text": "OPENSSL_free(raw_extensions);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 857,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/t1_lib.c",
+      "function": "tls12_check_peer_sigalg",
+      "line_range": [
+        2854,
+        2989
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "extensions",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "extensions",
+          "line": 2940,
+          "text": "/* Check curve matches extensions */"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2869,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2880,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2889,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2897,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2909,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2917,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2925,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2935,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CURVE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2942,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CURVE);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_encrypted_extensions",
+      "line_range": [
+        4455,
+        4482
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 4455,
+          "text": "static MSG_PROCESS_RETURN tls_process_encrypted_extensions(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 4468,
+          "text": "SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS, &rawexts,"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 4470,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS,"
+        },
+        {
+          "term": "extensions",
+          "line": 4455,
+          "text": "static MSG_PROCESS_RETURN tls_process_encrypted_extensions(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "extensions",
+          "line": 4458,
+          "text": "PACKET extensions;"
+        },
+        {
+          "term": "extensions",
+          "line": 4461,
+          "text": "if (!PACKET_as_length_prefixed_2(pkt, &extensions)"
+        },
+        {
+          "term": "extensions",
+          "line": 4467,
+          "text": "if (!tls_collect_extensions(s, &extensions,"
+        },
+        {
+          "term": "extensions",
+          "line": 4468,
+          "text": "SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS, &rawexts,"
+        },
+        {
+          "term": "extensions",
+          "line": 4470,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS,"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "extensions",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "extensions",
+          "line": 2096,
+          "text": "/* TLS extensions */"
+        },
+        {
+          "term": "extensions",
+          "line": 2097,
+          "text": "if (!tls_parse_all_extensions(s, SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1891,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, protverr);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1985,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_CIPHER);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2071,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2088,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2204,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2240,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_parse",
+      "line_range": [
+        113,
+        167
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 137,
+          "text": "* If it's ServerHello or EncryptedExtensions we can't have any"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 135,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS)) != 0) {"
+        },
+        {
+          "term": "extensions",
+          "line": 135,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS)) != 0) {"
+        },
+        {
+          "term": "extensions",
+          "line": 137,
+          "text": "* If it's ServerHello or EncryptedExtensions we can't have any"
+        },
+        {
+          "term": "extensions",
+          "line": 138,
+          "text": "* extensions not sent in ClientHello."
+        },
+        {
+          "term": "extensions",
+          "line": 147,
+          "text": "* Extensions received in the ClientHello or CertificateRequest are marked"
+        },
+        {
+          "term": "extensions",
+          "line": 149,
+          "text": "* extensions in the response messages"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/ech/ech_internal.c",
+      "function": "ech_find_outers",
+      "line_range": [
+        1423,
+        1499
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "extensions",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "extensions",
+          "line": 1433,
+          "text": "/* chew up the packet to extensions */"
+        },
+        {
+          "term": "extensions",
+          "line": 1445,
+          "text": "|| !PACKET_get_net_2(pkt, &extlens) /* len(extensions) */"
+        },
+        {
+          "term": "extensions",
+          "line": 1446,
+          "text": "|| extlens == 0) { /* no extensions! */"
+        },
+        {
+          "term": "extensions",
+          "line": 1455,
+          "text": "if (etype == TLSEXT_TYPE_outer_extensions) {"
+        },
+        {
+          "term": "extensions",
+          "line": 1489,
+          "text": "|| pi_tmp == TLSEXT_TYPE_outer_extensions"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1482,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1491,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_write_transition",
+      "line_range": [
+        582,
+        715
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 624,
+          "text": "st->hand_state = TLS_ST_SW_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 631,
+          "text": "st->hand_state = TLS_ST_SW_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 634,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "extensions",
+          "line": 624,
+          "text": "st->hand_state = TLS_ST_SW_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "extensions",
+          "line": 631,
+          "text": "st->hand_state = TLS_ST_SW_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "extensions",
+          "line": 634,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_construct_message",
+      "line_range": [
+        1225,
+        1324
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "extensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 1312,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1313,
+          "text": "*confunc = tls_construct_encrypted_extensions;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1314,
+          "text": "*mt = SSL3_MT_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "extensions",
+          "line": 1312,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "extensions",
+          "line": 1313,
+          "text": "*confunc = tls_construct_encrypted_extensions;"
+        },
+        {
+          "term": "extensions",
+          "line": 1314,
+          "text": "*mt = SSL3_MT_ENCRYPTED_EXTENSIONS;"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-3-1-client-must-check-forbidden-extensions_candidate_1.c",
+    "locations/code/rfc8446-4-3-1-client-must-check-forbidden-extensions_candidate_2.c",
+    "locations/code/rfc8446-4-3-1-client-must-check-forbidden-extensions_candidate_3.c",
+    "locations/code/rfc8446-4-3-1-client-must-check-forbidden-extensions_candidate_4.c",
+    "locations/code/rfc8446-4-3-1-client-must-check-forbidden-extensions_candidate_5.c",
+    "locations/code/rfc8446-4-3-1-client-must-check-forbidden-extensions_candidate_6.c",
+    "locations/code/rfc8446-4-3-1-client-must-check-forbidden-extensions_candidate_7.c",
+    "locations/code/rfc8446-4-3-1-client-must-check-forbidden-extensions_candidate_8.c",
+    "locations/code/rfc8446-4-3-1-client-must-check-forbidden-extensions_candidate_9.c",
+    "locations/code/rfc8446-4-3-1-client-must-check-forbidden-extensions_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 832,
+    "files_with_hits": 92,
+    "functions_identified": 298,
+    "null_scope_hits": 207,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1666
+  }
+}

@@ -1,0 +1,140 @@
+[
+  {
+    "rule_id": "rfc8446-6.1-data-after-closure-must-be-ignored",
+    "source_section": "6.1",
+    "source_text": "Any data received after a closure alert has been received MUST be ignored.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "Any data received after a closure alert MUST be ignored.",
+    "entity": "both",
+    "applies_when": "Endpoint receives data after close_notify",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "data silently ignored",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "close_notify"
+      ],
+      "modes_or_conditions": [
+        "connection closure"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify endpoint doesn't process data after close_notify but behavior is passive.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-6.1-user-canceled-should-follow-with-close-notify",
+    "source_section": "6.1",
+    "source_text": "This alert SHOULD be followed by a \"close_notify\".",
+    "normative_keyword": "SHOULD",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "A user_canceled alert SHOULD be followed by a close_notify.",
+    "entity": "both",
+    "applies_when": "Endpoint sends user_canceled alert",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "close_notify follows user_canceled",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "user_canceled",
+        "close_notify"
+      ],
+      "modes_or_conditions": [
+        "connection closure"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify close_notify follows user_canceled.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit SHOULD.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-6.1-must-send-close-notify-before-closing-write",
+    "source_section": "6.1",
+    "source_text": "Each party MUST send a \"close_notify\" alert before closing its write side of the connection, unless it has already sent some error alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "Each party MUST send close_notify before closing write side, unless an error alert was already sent.",
+    "entity": "both",
+    "applies_when": "Endpoint closes its write side of the connection",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "close_notify sent before write-side close",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "close_notify"
+      ],
+      "modes_or_conditions": [
+        "connection closure"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify close_notify is sent before transport close.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-6.1-must-receive-close-notify-if-post-tls-data",
+    "source_section": "6.1",
+    "source_text": "If the application protocol using TLS provides that any data may be carried over the underlying transport after the TLS connection is closed, the TLS implementation MUST receive a \"close_notify\" alert before indicating end-of-data to the application layer.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If application protocol carries data after TLS close, implementation MUST receive close_notify before indicating end-of-data.",
+    "entity": "both",
+    "applies_when": "Application protocol allows post-TLS transport data",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "close_notify received before end-of-data indication",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "close_notify"
+      ],
+      "modes_or_conditions": [
+        "connection closure",
+        "post-TLS data"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Depends on application protocol behavior; requires specific protocol context.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

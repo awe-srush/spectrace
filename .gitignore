@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+.env
+.pytest_cache/
+results_old/
+results_backup_r01/
+run_check.sh
+run_10rules.sh
+locations/code/

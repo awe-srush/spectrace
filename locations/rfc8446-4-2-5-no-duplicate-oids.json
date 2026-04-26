@@ -1,0 +1,408 @@
+{
+  "rule_id": "rfc8446-4.2.5-no-duplicate-oids",
+  "rule_type": "uniqueness_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "CertificateRequest",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateRequest",
+        "certificate_request"
+      ]
+    },
+    {
+      "term": "filters",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "filters"
+      ]
+    },
+    {
+      "term": "certificate_extension_oid",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "certificate_extension_oid",
+        "CertificateExtensionOid"
+      ]
+    },
+    {
+      "term": "oid_filters",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "oid_filters",
+        "OidFilters"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_certificate_request",
+      "line_range": [
+        2959,
+        3081
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_write_transition",
+      "line_range": [
+        721,
+        854
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 790,
+          "text": "} else if (send_certificate_request(s)) {"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 813,
+          "text": "if (send_certificate_request(s)) {"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_construct_message",
+      "line_range": [
+        1225,
+        1324
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1283,
+          "text": "*confunc = tls_construct_certificate_request;"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1284,
+          "text": "*mt = SSL3_MT_CERTIFICATE_REQUEST;"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_construct_certificate_request",
+      "line_range": [
+        3159,
+        3230
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 3159,
+          "text": "CON_FUNC_RETURN tls_construct_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 3193,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST, NULL,"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_status_request",
+      "line_range": [
+        1819,
+        1850
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1824,
+          "text": "/* We ignore this if the server sends a CertificateRequest */"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1823,
+          "text": "if (context == SSL_EXT_TLS1_3_CERTIFICATE_REQUEST) {"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_sct",
+      "line_range": [
+        1854,
+        1914
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1858,
+          "text": "/* We ignore this if the server sends it in a CertificateRequest */"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1857,
+          "text": "if (context == SSL_EXT_TLS1_3_CERTIFICATE_REQUEST) {"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/extensions.c",
+      "function": "tls_collect_extensions",
+      "line_range": [
+        805,
+        927
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 863,
+          "text": "* be sent in the ClientHello and CertificateRequest. Unsolicited"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 876,
+          "text": "&& (context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST | SSL_EXT_TLS1_3_NEW_SESSION_TICKET)) == 0"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_parse",
+      "line_range": [
+        113,
+        167
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 147,
+          "text": "* Extensions received in the ClientHello or CertificateRequest are marked"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 151,
+          "text": "if ((context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST))"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_construct_stoc_status_request",
+      "line_range": [
+        1762,
+        1804
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1768,
+          "text": "/* We don't currently support this extension inside a CertificateRequest */"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1769,
+          "text": "if (context == SSL_EXT_TLS1_3_CERTIFICATE_REQUEST)"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_construct_stoc_client_cert_type",
+      "line_range": [
+        2295,
+        2333
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 2300,
+          "text": "&& (send_certificate_request(sc)"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 2316,
+          "text": "if ((!send_certificate_request(sc) && sc->post_handshake_auth != SSL_PHA_EXT_RECEIVED)"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-5-no-duplicate-oids_candidate_1.c",
+    "locations/code/rfc8446-4-2-5-no-duplicate-oids_candidate_2.c",
+    "locations/code/rfc8446-4-2-5-no-duplicate-oids_candidate_3.c",
+    "locations/code/rfc8446-4-2-5-no-duplicate-oids_candidate_4.c",
+    "locations/code/rfc8446-4-2-5-no-duplicate-oids_candidate_5.c",
+    "locations/code/rfc8446-4-2-5-no-duplicate-oids_candidate_6.c",
+    "locations/code/rfc8446-4-2-5-no-duplicate-oids_candidate_7.c",
+    "locations/code/rfc8446-4-2-5-no-duplicate-oids_candidate_8.c",
+    "locations/code/rfc8446-4-2-5-no-duplicate-oids_candidate_9.c",
+    "locations/code/rfc8446-4-2-5-no-duplicate-oids_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 59,
+    "files_with_hits": 14,
+    "functions_identified": 27,
+    "null_scope_hits": 16,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 782
+  }
+}

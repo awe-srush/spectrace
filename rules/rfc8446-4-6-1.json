@@ -1,0 +1,262 @@
+[
+  {
+    "rule_id": "rfc8446-4.6.1-ticket-must-resume-with-same-kdf-hash",
+    "source_section": "4.6.1",
+    "source_text": "Any ticket MUST only be resumed with a cipher suite that has the same KDF hash algorithm as that used to establish the original connection.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "A ticket MUST only be resumed with a cipher suite using the same KDF hash algorithm as the original connection.",
+    "entity": "both",
+    "applies_when": "Client or server uses a ticket for resumption",
+    "target_message": "ClientHello",
+    "target_field": "cipher_suites",
+    "expected_value": "cipher suite with same KDF hash as original",
+    "related_fields": [
+      "pre_shared_key"
+    ],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "NewSessionTicket"
+      ],
+      "field_names": [
+        "cipher_suites"
+      ],
+      "extension_names": [
+        "pre_shared_key"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "resumption",
+        "PSK"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify cipher suite hash matches ticket's original connection hash.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.1-client-must-only-resume-if-sni-valid",
+    "source_section": "4.6.1",
+    "source_text": "Clients MUST only resume if the new SNI value is valid for the server certificate presented in the original session and SHOULD only resume if the SNI value matches the one used in the original session.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Clients MUST only resume if the new SNI is valid for the original session's server certificate.",
+    "entity": "client",
+    "applies_when": "Client attempts session resumption with a ticket",
+    "target_message": "ClientHello",
+    "target_field": "extensions.server_name",
+    "expected_value": "SNI valid for original certificate",
+    "related_fields": [
+      "pre_shared_key"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "server_name",
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "resumption",
+        "SNI"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Requires tracking original certificate and SNI across sessions.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.1-must-use-resumption-sni",
+    "source_section": "4.6.1",
+    "source_text": "On resumption, if reporting an SNI value to the calling application, implementations MUST use the value sent in the resumption ClientHello rather than the value sent in the previous session.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "On resumption, implementations MUST report the SNI from the resumption ClientHello, not from the previous session.",
+    "entity": "both",
+    "applies_when": "Implementation reports SNI during resumption",
+    "target_message": "ClientHello",
+    "target_field": "extensions.server_name",
+    "expected_value": "value from current (resumption) ClientHello",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "server_name",
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "resumption",
+        "SNI"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Requires observing application-level SNI reporting behavior.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.1-ticket-lifetime-must-not-exceed-7-days",
+    "source_section": "4.6.1",
+    "source_text": "Servers MUST NOT use any value greater than 604800 seconds (7 days).",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "value_constraint",
+    "rule_statement": "Servers MUST NOT set ticket_lifetime greater than 604800 seconds (7 days).",
+    "entity": "server",
+    "applies_when": "Server constructs NewSessionTicket",
+    "target_message": "NewSessionTicket",
+    "target_field": "ticket_lifetime",
+    "expected_value": "<= 604800",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "NewSessionTicket"
+      ],
+      "field_names": [
+        "ticket_lifetime"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct value range check.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.1-client-must-not-cache-over-7-days",
+    "source_section": "4.6.1",
+    "source_text": "Clients MUST NOT cache tickets for longer than 7 days, regardless of the ticket_lifetime, and MAY delete tickets earlier based on local policy.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "value_constraint",
+    "rule_statement": "Clients MUST NOT cache tickets for longer than 7 days regardless of ticket_lifetime.",
+    "entity": "client",
+    "applies_when": "Client stores session ticket",
+    "target_message": "NewSessionTicket",
+    "target_field": "ticket_lifetime",
+    "expected_value": "cached no longer than 7 days",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "NewSessionTicket"
+      ],
+      "field_names": [
+        "ticket_lifetime"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "ticket caching"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Requires observing client ticket storage behavior over time.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.1-server-must-generate-fresh-ticket-age-add",
+    "source_section": "4.6.1",
+    "source_text": "The server MUST generate a fresh value for each ticket it sends.",
+    "normative_keyword": "MUST",
+    "rule_type": "uniqueness_constraint",
+    "rule_statement": "The server MUST generate a fresh ticket_age_add value for each NewSessionTicket.",
+    "entity": "server",
+    "applies_when": "Server constructs NewSessionTicket",
+    "target_message": "NewSessionTicket",
+    "target_field": "ticket_age_add",
+    "expected_value": "fresh random value per ticket",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "NewSessionTicket"
+      ],
+      "field_names": [
+        "ticket_age_add"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify different values across tickets but randomness is hard to fully verify.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.1-client-must-ignore-unrecognized-extensions",
+    "source_section": "4.6.1",
+    "source_text": "Clients MUST ignore unrecognized extensions.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "Clients MUST ignore unrecognized extensions in NewSessionTicket.",
+    "entity": "client",
+    "applies_when": "Client processes NewSessionTicket extensions",
+    "target_message": "NewSessionTicket",
+    "target_field": "extensions",
+    "expected_value": "unrecognized extensions silently ignored",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "NewSessionTicket"
+      ],
+      "field_names": [
+        "extensions"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify client doesn't abort on unknown extensions.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

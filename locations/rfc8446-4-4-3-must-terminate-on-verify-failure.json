@@ -1,0 +1,2004 @@
+{
+  "rule_id": "rfc8446-4.4.3-must-terminate-on-verify-failure",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "CertificateVerify",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateVerify",
+        "certificate_verify"
+      ]
+    },
+    {
+      "term": "signature",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "signature"
+      ]
+    },
+    {
+      "term": "decrypt_error",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "decrypt_error",
+        "DecryptError"
+      ]
+    },
+    {
+      "term": "signature verification failure",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "signature verification failure"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "crypto/x509/x509_txt.c",
+      "function": "X509_verify_cert_error_string",
+      "line_range": [
+        21,
+        242
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 23,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "signature",
+          "signature verification failure"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature",
+          "line": 32,
+          "text": "case X509_V_ERR_UNABLE_TO_DECRYPT_CERT_SIGNATURE:"
+        },
+        {
+          "term": "signature",
+          "line": 33,
+          "text": "return \"unable to decrypt certificate's signature\";"
+        },
+        {
+          "term": "signature",
+          "line": 34,
+          "text": "case X509_V_ERR_UNABLE_TO_DECRYPT_CRL_SIGNATURE:"
+        },
+        {
+          "term": "signature",
+          "line": 35,
+          "text": "return \"unable to decrypt CRL's signature\";"
+        },
+        {
+          "term": "signature",
+          "line": 38,
+          "text": "case X509_V_ERR_CERT_SIGNATURE_FAILURE:"
+        },
+        {
+          "term": "signature",
+          "line": 39,
+          "text": "return \"certificate signature failure\";"
+        },
+        {
+          "term": "signature",
+          "line": 40,
+          "text": "case X509_V_ERR_CRL_SIGNATURE_FAILURE:"
+        },
+        {
+          "term": "signature",
+          "line": 41,
+          "text": "return \"CRL signature failure\";"
+        },
+        {
+          "term": "signature",
+          "line": 66,
+          "text": "case X509_V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE:"
+        },
+        {
+          "term": "signature",
+          "line": 102,
+          "text": "case X509_V_ERR_KEYUSAGE_NO_DIGITAL_SIGNATURE:"
+        },
+        {
+          "term": "signature",
+          "line": 103,
+          "text": "return \"key usage does not include digital signature\";"
+        },
+        {
+          "term": "signature",
+          "line": 142,
+          "text": "case X509_V_ERR_SUITE_B_INVALID_SIGNATURE_ALGORITHM:"
+        },
+        {
+          "term": "signature",
+          "line": 143,
+          "text": "return \"Suite B: invalid signature algorithm\";"
+        },
+        {
+          "term": "signature",
+          "line": 161,
+          "text": "return \"CA signature digest algorithm too weak\";"
+        },
+        {
+          "term": "signature",
+          "line": 178,
+          "text": "case X509_V_ERR_OCSP_SIGNATURE_FAILURE:"
+        },
+        {
+          "term": "signature",
+          "line": 179,
+          "text": "return \"OCSP response signature verification failure\";"
+        },
+        {
+          "term": "signature",
+          "line": 186,
+          "text": "case X509_V_ERR_UNSUPPORTED_SIGNATURE_ALGORITHM:"
+        },
+        {
+          "term": "signature",
+          "line": 187,
+          "text": "return \"Cannot find certificate signature algorithm\";"
+        },
+        {
+          "term": "signature",
+          "line": 188,
+          "text": "case X509_V_ERR_SIGNATURE_ALGORITHM_MISMATCH:"
+        },
+        {
+          "term": "signature",
+          "line": 189,
+          "text": "return \"subject signature algorithm and issuer public key algorithm mismatch\";"
+        },
+        {
+          "term": "signature",
+          "line": 190,
+          "text": "case X509_V_ERR_SIGNATURE_ALGORITHM_INCONSISTENCY:"
+        },
+        {
+          "term": "signature",
+          "line": 191,
+          "text": "return \"cert info signature and signature algorithm mismatch\";"
+        },
+        {
+          "term": "signature verification failure",
+          "line": 179,
+          "text": "return \"OCSP response signature verification failure\";"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_key_exchange",
+      "line_range": [
+        2801,
+        2957
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decrypt_error",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature",
+          "line": 2807,
+          "text": "PACKET save_param_start, signature;"
+        },
+        {
+          "term": "signature",
+          "line": 2846,
+          "text": "/* if it was signed, check the signature */"
+        },
+        {
+          "term": "signature",
+          "line": 2855,
+          "text": "* |pkt| now points to the beginning of the signature, so the difference"
+        },
+        {
+          "term": "signature",
+          "line": 2890,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &signature)"
+        },
+        {
+          "term": "signature",
+          "line": 2926,
+          "text": "rv = EVP_DigestVerify(md_ctx, PACKET_data(&signature),"
+        },
+        {
+          "term": "signature",
+          "line": 2927,
+          "text": "PACKET_remaining(&signature), tbs, tbslen);"
+        },
+        {
+          "term": "signature",
+          "line": 2930,
+          "text": "SSLfatal(s, SSL_AD_DECRYPT_ERROR, SSL_R_BAD_SIGNATURE);"
+        },
+        {
+          "term": "decrypt_error",
+          "line": 2930,
+          "text": "SSLfatal(s, SSL_AD_DECRYPT_ERROR, SSL_R_BAD_SIGNATURE);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_cert_verify",
+      "line_range": [
+        430,
+        601
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "decrypt_error",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature",
+          "line": 462,
+          "text": "SSL_R_SIGNATURE_FOR_NON_SIGNING_CERTIFICATE);"
+        },
+        {
+          "term": "signature",
+          "line": 494,
+          "text": "* If key is GOST and len is exactly 64 or 128, it is signature without"
+        },
+        {
+          "term": "signature",
+          "line": 533,
+          "text": "*p++ = OSSL_PARAM_construct_int(OSSL_SIGNATURE_PARAM_TLS_VERSION, &s->version);"
+        },
+        {
+          "term": "signature",
+          "line": 535,
+          "text": "*p++ = OSSL_PARAM_construct_utf8_string(OSSL_SIGNATURE_PARAM_DIGEST,"
+        },
+        {
+          "term": "signature",
+          "line": 572,
+          "text": "/* Ignore bad signatures when fuzzing */"
+        },
+        {
+          "term": "signature",
+          "line": 577,
+          "text": "SSLfatal(s, SSL_AD_DECRYPT_ERROR, SSL_R_BAD_SIGNATURE);"
+        },
+        {
+          "term": "decrypt_error",
+          "line": 577,
+          "text": "SSLfatal(s, SSL_AD_DECRYPT_ERROR, SSL_R_BAD_SIGNATURE);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "crypto/pkcs7/pk7_smime.c",
+      "function": "PKCS7_verify",
+      "line_range": [
+        210,
+        360
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateVerify",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 296,
+          "text": "ERR_raise_data(ERR_LIB_PKCS7, PKCS7_R_CERTIFICATE_VERIFY_ERROR,"
+        },
+        {
+          "term": "signature",
+          "line": 236,
+          "text": "/* Check for no data and no content: no data to verify signature */"
+        },
+        {
+          "term": "signature",
+          "line": 259,
+          "text": "ERR_raise(ERR_LIB_PKCS7, PKCS7_R_NO_SIGNATURES_ON_DATA);"
+        },
+        {
+          "term": "signature",
+          "line": 335,
+          "text": "/* Now Verify All Signatures */"
+        },
+        {
+          "term": "signature",
+          "line": 340,
+          "text": "j = PKCS7_signatureVerify(p7bio, p7, si, signer);"
+        },
+        {
+          "term": "signature",
+          "line": 342,
+          "text": "ERR_raise(ERR_LIB_PKCS7, PKCS7_R_SIGNATURE_FAILURE);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_certificate_request",
+      "line_range": [
+        2959,
+        3081
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateVerify",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "signature",
+          "line": 3044,
+          "text": "SSL_R_SIGNATURE_ALGORITHMS_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_handshake",
+      "line_range": [
+        1625,
+        1738
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateVerify",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 1691,
+          "text": "case SSL3_MT_CERTIFICATE_VERIFY:"
+        },
+        {
+          "term": "signature",
+          "line": 1692,
+          "text": "if (!ssl_print_signature(bio, indent + 2, sc, &msg, &msglen))"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "crypto/evp/signature.c",
+      "function": "evp_signature_from_algorithm",
+      "line_range": [
+        52,
+        453
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 191,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature",
+          "line": 52,
+          "text": "static void *evp_signature_from_algorithm(int name_id,"
+        },
+        {
+          "term": "signature",
+          "line": 57,
+          "text": "EVP_SIGNATURE *signature = NULL;"
+        },
+        {
+          "term": "signature",
+          "line": 67,
+          "text": "if ((signature = evp_signature_new(prov)) == NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 72,
+          "text": "signature->name_id = name_id;"
+        },
+        {
+          "term": "signature",
+          "line": 73,
+          "text": "if ((signature->type_name = ossl_algorithm_get1_first_name(algodef)) == NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 75,
+          "text": "signature->description = algodef->algorithm_description;"
+        },
+        {
+          "term": "signature",
+          "line": 76,
+          "text": "desc = signature->description != NULL ? signature->description : \"\";"
+        },
+        {
+          "term": "signature",
+          "line": 80,
+          "text": "case OSSL_FUNC_SIGNATURE_NEWCTX:"
+        },
+        {
+          "term": "signature",
+          "line": 81,
+          "text": "if (signature->newctx != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 83,
+          "text": "signature->newctx = OSSL_FUNC_signature_newctx(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 86,
+          "text": "case OSSL_FUNC_SIGNATURE_SIGN_INIT:"
+        },
+        {
+          "term": "signature",
+          "line": 87,
+          "text": "if (signature->sign_init != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 89,
+          "text": "signature->sign_init = OSSL_FUNC_signature_sign_init(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 92,
+          "text": "case OSSL_FUNC_SIGNATURE_SIGN:"
+        },
+        {
+          "term": "signature",
+          "line": 93,
+          "text": "if (signature->sign != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 95,
+          "text": "signature->sign = OSSL_FUNC_signature_sign(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 97,
+          "text": "case OSSL_FUNC_SIGNATURE_SIGN_MESSAGE_INIT:"
+        },
+        {
+          "term": "signature",
+          "line": 98,
+          "text": "if (signature->sign_message_init != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 100,
+          "text": "signature->sign_message_init"
+        },
+        {
+          "term": "signature",
+          "line": 101,
+          "text": "= OSSL_FUNC_signature_sign_message_init(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 104,
+          "text": "case OSSL_FUNC_SIGNATURE_SIGN_MESSAGE_UPDATE:"
+        },
+        {
+          "term": "signature",
+          "line": 105,
+          "text": "if (signature->sign_message_update != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 107,
+          "text": "signature->sign_message_update"
+        },
+        {
+          "term": "signature",
+          "line": 108,
+          "text": "= OSSL_FUNC_signature_sign_message_update(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 110,
+          "text": "case OSSL_FUNC_SIGNATURE_SIGN_MESSAGE_FINAL:"
+        },
+        {
+          "term": "signature",
+          "line": 111,
+          "text": "if (signature->sign_message_final != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 113,
+          "text": "signature->sign_message_final"
+        },
+        {
+          "term": "signature",
+          "line": 114,
+          "text": "= OSSL_FUNC_signature_sign_message_final(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 116,
+          "text": "case OSSL_FUNC_SIGNATURE_VERIFY_INIT:"
+        },
+        {
+          "term": "signature",
+          "line": 117,
+          "text": "if (signature->verify_init != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 119,
+          "text": "signature->verify_init = OSSL_FUNC_signature_verify_init(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 122,
+          "text": "case OSSL_FUNC_SIGNATURE_VERIFY:"
+        },
+        {
+          "term": "signature",
+          "line": 123,
+          "text": "if (signature->verify != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 125,
+          "text": "signature->verify = OSSL_FUNC_signature_verify(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 127,
+          "text": "case OSSL_FUNC_SIGNATURE_VERIFY_MESSAGE_INIT:"
+        },
+        {
+          "term": "signature",
+          "line": 128,
+          "text": "if (signature->verify_message_init != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 130,
+          "text": "signature->verify_message_init"
+        },
+        {
+          "term": "signature",
+          "line": 131,
+          "text": "= OSSL_FUNC_signature_verify_message_init(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 134,
+          "text": "case OSSL_FUNC_SIGNATURE_VERIFY_MESSAGE_UPDATE:"
+        },
+        {
+          "term": "signature",
+          "line": 135,
+          "text": "if (signature->verify_message_update != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 137,
+          "text": "signature->verify_message_update"
+        },
+        {
+          "term": "signature",
+          "line": 138,
+          "text": "= OSSL_FUNC_signature_verify_message_update(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 140,
+          "text": "case OSSL_FUNC_SIGNATURE_VERIFY_MESSAGE_FINAL:"
+        },
+        {
+          "term": "signature",
+          "line": 141,
+          "text": "if (signature->verify_message_final != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 143,
+          "text": "signature->verify_message_final"
+        },
+        {
+          "term": "signature",
+          "line": 144,
+          "text": "= OSSL_FUNC_signature_verify_message_final(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 146,
+          "text": "case OSSL_FUNC_SIGNATURE_VERIFY_RECOVER_INIT:"
+        },
+        {
+          "term": "signature",
+          "line": 147,
+          "text": "if (signature->verify_recover_init != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 149,
+          "text": "signature->verify_recover_init"
+        },
+        {
+          "term": "signature",
+          "line": 150,
+          "text": "= OSSL_FUNC_signature_verify_recover_init(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 153,
+          "text": "case OSSL_FUNC_SIGNATURE_VERIFY_RECOVER:"
+        },
+        {
+          "term": "signature",
+          "line": 154,
+          "text": "if (signature->verify_recover != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 156,
+          "text": "signature->verify_recover"
+        },
+        {
+          "term": "signature",
+          "line": 157,
+          "text": "= OSSL_FUNC_signature_verify_recover(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 159,
+          "text": "case OSSL_FUNC_SIGNATURE_DIGEST_SIGN_INIT:"
+        },
+        {
+          "term": "signature",
+          "line": 160,
+          "text": "if (signature->digest_sign_init != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 162,
+          "text": "signature->digest_sign_init"
+        },
+        {
+          "term": "signature",
+          "line": 163,
+          "text": "= OSSL_FUNC_signature_digest_sign_init(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 166,
+          "text": "case OSSL_FUNC_SIGNATURE_DIGEST_SIGN_UPDATE:"
+        },
+        {
+          "term": "signature",
+          "line": 167,
+          "text": "if (signature->digest_sign_update != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 169,
+          "text": "signature->digest_sign_update"
+        },
+        {
+          "term": "signature",
+          "line": 170,
+          "text": "= OSSL_FUNC_signature_digest_sign_update(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 172,
+          "text": "case OSSL_FUNC_SIGNATURE_DIGEST_SIGN_FINAL:"
+        },
+        {
+          "term": "signature",
+          "line": 173,
+          "text": "if (signature->digest_sign_final != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 175,
+          "text": "signature->digest_sign_final"
+        },
+        {
+          "term": "signature",
+          "line": 176,
+          "text": "= OSSL_FUNC_signature_digest_sign_final(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 178,
+          "text": "case OSSL_FUNC_SIGNATURE_DIGEST_SIGN:"
+        },
+        {
+          "term": "signature",
+          "line": 179,
+          "text": "if (signature->digest_sign != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 181,
+          "text": "signature->digest_sign"
+        },
+        {
+          "term": "signature",
+          "line": 182,
+          "text": "= OSSL_FUNC_signature_digest_sign(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 184,
+          "text": "case OSSL_FUNC_SIGNATURE_DIGEST_VERIFY_INIT:"
+        },
+        {
+          "term": "signature",
+          "line": 185,
+          "text": "if (signature->digest_verify_init != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 187,
+          "text": "signature->digest_verify_init"
+        },
+        {
+          "term": "signature",
+          "line": 188,
+          "text": "= OSSL_FUNC_signature_digest_verify_init(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 191,
+          "text": "case OSSL_FUNC_SIGNATURE_DIGEST_VERIFY_UPDATE:"
+        },
+        {
+          "term": "signature",
+          "line": 192,
+          "text": "if (signature->digest_verify_update != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 194,
+          "text": "signature->digest_verify_update"
+        },
+        {
+          "term": "signature",
+          "line": 195,
+          "text": "= OSSL_FUNC_signature_digest_verify_update(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 197,
+          "text": "case OSSL_FUNC_SIGNATURE_DIGEST_VERIFY_FINAL:"
+        },
+        {
+          "term": "signature",
+          "line": 198,
+          "text": "if (signature->digest_verify_final != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 200,
+          "text": "signature->digest_verify_final"
+        },
+        {
+          "term": "signature",
+          "line": 201,
+          "text": "= OSSL_FUNC_signature_digest_verify_final(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 203,
+          "text": "case OSSL_FUNC_SIGNATURE_DIGEST_VERIFY:"
+        },
+        {
+          "term": "signature",
+          "line": 204,
+          "text": "if (signature->digest_verify != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 206,
+          "text": "signature->digest_verify"
+        },
+        {
+          "term": "signature",
+          "line": 207,
+          "text": "= OSSL_FUNC_signature_digest_verify(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 209,
+          "text": "case OSSL_FUNC_SIGNATURE_FREECTX:"
+        },
+        {
+          "term": "signature",
+          "line": 210,
+          "text": "if (signature->freectx != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 212,
+          "text": "signature->freectx = OSSL_FUNC_signature_freectx(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 215,
+          "text": "case OSSL_FUNC_SIGNATURE_DUPCTX:"
+        },
+        {
+          "term": "signature",
+          "line": 216,
+          "text": "if (signature->dupctx != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 218,
+          "text": "signature->dupctx = OSSL_FUNC_signature_dupctx(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 220,
+          "text": "case OSSL_FUNC_SIGNATURE_GET_CTX_PARAMS:"
+        },
+        {
+          "term": "signature",
+          "line": 221,
+          "text": "if (signature->get_ctx_params != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 223,
+          "text": "signature->get_ctx_params"
+        },
+        {
+          "term": "signature",
+          "line": 224,
+          "text": "= OSSL_FUNC_signature_get_ctx_params(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 227,
+          "text": "case OSSL_FUNC_SIGNATURE_GETTABLE_CTX_PARAMS:"
+        },
+        {
+          "term": "signature",
+          "line": 228,
+          "text": "if (signature->gettable_ctx_params != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 230,
+          "text": "signature->gettable_ctx_params"
+        },
+        {
+          "term": "signature",
+          "line": 231,
+          "text": "= OSSL_FUNC_signature_gettable_ctx_params(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 234,
+          "text": "case OSSL_FUNC_SIGNATURE_SET_CTX_PARAMS:"
+        },
+        {
+          "term": "signature",
+          "line": 235,
+          "text": "if (signature->set_ctx_params != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 237,
+          "text": "signature->set_ctx_params"
+        },
+        {
+          "term": "signature",
+          "line": 238,
+          "text": "= OSSL_FUNC_signature_set_ctx_params(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 241,
+          "text": "case OSSL_FUNC_SIGNATURE_SETTABLE_CTX_PARAMS:"
+        },
+        {
+          "term": "signature",
+          "line": 242,
+          "text": "if (signature->settable_ctx_params != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 244,
+          "text": "signature->settable_ctx_params"
+        },
+        {
+          "term": "signature",
+          "line": 245,
+          "text": "= OSSL_FUNC_signature_settable_ctx_params(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 248,
+          "text": "case OSSL_FUNC_SIGNATURE_GET_CTX_MD_PARAMS:"
+        },
+        {
+          "term": "signature",
+          "line": 249,
+          "text": "if (signature->get_ctx_md_params != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 251,
+          "text": "signature->get_ctx_md_params"
+        },
+        {
+          "term": "signature",
+          "line": 252,
+          "text": "= OSSL_FUNC_signature_get_ctx_md_params(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 255,
+          "text": "case OSSL_FUNC_SIGNATURE_GETTABLE_CTX_MD_PARAMS:"
+        },
+        {
+          "term": "signature",
+          "line": 256,
+          "text": "if (signature->gettable_ctx_md_params != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 258,
+          "text": "signature->gettable_ctx_md_params"
+        },
+        {
+          "term": "signature",
+          "line": 259,
+          "text": "= OSSL_FUNC_signature_gettable_ctx_md_params(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 262,
+          "text": "case OSSL_FUNC_SIGNATURE_SET_CTX_MD_PARAMS:"
+        },
+        {
+          "term": "signature",
+          "line": 263,
+          "text": "if (signature->set_ctx_md_params != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 265,
+          "text": "signature->set_ctx_md_params"
+        },
+        {
+          "term": "signature",
+          "line": 266,
+          "text": "= OSSL_FUNC_signature_set_ctx_md_params(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 269,
+          "text": "case OSSL_FUNC_SIGNATURE_SETTABLE_CTX_MD_PARAMS:"
+        },
+        {
+          "term": "signature",
+          "line": 270,
+          "text": "if (signature->settable_ctx_md_params != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 272,
+          "text": "signature->settable_ctx_md_params"
+        },
+        {
+          "term": "signature",
+          "line": 273,
+          "text": "= OSSL_FUNC_signature_settable_ctx_md_params(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 276,
+          "text": "case OSSL_FUNC_SIGNATURE_QUERY_KEY_TYPES:"
+        },
+        {
+          "term": "signature",
+          "line": 277,
+          "text": "if (signature->query_key_types != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 279,
+          "text": "signature->query_key_types"
+        },
+        {
+          "term": "signature",
+          "line": 280,
+          "text": "= OSSL_FUNC_signature_query_key_types(fns);"
+        },
+        {
+          "term": "signature",
+          "line": 287,
+          "text": "* \"signature\" functions.  Because there's an overlap between some sets"
+        },
+        {
+          "term": "signature",
+          "line": 297,
+          "text": "\"missing %s newctx or freectx:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 311,
+          "text": "\"missing %s params getter or setter:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 316,
+          "text": "\"missing %s init:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 322,
+          "text": "&& ((signature->sign_init != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 323,
+          "text": "&& signature->sign == NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 324,
+          "text": "|| (signature->sign_message_init != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 325,
+          "text": "&& signature->sign == NULL"
+        },
+        {
+          "term": "signature",
+          "line": 326,
+          "text": "&& (signature->sign_message_update == NULL"
+        },
+        {
+          "term": "signature",
+          "line": 327,
+          "text": "|| signature->sign_message_final == NULL)))) {"
+        },
+        {
+          "term": "signature",
+          "line": 330,
+          "text": "\"missing %s signing function:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 334,
+          "text": "&& (signature->sign != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 335,
+          "text": "|| signature->sign_message_update != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 336,
+          "text": "|| signature->sign_message_final != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 337,
+          "text": "&& signature->sign_init == NULL"
+        },
+        {
+          "term": "signature",
+          "line": 338,
+          "text": "&& signature->sign_message_init == NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 341,
+          "text": "\"missing %s sign_init or sign_message_init:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 346,
+          "text": "&& ((signature->verify_init != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 347,
+          "text": "&& signature->verify == NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 348,
+          "text": "|| (signature->verify_message_init != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 349,
+          "text": "&& signature->verify == NULL"
+        },
+        {
+          "term": "signature",
+          "line": 350,
+          "text": "&& (signature->verify_message_update == NULL"
+        },
+        {
+          "term": "signature",
+          "line": 351,
+          "text": "|| signature->verify_message_final == NULL)))) {"
+        },
+        {
+          "term": "signature",
+          "line": 354,
+          "text": "\"missing %s verification function:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 358,
+          "text": "&& (signature->verify != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 359,
+          "text": "|| signature->verify_message_update != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 360,
+          "text": "|| signature->verify_message_final != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 361,
+          "text": "&& signature->verify_init == NULL"
+        },
+        {
+          "term": "signature",
+          "line": 362,
+          "text": "&& signature->verify_message_init == NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 365,
+          "text": "signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 371,
+          "text": "&& (signature->verify_recover_init != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 372,
+          "text": "&& (signature->verify_recover == NULL)) {"
+        },
+        {
+          "term": "signature",
+          "line": 375,
+          "text": "\"missing %s verify_recover:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 380,
+          "text": "&& (signature->digest_sign_init != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 381,
+          "text": "&& signature->digest_sign == NULL"
+        },
+        {
+          "term": "signature",
+          "line": 382,
+          "text": "&& (signature->digest_sign_update == NULL"
+        },
+        {
+          "term": "signature",
+          "line": 383,
+          "text": "|| signature->digest_sign_final == NULL))) {"
+        },
+        {
+          "term": "signature",
+          "line": 386,
+          "text": "\"missing %s digest_sign function:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 391,
+          "text": "&& ((signature->digest_verify_init != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 392,
+          "text": "&& signature->digest_verify == NULL"
+        },
+        {
+          "term": "signature",
+          "line": 393,
+          "text": "&& (signature->digest_verify_update == NULL"
+        },
+        {
+          "term": "signature",
+          "line": 394,
+          "text": "|| signature->digest_verify_final == NULL)))) {"
+        },
+        {
+          "term": "signature",
+          "line": 397,
+          "text": "\"missing %s digest_verify function:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 404,
+          "text": "if ((signature->digest_sign != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 405,
+          "text": "|| signature->digest_sign_update != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 406,
+          "text": "|| signature->digest_sign_final != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 407,
+          "text": "&& signature->digest_sign_init == NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 410,
+          "text": "\"missing %s digest_sign_init:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 414,
+          "text": "if ((signature->digest_verify != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 415,
+          "text": "|| signature->digest_verify_update != NULL"
+        },
+        {
+          "term": "signature",
+          "line": 416,
+          "text": "|| signature->digest_verify_final != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 417,
+          "text": "&& signature->digest_verify_init == NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 420,
+          "text": "\"missing %s digest_verify_init:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 424,
+          "text": "if ((signature->sign_message_update == NULL) != (signature->sign_message_final == NULL)) {"
+        },
+        {
+          "term": "signature",
+          "line": 427,
+          "text": "signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 430,
+          "text": "if ((signature->verify_message_update == NULL) != (signature->verify_message_final == NULL)) {"
+        },
+        {
+          "term": "signature",
+          "line": 433,
+          "text": "signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 436,
+          "text": "if ((signature->digest_sign_update == NULL) != (signature->digest_sign_final == NULL)) {"
+        },
+        {
+          "term": "signature",
+          "line": 439,
+          "text": "signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 442,
+          "text": "if ((signature->digest_verify_update == NULL) != (signature->digest_verify_final == NULL)) {"
+        },
+        {
+          "term": "signature",
+          "line": 445,
+          "text": "signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 449,
+          "text": "return signature;"
+        },
+        {
+          "term": "signature",
+          "line": 451,
+          "text": "EVP_SIGNATURE_free(signature);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "crypto/evp/signature.c",
+      "function": "evp_pkey_signature_init",
+      "line_range": [
+        574,
+        877
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 57,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature",
+          "line": 574,
+          "text": "static int evp_pkey_signature_init(EVP_PKEY_CTX *ctx, EVP_SIGNATURE *signature,"
+        },
+        {
+          "term": "signature",
+          "line": 593,
+          "text": "if (signature != NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 609,
+          "text": "* name as |ctx->pkey|, but from the provider of the signature"
+        },
+        {
+          "term": "signature",
+          "line": 611,
+          "text": "* signature method.  With the keymgmt we found (if we did), we"
+        },
+        {
+          "term": "signature",
+          "line": 616,
+          "text": "tmp_prov = EVP_SIGNATURE_get0_provider(signature);"
+        },
+        {
+          "term": "signature",
+          "line": 630,
+          "text": "* Check that the signature matches the given key.  This is not"
+        },
+        {
+          "term": "signature",
+          "line": 634,
+          "text": "if (signature->query_key_types != NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 638,
+          "text": "keytypes = signature->query_key_types();"
+        },
+        {
+          "term": "signature",
+          "line": 643,
+          "text": "ERR_raise(ERR_LIB_EVP, EVP_R_SIGNATURE_TYPE_AND_KEY_TYPE_INCOMPATIBLE);"
+        },
+        {
+          "term": "signature",
+          "line": 650,
+          "text": "* check if the keytype is the same as the signature algorithm name"
+        },
+        {
+          "term": "signature",
+          "line": 653,
+          "text": "int ok = EVP_SIGNATURE_is_a(signature, keytype);"
+        },
+        {
+          "term": "signature",
+          "line": 657,
+          "text": "* query the pkey for a default signature algorithm name, and check"
+        },
+        {
+          "term": "signature",
+          "line": 658,
+          "text": "* if it matches the signature implementation"
+        },
+        {
+          "term": "signature",
+          "line": 663,
+          "text": "OSSL_OP_SIGNATURE);"
+        },
+        {
+          "term": "signature",
+          "line": 665,
+          "text": "ok = EVP_SIGNATURE_is_a(signature, signame);"
+        },
+        {
+          "term": "signature",
+          "line": 670,
+          "text": "ERR_raise(ERR_LIB_EVP, EVP_R_SIGNATURE_TYPE_AND_KEY_TYPE_INCOMPATIBLE);"
+        },
+        {
+          "term": "signature",
+          "line": 676,
+          "text": "if (!EVP_SIGNATURE_up_ref(signature))"
+        },
+        {
+          "term": "signature",
+          "line": 679,
+          "text": "/* Without a pre-fetched signature, it must be figured out somehow */"
+        },
+        {
+          "term": "signature",
+          "line": 692,
+          "text": "* Try to derive the supported signature from |ctx->keymgmt|."
+        },
+        {
+          "term": "signature",
+          "line": 702,
+          "text": "OSSL_OP_SIGNATURE);"
+        },
+        {
+          "term": "signature",
+          "line": 712,
+          "text": "* 1.  Do the normal signature fetch, using the fetching data given by"
+        },
+        {
+          "term": "signature",
+          "line": 714,
+          "text": "* 2.  Do the provider specific signature fetch, from the same provider"
+        },
+        {
+          "term": "signature",
+          "line": 718,
+          "text": "* signature, and try to export |ctx->pkey| to that keymgmt (when"
+        },
+        {
+          "term": "signature",
+          "line": 734,
+          "text": "EVP_SIGNATURE_free(signature);"
+        },
+        {
+          "term": "signature",
+          "line": 739,
+          "text": "signature = EVP_SIGNATURE_fetch(ctx->libctx, supported_sig, ctx->propquery);"
+        },
+        {
+          "term": "signature",
+          "line": 740,
+          "text": "if (signature != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 741,
+          "text": "tmp_prov = EVP_SIGNATURE_get0_provider(signature);"
+        },
+        {
+          "term": "signature",
+          "line": 745,
+          "text": "signature = evp_signature_fetch_from_prov((OSSL_PROVIDER *)tmp_prov,"
+        },
+        {
+          "term": "signature",
+          "line": 747,
+          "text": "if (signature == NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 751,
+          "text": "if (signature == NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 757,
+          "text": "* name as |ctx->pkey|, but from the provider of the signature"
+        },
+        {
+          "term": "signature",
+          "line": 759,
+          "text": "* signature method.  With the keymgmt we found (if we did), we"
+        },
+        {
+          "term": "signature",
+          "line": 775,
+          "text": "EVP_SIGNATURE_free(signature);"
+        },
+        {
+          "term": "signature",
+          "line": 784,
+          "text": "ctx->op.sig.signature = signature;"
+        },
+        {
+          "term": "signature",
+          "line": 785,
+          "text": "desc = signature->description != NULL ? signature->description : \"\";"
+        },
+        {
+          "term": "signature",
+          "line": 787,
+          "text": "ctx->op.sig.algctx = signature->newctx(ossl_provider_ctx(signature->prov), ctx->propquery);"
+        },
+        {
+          "term": "signature",
+          "line": 796,
+          "text": "if (signature->sign_init == NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 797,
+          "text": "ERR_raise_data(ERR_LIB_EVP, EVP_R_PROVIDER_SIGNATURE_NOT_SUPPORTED,"
+        },
+        {
+          "term": "signature",
+          "line": 798,
+          "text": "\"%s sign_init:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 802,
+          "text": "ret = signature->sign_init(ctx->op.sig.algctx, provkey, params);"
+        },
+        {
+          "term": "signature",
+          "line": 805,
+          "text": "if (signature->sign_message_init == NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 806,
+          "text": "ERR_raise_data(ERR_LIB_EVP, EVP_R_PROVIDER_SIGNATURE_NOT_SUPPORTED,"
+        },
+        {
+          "term": "signature",
+          "line": 807,
+          "text": "\"%s sign_message_init:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 811,
+          "text": "ret = signature->sign_message_init(ctx->op.sig.algctx, provkey, params);"
+        },
+        {
+          "term": "signature",
+          "line": 814,
+          "text": "if (signature->verify_init == NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 815,
+          "text": "ERR_raise_data(ERR_LIB_EVP, EVP_R_PROVIDER_SIGNATURE_NOT_SUPPORTED,"
+        },
+        {
+          "term": "signature",
+          "line": 816,
+          "text": "\"%s verify_init:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 820,
+          "text": "ret = signature->verify_init(ctx->op.sig.algctx, provkey, params);"
+        },
+        {
+          "term": "signature",
+          "line": 823,
+          "text": "if (signature->verify_message_init == NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 824,
+          "text": "ERR_raise_data(ERR_LIB_EVP, EVP_R_PROVIDER_SIGNATURE_NOT_SUPPORTED,"
+        },
+        {
+          "term": "signature",
+          "line": 825,
+          "text": "\"%s verify_message_init:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 829,
+          "text": "ret = signature->verify_message_init(ctx->op.sig.algctx, provkey, params);"
+        },
+        {
+          "term": "signature",
+          "line": 832,
+          "text": "if (signature->verify_recover_init == NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 833,
+          "text": "ERR_raise_data(ERR_LIB_EVP, EVP_R_PROVIDER_SIGNATURE_NOT_SUPPORTED,"
+        },
+        {
+          "term": "signature",
+          "line": 834,
+          "text": "\"%s verify_recover_init:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 838,
+          "text": "ret = signature->verify_recover_init(ctx->op.sig.algctx, provkey, params);"
+        },
+        {
+          "term": "signature",
+          "line": 846,
+          "text": "signature->freectx(ctx->op.sig.algctx);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "crypto/evp/m_sigver.c",
+      "function": "do_sigver_init",
+      "line_range": [
+        32,
+        288
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 30,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature",
+          "line": 39,
+          "text": "EVP_SIGNATURE *signature = NULL;"
+        },
+        {
+          "term": "signature",
+          "line": 70,
+          "text": "|| (signature = locpctx->op.sig.signature) == NULL"
+        },
+        {
+          "term": "signature",
+          "line": 92,
+          "text": "* Try to derive the supported signature from |locpctx->keymgmt|."
+        },
+        {
+          "term": "signature",
+          "line": 101,
+          "text": "OSSL_OP_SIGNATURE);"
+        },
+        {
+          "term": "signature",
+          "line": 111,
+          "text": "* 1.  Do the normal signature fetch, using the fetching data given by"
+        },
+        {
+          "term": "signature",
+          "line": 113,
+          "text": "* 2.  Do the provider specific signature fetch, from the same provider"
+        },
+        {
+          "term": "signature",
+          "line": 117,
+          "text": "* signature, and try to export |ctx->pkey| to that keymgmt (when"
+        },
+        {
+          "term": "signature",
+          "line": 133,
+          "text": "EVP_SIGNATURE_free(signature);"
+        },
+        {
+          "term": "signature",
+          "line": 138,
+          "text": "signature = EVP_SIGNATURE_fetch(locpctx->libctx, supported_sig,"
+        },
+        {
+          "term": "signature",
+          "line": 140,
+          "text": "if (signature != NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 141,
+          "text": "tmp_prov = EVP_SIGNATURE_get0_provider(signature);"
+        },
+        {
+          "term": "signature",
+          "line": 145,
+          "text": "signature = evp_signature_fetch_from_prov((OSSL_PROVIDER *)tmp_prov,"
+        },
+        {
+          "term": "signature",
+          "line": 147,
+          "text": "if (signature == NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 151,
+          "text": "if (signature == NULL)"
+        },
+        {
+          "term": "signature",
+          "line": 157,
+          "text": "* |locpctx->pkey|, but from the provider of the signature method, using"
+        },
+        {
+          "term": "signature",
+          "line": 158,
+          "text": "* the same property query as when fetching the signature method."
+        },
+        {
+          "term": "signature",
+          "line": 175,
+          "text": "EVP_SIGNATURE_free(signature);"
+        },
+        {
+          "term": "signature",
+          "line": 185,
+          "text": "locpctx->op.sig.signature = signature;"
+        },
+        {
+          "term": "signature",
+          "line": 189,
+          "text": "= signature->newctx(ossl_provider_ctx(signature->prov), props);"
+        },
+        {
+          "term": "signature",
+          "line": 238,
+          "text": "desc = signature->description != NULL ? signature->description : \"\";"
+        },
+        {
+          "term": "signature",
+          "line": 240,
+          "text": "if (signature->digest_verify_init == NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 241,
+          "text": "ERR_raise_data(ERR_LIB_EVP, EVP_R_PROVIDER_SIGNATURE_NOT_SUPPORTED,"
+        },
+        {
+          "term": "signature",
+          "line": 242,
+          "text": "\"%s digest_verify_init:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 245,
+          "text": "ret = signature->digest_verify_init(locpctx->op.sig.algctx,"
+        },
+        {
+          "term": "signature",
+          "line": 248,
+          "text": "if (signature->digest_sign_init == NULL) {"
+        },
+        {
+          "term": "signature",
+          "line": 249,
+          "text": "ERR_raise_data(ERR_LIB_EVP, EVP_R_PROVIDER_SIGNATURE_NOT_SUPPORTED,"
+        },
+        {
+          "term": "signature",
+          "line": 250,
+          "text": "\"%s digest_sign_init:%s\", signature->type_name, desc);"
+        },
+        {
+          "term": "signature",
+          "line": 253,
+          "text": "ret = signature->digest_sign_init(locpctx->op.sig.algctx,"
+        },
+        {
+          "term": "signature",
+          "line": 270,
+          "text": "ERR_raise_data(ERR_LIB_EVP, EVP_R_PROVIDER_SIGNATURE_FAILURE,"
+        },
+        {
+          "term": "signature",
+          "line": 272,
+          "text": "signature->type_name, desc);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/t1_lib.c",
+      "function": "tls12_check_peer_sigalg",
+      "line_range": [
+        2854,
+        2989
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature",
+          "line": 2869,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "signature",
+          "line": 2880,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "signature",
+          "line": 2889,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "signature",
+          "line": 2897,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "signature",
+          "line": 2903,
+          "text": "* is consistent with signature: RSA keys can be used for RSA-PSS"
+        },
+        {
+          "term": "signature",
+          "line": 2909,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "signature",
+          "line": 2917,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "signature",
+          "line": 2930,
+          "text": "/* For TLS 1.3 or Suite B check curve matches signature algorithm */"
+        },
+        {
+          "term": "signature",
+          "line": 2950,
+          "text": "SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "signature",
+          "line": 2956,
+          "text": "SSLfatal(s, SSL_AD_HANDSHAKE_FAILURE, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "signature",
+          "line": 2960,
+          "text": "/* Check signature matches a type we sent */"
+        },
+        {
+          "term": "signature",
+          "line": 2968,
+          "text": "SSLfatal(s, SSL_AD_HANDSHAKE_FAILURE, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "signature",
+          "line": 2983,
+          "text": "SSLfatal(s, SSL_AD_HANDSHAKE_FAILURE, SSL_R_WRONG_SIGNATURE_TYPE);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-4-3-must-terminate-on-verify-failure_candidate_1.c",
+    "locations/code/rfc8446-4-4-3-must-terminate-on-verify-failure_candidate_2.c",
+    "locations/code/rfc8446-4-4-3-must-terminate-on-verify-failure_candidate_3.c",
+    "locations/code/rfc8446-4-4-3-must-terminate-on-verify-failure_candidate_4.c",
+    "locations/code/rfc8446-4-4-3-must-terminate-on-verify-failure_candidate_5.c",
+    "locations/code/rfc8446-4-4-3-must-terminate-on-verify-failure_candidate_6.c",
+    "locations/code/rfc8446-4-4-3-must-terminate-on-verify-failure_candidate_7.c",
+    "locations/code/rfc8446-4-4-3-must-terminate-on-verify-failure_candidate_8.c",
+    "locations/code/rfc8446-4-4-3-must-terminate-on-verify-failure_candidate_9.c",
+    "locations/code/rfc8446-4-4-3-must-terminate-on-verify-failure_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1561,
+    "files_with_hits": 138,
+    "functions_identified": 313,
+    "null_scope_hits": 465,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 2038
+  }
+}

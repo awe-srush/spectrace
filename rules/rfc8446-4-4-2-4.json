@@ -1,0 +1,114 @@
+[
+  {
+    "rule_id": "rfc8446-4.4.2.4-client-must-abort-on-empty-server-cert",
+    "source_section": "4.4.2.4",
+    "source_text": "If the server supplies an empty Certificate message, the client MUST abort the handshake with a \"decode_error\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If the server sends an empty Certificate message, the client MUST abort with decode_error.",
+    "entity": "client",
+    "applies_when": "Client receives empty Certificate message from server",
+    "target_message": "Certificate",
+    "target_field": "certificate_list",
+    "expected_value": "abort handshake",
+    "related_fields": [],
+    "violation_alert": "decode_error",
+    "violation_alert_source": "4.4.2.4",
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate"
+      ],
+      "field_names": [
+        "certificate_list"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "decode_error"
+      ],
+      "modes_or_conditions": [
+        "server authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify client aborts when receiving empty server Certificate.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specified alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.2.4-must-abort-on-md5-cert",
+    "source_section": "4.4.2.4",
+    "source_text": "Any endpoint receiving any certificate which it would need to validate using any signature algorithm using an MD5 hash MUST abort the handshake with a \"bad_certificate\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Any endpoint receiving a certificate requiring MD5 validation MUST abort with bad_certificate.",
+    "entity": "both",
+    "applies_when": "Endpoint receives certificate signed with MD5-based algorithm that needs validation",
+    "target_message": "Certificate",
+    "target_field": null,
+    "expected_value": "abort handshake",
+    "related_fields": [],
+    "violation_alert": "bad_certificate",
+    "violation_alert_source": "4.4.2.4",
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "bad_certificate"
+      ],
+      "modes_or_conditions": [
+        "MD5",
+        "certificate validation"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify endpoint rejects MD5-signed certificates with correct alert.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": "Self-signed or trust anchor certificates are exempt (not validated as part of chain).",
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.2.4-recommended-abort-on-sha1-cert",
+    "source_section": "4.4.2.4",
+    "source_text": "SHA-1 is deprecated, and it is RECOMMENDED that any endpoint receiving any certificate which it would need to validate using any signature algorithm using a SHA-1 hash abort the handshake with a \"bad_certificate\" alert.",
+    "normative_keyword": "RECOMMENDED",
+    "rule_type": "conditional_action",
+    "rule_statement": "It is RECOMMENDED that endpoints abort with bad_certificate when receiving a certificate requiring SHA-1 validation.",
+    "entity": "both",
+    "applies_when": "Endpoint receives certificate signed with SHA-1 that needs validation",
+    "target_message": "Certificate",
+    "target_field": null,
+    "expected_value": "abort handshake (recommended)",
+    "related_fields": [],
+    "violation_alert": "bad_certificate",
+    "violation_alert_source": "4.4.2.4",
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "bad_certificate"
+      ],
+      "modes_or_conditions": [
+        "SHA-1",
+        "certificate validation"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify endpoint rejects SHA-1 signed certificates.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit RECOMMENDED.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": "Self-signed or trust anchor certificates are exempt.",
+    "model": "claude-opus-4-6"
+  }
+]

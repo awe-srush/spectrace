@@ -1,0 +1,41 @@
+{
+  "rule_id": "rfc8446-4.2.1-client-must-send-supported-versions",
+  "source_file": "ssl/statem/extensions_srvr.c",
+  "primary_function": "tls_parse_ctos_cookie",
+  "judgment": "not_applicable",
+  "confidence": "high",
+  "reasoning": "The function tls_parse_ctos_cookie is a server-side function that parses the cookie extension received from a ClientHello (ctos = client-to-server). The rule requires that TLS 1.3 clients send the supported_versions extension in their ClientHello. This function does the opposite: it runs on the server, parses a cookie from an already-received ClientHello, and reconstructs a HelloRetryRequest (HRR) message for transcript hash purposes. The TLSEXT_TYPE_supported_versions reference at line 1173 is within the reconstruction of an HRR packet (not a ClientHello), used solely to recreate the transcript hash as if the current ClientHello came after a HelloRetryRequest. The comment at line 1152 confirms this is about transcript reconstruction. The actual client-side construction of the supported_versions extension in a ClientHello is implemented in tls_construct_ctos_supported_versions in ssl/statem/extensions_clnt.c, which is not the function under review here.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [],
+    "key_code_snippet": "/* Reconstruct the HRR that we would have sent in response to the original\n * ClientHello so we can add it to the transcript hash. */\nif (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_supported_versions)\n    || !WPACKET_start_sub_packet_u16(&hrrpkt)\n    || !WPACKET_put_bytes_u16(&hrrpkt, s->version)\n    || !WPACKET_close(&hrrpkt)) {",
+    "expected_behavior": "Client must include supported_versions extension in ClientHello with at least TLS 1.3 (0x0304) listed",
+    "paths_checked": 0,
+    "paths_conforming": 0,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "tls_construct_ctos_supported_versions"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 2,
+  "tools_used": [
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls_construct_ctos_supported_versions"
+      }
+    },
+    {
+      "tool": "get_callers",
+      "input": {
+        "function_name": "tls_parse_ctos_cookie"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 19276,
+    "output": 1952
+  }
+}

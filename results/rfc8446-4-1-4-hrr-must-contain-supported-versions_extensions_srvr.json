@@ -1,0 +1,94 @@
+{
+  "rule_id": "rfc8446-4.1.4-hrr-must-contain-supported-versions",
+  "source_file": "ssl/statem/extensions_srvr.c",
+  "primary_function": "tls_parse_ctos_cookie",
+  "judgment": "not_applicable",
+  "confidence": "high",
+  "reasoning": "The function `tls_parse_ctos_cookie` is a server-side parser for the cookie extension received in a ClientHello. It does NOT construct or send a HelloRetryRequest \u2014 it reconstructs the HRR packet only to recompute the transcript hash (for stateless cookie-based handshake resumption). The actual HRR sending is done in `tls_construct_server_hello` (ssl/statem/statem_srvr.c), which calls `tls_construct_extensions` with `SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST` context, and `tls_construct_stoc_supported_versions` (ssl/statem/extensions_srvr.c:1927-1945) handles inclusion of the supported_versions extension when constructing the real HRR. The reconstructed HRR inside `tls_parse_ctos_cookie` at lines 1153-1209 is only used as input to `create_synthetic_message_hash` \u2014 it is never transmitted over the network. Therefore, the rule about HRR extensions MUST contain supported_versions does not apply to this function's primary purpose. Notably, the reconstruction does include `TLSEXT_TYPE_supported_versions` at line 1173 unconditionally, which matches what a real HRR would contain.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [
+      1173
+    ],
+    "key_code_snippet": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_supported_versions)\n    || !WPACKET_start_sub_packet_u16(&hrrpkt)\n    || !WPACKET_put_bytes_u16(&hrrpkt, s->version)\n    || !WPACKET_close(&hrrpkt)) {",
+    "expected_behavior": "HelloRetryRequest extensions must contain the supported_versions extension when a HelloRetryRequest is sent by the server.",
+    "paths_checked": 1,
+    "paths_conforming": 1,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "tls_parse_ctos_cookie",
+    "tls_construct_stoc_supported_versions",
+    "tls_construct_server_hello",
+    "ossl_statem_server13_write_transition"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 10,
+  "tools_used": [
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL_HRR_PENDING"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls_construct_hello_retry_request"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "hello_retry_request"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls_construct_stoc_supported_versions"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls_construct_stoc_supported_versions"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLSEXT_TYPE_supported_versions"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "extensions.c:378"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server13_write_transition"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLSEXT_TYPE_supported_versions, context"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls_construct_server_hello"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 73392,
+    "output": 1648
+  }
+}

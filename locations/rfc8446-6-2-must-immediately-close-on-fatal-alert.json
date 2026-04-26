@@ -1,0 +1,213 @@
+{
+  "rule_id": "rfc8446-6.2-must-immediately-close-on-fatal-alert",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "AlertLevel",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "AlertLevel",
+        "alert_level"
+      ]
+    },
+    {
+      "term": "fatal alert",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "fatal alert"
+      ]
+    },
+    {
+      "term": "connection closure",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "connection closure"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/record/rec_layer_s3.c",
+      "function": "ssl3_read_bytes",
+      "line_range": [
+        627,
+        1128
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "AlertLevel"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AlertLevel",
+          "line": 870,
+          "text": "unsigned int alert_level, alert_descr;"
+        },
+        {
+          "term": "AlertLevel",
+          "line": 875,
+          "text": "|| !PACKET_get_1(&alert, &alert_level)"
+        },
+        {
+          "term": "AlertLevel",
+          "line": 892,
+          "text": "j = (alert_level << 8) | alert_descr;"
+        },
+        {
+          "term": "AlertLevel",
+          "line": 896,
+          "text": "if ((!is_tls13 && alert_level == SSL3_AL_WARNING)"
+        },
+        {
+          "term": "AlertLevel",
+          "line": 917,
+          "text": "&& (is_tls13 || alert_level == SSL3_AL_WARNING)) {"
+        },
+        {
+          "term": "AlertLevel",
+          "line": 920,
+          "text": "} else if (alert_level == SSL3_AL_FATAL || is_tls13) {"
+        },
+        {
+          "term": "AlertLevel",
+          "line": 942,
+          "text": "} else if (alert_level == SSL3_AL_WARNING) {"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/record/rec_layer_d1.c",
+      "function": "dtls1_read_bytes",
+      "line_range": [
+        197,
+        605
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "AlertLevel"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AlertLevel",
+          "line": 378,
+          "text": "unsigned int alert_level, alert_descr;"
+        },
+        {
+          "term": "AlertLevel",
+          "line": 383,
+          "text": "|| !PACKET_get_1(&alert, &alert_level)"
+        },
+        {
+          "term": "AlertLevel",
+          "line": 400,
+          "text": "j = (alert_level << 8) | alert_descr;"
+        },
+        {
+          "term": "AlertLevel",
+          "line": 404,
+          "text": "if (alert_level == SSL3_AL_WARNING) {"
+        },
+        {
+          "term": "AlertLevel",
+          "line": 445,
+          "text": "} else if (alert_level == SSL3_AL_FATAL) {"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/record/methods/tlsany_meth.c",
+      "function": "tls_validate_record_header",
+      "line_range": [
+        44,
+        114
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "fatal alert"
+        ]
+      },
+      "hits": [
+        {
+          "term": "fatal alert",
+          "line": 89,
+          "text": "* shouldn't send a fatal alert back. We'll just"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/quic/quic_impl.c",
+      "function": "ossl_quic_conn_shutdown",
+      "line_range": [
+        1544,
+        1662
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "connection closure"
+        ]
+      },
+      "hits": [
+        {
+          "term": "connection closure",
+          "line": 1605,
+          "text": "/* Phase 2: Connection Closure */"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-6-2-must-immediately-close-on-fatal-alert_candidate_1.c",
+    "locations/code/rfc8446-6-2-must-immediately-close-on-fatal-alert_candidate_2.c",
+    "locations/code/rfc8446-6-2-must-immediately-close-on-fatal-alert_candidate_3.c",
+    "locations/code/rfc8446-6-2-must-immediately-close-on-fatal-alert_candidate_4.c"
+  ],
+  "stats": {
+    "total_grep_hits": 18,
+    "files_with_hits": 6,
+    "functions_identified": 4,
+    "null_scope_hits": 4,
+    "top_k_returned": 4,
+    "total_lines_in_top_k": 1101
+  }
+}

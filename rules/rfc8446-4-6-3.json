@@ -1,0 +1,257 @@
+[
+  {
+    "rule_id": "rfc8446-4.6.3-must-terminate-if-ku-before-finished",
+    "source_section": "4.6.3",
+    "source_text": "Implementations that receive a KeyUpdate message prior to receiving a Finished message MUST terminate the connection with an \"unexpected_message\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If KeyUpdate is received before Finished, the implementation MUST terminate with unexpected_message.",
+    "entity": "both",
+    "applies_when": "Endpoint receives KeyUpdate before handshake Finished",
+    "target_message": "KeyUpdate",
+    "target_field": null,
+    "expected_value": "connection terminated",
+    "related_fields": [],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "4.6.3",
+    "protocol_keywords": {
+      "message_types": [
+        "KeyUpdate",
+        "Finished"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify implementation rejects KeyUpdate before handshake complete.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specified alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.3-sender-shall-use-next-gen-keys",
+    "source_section": "4.6.3",
+    "source_text": "After sending a KeyUpdate message, the sender SHALL send all its traffic using the next generation of keys, computed as described in Section 7.2.",
+    "normative_keyword": "SHALL",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "After sending KeyUpdate, the sender SHALL use next-generation keys for all subsequent traffic.",
+    "entity": "both",
+    "applies_when": "Endpoint sends KeyUpdate",
+    "target_message": "KeyUpdate",
+    "target_field": null,
+    "expected_value": "all subsequent traffic uses new keys",
+    "related_fields": [],
+    "violation_alert": "bad_record_mac",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "KeyUpdate"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "bad_record_mac"
+      ],
+      "modes_or_conditions": [
+        "key update"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify sender uses new keys after KeyUpdate.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit SHALL.",
+    "cross_section_context_used": [
+      "7.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.3-receiver-must-update-receiving-keys",
+    "source_section": "4.6.3",
+    "source_text": "Upon receiving a KeyUpdate, the receiver MUST update its receiving keys.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Upon receiving KeyUpdate, the receiver MUST update its receiving keys.",
+    "entity": "both",
+    "applies_when": "Endpoint receives KeyUpdate",
+    "target_message": "KeyUpdate",
+    "target_field": null,
+    "expected_value": "receiving keys updated to next generation",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "KeyUpdate"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "key update"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify receiver can decrypt with new keys after KeyUpdate.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "7.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.3-invalid-request-update-must-terminate",
+    "source_section": "4.6.3",
+    "source_text": "If an implementation receives any other value, it MUST terminate the connection with an \"illegal_parameter\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If request_update field contains an invalid value (not 0 or 1), the receiver MUST terminate with illegal_parameter.",
+    "entity": "both",
+    "applies_when": "Endpoint receives KeyUpdate with invalid request_update value",
+    "target_message": "KeyUpdate",
+    "target_field": "request_update",
+    "expected_value": "terminate connection",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.6.3",
+    "protocol_keywords": {
+      "message_types": [
+        "KeyUpdate"
+      ],
+      "field_names": [
+        "request_update"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify correct alert on invalid request_update value.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specified alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.3-must-respond-to-update-requested",
+    "source_section": "4.6.3",
+    "source_text": "If the request_update field is set to \"update_requested\", then the receiver MUST send a KeyUpdate of its own with request_update set to \"update_not_requested\" prior to sending its next Application Data record.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If request_update is update_requested, the receiver MUST send its own KeyUpdate with update_not_requested before next Application Data.",
+    "entity": "both",
+    "applies_when": "Endpoint receives KeyUpdate with request_update = update_requested",
+    "target_message": "KeyUpdate",
+    "target_field": "request_update",
+    "expected_value": "respond with KeyUpdate(update_not_requested) before next app data",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "KeyUpdate"
+      ],
+      "field_names": [
+        "request_update"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "update_requested",
+        "update_not_requested"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify response KeyUpdate is sent before next application data.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.3-must-encrypt-ku-with-old-keys",
+    "source_section": "4.6.3",
+    "source_text": "Both sender and receiver MUST encrypt their KeyUpdate messages with the old keys.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "KeyUpdate messages MUST be encrypted with the old (current) keys, not the new keys.",
+    "entity": "both",
+    "applies_when": "Endpoint sends or receives KeyUpdate",
+    "target_message": "KeyUpdate",
+    "target_field": null,
+    "expected_value": "encrypted with pre-update keys",
+    "related_fields": [],
+    "violation_alert": "bad_record_mac",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "KeyUpdate"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "bad_record_mac"
+      ],
+      "modes_or_conditions": [
+        "key update"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify KeyUpdate is decryptable with current keys.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.3-must-receive-ku-before-new-key-messages",
+    "source_section": "4.6.3",
+    "source_text": "Additionally, both sides MUST enforce that a KeyUpdate with the old key is received before accepting any messages encrypted with the new key.",
+    "normative_keyword": "MUST",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "Both sides MUST enforce that KeyUpdate (encrypted with old key) is received before accepting messages with new key.",
+    "entity": "both",
+    "applies_when": "Endpoint processes key transition",
+    "target_message": "KeyUpdate",
+    "target_field": null,
+    "expected_value": "KeyUpdate received before new-key messages accepted",
+    "related_fields": [],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "KeyUpdate"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "key update",
+        "message truncation prevention"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify endpoint rejects new-key messages without prior KeyUpdate.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": "Failure to enforce allows message truncation attacks.",
+    "model": "claude-opus-4-6"
+  }
+]

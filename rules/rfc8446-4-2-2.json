@@ -1,0 +1,119 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.2-client-must-copy-cookie",
+    "source_section": "4.2.2",
+    "source_text": "When sending the new ClientHello, the client MUST copy the contents of the extension received in the HelloRetryRequest into a \"cookie\" extension in the new ClientHello.",
+    "normative_keyword": "MUST",
+    "rule_type": "message_construction",
+    "rule_statement": "When sending the updated ClientHello after HelloRetryRequest, the client MUST copy the cookie extension contents from the HRR into a cookie extension in the new ClientHello.",
+    "entity": "client",
+    "applies_when": "Client constructs second ClientHello after receiving HelloRetryRequest with cookie",
+    "target_message": "ClientHello",
+    "target_field": "extensions.cookie",
+    "expected_value": "exact copy of HelloRetryRequest cookie value",
+    "related_fields": [
+      "HelloRetryRequest.extensions.cookie"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "HelloRetryRequest"
+      ],
+      "field_names": [
+        "cookie"
+      ],
+      "extension_names": [
+        "cookie"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "after HelloRetryRequest"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify cookie is copied from HRR to second ClientHello.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.2-client-must-not-use-cookie-initial",
+    "source_section": "4.2.2",
+    "source_text": "Clients MUST NOT use cookies in their initial ClientHello in subsequent connections.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "presence_requirement",
+    "rule_statement": "Clients MUST NOT include a cookie extension in their initial ClientHello in subsequent connections.",
+    "entity": "client",
+    "applies_when": "Client constructs the initial ClientHello for a new connection",
+    "target_message": "ClientHello",
+    "target_field": "extensions",
+    "expected_value": "no cookie extension present",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "cookie"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "initial ClientHello",
+        "new connection"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify cookie is not included in initial ClientHello construction.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.2-stateless-server-ignore-ccs",
+    "source_section": "4.2.2",
+    "source_text": "Servers operating statelessly MUST ignore these records.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "Stateless servers MUST ignore unprotected change_cipher_spec records received between first and second ClientHello.",
+    "entity": "server",
+    "applies_when": "Stateless server receives change_cipher_spec between first and second ClientHello",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "record is silently ignored",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "cookie"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "stateless server",
+        "change_cipher_spec"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Requires testing stateless server path with interleaved CCS records.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "5"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

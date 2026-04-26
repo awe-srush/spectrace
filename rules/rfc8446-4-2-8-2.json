@@ -1,0 +1,133 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.8.2-must-validate-point-on-curve",
+    "source_section": "4.2.8.2",
+    "source_text": "For secp256r1, secp384r1, and secp521r1, peers MUST validate each other's public value Q by ensuring that the point is a valid point on the elliptic curve.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "For NIST curves (secp256r1/384r1/521r1), peers MUST validate that the peer's ECDH public value Q lies on the curve.",
+    "entity": "both",
+    "applies_when": "Processing an ECDHE key_share for secp256r1, secp384r1, or secp521r1",
+    "target_message": null,
+    "target_field": "extensions.key_share.key_exchange",
+    "expected_value": "Q is a valid point on the negotiated elliptic curve",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.2.8.2",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "ServerHello"
+      ],
+      "field_names": [
+        "key_exchange"
+      ],
+      "extension_names": [
+        "key_share"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "ECDHE",
+        "secp256r1",
+        "secp384r1",
+        "secp521r1"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can send point not on curve and verify peer rejects with illegal_parameter.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.8.2-must-abort-invalid-point",
+    "source_section": "4.2.8.2",
+    "source_text": "If the validation fails, the receiving peer MUST terminate the connection with an \"illegal_parameter\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If ECDH point validation fails, the peer MUST abort with illegal_parameter.",
+    "entity": "both",
+    "applies_when": "Receiving ECDHE key_share with invalid curve point",
+    "target_message": null,
+    "target_field": "extensions.key_share.key_exchange",
+    "expected_value": "abort with illegal_parameter alert",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.2.8.2",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "ServerHello"
+      ],
+      "field_names": [
+        "key_exchange"
+      ],
+      "extension_names": [
+        "key_share"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "ECDHE",
+        "secp256r1",
+        "secp384r1",
+        "secp521r1"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can send invalid point and verify illegal_parameter response.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specified alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.8.2-x25519-x448-no-validation-required",
+    "source_section": "4.2.8.2",
+    "source_text": "For X25519 and X448, the only check specified is that described in Section 7.4.2.",
+    "normative_keyword": "MUST",
+    "rule_type": "algorithmic",
+    "rule_statement": "For X25519/X448, the only required validation is the all-zero shared secret check (\u00a77.4.2); no point-on-curve check is needed.",
+    "entity": "both",
+    "applies_when": "Processing X25519 or X448 key_share",
+    "target_message": null,
+    "target_field": "extensions.key_share.key_exchange",
+    "expected_value": "only all-zero shared secret check required",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "ServerHello"
+      ],
+      "field_names": [
+        "key_exchange"
+      ],
+      "extension_names": [
+        "key_share"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "ECDHE",
+        "X25519",
+        "X448"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify server accepts any 32/56-byte key_exchange value without aborting.",
+    "extraction_confidence": "medium",
+    "extraction_confidence_rationale": "Implied from the specification limiting validation to \u00a77.4.2 check only.",
+    "cross_section_context_used": [
+      "7.4.2"
+    ],
+    "ambiguity_notes": "Not an explicit MUST statement but derives from the scoping language limiting required checks.",
+    "model": "claude-opus-4-6"
+  }
+]

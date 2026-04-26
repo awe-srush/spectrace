@@ -1,0 +1,599 @@
+{
+  "rule_id": "rfc8446-4.2.5-oid-filters-only-in-cr",
+  "rule_type": "presence_requirement",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "CertificateRequest",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateRequest",
+        "certificate_request"
+      ]
+    },
+    {
+      "term": "filters",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "filters"
+      ]
+    },
+    {
+      "term": "oid_filters",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "oid_filters",
+        "OidFilters"
+      ]
+    },
+    {
+      "term": "illegal_parameter",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "illegal_parameter",
+        "IllegalParameter"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions.c",
+      "function": "tls_collect_extensions",
+      "line_range": [
+        805,
+        927
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 863,
+          "text": "* be sent in the ClientHello and CertificateRequest. Unsolicited"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 876,
+          "text": "&& (context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST | SSL_EXT_TLS1_3_NEW_SESSION_TICKET)) == 0"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 857,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/quic/quic_channel.c",
+      "function": "ch_on_handshake_alert",
+      "line_range": [
+        1246,
+        1284
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1252,
+          "text": "* TLS CertificateRequest messages, and clients MUST treat receipt of such"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1262,
+          "text": "\"CertificateRequest received\");"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1270,
+          "text": "else if (alert_code == SSL_AD_ILLEGAL_PARAMETER"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_cert_verify",
+      "line_range": [
+        430,
+        601
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateRequest",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 584,
+          "text": "* CertificateRequest. This is because in TLSv1.3 the CertificateRequest"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 461,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 1776,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_TLS_SESSION_ID_TOO_LONG);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1893,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_ECH_REQUIRED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1924,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1933,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_INVALID_SESSION_ID);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1959,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2031,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2087,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2101,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2108,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COMPRESSION_DISABLED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2116,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/ech/ech_internal.c",
+      "function": "ech_decode_inbound_ech",
+      "line_range": [
+        1246,
+        1411
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 1280,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1308,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1316,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1328,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1332,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1336,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1349,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1355,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1387,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1391,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/t1_lib.c",
+      "function": "tls12_check_peer_sigalg",
+      "line_range": [
+        2854,
+        2989
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 2869,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2880,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2889,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2897,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2909,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2917,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2925,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2935,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CURVE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2942,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CURVE);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 1891,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, protverr);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1985,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_CIPHER);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2071,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2088,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2204,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2240,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_key_share",
+      "line_range": [
+        2193,
+        2367
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 2219,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2238,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2253,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2291,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2320,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2342,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "set_client_ciphersuite",
+      "line_range": [
+        1624,
+        1700
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 1635,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_UNKNOWN_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1643,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1651,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1658,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1683,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1692,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 1076,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COOKIE_MISMATCH);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1099,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1121,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_CIPHER);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1146,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COOKIE_MISMATCH);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-5-oid-filters-only-in-cr_candidate_1.c",
+    "locations/code/rfc8446-4-2-5-oid-filters-only-in-cr_candidate_2.c",
+    "locations/code/rfc8446-4-2-5-oid-filters-only-in-cr_candidate_3.c",
+    "locations/code/rfc8446-4-2-5-oid-filters-only-in-cr_candidate_4.c",
+    "locations/code/rfc8446-4-2-5-oid-filters-only-in-cr_candidate_5.c",
+    "locations/code/rfc8446-4-2-5-oid-filters-only-in-cr_candidate_6.c",
+    "locations/code/rfc8446-4-2-5-oid-filters-only-in-cr_candidate_7.c",
+    "locations/code/rfc8446-4-2-5-oid-filters-only-in-cr_candidate_8.c",
+    "locations/code/rfc8446-4-2-5-oid-filters-only-in-cr_candidate_9.c",
+    "locations/code/rfc8446-4-2-5-oid-filters-only-in-cr_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 183,
+    "files_with_hits": 25,
+    "functions_identified": 80,
+    "null_scope_hits": 17,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 2071
+  }
+}

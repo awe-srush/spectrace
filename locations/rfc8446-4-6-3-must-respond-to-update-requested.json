@@ -1,0 +1,678 @@
+{
+  "rule_id": "rfc8446-4.6.3-must-respond-to-update-requested",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "KeyUpdate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "KeyUpdate",
+        "key_update"
+      ]
+    },
+    {
+      "term": "request_update",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "request_update",
+        "RequestUpdate"
+      ]
+    },
+    {
+      "term": "update_requested",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "update_requested",
+        "UpdateRequested"
+      ]
+    },
+    {
+      "term": "update_not_requested",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "update_not_requested",
+        "UpdateNotRequested"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_key_update",
+      "line_range": [
+        698,
+        741
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "update_not_requested",
+          "update_requested"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 703,
+          "text": "* A KeyUpdate message signals a key change so the end of the message must"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 729,
+          "text": "* to additionally send a KeyUpdate message. However that message should"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 698,
+          "text": "MSG_PROCESS_RETURN tls_process_key_update(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 713,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_KEY_UPDATE);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 721,
+          "text": "if (updatetype != SSL_KEY_UPDATE_NOT_REQUESTED"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 722,
+          "text": "&& updatetype != SSL_KEY_UPDATE_REQUESTED) {"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_UPDATE);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 732,
+          "text": "if (updatetype == SSL_KEY_UPDATE_REQUESTED)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 733,
+          "text": "s->key_update = SSL_KEY_UPDATE_NOT_REQUESTED;"
+        },
+        {
+          "term": "update_requested",
+          "line": 722,
+          "text": "&& updatetype != SSL_KEY_UPDATE_REQUESTED) {"
+        },
+        {
+          "term": "update_requested",
+          "line": 732,
+          "text": "if (updatetype == SSL_KEY_UPDATE_REQUESTED)"
+        },
+        {
+          "term": "update_not_requested",
+          "line": 721,
+          "text": "if (updatetype != SSL_KEY_UPDATE_NOT_REQUESTED"
+        },
+        {
+          "term": "update_not_requested",
+          "line": 733,
+          "text": "s->key_update = SSL_KEY_UPDATE_NOT_REQUESTED;"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/ssl_lib.c",
+      "function": "SSL_key_update",
+      "line_range": [
+        2989,
+        3025
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "update_not_requested",
+          "update_requested"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 2989,
+          "text": "int SSL_key_update(SSL *s, int updatetype)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 2995,
+          "text": "return ossl_quic_key_update(s, updatetype);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 3006,
+          "text": "if (updatetype != SSL_KEY_UPDATE_NOT_REQUESTED"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 3007,
+          "text": "&& updatetype != SSL_KEY_UPDATE_REQUESTED) {"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 3008,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_INVALID_KEY_UPDATE_TYPE);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 3023,
+          "text": "sc->key_update = updatetype;"
+        },
+        {
+          "term": "update_requested",
+          "line": 3007,
+          "text": "&& updatetype != SSL_KEY_UPDATE_REQUESTED) {"
+        },
+        {
+          "term": "update_not_requested",
+          "line": 3006,
+          "text": "if (updatetype != SSL_KEY_UPDATE_NOT_REQUESTED"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/quic/quic_impl.c",
+      "function": "ossl_quic_key_update",
+      "line_range": [
+        4670,
+        4702
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "update_not_requested",
+          "update_requested"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 4670,
+          "text": "int ossl_quic_key_update(SSL *ssl, int update_type)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 4678,
+          "text": "case SSL_KEY_UPDATE_NOT_REQUESTED:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 4681,
+          "text": "* spontaneous TXKU. Silently upgrade this to SSL_KEY_UPDATE_REQUESTED."
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 4683,
+          "text": "case SSL_KEY_UPDATE_REQUESTED:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 4695,
+          "text": "QUIC_RAISE_NON_NORMAL_ERROR(&ctx, SSL_R_TOO_MANY_KEY_UPDATES, NULL);"
+        },
+        {
+          "term": "update_requested",
+          "line": 4681,
+          "text": "* spontaneous TXKU. Silently upgrade this to SSL_KEY_UPDATE_REQUESTED."
+        },
+        {
+          "term": "update_requested",
+          "line": 4683,
+          "text": "case SSL_KEY_UPDATE_REQUESTED:"
+        },
+        {
+          "term": "update_not_requested",
+          "line": 4678,
+          "text": "case SSL_KEY_UPDATE_NOT_REQUESTED:"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "crypto/seed/seed.c",
+      "function": "SEED_set_key",
+      "line_range": [
+        435,
+        492
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 18,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 448,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[0]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 450,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[2]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 454,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[4]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 456,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[6]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 458,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[8]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 460,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[10]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 462,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[12]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 464,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[14]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 466,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[16]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 468,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[18]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 470,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[20]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 472,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[22]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 474,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[24]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 476,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[26]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 478,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[28]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 480,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[30]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 486,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[i * 2]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 488,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[i * 2 + 2]);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "crypto/cmp/cmp_asn.c",
+      "function": "OSSL_CMP_ITAV_new_rootCaKeyUpdate",
+      "line_range": [
+        316,
+        347
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 316,
+          "text": "OSSL_CMP_ITAV *OSSL_CMP_ITAV_new_rootCaKeyUpdate(const X509 *newWithNew,"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 321,
+          "text": "OSSL_CMP_ROOTCAKEYUPDATE *upd = NULL;"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 324,
+          "text": "upd = OSSL_CMP_ROOTCAKEYUPDATE_new();"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 340,
+          "text": "itav->infoType = OBJ_nid2obj(NID_id_it_rootCaKeyUpdate);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 341,
+          "text": "itav->infoValue.rootCaKeyUpdate = upd;"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 345,
+          "text": "OSSL_CMP_ROOTCAKEYUPDATE_free(upd);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "crypto/cmp/cmp_genm.c",
+      "function": "OSSL_CMP_get1_rootCaKeyUpdate",
+      "line_range": [
+        304,
+        366
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 304,
+          "text": "int OSSL_CMP_get1_rootCaKeyUpdate(OSSL_CMP_CTX *ctx,"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 320,
+          "text": "itav = get_genm_itav(ctx, req, NID_id_it_rootCaKeyUpdate, \"rootCaKeyUpdate\");"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 324,
+          "text": "if (!OSSL_CMP_ITAV_get0_rootCaKeyUpdate(itav, newWithNew,"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 336,
+          "text": "ERR_raise(ERR_LIB_CMP, CMP_R_INVALID_ROOTCAKEYUPDATE);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 344,
+          "text": "ERR_raise(ERR_LIB_CMP, CMP_R_INVALID_ROOTCAKEYUPDATE);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "crypto/cmp/cmp_local.h",
+      "function": "ossl_cmp_itav_st",
+      "line_range": [
+        240,
+        298
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 260,
+          "text": "/* NID_id_it_caKeyUpdateInfo - Updated CA Key Pair */"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 261,
+          "text": "OSSL_CMP_CAKEYUPDANNCONTENT *caKeyUpdateInfo;"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 286,
+          "text": "/* NID_id_it_rootCaKeyUpdate - Root CA Certificate Update */"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 287,
+          "text": "OSSL_CMP_ROOTCAKEYUPDATE *rootCaKeyUpdate;"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "crypto/cmp/cmp_asn.c",
+      "function": "OSSL_CMP_ITAV_get0_rootCaKeyUpdate",
+      "line_range": [
+        349,
+        371
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 349,
+          "text": "int OSSL_CMP_ITAV_get0_rootCaKeyUpdate(const OSSL_CMP_ITAV *itav,"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 354,
+          "text": "OSSL_CMP_ROOTCAKEYUPDATE *upd;"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 360,
+          "text": "if (OBJ_obj2nid(itav->infoType) != NID_id_it_rootCaKeyUpdate) {"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 364,
+          "text": "upd = itav->infoValue.rootCaKeyUpdate;"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_write_transition",
+      "line_range": [
+        582,
+        715
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 598,
+          "text": "if (s->key_update != SSL_KEY_UPDATE_NONE) {"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 599,
+          "text": "st->hand_state = TLS_ST_SW_KEY_UPDATE;"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 697,
+          "text": "case TLS_ST_SR_KEY_UPDATE:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 698,
+          "text": "case TLS_ST_SW_KEY_UPDATE:"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_write_transition",
+      "line_range": [
+        422,
+        518
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 502,
+          "text": "case TLS_ST_CR_KEY_UPDATE:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 503,
+          "text": "case TLS_ST_CW_KEY_UPDATE:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 510,
+          "text": "if (s->key_update != SSL_KEY_UPDATE_NONE) {"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 511,
+          "text": "st->hand_state = TLS_ST_CW_KEY_UPDATE;"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-6-3-must-respond-to-update-requested_candidate_1.c",
+    "locations/code/rfc8446-4-6-3-must-respond-to-update-requested_candidate_2.c",
+    "locations/code/rfc8446-4-6-3-must-respond-to-update-requested_candidate_3.c",
+    "locations/code/rfc8446-4-6-3-must-respond-to-update-requested_candidate_4.c",
+    "locations/code/rfc8446-4-6-3-must-respond-to-update-requested_candidate_5.c",
+    "locations/code/rfc8446-4-6-3-must-respond-to-update-requested_candidate_6.c",
+    "locations/code/rfc8446-4-6-3-must-respond-to-update-requested_candidate_7.c",
+    "locations/code/rfc8446-4-6-3-must-respond-to-update-requested_candidate_8.c",
+    "locations/code/rfc8446-4-6-3-must-respond-to-update-requested_candidate_9.c",
+    "locations/code/rfc8446-4-6-3-must-respond-to-update-requested_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 209,
+    "files_with_hits": 28,
+    "functions_identified": 54,
+    "null_scope_hits": 51,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 580
+  }
+}

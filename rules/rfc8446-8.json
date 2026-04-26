@@ -1,0 +1,158 @@
+[
+  {
+    "rule_id": "rfc8446-8-should-provide-replay-safety",
+    "source_section": "8",
+    "source_text": "Servers SHOULD provide that level of replay safety by implementing one of the methods described in this section or by equivalent means.",
+    "normative_keyword": "SHOULD",
+    "rule_type": "conditional_action",
+    "rule_statement": "Servers SHOULD implement anti-replay mechanisms (\u00a78.1 or \u00a78.2) to ensure 0-RTT data is accepted at most once.",
+    "entity": "server",
+    "applies_when": "Server accepts 0-RTT data",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": "anti-replay mechanism in place",
+    "related_fields": [
+      "early_data"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "early_data",
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT",
+        "anti-replay"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can test by replaying 0-RTT and checking if server rejects duplicate.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit SHOULD.",
+    "cross_section_context_used": [
+      "8.1",
+      "8.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-8-clients-must-only-send-replay-safe-early-data",
+    "source_section": "8",
+    "source_text": "clients will not know which, if any, of these mechanisms servers actually implement and hence MUST only send early data which they deem safe to be replayed.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "Clients MUST only send early data that is safe to be replayed.",
+    "entity": "client",
+    "applies_when": "Client sends 0-RTT early data",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": "early data is replay-safe",
+    "related_fields": [
+      "early_data"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "early_data"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT"
+      ]
+    },
+    "checkability": "low",
+    "checkability_rationale": "Application-level requirement; cannot verify at protocol level what data is replay-safe.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-8-server-must-accept-0rtt-at-most-once-per-instance",
+    "source_section": "8",
+    "source_text": "The server MUST ensure that any instance of it (be it a machine, a thread, or any other entity within the relevant serving infrastructure) would accept 0-RTT for the same 0-RTT handshake at most once.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Each server instance MUST accept 0-RTT for the same handshake at most once.",
+    "entity": "server",
+    "applies_when": "Server processes 0-RTT data",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": "0-RTT accepted at most once per server instance per handshake",
+    "related_fields": [
+      "early_data"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "early_data",
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT",
+        "anti-replay"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can replay same ClientHello with 0-RTT to same server and verify rejection.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-8-application-must-handle-retry-replay",
+    "source_section": "8",
+    "source_text": "The second class of attack cannot be prevented at the TLS layer and MUST be dealt with by any application.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Applications MUST handle the retry-based replay attack class themselves (not solvable at TLS layer).",
+    "entity": "both",
+    "applies_when": "Application uses 0-RTT data",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "application-level anti-replay for retry scenarios",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [
+        "early_data"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "0-RTT",
+        "anti-replay"
+      ]
+    },
+    "checkability": "not_checkable",
+    "checkability_rationale": "Application-level requirement; cannot be verified at TLS protocol level.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

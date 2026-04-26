@@ -1,0 +1,416 @@
+{
+  "rule_id": "rfc8446-4.2.3-tls12-accept-pss",
+  "rule_type": "behavioral_tolerance",
+  "checkability": "medium",
+  "search_terms": [
+    {
+      "term": "CertificateVerify",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateVerify",
+        "certificate_verify"
+      ]
+    },
+    {
+      "term": "signature_algorithms",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "signature_algorithms",
+        "SignatureAlgorithms"
+      ]
+    },
+    {
+      "term": "TLS 1.2",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "TLS 1.2"
+      ]
+    },
+    {
+      "term": "RSASSA-PSS",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "RSASSA-PSS"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ssl_check_for_safari",
+      "line_range": [
+        1547,
+        1613
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "TLS 1.2",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature_algorithms",
+          "line": 1572,
+          "text": "0x0d, /* signature_algorithms */"
+        },
+        {
+          "term": "TLS 1.2",
+          "line": 1570,
+          "text": "/* The following is only present in TLS 1.2 */"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_certificate_request",
+      "line_range": [
+        2959,
+        3081
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateVerify",
+          "signature_algorithms"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "signature_algorithms",
+          "line": 3044,
+          "text": "SSL_R_SIGNATURE_ALGORITHMS_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_read_transition",
+      "line_range": [
+        190,
+        314
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 242,
+          "text": "* We should only process a CertificateVerify message if we have"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 244,
+          "text": "* will be non NULL. In some instances a CertificateVerify message is"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 253,
+          "text": "* pub key in a certificate, the CertificateVerify message is"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 261,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/ssl_lib.c",
+      "function": "ssl_set_masks",
+      "line_range": [
+        4777,
+        4898
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "TLS 1.2"
+        ]
+      },
+      "hits": [
+        {
+          "term": "TLS 1.2",
+          "line": 4828,
+          "text": "* if TLS 1.2 and peer supports it."
+        },
+        {
+          "term": "TLS 1.2",
+          "line": 4871,
+          "text": "/* Allow Ed25519 for TLS 1.2 if peer supports it */"
+        },
+        {
+          "term": "TLS 1.2",
+          "line": 4877,
+          "text": "/* Allow Ed448 for TLS 1.2 if peer supports it */"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_rpk",
+      "line_range": [
+        3855,
+        3938
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 3921,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 3876,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_certificate",
+      "line_range": [
+        3940,
+        4131
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 4112,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 4058,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "get_cert_verify_tbs_data",
+      "line_range": [
+        259,
+        312
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 262,
+          "text": "/* ASCII: \"TLS 1.3, server CertificateVerify\", in hex for EBCDIC compatibility */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 265,
+          "text": "/* ASCII: \"TLS 1.3, client CertificateVerify\", in hex for EBCDIC compatibility */"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_post_process_server_rpk",
+      "line_range": [
+        2285,
+        2350
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 2340,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 2306,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_post_process_server_certificate",
+      "line_range": [
+        2450,
+        2544
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "CertificateVerify"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 2535,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 2484,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_check_chain",
+      "line_range": [
+        4215,
+        4476
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "TLS 1.2"
+        ]
+      },
+      "hits": [
+        {
+          "term": "TLS 1.2",
+          "line": 4287,
+          "text": "* algorithms extension if TLS 1.2 or later and strict mode."
+        },
+        {
+          "term": "TLS 1.2",
+          "line": 4379,
+          "text": "/* Else not TLS 1.2, so mark EE and CA signing algorithms OK */"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-3-tls12-accept-pss_candidate_1.c",
+    "locations/code/rfc8446-4-2-3-tls12-accept-pss_candidate_2.c",
+    "locations/code/rfc8446-4-2-3-tls12-accept-pss_candidate_3.c",
+    "locations/code/rfc8446-4-2-3-tls12-accept-pss_candidate_4.c",
+    "locations/code/rfc8446-4-2-3-tls12-accept-pss_candidate_5.c",
+    "locations/code/rfc8446-4-2-3-tls12-accept-pss_candidate_6.c",
+    "locations/code/rfc8446-4-2-3-tls12-accept-pss_candidate_7.c",
+    "locations/code/rfc8446-4-2-3-tls12-accept-pss_candidate_8.c",
+    "locations/code/rfc8446-4-2-3-tls12-accept-pss_candidate_9.c",
+    "locations/code/rfc8446-4-2-3-tls12-accept-pss_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 103,
+    "files_with_hits": 29,
+    "functions_identified": 46,
+    "null_scope_hits": 42,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1190
+  }
+}

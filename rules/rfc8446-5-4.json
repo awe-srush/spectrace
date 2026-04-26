@@ -1,0 +1,185 @@
+[
+  {
+    "rule_id": "rfc8446-5.4-padding-must-be-all-zeros",
+    "source_section": "5.4",
+    "source_text": "Implementations MUST set the padding octets to all zeros before encrypting.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "Padding octets in TLSInnerPlaintext MUST be all zeros before encryption.",
+    "entity": "both",
+    "applies_when": "Generating padded TLSCiphertext records",
+    "target_message": null,
+    "target_field": "TLSInnerPlaintext.zeros",
+    "expected_value": "all zero bytes",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [
+        "zeros",
+        "TLSInnerPlaintext"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "record padding"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify padding bytes are zero after decryption.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-5.4-must-not-send-zero-length-hs-alert-content",
+    "source_section": "5.4",
+    "source_text": "Implementations MUST NOT send Handshake and Alert records that have a zero-length TLSInnerPlaintext.content; if such a message is received, the receiving implementation MUST terminate the connection with an \"unexpected_message\" alert.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "value_constraint",
+    "rule_statement": "Handshake and Alert records MUST NOT have zero-length TLSInnerPlaintext.content; receivers MUST terminate with unexpected_message.",
+    "entity": "both",
+    "applies_when": "Sending or receiving encrypted Handshake or Alert records",
+    "target_message": null,
+    "target_field": "TLSInnerPlaintext.content",
+    "expected_value": "length > 0 for Handshake and Alert types",
+    "related_fields": [
+      "ContentType"
+    ],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "5.4",
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [
+        "TLSInnerPlaintext",
+        "content",
+        "ContentType"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "record padding"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify correct alert when receiving zero-length handshake/alert content.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT with specified alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-5.4-must-limit-scanning-to-aead-cleartext",
+    "source_section": "5.4",
+    "source_text": "Implementations MUST limit their scanning to the cleartext returned from the AEAD decryption.",
+    "normative_keyword": "MUST",
+    "rule_type": "algorithmic",
+    "rule_statement": "Content type scanning MUST be limited to the cleartext returned from AEAD decryption.",
+    "entity": "both",
+    "applies_when": "Scanning for content type after decryption",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "scan only within AEAD-decrypted cleartext bounds",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [
+        "TLSInnerPlaintext"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "AEAD decryption",
+        "record padding"
+      ]
+    },
+    "checkability": "low",
+    "checkability_rationale": "Internal implementation detail; hard to observe externally.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-5.4-must-terminate-if-no-nonzero-octet",
+    "source_section": "5.4",
+    "source_text": "If a receiving implementation does not find a non-zero octet in the cleartext, it MUST terminate the connection with an \"unexpected_message\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If no non-zero octet is found in decrypted cleartext (no content type), MUST terminate with unexpected_message.",
+    "entity": "both",
+    "applies_when": "After AEAD decryption yields all-zero cleartext",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "terminate connection",
+    "related_fields": [],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "5.4",
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [
+        "TLSInnerPlaintext"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "record padding",
+        "content type scanning"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can send crafted all-zero plaintext and verify alert response.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specified alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-5.4-inner-plaintext-must-not-exceed-limit",
+    "source_section": "5.4",
+    "source_text": "The presence of padding does not change the overall record size limitations: the full encoded TLSInnerPlaintext MUST NOT exceed 2^14 + 1 octets.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "value_constraint",
+    "rule_statement": "Full encoded TLSInnerPlaintext (content + type + padding) MUST NOT exceed 2^14 + 1 octets.",
+    "entity": "both",
+    "applies_when": "Constructing padded records",
+    "target_message": null,
+    "target_field": "TLSInnerPlaintext",
+    "expected_value": "<= 16385 octets total",
+    "related_fields": [],
+    "violation_alert": "record_overflow",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [
+        "TLSInnerPlaintext"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "record_overflow"
+      ],
+      "modes_or_conditions": [
+        "record padding"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify decrypted record does not exceed size limit.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

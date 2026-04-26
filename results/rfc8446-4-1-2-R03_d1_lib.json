@@ -1,0 +1,73 @@
+{
+  "rule_id": "rfc8446-4.1.2-R03",
+  "source_file": "ssl/d1_lib.c",
+  "primary_function": "DTLSv1_listen",
+  "judgment": "not_applicable",
+  "confidence": "high",
+  "reasoning": "The `DTLSv1_listen` function is a DTLS-specific stateless listener that operates BEFORE any handshake is established, not after TLS 1.3 negotiation. It implements the DTLS cookie exchange mechanism (HelloVerifyRequest) used for DoS prevention in DTLS. The function has a version check at line 450 (`if ((s->version & 0xff00) != (DTLS1_VERSION & 0xff00))`) that restricts it to DTLS 1.0/1.2 versions only \u2014 not TLS 1.3. The rule from RFC 8446 section 4.1.2 applies to a server that has already negotiated TLS 1.3 receiving a ClientHello post-handshake (renegotiation attempt). That behavior is handled by `ossl_statem_server13_read_transition` in `ssl/statem/statem_srvr.c`, where the `TLS_ST_OK` state does not include a transition for `SSL3_MT_CLIENT_HELLO`, causing the function to return 0, which triggers `SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE)` at line 312 of `ssl/statem/statem_srvr.c`. The `DTLSv1_listen` function processes ClientHellos as part of normal initial DTLS connection setup \u2014 not an RFC 8446 TLS 1.3 post-negotiation renegotiation scenario.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [],
+    "key_code_snippet": "// ssl/d1_lib.c:450 - version check excludes TLS 1.3\nif ((s->version & 0xff00) != (DTLS1_VERSION & 0xff00)) {\n    ERR_raise(ERR_LIB_SSL, SSL_R_UNSUPPORTED_SSL_VERSION);\n    return -1;\n}",
+    "expected_behavior": "A server that has already negotiated TLS 1.3 (TLS_ST_OK state) and receives a ClientHello must terminate with an unexpected_message alert. DTLSv1_listen does not operate in this context \u2014 it is a pre-handshake DTLS cookie exchange function for DTLS 1.0/1.2 only.",
+    "paths_checked": 0,
+    "paths_conforming": 0,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "DTLSv1_listen",
+    "ossl_statem_server13_read_transition",
+    "ossl_statem_server_read_transition"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 7,
+  "tools_used": [
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "DTLSv1_listen"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL3_MT_CLIENT_HELLO"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server13_read_transition"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server_read_transition"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSLfatal"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL3_AD_UNEXPECTED_MESSAGE"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "DTLS1_VERSION"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 111009,
+    "output": 3355
+  }
+}

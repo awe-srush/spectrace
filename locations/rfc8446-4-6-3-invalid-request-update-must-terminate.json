@@ -1,0 +1,726 @@
+{
+  "rule_id": "rfc8446-4.6.3-invalid-request-update-must-terminate",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "KeyUpdate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "KeyUpdate",
+        "key_update"
+      ]
+    },
+    {
+      "term": "request_update",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "request_update",
+        "RequestUpdate"
+      ]
+    },
+    {
+      "term": "illegal_parameter",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "illegal_parameter",
+        "IllegalParameter"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_key_update",
+      "line_range": [
+        698,
+        741
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 703,
+          "text": "* A KeyUpdate message signals a key change so the end of the message must"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 729,
+          "text": "* to additionally send a KeyUpdate message. However that message should"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 698,
+          "text": "MSG_PROCESS_RETURN tls_process_key_update(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 713,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_KEY_UPDATE);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 721,
+          "text": "if (updatetype != SSL_KEY_UPDATE_NOT_REQUESTED"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 722,
+          "text": "&& updatetype != SSL_KEY_UPDATE_REQUESTED) {"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_UPDATE);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 732,
+          "text": "if (updatetype == SSL_KEY_UPDATE_REQUESTED)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 733,
+          "text": "s->key_update = SSL_KEY_UPDATE_NOT_REQUESTED;"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_UPDATE);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "crypto/seed/seed.c",
+      "function": "SEED_set_key",
+      "line_range": [
+        435,
+        492
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 18,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 448,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[0]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 450,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[2]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 454,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[4]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 456,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[6]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 458,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[8]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 460,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[10]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 462,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[12]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 464,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[14]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 466,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[16]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 468,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[18]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 470,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[20]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 472,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[22]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 474,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[24]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 476,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[26]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 478,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[28]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 480,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[30]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 486,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[i * 2]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 488,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[i * 2 + 2]);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 1776,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_TLS_SESSION_ID_TOO_LONG);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1893,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_ECH_REQUIRED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1924,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1933,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_INVALID_SESSION_ID);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1959,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2031,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2087,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2101,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2108,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COMPRESSION_DISABLED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2116,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/ech/ech_internal.c",
+      "function": "ech_decode_inbound_ech",
+      "line_range": [
+        1246,
+        1411
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 1280,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1308,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1316,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1328,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1332,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1336,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1349,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1355,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1387,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1391,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/t1_lib.c",
+      "function": "tls12_check_peer_sigalg",
+      "line_range": [
+        2854,
+        2989
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 2869,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2880,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2889,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2897,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2909,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2917,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2925,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2935,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CURVE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2942,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CURVE);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "crypto/cmp/cmp_asn.c",
+      "function": "OSSL_CMP_ITAV_new_rootCaKeyUpdate",
+      "line_range": [
+        316,
+        347
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 316,
+          "text": "OSSL_CMP_ITAV *OSSL_CMP_ITAV_new_rootCaKeyUpdate(const X509 *newWithNew,"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 321,
+          "text": "OSSL_CMP_ROOTCAKEYUPDATE *upd = NULL;"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 324,
+          "text": "upd = OSSL_CMP_ROOTCAKEYUPDATE_new();"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 340,
+          "text": "itav->infoType = OBJ_nid2obj(NID_id_it_rootCaKeyUpdate);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 341,
+          "text": "itav->infoValue.rootCaKeyUpdate = upd;"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 345,
+          "text": "OSSL_CMP_ROOTCAKEYUPDATE_free(upd);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 1891,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, protverr);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1985,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_CIPHER);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2071,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2088,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2204,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2240,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "set_client_ciphersuite",
+      "line_range": [
+        1624,
+        1700
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 1635,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_UNKNOWN_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1643,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1651,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1658,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1683,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1692,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/ssl_lib.c",
+      "function": "SSL_key_update",
+      "line_range": [
+        2989,
+        3025
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 2989,
+          "text": "int SSL_key_update(SSL *s, int updatetype)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 2995,
+          "text": "return ossl_quic_key_update(s, updatetype);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 3006,
+          "text": "if (updatetype != SSL_KEY_UPDATE_NOT_REQUESTED"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 3007,
+          "text": "&& updatetype != SSL_KEY_UPDATE_REQUESTED) {"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 3008,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_INVALID_KEY_UPDATE_TYPE);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 3023,
+          "text": "sc->key_update = updatetype;"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_key_share",
+      "line_range": [
+        2193,
+        2367
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "illegal_parameter",
+          "line": 2219,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2238,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2253,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2291,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2320,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2342,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-6-3-invalid-request-update-must-terminate_candidate_1.c",
+    "locations/code/rfc8446-4-6-3-invalid-request-update-must-terminate_candidate_2.c",
+    "locations/code/rfc8446-4-6-3-invalid-request-update-must-terminate_candidate_3.c",
+    "locations/code/rfc8446-4-6-3-invalid-request-update-must-terminate_candidate_4.c",
+    "locations/code/rfc8446-4-6-3-invalid-request-update-must-terminate_candidate_5.c",
+    "locations/code/rfc8446-4-6-3-invalid-request-update-must-terminate_candidate_6.c",
+    "locations/code/rfc8446-4-6-3-invalid-request-update-must-terminate_candidate_7.c",
+    "locations/code/rfc8446-4-6-3-invalid-request-update-must-terminate_candidate_8.c",
+    "locations/code/rfc8446-4-6-3-invalid-request-update-must-terminate_candidate_9.c",
+    "locations/code/rfc8446-4-6-3-invalid-request-update-must-terminate_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 322,
+    "files_with_hits": 39,
+    "functions_identified": 109,
+    "null_scope_hits": 50,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1696
+  }
+}

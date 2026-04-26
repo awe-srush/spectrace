@@ -1,0 +1,36 @@
+{
+  "rule_id": "rfc8446-6-unknown-alerts-must-be-treated-as-error",
+  "rule_type": "behavioral_tolerance",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "AlertDescription",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "AlertDescription",
+        "alert_description"
+      ]
+    },
+    {
+      "term": "unknown alert",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "unknown alert"
+      ]
+    }
+  ],
+  "candidates": [],
+  "scoped_code_files": [],
+  "stats": {
+    "total_grep_hits": 3,
+    "files_with_hits": 3,
+    "functions_identified": 0,
+    "null_scope_hits": 3,
+    "top_k_returned": 0,
+    "total_lines_in_top_k": 0
+  }
+}

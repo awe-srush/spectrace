@@ -1,0 +1,46 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.11.1-must-not-use-expired-ticket",
+    "source_section": "4.2.11.1",
+    "source_text": "Clients MUST NOT attempt to use tickets which have ages greater than the \"ticket_lifetime\" value which was provided with the ticket.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "value_constraint",
+    "rule_statement": "Clients MUST NOT use tickets older than their ticket_lifetime value.",
+    "entity": "client",
+    "applies_when": "Client considers using a cached session ticket for resumption",
+    "target_message": "ClientHello",
+    "target_field": "extensions.pre_shared_key",
+    "expected_value": "ticket age <= ticket_lifetime",
+    "related_fields": [
+      "obfuscated_ticket_age",
+      "ticket_lifetime"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "obfuscated_ticket_age"
+      ],
+      "extension_names": [
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "PSK",
+        "resumption"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify client doesn't offer expired tickets, but requires timing control.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [
+      "4.6.1"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

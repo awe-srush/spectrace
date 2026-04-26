@@ -1,0 +1,238 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.5-oid-filters-only-in-cr",
+    "source_section": "4.2.5",
+    "source_text": "This extension, if provided by the server, MUST only be sent in the CertificateRequest message.",
+    "normative_keyword": "MUST",
+    "rule_type": "presence_requirement",
+    "rule_statement": "The oid_filters extension MUST only be sent in the CertificateRequest message.",
+    "entity": "server",
+    "applies_when": "Server includes oid_filters extension",
+    "target_message": "CertificateRequest",
+    "target_field": "extensions",
+    "expected_value": "oid_filters only in CertificateRequest",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateRequest"
+      ],
+      "field_names": [
+        "filters"
+      ],
+      "extension_names": [
+        "oid_filters"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify extension is only added to CertificateRequest construction.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.5-client-cert-must-contain-oids",
+    "source_section": "4.2.5",
+    "source_text": "If the server has included a non-empty filters list, the client certificate included in the response MUST contain all of the specified extension OIDs that the client recognizes.",
+    "normative_keyword": "MUST",
+    "rule_type": "presence_requirement",
+    "rule_statement": "If the server sends a non-empty oid_filters list, the client certificate MUST contain all specified extension OIDs that the client recognizes.",
+    "entity": "client",
+    "applies_when": "Client selects a certificate in response to CertificateRequest with non-empty oid_filters",
+    "target_message": "Certificate",
+    "target_field": null,
+    "expected_value": "certificate contains all recognized OIDs from filters",
+    "related_fields": [
+      "CertificateRequest.oid_filters"
+    ],
+    "violation_alert": "unsupported_certificate",
+    "violation_alert_source": "4.2.5",
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate",
+        "CertificateRequest"
+      ],
+      "field_names": [
+        "filters"
+      ],
+      "extension_names": [
+        "oid_filters"
+      ],
+      "alert_names": [
+        "unsupported_certificate"
+      ],
+      "modes_or_conditions": [
+        "client certificate selection"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Requires certificate selection logic to filter based on OID presence.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.5-all-values-must-be-present",
+    "source_section": "4.2.5",
+    "source_text": "For each extension OID recognized by the client, all of the specified values MUST be present in the client certificate (but the certificate MAY have other values as well).",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "For each recognized OID in oid_filters, all specified values MUST be present in the client certificate's corresponding extension.",
+    "entity": "client",
+    "applies_when": "Client selects certificate based on oid_filters",
+    "target_message": "Certificate",
+    "target_field": null,
+    "expected_value": "all filter values present in certificate extension",
+    "related_fields": [
+      "CertificateRequest.oid_filters"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate",
+        "CertificateRequest"
+      ],
+      "field_names": [
+        "filters",
+        "certificate_extension_values"
+      ],
+      "extension_names": [
+        "oid_filters"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "client certificate selection"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Requires parsing certificate extensions and comparing values.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.5-client-must-ignore-unrecognized-oids",
+    "source_section": "4.2.5",
+    "source_text": "However, the client MUST ignore and skip any unrecognized certificate extension OIDs.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "The client MUST ignore and skip any unrecognized certificate extension OIDs in the oid_filters list.",
+    "entity": "client",
+    "applies_when": "Client processes oid_filters containing unrecognized OIDs",
+    "target_message": "CertificateRequest",
+    "target_field": "oid_filters.filters",
+    "expected_value": "unrecognized OIDs silently skipped",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateRequest"
+      ],
+      "field_names": [
+        "filters",
+        "certificate_extension_oid"
+      ],
+      "extension_names": [
+        "oid_filters"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify client doesn't error on unknown OIDs, but requires specific test cases.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.5-no-duplicate-oids",
+    "source_section": "4.2.5",
+    "source_text": "Any given OID MUST NOT appear more than once in the filters list.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "uniqueness_constraint",
+    "rule_statement": "Each OID MUST NOT appear more than once in the oid_filters list.",
+    "entity": "server",
+    "applies_when": "Server constructs oid_filters extension",
+    "target_message": "CertificateRequest",
+    "target_field": "oid_filters.filters",
+    "expected_value": "no duplicate OIDs",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateRequest"
+      ],
+      "field_names": [
+        "filters",
+        "certificate_extension_oid"
+      ],
+      "extension_names": [
+        "oid_filters"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct uniqueness check on OID list.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.5-no-any-extended-key-usage",
+    "source_section": "4.2.5",
+    "source_text": "The special anyExtendedKeyUsage OID MUST NOT be used in the request.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "value_constraint",
+    "rule_statement": "The anyExtendedKeyUsage OID MUST NOT be used in the oid_filters Extended Key Usage request.",
+    "entity": "server",
+    "applies_when": "Server includes Extended Key Usage OIDs in oid_filters",
+    "target_message": "CertificateRequest",
+    "target_field": "oid_filters.filters",
+    "expected_value": "no anyExtendedKeyUsage OID",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateRequest"
+      ],
+      "field_names": [
+        "filters",
+        "certificate_extension_values"
+      ],
+      "extension_names": [
+        "oid_filters"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "Extended Key Usage"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct check that specific OID is not in the list.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

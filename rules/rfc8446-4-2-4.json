@@ -1,0 +1,44 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.4-R01",
+    "source_section": "4.2.4",
+    "source_text": "The \"certificate_authorities\" extension is used to indicate the certificate authorities (CAs) which an endpoint supports and which SHOULD be used by the receiving endpoint to guide certificate selection.",
+    "normative_keyword": "SHOULD",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "When a receiving endpoint gets a certificate_authorities extension, it SHOULD use the listed CAs to guide certificate selection.",
+    "entity": "receiver",
+    "applies_when": "Upon receiving a certificate_authorities extension in a ClientHello or CertificateRequest message",
+    "target_message": null,
+    "target_field": "certificate_authorities",
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "CertificateRequest"
+      ],
+      "field_names": [
+        "certificate_authorities"
+      ],
+      "extension_names": [
+        "certificate_authorities"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": []
+    },
+    "checkability": "low",
+    "checkability_rationale": "This is a behavioral guidance requirement about certificate selection policy, which is difficult to verify through static code analysis alone.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "The SHOULD keyword and its scope are clear.",
+    "cross_section_context_used": [
+      "4.2.4",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

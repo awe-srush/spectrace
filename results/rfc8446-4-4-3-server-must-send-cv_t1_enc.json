@@ -1,0 +1,26 @@
+{
+  "rule_id": "rfc8446-4.4.3-server-must-send-cv",
+  "source_file": "ssl/t1_enc.c",
+  "primary_function": "tls1_alert_code",
+  "judgment": "not_applicable",
+  "confidence": "high",
+  "reasoning": "The function tls1_alert_code is a simple switch statement that maps internal SSL alert code constants to their TLS wire-format numeric values. It has no relation to the TLS handshake flow, server certificate authentication, or sending of CertificateVerify messages. The 'Certificate' matches in the focus guidance are all for alert code names (SSL_AD_BAD_CERTIFICATE, SSL_AD_UNSUPPORTED_CERTIFICATE, SSL_AD_CERTIFICATE_REVOKED, etc.), not for the CertificateVerify handshake message. RFC 8446 section 4.4.3 requires servers to send a CertificateVerify message when authenticating via a certificate \u2014 this is a handshake state machine concern, not an alert code translation concern. This function is entirely not applicable to that rule.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [],
+    "key_code_snippet": "int tls1_alert_code(int code) { switch (code) { case SSL_AD_BAD_CERTIFICATE: return SSL3_AD_BAD_CERTIFICATE; ... } }",
+    "expected_behavior": "Server should send CertificateVerify message after Certificate message when authenticating via a certificate.",
+    "paths_checked": 1,
+    "paths_conforming": 0,
+    "paths_violating": 0
+  },
+  "functions_explored": [],
+  "context_used_beyond_primary_function": false,
+  "tool_calls_made": 0,
+  "tools_used": [],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 8165,
+    "output": 1020
+  }
+}

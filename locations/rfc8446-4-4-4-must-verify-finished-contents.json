@@ -1,0 +1,684 @@
+{
+  "rule_id": "rfc8446-4.4.4-must-verify-finished-contents",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "Finished",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Finished"
+      ]
+    },
+    {
+      "term": "verify_data",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "verify_data",
+        "VerifyData"
+      ]
+    },
+    {
+      "term": "decrypt_error",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "decrypt_error",
+        "DecryptError"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_finished",
+      "line_range": [
+        828,
+        959
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Finished",
+          "decrypt_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 828,
+          "text": "MSG_PROCESS_RETURN tls_process_finished(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "Finished",
+          "line": 854,
+          "text": "* In TLSv1.3 a Finished message signals a key change so the end of the"
+        },
+        {
+          "term": "Finished",
+          "line": 892,
+          "text": "* Copy the finished so we can use it for renegotiation checks"
+        },
+        {
+          "term": "Finished",
+          "line": 899,
+          "text": "memcpy(s->s3.previous_client_finished, s->s3.tmp.peer_finish_md,"
+        },
+        {
+          "term": "Finished",
+          "line": 901,
+          "text": "s->s3.previous_client_finished_len = md_len;"
+        },
+        {
+          "term": "Finished",
+          "line": 903,
+          "text": "memcpy(s->s3.previous_server_finished, s->s3.tmp.peer_finish_md,"
+        },
+        {
+          "term": "Finished",
+          "line": 905,
+          "text": "s->s3.previous_server_finished_len = md_len;"
+        },
+        {
+          "term": "Finished",
+          "line": 927,
+          "text": "if (!tls13_store_server_finished_hash(s)) {"
+        },
+        {
+          "term": "Finished",
+          "line": 958,
+          "text": "return MSG_PROCESS_FINISHED_READING;"
+        },
+        {
+          "term": "decrypt_error",
+          "line": 887,
+          "text": "SSLfatal(s, SSL_AD_DECRYPT_ERROR, SSL_R_DIGEST_CHECK_FAILED);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_hello",
+      "line_range": [
+        1619,
+        1846
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "decrypt_error"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 1739,
+          "text": "return MSG_PROCESS_FINISHED_READING;"
+        },
+        {
+          "term": "Finished",
+          "line": 1789,
+          "text": "return MSG_PROCESS_FINISHED_READING;"
+        },
+        {
+          "term": "decrypt_error",
+          "line": 1720,
+          "text": "SSLfatal(s, SSL_AD_DECRYPT_ERROR, ERR_R_INTERNAL_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_handshake",
+      "line_range": [
+        1625,
+        1738
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "verify_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 1701,
+          "text": "case SSL3_MT_FINISHED:"
+        },
+        {
+          "term": "verify_data",
+          "line": 1702,
+          "text": "ssl_print_hex(bio, indent + 2, \"verify_data\", msg, msglen);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_renegotiate",
+      "line_range": [
+        1624,
+        1678
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 1628,
+          "text": "size_t expected_len = s->s3.previous_client_finished_len"
+        },
+        {
+          "term": "Finished",
+          "line": 1629,
+          "text": "+ s->s3.previous_server_finished_len;"
+        },
+        {
+          "term": "Finished",
+          "line": 1635,
+          "text": "|| s->s3.previous_client_finished_len != 0)"
+        },
+        {
+          "term": "Finished",
+          "line": 1637,
+          "text": "|| s->s3.previous_server_finished_len != 0)) {"
+        },
+        {
+          "term": "Finished",
+          "line": 1660,
+          "text": "if (!PACKET_get_bytes(pkt, &data, s->s3.previous_client_finished_len)"
+        },
+        {
+          "term": "Finished",
+          "line": 1661,
+          "text": "|| memcmp(data, s->s3.previous_client_finished,"
+        },
+        {
+          "term": "Finished",
+          "line": 1662,
+          "text": "s->s3.previous_client_finished_len)"
+        },
+        {
+          "term": "Finished",
+          "line": 1668,
+          "text": "if (!PACKET_get_bytes(pkt, &data, s->s3.previous_server_finished_len)"
+        },
+        {
+          "term": "Finished",
+          "line": 1669,
+          "text": "|| memcmp(data, s->s3.previous_server_finished,"
+        },
+        {
+          "term": "Finished",
+          "line": 1670,
+          "text": "s->s3.previous_server_finished_len)"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem.c",
+      "function": "write_state_machine",
+      "line_range": [
+        796,
+        955
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 843,
+          "text": "case WRITE_TRAN_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 844,
+          "text": "return SUB_STATE_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 862,
+          "text": "case WORK_FINISHED_CONTINUE:"
+        },
+        {
+          "term": "Finished",
+          "line": 866,
+          "text": "case WORK_FINISHED_SWAP:"
+        },
+        {
+          "term": "Finished",
+          "line": 867,
+          "text": "return SUB_STATE_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 869,
+          "text": "case WORK_FINISHED_STOP:"
+        },
+        {
+          "term": "Finished",
+          "line": 938,
+          "text": "case WORK_FINISHED_CONTINUE:"
+        },
+        {
+          "term": "Finished",
+          "line": 942,
+          "text": "case WORK_FINISHED_SWAP:"
+        },
+        {
+          "term": "Finished",
+          "line": 943,
+          "text": "return SUB_STATE_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 945,
+          "text": "case WORK_FINISHED_STOP:"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_construct_finished",
+      "line_range": [
+        603,
+        685
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 603,
+          "text": "CON_FUNC_RETURN tls_construct_finished(SSL_CONNECTION *s, WPACKET *pkt)"
+        },
+        {
+          "term": "Finished",
+          "line": 634,
+          "text": "sender = ssl->method->ssl3_enc->server_finished_label;"
+        },
+        {
+          "term": "Finished",
+          "line": 635,
+          "text": "slen = ssl->method->ssl3_enc->server_finished_label_len;"
+        },
+        {
+          "term": "Finished",
+          "line": 637,
+          "text": "sender = ssl->method->ssl3_enc->client_finished_label;"
+        },
+        {
+          "term": "Finished",
+          "line": 638,
+          "text": "slen = ssl->method->ssl3_enc->client_finished_label_len;"
+        },
+        {
+          "term": "Finished",
+          "line": 668,
+          "text": "* Copy the finished so we can use it for renegotiation checks"
+        },
+        {
+          "term": "Finished",
+          "line": 675,
+          "text": "memcpy(s->s3.previous_client_finished, s->s3.tmp.finish_md,"
+        },
+        {
+          "term": "Finished",
+          "line": 677,
+          "text": "s->s3.previous_client_finished_len = finish_md_len;"
+        },
+        {
+          "term": "Finished",
+          "line": 679,
+          "text": "memcpy(s->s3.previous_server_finished, s->s3.tmp.finish_md,"
+        },
+        {
+          "term": "Finished",
+          "line": 681,
+          "text": "s->s3.previous_server_finished_len = finish_md_len;"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_write_transition",
+      "line_range": [
+        524,
+        690
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 548,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 574,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 583,
+          "text": "&& s->early_data_state != SSL_EARLY_DATA_FINISHED_WRITING)"
+        },
+        {
+          "term": "Finished",
+          "line": 591,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 641,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 646,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 653,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 657,
+          "text": "case TLS_ST_CW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 662,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 665,
+          "text": "case TLS_ST_CR_FINISHED:"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/record/rec_layer_d1.c",
+      "function": "dtls1_read_bytes",
+      "line_range": [
+        197,
+        605
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 232,
+          "text": "if (SSL_is_init_finished(s))"
+        },
+        {
+          "term": "Finished",
+          "line": 283,
+          "text": "* reset by ssl3_get_finished */"
+        },
+        {
+          "term": "Finished",
+          "line": 286,
+          "text": "* We now have application data between CCS and Finished. Most likely"
+        },
+        {
+          "term": "Finished",
+          "line": 502,
+          "text": "* If we are server, we may have a repeated FINISHED of the client"
+        },
+        {
+          "term": "Finished",
+          "line": 503,
+          "text": "* here, then retransmit our CCS and FINISHED."
+        },
+        {
+          "term": "Finished",
+          "line": 505,
+          "text": "if (msg_hdr.type == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 537,
+          "text": "* finished"
+        },
+        {
+          "term": "Finished",
+          "line": 539,
+          "text": "if (!ossl_assert(SSL_is_init_finished(s))) {"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_write_transition",
+      "line_range": [
+        422,
+        518
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 457,
+          "text": "case TLS_ST_CR_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 459,
+          "text": "|| s->early_data_state == SSL_EARLY_DATA_FINISHED_WRITING)"
+        },
+        {
+          "term": "Finished",
+          "line": 465,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 484,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 495,
+          "text": ": TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 499,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 505,
+          "text": "case TLS_ST_CW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 516,
+          "text": "return WRITE_TRAN_FINISHED;"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/tls13_enc.c",
+      "function": "tls13_change_cipher_state",
+      "line_range": [
+        478,
+        788
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 629,
+          "text": "finsecret = s->client_finished_secret;"
+        },
+        {
+          "term": "Finished",
+          "line": 655,
+          "text": "* Finished hash. We do not include the client's Finished, which is"
+        },
+        {
+          "term": "Finished",
+          "line": 659,
+          "text": "hash = s->server_finished_hash;"
+        },
+        {
+          "term": "Finished",
+          "line": 665,
+          "text": "finsecret = s->server_finished_secret;"
+        },
+        {
+          "term": "Finished",
+          "line": 679,
+          "text": "hash = s->server_finished_hash;"
+        },
+        {
+          "term": "Finished",
+          "line": 698,
+          "text": "* hash for the whole handshake including the Client Finished"
+        },
+        {
+          "term": "Finished",
+          "line": 747,
+          "text": "&& !tls13_derive_finishedkey(s, ssl_handshake_md(s), secret,"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-4-4-must-verify-finished-contents_candidate_1.c",
+    "locations/code/rfc8446-4-4-4-must-verify-finished-contents_candidate_2.c",
+    "locations/code/rfc8446-4-4-4-must-verify-finished-contents_candidate_3.c",
+    "locations/code/rfc8446-4-4-4-must-verify-finished-contents_candidate_4.c",
+    "locations/code/rfc8446-4-4-4-must-verify-finished-contents_candidate_5.c",
+    "locations/code/rfc8446-4-4-4-must-verify-finished-contents_candidate_6.c",
+    "locations/code/rfc8446-4-4-4-must-verify-finished-contents_candidate_7.c",
+    "locations/code/rfc8446-4-4-4-must-verify-finished-contents_candidate_8.c",
+    "locations/code/rfc8446-4-4-4-must-verify-finished-contents_candidate_9.c",
+    "locations/code/rfc8446-4-4-4-must-verify-finished-contents_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 421,
+    "files_with_hits": 56,
+    "functions_identified": 142,
+    "null_scope_hits": 77,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1756
+  }
+}

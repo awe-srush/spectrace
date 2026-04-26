@@ -1,0 +1,401 @@
+[
+  {
+    "rule_id": "rfc8446-4.4.3-server-must-send-cv",
+    "source_section": "4.4.3",
+    "source_text": "Servers MUST send this message when authenticating via a certificate.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Servers MUST send CertificateVerify when authenticating via a certificate.",
+    "entity": "server",
+    "applies_when": "Server authenticates with certificate",
+    "target_message": "CertificateVerify",
+    "target_field": null,
+    "expected_value": "CertificateVerify sent",
+    "related_fields": [],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify",
+        "Certificate"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "certificate authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify CertificateVerify presence after Certificate.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.3-client-must-send-cv-when-non-empty-cert",
+    "source_section": "4.4.3",
+    "source_text": "Clients MUST send this message whenever authenticating via a certificate (i.e., when the Certificate message is non-empty).",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Clients MUST send CertificateVerify when their Certificate message is non-empty.",
+    "entity": "client",
+    "applies_when": "Client sends non-empty Certificate message",
+    "target_message": "CertificateVerify",
+    "target_field": null,
+    "expected_value": "CertificateVerify sent",
+    "related_fields": [
+      "Certificate.certificate_list"
+    ],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify",
+        "Certificate"
+      ],
+      "field_names": [
+        "certificate_list"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "client authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify CertificateVerify follows non-empty Certificate.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.3-cv-must-follow-cert-and-precede-finished",
+    "source_section": "4.4.3",
+    "source_text": "When sent, this message MUST appear immediately after the Certificate message and immediately prior to the Finished message.",
+    "normative_keyword": "MUST",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "CertificateVerify MUST appear immediately after Certificate and immediately before Finished.",
+    "entity": "both",
+    "applies_when": "Endpoint sends CertificateVerify",
+    "target_message": "CertificateVerify",
+    "target_field": null,
+    "expected_value": "after Certificate, before Finished",
+    "related_fields": [],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify",
+        "Certificate",
+        "Finished"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify message ordering in handshake transcript.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.3-server-sig-alg-must-be-from-client-list",
+    "source_section": "4.4.3",
+    "source_text": "If the CertificateVerify message is sent by a server, the signature algorithm MUST be one offered in the client's \"signature_algorithms\" extension unless no valid certificate chain can be produced without unsupported algorithms (see Section 4.2.3).",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "Server's CertificateVerify signature algorithm MUST be from the client's signature_algorithms extension (with fallback exception).",
+    "entity": "server",
+    "applies_when": "Server sends CertificateVerify",
+    "target_message": "CertificateVerify",
+    "target_field": "algorithm",
+    "expected_value": "algorithm from ClientHello.signature_algorithms",
+    "related_fields": [
+      "ClientHello.extensions.signature_algorithms"
+    ],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify",
+        "ClientHello"
+      ],
+      "field_names": [
+        "algorithm"
+      ],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify algorithm field against client's offered list.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with exception.",
+    "cross_section_context_used": [
+      "4.2.3"
+    ],
+    "ambiguity_notes": "Exception: if no valid chain can be produced without unsupported algorithms.",
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.3-client-sig-alg-must-be-from-cr",
+    "source_section": "4.4.3",
+    "source_text": "If sent by a client, the signature algorithm used in the signature MUST be one of those present in the supported_signature_algorithms field of the \"signature_algorithms\" extension in the CertificateRequest message.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "Client's CertificateVerify signature algorithm MUST be from the CertificateRequest's signature_algorithms extension.",
+    "entity": "client",
+    "applies_when": "Client sends CertificateVerify",
+    "target_message": "CertificateVerify",
+    "target_field": "algorithm",
+    "expected_value": "algorithm from CertificateRequest.signature_algorithms",
+    "related_fields": [
+      "CertificateRequest.extensions.signature_algorithms"
+    ],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify",
+        "CertificateRequest"
+      ],
+      "field_names": [
+        "algorithm",
+        "supported_signature_algorithms"
+      ],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "client authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify algorithm field against CertificateRequest's list.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.3-sig-alg-must-be-compatible-with-key",
+    "source_section": "4.4.3",
+    "source_text": "In addition, the signature algorithm MUST be compatible with the key in the sender's end-entity certificate.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "The CertificateVerify signature algorithm MUST be compatible with the sender's end-entity certificate key.",
+    "entity": "both",
+    "applies_when": "Endpoint sends CertificateVerify",
+    "target_message": "CertificateVerify",
+    "target_field": "algorithm",
+    "expected_value": "compatible with certificate key type",
+    "related_fields": [
+      "Certificate.certificate_list[0]"
+    ],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify",
+        "Certificate"
+      ],
+      "field_names": [
+        "algorithm"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify algorithm matches certificate key type.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.3-rsa-must-use-pss",
+    "source_section": "4.4.3",
+    "source_text": "RSA signatures MUST use an RSASSA-PSS algorithm, regardless of whether RSASSA-PKCS1-v1_5 algorithms appear in \"signature_algorithms\".",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "RSA signatures in CertificateVerify MUST use RSASSA-PSS, not PKCS1-v1_5.",
+    "entity": "both",
+    "applies_when": "Endpoint uses RSA key for CertificateVerify",
+    "target_message": "CertificateVerify",
+    "target_field": "algorithm",
+    "expected_value": "RSASSA-PSS algorithm (rsa_pss_rsae_* or rsa_pss_pss_*)",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify"
+      ],
+      "field_names": [
+        "algorithm"
+      ],
+      "extension_names": [
+        "signature_algorithms"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "RSA",
+        "RSASSA-PSS"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can directly verify algorithm code point is PSS variant.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "4.2.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.3-sha1-must-not-be-used",
+    "source_section": "4.4.3",
+    "source_text": "The SHA-1 algorithm MUST NOT be used in any signatures of CertificateVerify messages.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "value_constraint",
+    "rule_statement": "SHA-1 MUST NOT be used in CertificateVerify signatures.",
+    "entity": "both",
+    "applies_when": "Endpoint constructs or verifies CertificateVerify",
+    "target_message": "CertificateVerify",
+    "target_field": "algorithm",
+    "expected_value": "not rsa_pkcs1_sha1 or ecdsa_sha1",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify"
+      ],
+      "field_names": [
+        "algorithm"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "SHA-1"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can directly verify algorithm code point is not SHA-1 based.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.3-receiver-must-verify-signature",
+    "source_section": "4.4.3",
+    "source_text": "The receiver of a CertificateVerify message MUST verify the signature field.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "The receiver of CertificateVerify MUST verify the signature field.",
+    "entity": "both",
+    "applies_when": "Endpoint receives CertificateVerify",
+    "target_message": "CertificateVerify",
+    "target_field": "signature",
+    "expected_value": "signature verified",
+    "related_fields": [
+      "Certificate.certificate_list[0]"
+    ],
+    "violation_alert": "decrypt_error",
+    "violation_alert_source": "4.4.3",
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify",
+        "Certificate"
+      ],
+      "field_names": [
+        "signature",
+        "algorithm"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "decrypt_error"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify implementation checks signature.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.3-must-terminate-on-verify-failure",
+    "source_section": "4.4.3",
+    "source_text": "If the verification fails, the receiver MUST terminate the handshake with a \"decrypt_error\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If CertificateVerify signature verification fails, the receiver MUST terminate with decrypt_error.",
+    "entity": "both",
+    "applies_when": "CertificateVerify signature verification fails",
+    "target_message": "CertificateVerify",
+    "target_field": null,
+    "expected_value": "handshake terminated",
+    "related_fields": [],
+    "violation_alert": "decrypt_error",
+    "violation_alert_source": "4.4.3",
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateVerify"
+      ],
+      "field_names": [
+        "signature"
+      ],
+      "extension_names": [],
+      "alert_names": [
+        "decrypt_error"
+      ],
+      "modes_or_conditions": [
+        "signature verification failure"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify correct alert on bad signature.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specified alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

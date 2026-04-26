@@ -1,0 +1,19 @@
+{
+  "total_rules_checked": 1,
+  "total_judgments": 3,
+  "judgment_counts": {
+    "conforms": 3,
+    "violates": 0,
+    "not_applicable": 0,
+    "ambiguous": 0,
+    "error": 0
+  },
+  "violations": [],
+  "skipped_rules": [],
+  "model": "claude-sonnet-4-6",
+  "total_tokens": {
+    "input": 252389,
+    "output": 5935
+  },
+  "total_tool_calls": 30
+}

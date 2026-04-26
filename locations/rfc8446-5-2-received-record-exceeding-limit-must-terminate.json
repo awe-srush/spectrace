@@ -1,0 +1,1178 @@
+{
+  "rule_id": "rfc8446-5.2-received-record-exceeding-limit-must-terminate",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "length",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "length"
+      ]
+    },
+    {
+      "term": "record_overflow",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "record_overflow",
+        "RecordOverflow"
+      ]
+    },
+    {
+      "term": "record protection",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "record protection"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls_get_more_records",
+      "line_range": [
+        543,
+        939
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 44,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "length",
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "length",
+          "line": 578,
+          "text": "if ((rl->rstate != SSL_ST_READ_BODY) || (rl->packet_length < SSL3_RT_HEADER_LENGTH)) {"
+        },
+        {
+          "term": "length",
+          "line": 581,
+          "text": "rret = rl->funcs->read_n(rl, SSL3_RT_HEADER_LENGTH,"
+        },
+        {
+          "term": "length",
+          "line": 591,
+          "text": "if (!PACKET_buf_init(&pkt, p, rl->packet_length)) {"
+        },
+        {
+          "term": "length",
+          "line": 599,
+          "text": "|| !PACKET_get_net_2_len(&pkt, &thisrr->length)) {"
+        },
+        {
+          "term": "length",
+          "line": 616,
+          "text": "if (thisrr->length > TLS_BUFFER_get_len(rbuf) - SSL3_RT_HEADER_LENGTH) {"
+        },
+        {
+          "term": "length",
+          "line": 618,
+          "text": "SSL_R_PACKET_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "length",
+          "line": 630,
+          "text": "more = thisrr->length + SSL2_RT_HEADER_LENGTH"
+        },
+        {
+          "term": "length",
+          "line": 631,
+          "text": "- SSL3_RT_HEADER_LENGTH;"
+        },
+        {
+          "term": "length",
+          "line": 633,
+          "text": "more = thisrr->length;"
+        },
+        {
+          "term": "length",
+          "line": 637,
+          "text": "/* now rl->packet_length == SSL3_RT_HEADER_LENGTH */"
+        },
+        {
+          "term": "length",
+          "line": 648,
+          "text": "* At this point, rl->packet_length == SSL3_RT_HEADER_LENGTH"
+        },
+        {
+          "term": "length",
+          "line": 649,
+          "text": "* + thisrr->length, or rl->packet_length == SSL2_RT_HEADER_LENGTH"
+        },
+        {
+          "term": "length",
+          "line": 650,
+          "text": "* + thisrr->length and we have that many bytes in rl->packet"
+        },
+        {
+          "term": "length",
+          "line": 653,
+          "text": "thisrr->input = &(rl->packet[SSL2_RT_HEADER_LENGTH]);"
+        },
+        {
+          "term": "length",
+          "line": 655,
+          "text": "thisrr->input = &(rl->packet[SSL3_RT_HEADER_LENGTH]);"
+        },
+        {
+          "term": "length",
+          "line": 659,
+          "text": "* thisrr->input points at thisrr->length bytes, which need to be copied"
+        },
+        {
+          "term": "length",
+          "line": 667,
+          "text": "* thisrr->length bytes of encrypted compressed stuff."
+        },
+        {
+          "term": "length",
+          "line": 672,
+          "text": "thisrr->orig_len = thisrr->length;"
+        },
+        {
+          "term": "length",
+          "line": 677,
+          "text": "rl->packet_length = 0;"
+        },
+        {
+          "term": "length",
+          "line": 696,
+          "text": "if (thisrr->length != 1 || thisrr->data[0] != 0x01) {"
+        },
+        {
+          "term": "length",
+          "line": 744,
+          "text": "if (thisrr->length < mac_size) {"
+        },
+        {
+          "term": "length",
+          "line": 745,
+          "text": "RLAYERfatal(rl, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_TOO_SHORT);"
+        },
+        {
+          "term": "length",
+          "line": 748,
+          "text": "thisrr->length -= mac_size;"
+        },
+        {
+          "term": "length",
+          "line": 749,
+          "text": "mac = thisrr->data + thisrr->length;"
+        },
+        {
+          "term": "length",
+          "line": 803,
+          "text": "if (!rlayer_early_data_count_ok(rl, thisrr->length,"
+        },
+        {
+          "term": "length",
+          "line": 809,
+          "text": "thisrr->length = 0;"
+        },
+        {
+          "term": "length",
+          "line": 827,
+          "text": "BIO_printf(trc_out, \"dec %lu\\n\", (unsigned long)rr[0].length);"
+        },
+        {
+          "term": "length",
+          "line": 828,
+          "text": "BIO_dump_indent(trc_out, rr[0].data, (int)rr[0].length, 4);"
+        },
+        {
+          "term": "length",
+          "line": 832,
+          "text": "/* r->length is now the compressed data plus mac */"
+        },
+        {
+          "term": "length",
+          "line": 845,
+          "text": "if (thisrr->length > SSL3_RT_MAX_COMPRESSED_LENGTH + mac_size)"
+        },
+        {
+          "term": "length",
+          "line": 882,
+          "text": "* thisrr->length > SSL3_RT_MAX_PLAIN_LENGTH) is the responsibility of"
+        },
+        {
+          "term": "length",
+          "line": 884,
+          "text": "* the received packet overflows the current Max Fragment Length setting"
+        },
+        {
+          "term": "length",
+          "line": 886,
+          "text": "* Note: rl->max_frag_len != SSL3_RT_MAX_PLAIN_LENGTH and KTLS are"
+        },
+        {
+          "term": "length",
+          "line": 887,
+          "text": "* mutually exclusive. Also note that with KTLS thisrr->length can"
+        },
+        {
+          "term": "length",
+          "line": 888,
+          "text": "* be > SSL3_RT_MAX_PLAIN_LENGTH (and rl->max_frag_len must be ignored)"
+        },
+        {
+          "term": "length",
+          "line": 890,
+          "text": "if (rl->max_frag_len != SSL3_RT_MAX_PLAIN_LENGTH"
+        },
+        {
+          "term": "length",
+          "line": 891,
+          "text": "&& thisrr->length > rl->max_frag_len) {"
+        },
+        {
+          "term": "length",
+          "line": 892,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "length",
+          "line": 900,
+          "text": "* thisrr->length == number of bytes in record"
+        },
+        {
+          "term": "length",
+          "line": 905,
+          "text": "/* just read a 0 length packet */"
+        },
+        {
+          "term": "length",
+          "line": 906,
+          "text": "if (thisrr->length == 0) {"
+        },
+        {
+          "term": "length",
+          "line": 920,
+          "text": "&& !rlayer_early_data_count_ok(rl, thisrr->length, 0, 0)) {"
+        },
+        {
+          "term": "record_overflow",
+          "line": 617,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW,"
+        },
+        {
+          "term": "record_overflow",
+          "line": 892,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/record/methods/dtls_meth.c",
+      "function": "dtls_process_record",
+      "line_range": [
+        108,
+        281
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 29,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "length",
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "length",
+          "line": 122,
+          "text": "* At this point, rl->packet_length == DTLS1_RT_HEADER_LENGTH + rr->length,"
+        },
+        {
+          "term": "length",
+          "line": 125,
+          "text": "rr->input = &(rl->packet[DTLS1_RT_HEADER_LENGTH]);"
+        },
+        {
+          "term": "length",
+          "line": 129,
+          "text": "* points at rr->length bytes, which need to be copied into rr->data by"
+        },
+        {
+          "term": "length",
+          "line": 135,
+          "text": "* We now have - encrypted [ MAC [ compressed [ plain ] ] ] rr->length"
+        },
+        {
+          "term": "length",
+          "line": 140,
+          "text": "if (rr->length > SSL3_RT_MAX_ENCRYPTED_LENGTH) {"
+        },
+        {
+          "term": "length",
+          "line": 141,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_ENCRYPTED_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "length",
+          "line": 147,
+          "text": "rr->orig_len = rr->length;"
+        },
+        {
+          "term": "length",
+          "line": 166,
+          "text": "RLAYERfatal(rl, SSL_AD_DECODE_ERROR, SSL_R_LENGTH_TOO_SHORT);"
+        },
+        {
+          "term": "length",
+          "line": 169,
+          "text": "rr->length -= mac_size;"
+        },
+        {
+          "term": "length",
+          "line": 170,
+          "text": "mac = rr->data + rr->length;"
+        },
+        {
+          "term": "length",
+          "line": 205,
+          "text": "rr->length = 0;"
+        },
+        {
+          "term": "length",
+          "line": 206,
+          "text": "rl->packet_length = 0;"
+        },
+        {
+          "term": "length",
+          "line": 212,
+          "text": "BIO_printf(trc_out, \"dec %zd\\n\", rr->length);"
+        },
+        {
+          "term": "length",
+          "line": 213,
+          "text": "BIO_dump_indent(trc_out, rr->data, (int)rr->length, 4);"
+        },
+        {
+          "term": "length",
+          "line": 217,
+          "text": "/* r->length is now the compressed data plus mac */"
+        },
+        {
+          "term": "length",
+          "line": 227,
+          "text": "if (rr->length > SSL3_RT_MAX_COMPRESSED_LENGTH + mac_size)"
+        },
+        {
+          "term": "length",
+          "line": 233,
+          "text": "rr->length = 0;"
+        },
+        {
+          "term": "length",
+          "line": 234,
+          "text": "rl->packet_length = 0;"
+        },
+        {
+          "term": "length",
+          "line": 238,
+          "text": "/* r->length is now just compressed */"
+        },
+        {
+          "term": "length",
+          "line": 240,
+          "text": "if (rr->length > SSL3_RT_MAX_COMPRESSED_LENGTH) {"
+        },
+        {
+          "term": "length",
+          "line": 242,
+          "text": "SSL_R_COMPRESSED_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "length",
+          "line": 253,
+          "text": "* Length setting."
+        },
+        {
+          "term": "length",
+          "line": 255,
+          "text": "if (rr->length > rl->max_frag_len) {"
+        },
+        {
+          "term": "length",
+          "line": 256,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "length",
+          "line": 264,
+          "text": "* ssl->s3.rrec.length == number of bytes in record"
+        },
+        {
+          "term": "length",
+          "line": 271,
+          "text": "rl->packet_length = 0;"
+        },
+        {
+          "term": "record_overflow",
+          "line": 141,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_ENCRYPTED_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "record_overflow",
+          "line": 241,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW,"
+        },
+        {
+          "term": "record_overflow",
+          "line": 256,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/record/methods/tls13_meth.c",
+      "function": "tls13_post_process_record",
+      "line_range": [
+        280,
+        312
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "length",
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "length",
+          "line": 286,
+          "text": "if (rec->length == 0"
+        },
+        {
+          "term": "length",
+          "line": 294,
+          "text": "for (end = rec->length - 1; end > 0 && rec->data[end] == 0; end--)"
+        },
+        {
+          "term": "length",
+          "line": 297,
+          "text": "rec->length = end;"
+        },
+        {
+          "term": "length",
+          "line": 301,
+          "text": "if (rec->length > SSL3_RT_MAX_PLAIN_LENGTH) {"
+        },
+        {
+          "term": "length",
+          "line": 302,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "record_overflow",
+          "line": 302,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls_default_post_process_record",
+      "line_range": [
+        1014,
+        1035
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "length",
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "length",
+          "line": 1017,
+          "text": "if (rec->length > SSL3_RT_MAX_COMPRESSED_LENGTH) {"
+        },
+        {
+          "term": "length",
+          "line": 1019,
+          "text": "SSL_R_COMPRESSED_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "length",
+          "line": 1029,
+          "text": "if (rec->length > SSL3_RT_MAX_PLAIN_LENGTH) {"
+        },
+        {
+          "term": "length",
+          "line": 1030,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "record_overflow",
+          "line": 1018,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW,"
+        },
+        {
+          "term": "record_overflow",
+          "line": 1030,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/record/methods/tlsany_meth.c",
+      "function": "tls_validate_record_header",
+      "line_range": [
+        44,
+        114
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "length",
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "length",
+          "line": 104,
+          "text": "if (rec->length > SSL3_RT_MAX_PLAIN_LENGTH) {"
+        },
+        {
+          "term": "length",
+          "line": 106,
+          "text": "* We use SSL_R_DATA_LENGTH_TOO_LONG instead of"
+        },
+        {
+          "term": "length",
+          "line": 107,
+          "text": "* SSL_R_ENCRYPTED_LENGTH_TOO_LONG here because we are the \"any\" method"
+        },
+        {
+          "term": "length",
+          "line": 110,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "record_overflow",
+          "line": 110,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls_default_validate_record_header",
+      "line_range": [
+        942,
+        967
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "length",
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "length",
+          "line": 944,
+          "text": "size_t len = SSL3_RT_MAX_ENCRYPTED_LENGTH;"
+        },
+        {
+          "term": "length",
+          "line": 953,
+          "text": "* If OPENSSL_NO_COMP is defined then SSL3_RT_MAX_ENCRYPTED_LENGTH"
+        },
+        {
+          "term": "length",
+          "line": 960,
+          "text": "if (rec->length > len) {"
+        },
+        {
+          "term": "length",
+          "line": 962,
+          "text": "SSL_R_ENCRYPTED_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "record_overflow",
+          "line": 961,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW,"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/record/methods/tls13_meth.c",
+      "function": "tls13_validate_record_header",
+      "line_range": [
+        256,
+        278
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "length",
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "length",
+          "line": 272,
+          "text": "if (rec->length > SSL3_RT_MAX_TLS13_ENCRYPTED_LENGTH) {"
+        },
+        {
+          "term": "length",
+          "line": 274,
+          "text": "SSL_R_ENCRYPTED_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "record_overflow",
+          "line": 273,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW,"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/record/methods/ktls_meth.c",
+      "function": "ktls_read_n",
+      "line_range": [
+        344,
+        371
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "length",
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "length",
+          "line": 359,
+          "text": "SSL_R_PACKET_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "record_overflow",
+          "line": 358,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW,"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/record/methods/ssl3_cbc.c",
+      "function": "ssl3_cbc_digest_record",
+      "line_range": [
+        126,
+        477
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 49,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "length"
+        ]
+      },
+      "hits": [
+        {
+          "term": "length",
+          "line": 134,
+          "text": "size_t mac_secret_length, char is_sslv3)"
+        },
+        {
+          "term": "length",
+          "line": 143,
+          "text": "size_t sslv3_pad_length = 40, header_length, variance_blocks,"
+        },
+        {
+          "term": "length",
+          "line": 147,
+          "text": "unsigned char length_bytes[MAX_HASH_BIT_COUNT_BYTES];"
+        },
+        {
+          "term": "length",
+          "line": 156,
+          "text": "* mdLengthSize is the number of bytes in the length field that"
+        },
+        {
+          "term": "length",
+          "line": 159,
+          "text": "size_t md_length_size = 8;"
+        },
+        {
+          "term": "length",
+          "line": 160,
+          "text": "char length_is_big_endian = 1;"
+        },
+        {
+          "term": "length",
+          "line": 179,
+          "text": "sslv3_pad_length = 48;"
+        },
+        {
+          "term": "length",
+          "line": 180,
+          "text": "length_is_big_endian = 0;"
+        },
+        {
+          "term": "length",
+          "line": 207,
+          "text": "md_length_size = 16;"
+        },
+        {
+          "term": "length",
+          "line": 215,
+          "text": "md_length_size = 16;"
+        },
+        {
+          "term": "length",
+          "line": 226,
+          "text": "if (!ossl_assert(md_length_size <= MAX_HASH_BIT_COUNT_BYTES)"
+        },
+        {
+          "term": "length",
+          "line": 231,
+          "text": "header_length = 13;"
+        },
+        {
+          "term": "length",
+          "line": 233,
+          "text": "header_length = mac_secret_length"
+        },
+        {
+          "term": "length",
+          "line": 234,
+          "text": "+ sslv3_pad_length"
+        },
+        {
+          "term": "length",
+          "line": 237,
+          "text": "+ 2; /* record length */"
+        },
+        {
+          "term": "length",
+          "line": 246,
+          "text": "* of hash termination (0x80 + 64-bit length) don't fit in the final"
+        },
+        {
+          "term": "length",
+          "line": 264,
+          "text": "len = data_plus_mac_plus_padding_size + header_length;"
+        },
+        {
+          "term": "length",
+          "line": 271,
+          "text": "num_blocks = (max_mac_bytes + 1 + md_length_size + md_block_size - 1) / md_block_size;"
+        },
+        {
+          "term": "length",
+          "line": 289,
+          "text": "mac_end_offset = data_size + header_length;"
+        },
+        {
+          "term": "length",
+          "line": 301,
+          "text": "* index_b is the hash block number that contains the 64-bit hash length,"
+        },
+        {
+          "term": "length",
+          "line": 304,
+          "text": "index_b = (mac_end_offset + md_length_size) / md_block_size;"
+        },
+        {
+          "term": "length",
+          "line": 306,
+          "text": "* bits is the hash-length in bits. It includes the additional hash block"
+        },
+        {
+          "term": "length",
+          "line": 328,
+          "text": "if (!ossl_assert(mac_secret_length <= sizeof(hmac_pad)))"
+        },
+        {
+          "term": "length",
+          "line": 330,
+          "text": "memcpy(hmac_pad, mac_secret, mac_secret_length);"
+        },
+        {
+          "term": "length",
+          "line": 337,
+          "text": "if (length_is_big_endian) {"
+        },
+        {
+          "term": "length",
+          "line": 338,
+          "text": "memset(length_bytes, 0, md_length_size - 4);"
+        },
+        {
+          "term": "length",
+          "line": 339,
+          "text": "length_bytes[md_length_size - 4] = (unsigned char)(bits >> 24);"
+        },
+        {
+          "term": "length",
+          "line": 340,
+          "text": "length_bytes[md_length_size - 3] = (unsigned char)(bits >> 16);"
+        },
+        {
+          "term": "length",
+          "line": 341,
+          "text": "length_bytes[md_length_size - 2] = (unsigned char)(bits >> 8);"
+        },
+        {
+          "term": "length",
+          "line": 342,
+          "text": "length_bytes[md_length_size - 1] = (unsigned char)bits;"
+        },
+        {
+          "term": "length",
+          "line": 344,
+          "text": "memset(length_bytes, 0, md_length_size);"
+        },
+        {
+          "term": "length",
+          "line": 345,
+          "text": "length_bytes[md_length_size - 5] = (unsigned char)(bits >> 24);"
+        },
+        {
+          "term": "length",
+          "line": 346,
+          "text": "length_bytes[md_length_size - 6] = (unsigned char)(bits >> 16);"
+        },
+        {
+          "term": "length",
+          "line": 347,
+          "text": "length_bytes[md_length_size - 7] = (unsigned char)(bits >> 8);"
+        },
+        {
+          "term": "length",
+          "line": 348,
+          "text": "length_bytes[md_length_size - 8] = (unsigned char)bits;"
+        },
+        {
+          "term": "length",
+          "line": 360,
+          "text": "* therefore we can be confident that the header_length will be"
+        },
+        {
+          "term": "length",
+          "line": 364,
+          "text": "if (header_length <= md_block_size) {"
+        },
+        {
+          "term": "length",
+          "line": 368,
+          "text": "overhang = header_length - md_block_size;"
+        },
+        {
+          "term": "length",
+          "line": 402,
+          "text": "if (k < header_length)"
+        },
+        {
+          "term": "length",
+          "line": 404,
+          "text": "else if (k < data_plus_mac_plus_padding_size + header_length)"
+        },
+        {
+          "term": "length",
+          "line": 405,
+          "text": "b = data[k - header_length];"
+        },
+        {
+          "term": "length",
+          "line": 423,
+          "text": "* of the data), then the 64-bit length didn't fit into index_a"
+        },
+        {
+          "term": "length",
+          "line": 429,
+          "text": "* The final bytes of one of the blocks contains the length."
+        },
+        {
+          "term": "length",
+          "line": 431,
+          "text": "if (j >= md_block_size - md_length_size) {"
+        },
+        {
+          "term": "length",
+          "line": 432,
+          "text": "/* If this is index_b, write a length byte. */"
+        },
+        {
+          "term": "length",
+          "line": 434,
+          "text": "length_bytes[j - (md_block_size - md_length_size)], b);"
+        },
+        {
+          "term": "length",
+          "line": 454,
+          "text": "memset(hmac_pad, 0x5c, sslv3_pad_length);"
+        },
+        {
+          "term": "length",
+          "line": 456,
+          "text": "if (EVP_DigestUpdate(md_ctx, mac_secret, mac_secret_length) <= 0"
+        },
+        {
+          "term": "length",
+          "line": 457,
+          "text": "|| EVP_DigestUpdate(md_ctx, hmac_pad, sslv3_pad_length) <= 0"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/d1_lib.c",
+      "function": "DTLSv1_listen",
+      "line_range": [
+        407,
+        843
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 26,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "length"
+        ]
+      },
+      "hits": [
+        {
+          "term": "length",
+          "line": 410,
+          "text": "unsigned char cookie[DTLS1_COOKIE_LENGTH];"
+        },
+        {
+          "term": "length",
+          "line": 455,
+          "text": "buf = OPENSSL_malloc(DTLS1_RT_HEADER_LENGTH + SSL3_RT_MAX_PLAIN_LENGTH);"
+        },
+        {
+          "term": "length",
+          "line": 458,
+          "text": "wbuf = OPENSSL_malloc(DTLS1_RT_HEADER_LENGTH + SSL3_RT_MAX_PLAIN_LENGTH);"
+        },
+        {
+          "term": "length",
+          "line": 468,
+          "text": "n = BIO_read(rbio, buf, SSL3_RT_MAX_PLAIN_LENGTH + DTLS1_RT_HEADER_LENGTH);"
+        },
+        {
+          "term": "length",
+          "line": 488,
+          "text": "* length, MAC, etc.).  In general, invalid records SHOULD be silently"
+        },
+        {
+          "term": "length",
+          "line": 494,
+          "text": "if (n < DTLS1_RT_HEADER_LENGTH) {"
+        },
+        {
+          "term": "length",
+          "line": 503,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "length",
+          "line": 509,
+          "text": "DTLS1_RT_HEADER_LENGTH, ssl, s->msg_callback_arg);"
+        },
+        {
+          "term": "length",
+          "line": 527,
+          "text": "|| !PACKET_get_length_prefixed_2(&pkt, &msgpkt)) {"
+        },
+        {
+          "term": "length",
+          "line": 528,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "length",
+          "line": 553,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "length",
+          "line": 583,
+          "text": "fraglen + DTLS1_HM_HEADER_LENGTH, ssl,"
+        },
+        {
+          "term": "length",
+          "line": 587,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "length",
+          "line": 600,
+          "text": "|| !PACKET_get_length_prefixed_1(&msgpayload, &session)"
+        },
+        {
+          "term": "length",
+          "line": 601,
+          "text": "|| !PACKET_get_length_prefixed_1(&msgpayload, &cookiepkt)) {"
+        },
+        {
+          "term": "length",
+          "line": 606,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_LENGTH_MISMATCH);"
+        },
+        {
+          "term": "length",
+          "line": 671,
+          "text": "+ DTLS1_RT_HEADER_LENGTH,"
+        },
+        {
+          "term": "length",
+          "line": 686,
+          "text": "* Message length - doesn't follow normal TLS convention:"
+        },
+        {
+          "term": "length",
+          "line": 687,
+          "text": "* the length isn't the last thing in the message header."
+        },
+        {
+          "term": "length",
+          "line": 689,
+          "text": "* length. Set it to zero for now"
+        },
+        {
+          "term": "length",
+          "line": 703,
+          "text": "* Fragment length is the same as message length, but"
+        },
+        {
+          "term": "length",
+          "line": 731,
+          "text": "memcpy(&wbuf[DTLS1_RT_HEADER_LENGTH + 1],"
+        },
+        {
+          "term": "length",
+          "line": 732,
+          "text": "&wbuf[DTLS1_RT_HEADER_LENGTH + DTLS1_HM_HEADER_LENGTH - 3],"
+        },
+        {
+          "term": "length",
+          "line": 738,
+          "text": "wbuf, DTLS1_RT_HEADER_LENGTH,"
+        },
+        {
+          "term": "length",
+          "line": 742,
+          "text": "wbuf + DTLS1_RT_HEADER_LENGTH,"
+        },
+        {
+          "term": "length",
+          "line": 743,
+          "text": "wreclen - DTLS1_RT_HEADER_LENGTH,"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-2-received-record-exceeding-limit-must-terminate_candidate_1.c",
+    "locations/code/rfc8446-5-2-received-record-exceeding-limit-must-terminate_candidate_2.c",
+    "locations/code/rfc8446-5-2-received-record-exceeding-limit-must-terminate_candidate_3.c",
+    "locations/code/rfc8446-5-2-received-record-exceeding-limit-must-terminate_candidate_4.c",
+    "locations/code/rfc8446-5-2-received-record-exceeding-limit-must-terminate_candidate_5.c",
+    "locations/code/rfc8446-5-2-received-record-exceeding-limit-must-terminate_candidate_6.c",
+    "locations/code/rfc8446-5-2-received-record-exceeding-limit-must-terminate_candidate_7.c",
+    "locations/code/rfc8446-5-2-received-record-exceeding-limit-must-terminate_candidate_8.c",
+    "locations/code/rfc8446-5-2-received-record-exceeding-limit-must-terminate_candidate_9.c",
+    "locations/code/rfc8446-5-2-received-record-exceeding-limit-must-terminate_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 3652,
+    "files_with_hits": 431,
+    "functions_identified": 1021,
+    "null_scope_hits": 743,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1563
+  }
+}

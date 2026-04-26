@@ -1,0 +1,363 @@
+{
+  "rule_id": "rfc8446-5.4-inner-plaintext-must-not-exceed-limit",
+  "rule_type": "value_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "TLSInnerPlaintext",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "TLSInnerPlaintext",
+        "tls_inner_plaintext"
+      ]
+    },
+    {
+      "term": "record_overflow",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "record_overflow",
+        "RecordOverflow"
+      ]
+    },
+    {
+      "term": "record padding",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "record padding"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/record/methods/dtls_meth.c",
+      "function": "dtls_process_record",
+      "line_range": [
+        108,
+        281
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "record_overflow",
+          "line": 141,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_ENCRYPTED_LENGTH_TOO_LONG);"
+        },
+        {
+          "term": "record_overflow",
+          "line": 241,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW,"
+        },
+        {
+          "term": "record_overflow",
+          "line": 256,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls_get_more_records",
+      "line_range": [
+        543,
+        939
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "record_overflow",
+          "line": 617,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW,"
+        },
+        {
+          "term": "record_overflow",
+          "line": 892,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls_default_post_process_record",
+      "line_range": [
+        1014,
+        1035
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "record_overflow",
+          "line": 1018,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW,"
+        },
+        {
+          "term": "record_overflow",
+          "line": 1030,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/t1_enc.c",
+      "function": "tls1_alert_code",
+      "line_range": [
+        527,
+        605
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "record_overflow",
+          "line": 538,
+          "text": "case SSL_AD_RECORD_OVERFLOW:"
+        },
+        {
+          "term": "record_overflow",
+          "line": 539,
+          "text": "return TLS1_AD_RECORD_OVERFLOW;"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/record/methods/tlsany_meth.c",
+      "function": "tls_validate_record_header",
+      "line_range": [
+        44,
+        114
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "record_overflow",
+          "line": 110,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/record/methods/ktls_meth.c",
+      "function": "ktls_read_n",
+      "line_range": [
+        344,
+        371
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "record_overflow",
+          "line": 358,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW,"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/record/methods/ktls_meth.c",
+      "function": "ktls_set_crypto_state",
+      "line_range": [
+        286,
+        342
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "record padding"
+        ]
+      },
+      "hits": [
+        {
+          "term": "record padding",
+          "line": 320,
+          "text": "/* KTLS does not support record padding */"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/record/methods/tls13_meth.c",
+      "function": "tls13_validate_record_header",
+      "line_range": [
+        256,
+        278
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "record_overflow",
+          "line": 273,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW,"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/record/methods/tls13_meth.c",
+      "function": "tls13_post_process_record",
+      "line_range": [
+        280,
+        312
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "record_overflow",
+          "line": 302,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW, SSL_R_DATA_LENGTH_TOO_LONG);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls_default_validate_record_header",
+      "line_range": [
+        942,
+        967
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "record_overflow"
+        ]
+      },
+      "hits": [
+        {
+          "term": "record_overflow",
+          "line": 961,
+          "text": "RLAYERfatal(rl, SSL_AD_RECORD_OVERFLOW,"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-4-inner-plaintext-must-not-exceed-limit_candidate_1.c",
+    "locations/code/rfc8446-5-4-inner-plaintext-must-not-exceed-limit_candidate_2.c",
+    "locations/code/rfc8446-5-4-inner-plaintext-must-not-exceed-limit_candidate_3.c",
+    "locations/code/rfc8446-5-4-inner-plaintext-must-not-exceed-limit_candidate_4.c",
+    "locations/code/rfc8446-5-4-inner-plaintext-must-not-exceed-limit_candidate_5.c",
+    "locations/code/rfc8446-5-4-inner-plaintext-must-not-exceed-limit_candidate_6.c",
+    "locations/code/rfc8446-5-4-inner-plaintext-must-not-exceed-limit_candidate_7.c",
+    "locations/code/rfc8446-5-4-inner-plaintext-must-not-exceed-limit_candidate_8.c",
+    "locations/code/rfc8446-5-4-inner-plaintext-must-not-exceed-limit_candidate_9.c",
+    "locations/code/rfc8446-5-4-inner-plaintext-must-not-exceed-limit_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 20,
+    "files_with_hits": 10,
+    "functions_identified": 13,
+    "null_scope_hits": 2,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 910
+  }
+}

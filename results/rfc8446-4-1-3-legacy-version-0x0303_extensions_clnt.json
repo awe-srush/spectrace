@@ -1,0 +1,72 @@
+{
+  "rule_id": "rfc8446-4.1.3-legacy-version-0x0303",
+  "source_file": "ssl/statem/extensions_clnt.c",
+  "primary_function": "tls_parse_stoc_supported_versions",
+  "judgment": "not_applicable",
+  "confidence": "high",
+  "reasoning": "The primary function tls_parse_stoc_supported_versions (ssl/statem/extensions_clnt.c:2157-2191) is a CLIENT-side parser that processes the supported_versions extension received in a ServerHello from the server. It does NOT construct a ServerHello or set the legacy_version field. The rule requires the SERVER to set legacy_version to 0x0303 in its ServerHello when negotiating TLS 1.3. The function matched the localization search terms only in comments ('a ServerHello is TLSv1.3') and the function name, not in the behavior being checked. The actual server-side ServerHello construction is in tls_construct_server_hello (ssl/statem/statem_srvr.c:2584-2586): 'version = usetls13 ? TLS1_2_VERSION : s->version;' where usetls13 = SSL_CONNECTION_IS_TLS13(s) || s->hello_retry_request == SSL_HRR_PENDING. That code correctly sets legacy_version to TLS1_2_VERSION (0x0303) when TLS 1.3 is negotiated, but the primary function identified by the rule localization is simply not the server-side code responsible for this rule.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [],
+    "key_code_snippet": "// tls_parse_stoc_supported_versions is a client-side parser; it does not set legacy_version.\n// For reference, the server-side code in tls_construct_server_hello (statem_srvr.c:2584-2586):\nint usetls13 = SSL_CONNECTION_IS_TLS13(s) || s->hello_retry_request == SSL_HRR_PENDING;\nversion = usetls13 ? TLS1_2_VERSION : s->version;\nif (!WPACKET_put_bytes_u16(pkt, version) ...)",
+    "expected_behavior": "The server MUST set the legacy_version field in ServerHello to 0x0303 when negotiating TLS 1.3. The primary function tls_parse_stoc_supported_versions is a client-side extension parser and does not implement this server-side behavior.",
+    "paths_checked": 0,
+    "paths_conforming": 0,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "tls_parse_stoc_supported_versions",
+    "tls_construct_server_hello"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 7,
+  "tools_used": [
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "legacy_version"
+      }
+    },
+    {
+      "tool": "get_callers",
+      "input": {
+        "function_name": "tls_parse_stoc_supported_versions"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls_construct_server_hello"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "PACKET_get_net_2"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls_construct_server_hello"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLS1_2_VERSION"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL_CONNECTION_IS_TLS13"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 46081,
+    "output": 2762
+  }
+}

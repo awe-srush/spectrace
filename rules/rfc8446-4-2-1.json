@@ -1,0 +1,520 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.1-client-must-send-supported-versions",
+    "source_section": "4.2.1",
+    "source_text": "Implementations of this specification MUST send this extension in the ClientHello containing all versions of TLS which they are prepared to negotiate (for this specification, that means minimally 0x0304, but if previous versions of TLS are allowed to be negotiated, they MUST be present as well).",
+    "normative_keyword": "MUST",
+    "rule_type": "presence_requirement",
+    "rule_statement": "TLS 1.3 implementations MUST send the supported_versions extension in the ClientHello containing all TLS versions they are prepared to negotiate, minimally including 0x0304.",
+    "entity": "client",
+    "applies_when": "Client constructs a ClientHello for TLS 1.3",
+    "target_message": "ClientHello",
+    "target_field": "extensions",
+    "expected_value": "supported_versions extension present with at least 0x0304",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "extensions",
+        "versions"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "TLS 1.3"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify supported_versions extension is included and contains 0x0304.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specific minimum value.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.1-prior-versions-must-be-listed",
+    "source_section": "4.2.1",
+    "source_text": "if previous versions of TLS are allowed to be negotiated, they MUST be present as well",
+    "normative_keyword": "MUST",
+    "rule_type": "presence_requirement",
+    "rule_statement": "If previous TLS versions are allowed to be negotiated, they MUST be listed in the supported_versions extension.",
+    "entity": "client",
+    "applies_when": "Client supports negotiation of TLS versions prior to 1.3",
+    "target_message": "ClientHello",
+    "target_field": "supported_versions.versions",
+    "expected_value": "all supported versions listed",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "versions"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "backward compatibility"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Requires knowing which versions the implementation intends to support vs which it lists.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.1-no-extension-negotiate-tls12",
+    "source_section": "4.2.1",
+    "source_text": "If this extension is not present, servers which are compliant with this specification and which also support TLS 1.2 MUST negotiate TLS 1.2 or prior as specified in [RFC5246], even if ClientHello.legacy_version is 0x0304 or later.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If supported_versions is absent from ClientHello, a TLS 1.3 server that also supports TLS 1.2 MUST negotiate TLS 1.2 or prior per RFC 5246, regardless of legacy_version.",
+    "entity": "server",
+    "applies_when": "Server receives ClientHello without supported_versions extension",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [
+      "legacy_version"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "ServerHello"
+      ],
+      "field_names": [
+        "legacy_version"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "extension absent",
+        "TLS 1.2 fallback"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server's version negotiation logic when supported_versions is missing.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with clear condition.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.1-must-not-use-legacy-version",
+    "source_section": "4.2.1",
+    "source_text": "If this extension is present in the ClientHello, servers MUST NOT use the ClientHello.legacy_version value for version negotiation and MUST use only the \"supported_versions\" extension to determine client preferences.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "conditional_action",
+    "rule_statement": "If supported_versions is present in ClientHello, servers MUST NOT use ClientHello.legacy_version for version negotiation.",
+    "entity": "server",
+    "applies_when": "Server receives ClientHello with supported_versions extension",
+    "target_message": "ClientHello",
+    "target_field": "legacy_version",
+    "expected_value": "ignored for version negotiation",
+    "related_fields": [
+      "supported_versions"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "legacy_version"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "version negotiation"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server version selection logic uses extension, not legacy_version field.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.1-must-use-only-supported-versions",
+    "source_section": "4.2.1",
+    "source_text": "servers MUST NOT use the ClientHello.legacy_version value for version negotiation and MUST use only the \"supported_versions\" extension to determine client preferences.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "When supported_versions is present, servers MUST use only the supported_versions extension to determine client version preferences.",
+    "entity": "server",
+    "applies_when": "Server receives ClientHello with supported_versions extension",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [
+      "supported_versions.versions"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "version negotiation"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify version selection code reads from extension list.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.1-select-only-listed-version",
+    "source_section": "4.2.1",
+    "source_text": "Servers MUST only select a version of TLS present in that extension and MUST ignore any unknown versions that are present in that extension.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "Servers MUST only select a TLS version that is present in the supported_versions extension and MUST ignore unknown versions in it.",
+    "entity": "server",
+    "applies_when": "Server performs version negotiation using supported_versions",
+    "target_message": "ServerHello",
+    "target_field": "supported_versions.selected_version",
+    "expected_value": "a version from the client's supported_versions list",
+    "related_fields": [
+      "ClientHello.supported_versions.versions"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "ServerHello"
+      ],
+      "field_names": [
+        "versions",
+        "selected_version"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "version negotiation"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify selected version is a member of the offered list.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.1-server-prepared-for-no-0x0304",
+    "source_section": "4.2.1",
+    "source_text": "Servers MUST be prepared to receive ClientHellos that include this extension but do not include 0x0304 in the list of versions.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "Servers MUST handle ClientHellos that include supported_versions without 0x0304 in the version list (i.e., must not crash or error on this).",
+    "entity": "server",
+    "applies_when": "Server receives ClientHello with supported_versions that does not include TLS 1.3",
+    "target_message": "ClientHello",
+    "target_field": "supported_versions.versions",
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "versions"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "version negotiation",
+        "backward compatibility"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify code gracefully handles missing 0x0304, but 'prepared' is somewhat qualitative.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.1-prior-tls13-set-version-no-extension",
+    "source_section": "4.2.1",
+    "source_text": "A server which negotiates a version of TLS prior to TLS 1.3 MUST set ServerHello.version and MUST NOT send the \"supported_versions\" extension.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "A server negotiating a TLS version prior to 1.3 MUST set ServerHello.version to the negotiated version and MUST NOT send the supported_versions extension.",
+    "entity": "server",
+    "applies_when": "Server negotiates TLS 1.2 or below",
+    "target_message": "ServerHello",
+    "target_field": "version",
+    "expected_value": "negotiated version (not via extension)",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello"
+      ],
+      "field_names": [
+        "version",
+        "legacy_version"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "TLS 1.2 negotiation"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify ServerHello construction logic for pre-1.3 versions.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST and MUST NOT pair.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.1-tls13-must-send-supported-versions-0x0304",
+    "source_section": "4.2.1",
+    "source_text": "A server which negotiates TLS 1.3 MUST respond by sending a \"supported_versions\" extension containing the selected version value (0x0304).",
+    "normative_keyword": "MUST",
+    "rule_type": "presence_requirement",
+    "rule_statement": "A server negotiating TLS 1.3 MUST send the supported_versions extension in ServerHello containing selected_version 0x0304.",
+    "entity": "server",
+    "applies_when": "Server negotiates TLS 1.3",
+    "target_message": "ServerHello",
+    "target_field": "supported_versions.selected_version",
+    "expected_value": "0x0304",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello"
+      ],
+      "field_names": [
+        "selected_version"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "TLS 1.3 negotiation"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct check for extension presence and value.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specific value.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.1-tls13-legacy-version-0x0303",
+    "source_section": "4.2.1",
+    "source_text": "It MUST set the ServerHello.legacy_version field to 0x0303 (TLS 1.2).",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "When negotiating TLS 1.3, the server MUST set ServerHello.legacy_version to 0x0303.",
+    "entity": "server",
+    "applies_when": "Server negotiates TLS 1.3",
+    "target_message": "ServerHello",
+    "target_field": "legacy_version",
+    "expected_value": "0x0303",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello"
+      ],
+      "field_names": [
+        "legacy_version"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "TLS 1.3 negotiation"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct value check.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with exact value.",
+    "cross_section_context_used": [
+      "4.1.3"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.1-client-check-extension-before-processing",
+    "source_section": "4.2.1",
+    "source_text": "Clients MUST check for this extension prior to processing the rest of the ServerHello",
+    "normative_keyword": "MUST",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "Clients MUST check for the supported_versions extension before processing the rest of the ServerHello.",
+    "entity": "client",
+    "applies_when": "Client receives ServerHello",
+    "target_message": "ServerHello",
+    "target_field": "extensions",
+    "expected_value": null,
+    "related_fields": [
+      "supported_versions"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello"
+      ],
+      "field_names": [
+        "extensions"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "version determination"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify parsing order checks extension first, but code structure may vary.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with ordering implication.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.1-client-ignore-legacy-version-if-extension",
+    "source_section": "4.2.1",
+    "source_text": "If this extension is present, clients MUST ignore the ServerHello.legacy_version value and MUST use only the \"supported_versions\" extension to determine the selected version.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If supported_versions is present in ServerHello, clients MUST ignore legacy_version and use only the extension to determine the selected version.",
+    "entity": "client",
+    "applies_when": "Client receives ServerHello with supported_versions extension",
+    "target_message": "ServerHello",
+    "target_field": "legacy_version",
+    "expected_value": "ignored",
+    "related_fields": [
+      "supported_versions.selected_version"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello"
+      ],
+      "field_names": [
+        "legacy_version",
+        "selected_version"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "version determination"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify client code uses extension value not legacy_version.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST pair.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.1-client-abort-invalid-version",
+    "source_section": "4.2.1",
+    "source_text": "If the \"supported_versions\" extension in the ServerHello contains a version not offered by the client or contains a version prior to TLS 1.3, the client MUST abort the handshake with an \"illegal_parameter\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "The client MUST abort with illegal_parameter if the ServerHello supported_versions contains a version not offered by the client or a version prior to TLS 1.3.",
+    "entity": "client",
+    "applies_when": "Client processes ServerHello supported_versions extension",
+    "target_message": "ServerHello",
+    "target_field": "supported_versions.selected_version",
+    "expected_value": "a version >= 0x0304 that was offered in ClientHello",
+    "related_fields": [
+      "ClientHello.supported_versions.versions"
+    ],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "4.2.1",
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello",
+        "ClientHello"
+      ],
+      "field_names": [
+        "selected_version",
+        "versions"
+      ],
+      "extension_names": [
+        "supported_versions"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "version validation"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct membership and range check.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specific alert and clear conditions.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

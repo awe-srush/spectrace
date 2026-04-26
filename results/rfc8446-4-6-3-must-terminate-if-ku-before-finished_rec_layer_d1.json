@@ -1,0 +1,99 @@
+{
+  "rule_id": "rfc8446-4.6.3-must-terminate-if-ku-before-finished",
+  "source_file": "ssl/record/rec_layer_d1.c",
+  "primary_function": "dtls1_read_bytes",
+  "judgment": "conforms",
+  "confidence": "medium",
+  "reasoning": "The rule requires that a KeyUpdate message received before Finished must terminate the connection with an 'unexpected_message' alert. In this codebase, KeyUpdate messages are processed through the TLS 1.3 state machine. When a handshake message arrives, dtls1_read_bytes routes it through the handshake function (sc->handshake_func), which eventually calls read_state_machine in ssl/statem/statem.c. The read_state_machine calls the transition function (ossl_statem_client_read_transition or ossl_statem_server_read_transition). For TLS 1.3, these functions delegate to ossl_statem_client13_read_transition and ossl_statem_server13_read_transition respectively. Both of these inner functions only allow SSL3_MT_KEY_UPDATE transitions from the TLS_ST_OK state (i.e., after the handshake is complete). If a KeyUpdate is received in any other state (before Finished), the inner function returns 0, causing the outer function to jump to the 'err:' label which calls SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE) and returns 0. This triggers the fatal alert mechanism with 'unexpected_message', satisfying the rule's requirement. Specifically: (1) ossl_statem_client_read_transition (statem_clnt.c line 236): 'if (!ossl_statem_client13_read_transition(s, mt)) goto err;' and at err label (line 405): 'SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);'. (2) ossl_statem_server_read_transition (statem_srvr.c line 196): 'if (!ossl_statem_server13_read_transition(s, mt)) goto err;' and at err label: 'SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);'. The confidence is medium rather than high because the primary function (dtls1_read_bytes) is for DTLS, and KeyUpdate is a TLS 1.3 feature; the rule technically applies to TLS 1.3, and while DTLS 1.3 would share this code path, the exact DTLS 1.3 handling was not fully traced. However, the state machine protection is clear.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [
+      185,
+      216,
+      170,
+      179
+    ],
+    "key_code_snippet": "case TLS_ST_OK:\n    if (mt == SSL3_MT_KEY_UPDATE && !SSL_IS_QUIC_HANDSHAKE(s)) {\n        st->hand_state = TLS_ST_CR_KEY_UPDATE;\n        return 1;\n    }\n    ...\nerr:\n    /* No valid transition found */\n    SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);\n    return 0;",
+    "expected_behavior": "When a KeyUpdate message is received before Finished (i.e., when the handshake state is not TLS_ST_OK), the implementation must terminate the connection with an 'unexpected_message' alert.",
+    "paths_checked": 2,
+    "paths_conforming": 2,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "ossl_statem_client13_read_transition",
+    "ossl_statem_server13_read_transition",
+    "ossl_statem_client_read_transition",
+    "ossl_statem_server_read_transition",
+    "read_state_machine",
+    "ossl_statem_in_error"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 10,
+  "tools_used": [
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL3_MT_KEY_UPDATE"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "KeyUpdate"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_client13_read_transition"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server13_read_transition"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_client_read_transition"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server_read_transition"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_in_error"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "ossl_statem_check_finish_init"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "read_state_machine"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_client_read_transition"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 107399,
+    "output": 2583
+  }
+}

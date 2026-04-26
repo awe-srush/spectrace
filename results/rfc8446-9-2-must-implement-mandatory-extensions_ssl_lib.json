@@ -1,0 +1,41 @@
+{
+  "rule_id": "rfc8446-9.2-must-implement-mandatory-extensions",
+  "source_file": "ssl/ssl_lib.c",
+  "primary_function": "ossl_ssl_connection_free",
+  "judgment": "not_applicable",
+  "confidence": "high",
+  "reasoning": "The function `ossl_ssl_connection_free` (lines 1493-1598 in ssl/ssl_lib.c) is a destructor/cleanup function that frees memory associated with an SSL connection. It does not implement, encode, decode, send, or receive TLS extensions. The rule (RFC 8446 \u00a79.2) requires that TLS-compliant applications MUST implement specific mandatory extensions (supported_versions, cookie, signature_algorithms, signature_algorithms_cert, supported_groups, key_share, server_name) in their ClientHello handling. The matched lines (1536-1559) are all OPENSSL_free() calls that deallocate memory for extension-related fields (e.g., s->ext.supportedgroups, s->ext.keyshares, s->ext.tls13_cookie, s->clienthello). While the presence of these cleanup calls shows that the codebase does have data structures for these extensions, the cleanup function itself is entirely outside the scope of the rule, which concerns protocol-level extension implementation in ClientHello construction and processing. This function cannot conform to or violate the rule because it does not handle the behavior the rule describes.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [],
+    "key_code_snippet": "OPENSSL_free(s->ext.supportedgroups); // line 1536\nOPENSSL_free(s->ext.keyshares);       // line 1537\nOPENSSL_free(s->ext.tls13_cookie);    // line 1556\nOPENSSL_free(s->clienthello);         // line 1559",
+    "expected_behavior": "A TLS 1.3 implementation must implement and support the following extensions in ClientHello: supported_versions, cookie, signature_algorithms, signature_algorithms_cert, supported_groups, key_share, server_name.",
+    "paths_checked": 0,
+    "paths_conforming": 0,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "ossl_ssl_connection_free"
+  ],
+  "context_used_beyond_primary_function": false,
+  "tool_calls_made": 2,
+  "tools_used": [
+    {
+      "tool": "get_callees",
+      "input": {
+        "function_name": "ossl_ssl_connection_free"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "ext.hostname"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 16739,
+    "output": 1929
+  }
+}

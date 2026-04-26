@@ -1,0 +1,639 @@
+{
+  "rule_id": "rfc8446-4.2.8-R03",
+  "rule_type": "algorithmic",
+  "checkability": "not_checkable",
+  "search_terms": [
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "key_exchange",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "key_exchange",
+        "KeyExchange"
+      ]
+    },
+    {
+      "term": "client_shares",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "client_shares",
+        "ClientShares"
+      ]
+    },
+    {
+      "term": "key_share",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "key_share",
+        "KeyShare"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_construct_client_hello",
+      "line_range": [
+        1198,
+        1379
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 18,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1361,
+          "text": "if (s->clienthello != NULL"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1362,
+          "text": "&& s->clienthello->pre_proc_exts != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1363,
+          "text": "OPENSSL_free(s->clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1364,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1365,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1373,
+          "text": "if (s->clienthello != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1374,
+          "text": "OPENSSL_free(s->clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1375,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1376,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1198,
+          "text": "__owur CON_FUNC_RETURN tls_construct_client_hello(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1207,
+          "text": "int mt = SSL3_MT_CLIENT_HELLO, rv = 0;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1211,
+          "text": "int protverr = ssl_set_client_hello_version(s);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1219,
+          "text": "return tls_construct_client_hello_aux(s, pkt);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1292,
+          "text": "|| tls_construct_client_hello_aux(s, &inner) != 1"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1328,
+          "text": "if (!tls_process_client_hello(s, &rpkt)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1344,
+          "text": "rv = tls_construct_client_hello_aux(s, pkt);"
+        },
+        {
+          "term": "key_share",
+          "line": 1336,
+          "text": "* zap the one for the inner. The inner key_share is stashed"
+        },
+        {
+          "term": "key_share",
+          "line": 1339,
+          "text": "if (ossl_ech_same_key_share() == 0) {"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_key_share",
+      "line_range": [
+        2193,
+        2367
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ClientHello",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2234,
+          "text": "* already sent in the first ClientHello"
+        },
+        {
+          "term": "key_share",
+          "line": 2193,
+          "text": "int tls_parse_stoc_key_share(SSL_CONNECTION *s, PACKET *pkt,"
+        },
+        {
+          "term": "key_share",
+          "line": 2219,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2233,
+          "text": "* It is an error if the HelloRetryRequest wants a key_share that we"
+        },
+        {
+          "term": "key_share",
+          "line": 2238,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2253,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2289,
+          "text": "* key_share!"
+        },
+        {
+          "term": "key_share",
+          "line": 2291,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2320,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2342,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2260,
+          "text": "/* The initial keyshares are obsolete now, hence free memory */"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_read_transition",
+      "line_range": [
+        227,
+        408
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "key_exchange"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 233,
+          "text": "* Note that after writing the first ClientHello we don't know what version"
+        },
+        {
+          "term": "key_exchange",
+          "line": 308,
+          "text": "ske_expected = key_exchange_expected(s);"
+        },
+        {
+          "term": "key_exchange",
+          "line": 312,
+          "text": "&& mt == SSL3_MT_SERVER_KEY_EXCHANGE)) {"
+        },
+        {
+          "term": "key_exchange",
+          "line": 313,
+          "text": "if (mt == SSL3_MT_SERVER_KEY_EXCHANGE) {"
+        },
+        {
+          "term": "key_exchange",
+          "line": 342,
+          "text": "ske_expected = key_exchange_expected(s);"
+        },
+        {
+          "term": "key_exchange",
+          "line": 344,
+          "text": "if (ske_expected || ((s->s3.tmp.new_cipher->algorithm_mkey & SSL_PSK) && mt == SSL3_MT_SERVER_KEY_EXCHANGE)) {"
+        },
+        {
+          "term": "key_exchange",
+          "line": 345,
+          "text": "if (mt == SSL3_MT_SERVER_KEY_EXCHANGE) {"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1152,
+          "text": "* ClientHello so we can add it to the transcript hash."
+        },
+        {
+          "term": "ClientHello",
+          "line": 1212,
+          "text": "/* Act as if this ClientHello came after a HelloRetryRequest */"
+        },
+        {
+          "term": "key_share",
+          "line": 1012,
+          "text": "unsigned int format, version, key_share, group_id;"
+        },
+        {
+          "term": "key_share",
+          "line": 1125,
+          "text": "if (!PACKET_get_1(&cookie, &key_share)"
+        },
+        {
+          "term": "key_share",
+          "line": 1181,
+          "text": "if (key_share) {"
+        },
+        {
+          "term": "key_share",
+          "line": 1182,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_key_share)"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_write_transition",
+      "line_range": [
+        721,
+        854
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "key_exchange"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 726,
+          "text": "* Note that before the ClientHello we don't know what version we are going"
+        },
+        {
+          "term": "ClientHello",
+          "line": 746,
+          "text": "/* Must be an incoming ClientHello */"
+        },
+        {
+          "term": "key_exchange",
+          "line": 788,
+          "text": "} else if (send_server_key_exchange(s)) {"
+        },
+        {
+          "term": "key_exchange",
+          "line": 806,
+          "text": "if (send_server_key_exchange(s)) {"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_construct_message",
+      "line_range": [
+        931,
+        1005
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "key_exchange"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 951,
+          "text": "*confunc = tls_construct_client_hello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 952,
+          "text": "*mt = SSL3_MT_CLIENT_HELLO;"
+        },
+        {
+          "term": "key_exchange",
+          "line": 978,
+          "text": "*confunc = tls_construct_client_key_exchange;"
+        },
+        {
+          "term": "key_exchange",
+          "line": 979,
+          "text": "*mt = SSL3_MT_CLIENT_KEY_EXCHANGE;"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/ssl_lib.c",
+      "function": "ossl_ssl_connection_free",
+      "line_range": [
+        1493,
+        1598
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1557,
+          "text": "if (s->clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1558,
+          "text": "OPENSSL_free(s->clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1559,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "key_share",
+          "line": 1537,
+          "text": "OPENSSL_free(s->ext.keyshares);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_handshake",
+      "line_range": [
+        1625,
+        1738
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "key_exchange"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1656,
+          "text": "case SSL3_MT_CLIENT_HELLO:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1657,
+          "text": "if (!ssl_print_client_hello(bio, sc, indent + 2, msg, msglen))"
+        },
+        {
+          "term": "key_exchange",
+          "line": 1671,
+          "text": "case SSL3_MT_SERVER_KEY_EXCHANGE:"
+        },
+        {
+          "term": "key_exchange",
+          "line": 1676,
+          "text": "case SSL3_MT_CLIENT_KEY_EXCHANGE:"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_read_transition",
+      "line_range": [
+        190,
+        314
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "key_exchange"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 207,
+          "text": "if (mt == SSL3_MT_CLIENT_HELLO) {"
+        },
+        {
+          "term": "key_exchange",
+          "line": 220,
+          "text": "if (mt == SSL3_MT_CLIENT_KEY_EXCHANGE) {"
+        },
+        {
+          "term": "key_exchange",
+          "line": 234,
+          "text": "if (mt == SSL3_MT_CLIENT_KEY_EXCHANGE) {"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_as_hello_retry_request",
+      "line_range": [
+        2204,
+        2263
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2233,
+          "text": "* ClientHello will not change"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2241,
+          "text": "* a synthetic message_hash in place of ClientHello1."
+        },
+        {
+          "term": "key_share",
+          "line": 2232,
+          "text": "* We didn't receive a cookie or a new key_share so the next"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-8-R03_candidate_1.c",
+    "locations/code/rfc8446-4-2-8-R03_candidate_2.c",
+    "locations/code/rfc8446-4-2-8-R03_candidate_3.c",
+    "locations/code/rfc8446-4-2-8-R03_candidate_4.c",
+    "locations/code/rfc8446-4-2-8-R03_candidate_5.c",
+    "locations/code/rfc8446-4-2-8-R03_candidate_6.c",
+    "locations/code/rfc8446-4-2-8-R03_candidate_7.c",
+    "locations/code/rfc8446-4-2-8-R03_candidate_8.c",
+    "locations/code/rfc8446-4-2-8-R03_candidate_9.c",
+    "locations/code/rfc8446-4-2-8-R03_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 720,
+    "files_with_hits": 25,
+    "functions_identified": 139,
+    "null_scope_hits": 171,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1365
+  }
+}

@@ -1,0 +1,1472 @@
+{
+  "rule_id": "rfc8446-2.2-should-supply-key-share-with-psk",
+  "rule_type": "presence_requirement",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "key_share",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "key_share",
+        "KeyShare"
+      ]
+    },
+    {
+      "term": "pre_shared_key",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "pre_shared_key",
+        "PreSharedKey"
+      ]
+    },
+    {
+      "term": "PSK",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "PSK"
+      ]
+    },
+    {
+      "term": "resumption",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "resumption"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_psk",
+      "line_range": [
+        1318,
+        1566
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 28,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "PSK",
+          "pre_shared_key",
+          "resumption"
+        ]
+      },
+      "hits": [
+        {
+          "term": "pre_shared_key",
+          "line": 1345,
+          "text": "for (id = 0; PACKET_remaining(&identities) != 0 && id < MAX_PRE_SHARED_KEYS; id++) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1318,
+          "text": "int tls_parse_ctos_psk(SSL_CONNECTION *s, PACKET *pkt, unsigned int context,"
+        },
+        {
+          "term": "PSK",
+          "line": 1331,
+          "text": "* If we have no PSK kex mode that we recognise then we can't resume so"
+        },
+        {
+          "term": "PSK",
+          "line": 1334,
+          "text": "if ((s->ext.psk_kex_mode"
+        },
+        {
+          "term": "PSK",
+          "line": 1357,
+          "text": "if (s->psk_find_session_cb != NULL"
+        },
+        {
+          "term": "PSK",
+          "line": 1358,
+          "text": "&& !s->psk_find_session_cb(ussl, PACKET_data(&identity), idlen,"
+        },
+        {
+          "term": "PSK",
+          "line": 1364,
+          "text": "#ifndef OPENSSL_NO_PSK"
+        },
+        {
+          "term": "PSK",
+          "line": 1366,
+          "text": "&& s->psk_server_callback != NULL"
+        },
+        {
+          "term": "PSK",
+          "line": 1367,
+          "text": "&& idlen <= PSK_MAX_IDENTITY_LEN) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1368,
+          "text": "char *pskid = NULL;"
+        },
+        {
+          "term": "PSK",
+          "line": 1369,
+          "text": "unsigned char pskdata[PSK_MAX_PSK_LEN];"
+        },
+        {
+          "term": "PSK",
+          "line": 1370,
+          "text": "unsigned int pskdatalen;"
+        },
+        {
+          "term": "PSK",
+          "line": 1372,
+          "text": "if (!PACKET_strndup(&identity, &pskid)) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1376,
+          "text": "pskdatalen = s->psk_server_callback(ussl, pskid, pskdata,"
+        },
+        {
+          "term": "PSK",
+          "line": 1377,
+          "text": "sizeof(pskdata));"
+        },
+        {
+          "term": "PSK",
+          "line": 1378,
+          "text": "OPENSSL_free(pskid);"
+        },
+        {
+          "term": "PSK",
+          "line": 1379,
+          "text": "if (pskdatalen > PSK_MAX_PSK_LEN) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1382,
+          "text": "} else if (pskdatalen > 0) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1387,
+          "text": "* We found a PSK using an old style callback. We don't know"
+        },
+        {
+          "term": "PSK",
+          "line": 1393,
+          "text": "OPENSSL_cleanse(pskdata, pskdatalen);"
+        },
+        {
+          "term": "PSK",
+          "line": 1400,
+          "text": "|| !SSL_SESSION_set1_master_key(sess, pskdata,"
+        },
+        {
+          "term": "PSK",
+          "line": 1401,
+          "text": "pskdatalen)"
+        },
+        {
+          "term": "PSK",
+          "line": 1405,
+          "text": "OPENSSL_cleanse(pskdata, pskdatalen);"
+        },
+        {
+          "term": "PSK",
+          "line": 1409,
+          "text": "OPENSSL_cleanse(pskdata, pskdatalen);"
+        },
+        {
+          "term": "PSK",
+          "line": 1412,
+          "text": "#endif /* OPENSSL_NO_PSK */"
+        },
+        {
+          "term": "PSK",
+          "line": 1415,
+          "text": "/* We found a PSK */"
+        },
+        {
+          "term": "PSK",
+          "line": 1551,
+          "text": "if (tls_psk_do_binder(s, md, PACKET_msg_start(pkt), binderoffset,"
+        },
+        {
+          "term": "resumption",
+          "line": 1519,
+          "text": "* allowing successful resumption on future connections."
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/extensions.c",
+      "function": "final_key_share",
+      "line_range": [
+        1639,
+        1779
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 21,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "PSK",
+          "key_share",
+          "resumption"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_share",
+          "line": 1639,
+          "text": "static int final_key_share(SSL_CONNECTION *s, unsigned int context, int sent)"
+        },
+        {
+          "term": "key_share",
+          "line": 1645,
+          "text": "/* Nothing to do for key_share in an HRR */"
+        },
+        {
+          "term": "key_share",
+          "line": 1653,
+          "text": "*     we have no key_share"
+        },
+        {
+          "term": "key_share",
+          "line": 1656,
+          "text": "*      OR the kex_mode doesn't allow non key_share resumes)"
+        },
+        {
+          "term": "key_share",
+          "line": 1663,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_NO_SUITABLE_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 1667,
+          "text": "SSLfatal(s, SSL_AD_MISSING_EXTENSION, SSL_R_NO_SUITABLE_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 1676,
+          "text": "*         we have a suitable key_share"
+        },
+        {
+          "term": "key_share",
+          "line": 1686,
+          "text": "*             the client sent a key_share extension"
+        },
+        {
+          "term": "key_share",
+          "line": 1689,
+          "text": "*              OR the kex_mode allows key_share resumes)"
+        },
+        {
+          "term": "key_share",
+          "line": 1697,
+          "text": "*             the kex_mode doesn't allow non key_share resumes"
+        },
+        {
+          "term": "key_share",
+          "line": 1707,
+          "text": "/* We have a suitable key_share */"
+        },
+        {
+          "term": "key_share",
+          "line": 1723,
+          "text": "/* No suitable key_share */"
+        },
+        {
+          "term": "key_share",
+          "line": 1728,
+          "text": "/* Did we detect group overlap in tls_parse_ctos_key_share ? */"
+        },
+        {
+          "term": "key_share",
+          "line": 1740,
+          "text": "SSL_R_NO_SUITABLE_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 1761,
+          "text": "* We have a key_share so don't send any more HelloRetryRequest"
+        },
+        {
+          "term": "key_share",
+          "line": 1768,
+          "text": "* For a client side resumption with no key_share we need to generate"
+        },
+        {
+          "term": "key_share",
+          "line": 1769,
+          "text": "* the handshake secret (otherwise this is done during key_share"
+        },
+        {
+          "term": "PSK",
+          "line": 1662,
+          "text": "if ((s->ext.psk_kex_mode & TLSEXT_KEX_MODE_FLAG_KE) == 0) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1726,
+          "text": "|| (s->ext.psk_kex_mode & TLSEXT_KEX_MODE_FLAG_KE_DHE) != 0)) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1737,
+          "text": "|| (s->ext.psk_kex_mode & TLSEXT_KEX_MODE_FLAG_KE) == 0) {"
+        },
+        {
+          "term": "resumption",
+          "line": 1768,
+          "text": "* For a client side resumption with no key_share we need to generate"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_key_share",
+      "line_range": [
+        2193,
+        2367
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ClientHello",
+          "key_share",
+          "resumption"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2234,
+          "text": "* already sent in the first ClientHello"
+        },
+        {
+          "term": "key_share",
+          "line": 2193,
+          "text": "int tls_parse_stoc_key_share(SSL_CONNECTION *s, PACKET *pkt,"
+        },
+        {
+          "term": "key_share",
+          "line": 2219,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2233,
+          "text": "* It is an error if the HelloRetryRequest wants a key_share that we"
+        },
+        {
+          "term": "key_share",
+          "line": 2238,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2253,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2289,
+          "text": "* key_share!"
+        },
+        {
+          "term": "key_share",
+          "line": 2291,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2320,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2342,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 2260,
+          "text": "/* The initial keyshares are obsolete now, hence free memory */"
+        },
+        {
+          "term": "resumption",
+          "line": 2299,
+          "text": "* If this is a resumption but changed what group was used, we need"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "PSK",
+          "resumption"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2055,
+          "text": "* echo of what we originally sent in the ClientHello and should not be"
+        },
+        {
+          "term": "PSK",
+          "line": 1977,
+          "text": "if (!tls_parse_extension(s, TLSEXT_IDX_psk,"
+        },
+        {
+          "term": "resumption",
+          "line": 1986,
+          "text": "* secret. EAP-FAST (RFC 4851) supports two types of session resumption."
+        },
+        {
+          "term": "resumption",
+          "line": 1987,
+          "text": "* Resumption based on server-side state works with session IDs."
+        },
+        {
+          "term": "resumption",
+          "line": 1988,
+          "text": "* Resumption based on pre-shared Protected Access Credentials (PACs)"
+        },
+        {
+          "term": "resumption",
+          "line": 1992,
+          "text": "* ID alone is not a reliable indicator of session resumption, so we"
+        },
+        {
+          "term": "resumption",
+          "line": 2041,
+          "text": "* overwritten if the server refuses resumption."
+        },
+        {
+          "term": "resumption",
+          "line": 2056,
+          "text": "* used for resumption."
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/ssl_lib.c",
+      "function": "ossl_ssl_connection_free",
+      "line_range": [
+        1493,
+        1598
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "PSK",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1557,
+          "text": "if (s->clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1558,
+          "text": "OPENSSL_free(s->clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1559,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "key_share",
+          "line": 1537,
+          "text": "OPENSSL_free(s->ext.keyshares);"
+        },
+        {
+          "term": "PSK",
+          "line": 1525,
+          "text": "SSL_SESSION_free(s->psksession);"
+        },
+        {
+          "term": "PSK",
+          "line": 1526,
+          "text": "OPENSSL_free(s->psksession_id);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 60,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "resumption"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1860,
+          "text": "CLIENTHELLO_MSG *clienthello = s->clienthello;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1866,
+          "text": "/* Finished parsing the ClientHello, now we can start processing it */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1867,
+          "text": "/* Give the ClientHello callback a crack at things */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1869,
+          "text": "/* A failure in the ClientHello callback terminates the connection. */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1884,
+          "text": "memcpy(s->s3.client_random, clienthello->random, SSL3_RANDOM_SIZE);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1887,
+          "text": "protverr = ssl_choose_server_version(s, clienthello, &dgrd);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1897,
+          "text": "s->version = s->client_version = clienthello->legacy_version;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1903,
+          "text": "/* TLSv1.3 specifies that a ClientHello must end on a record boundary */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1914,
+          "text": "if (sctx->app_verify_cookie_cb(ussl, clienthello->dtls_cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1915,
+          "text": "(unsigned int)clienthello->dtls_cookie_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1923,
+          "text": "} else if (s->d1->cookie_len != clienthello->dtls_cookie_len"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1924,
+          "text": "|| memcmp(clienthello->dtls_cookie, s->d1->cookie,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1936,
+          "text": "if (!ssl_cache_cipherlist(s, &clienthello->ciphersuites)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1937,
+          "text": "|| !ossl_bytes_to_cipher_list(s, &clienthello->ciphersuites, &ciphers, &scsvs, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1994,
+          "text": "clienthello->pre_proc_exts, NULL, 0)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2000,
+          "text": "* We don't allow resumption in a backwards compatible ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2021,
+          "text": "i = ssl_get_prev_session(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2038,
+          "text": "memcpy(s->tmp_session_id, s->clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2039,
+          "text": "s->clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2040,
+          "text": "s->tmp_session_id_len = s->clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2080,
+          "text": "if (clienthello->compressions_len == 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2085,
+          "text": "if (memchr(clienthello->compressions, 0,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2086,
+          "text": "clienthello->compressions_len)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2094,
+          "text": "ssl_check_for_safari(s, clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2098,
+          "text": "clienthello->pre_proc_exts, NULL, 0, 1)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2161,
+          "text": "* If the ClientHello contains both a Session ID and a PAC-Opaque in"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2166,
+          "text": "if (clienthello->session_id_len > 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2167,
+          "text": "memcpy(s->session->session_id, clienthello->session_id,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2168,
+          "text": "clienthello->session_id_len);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2169,
+          "text": "s->session->session_id_length = clienthello->session_id_len;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2201,
+          "text": "* a TLSv1.3 ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 2203,
+          "text": "if (clienthello->compressions_len != 1) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2235,
+          "text": "for (k = 0; k < clienthello->compressions_len; k++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2236,
+          "text": "if (clienthello->compressions[k] == comp_id)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2239,
+          "text": "if (k >= clienthello->compressions_len) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2255,
+          "text": "for (o = 0; o < clienthello->compressions_len; o++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2256,
+          "text": "if (v == clienthello->compressions[o]) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2304,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2305,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2306,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2311,
+          "text": "if (clienthello != NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2312,
+          "text": "OPENSSL_free(clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2313,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2314,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1848,
+          "text": "static int tls_early_post_process_client_hello(SSL_CONNECTION *s)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1868,
+          "text": "if (sctx->client_hello_cb != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1870,
+          "text": "switch (sctx->client_hello_cb(ussl, &al, sctx->client_hello_cb_arg)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1871,
+          "text": "case SSL_CLIENT_HELLO_SUCCESS:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1873,
+          "text": "case SSL_CLIENT_HELLO_RETRY:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1874,
+          "text": "s->rwstate = SSL_CLIENT_HELLO_CB;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1876,
+          "text": "case SSL_CLIENT_HELLO_ERROR:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1993,
+          "text": "SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 2097,
+          "text": "if (!tls_parse_all_extensions(s, SSL_EXT_CLIENT_HELLO,"
+        },
+        {
+          "term": "resumption",
+          "line": 1970,
+          "text": "/* For TLSv1.3 we must select the ciphersuite *before* session resumption */"
+        },
+        {
+          "term": "resumption",
+          "line": 2000,
+          "text": "* We don't allow resumption in a backwards compatible ClientHello."
+        },
+        {
+          "term": "resumption",
+          "line": 2005,
+          "text": "* ignore resumption requests with flag"
+        },
+        {
+          "term": "resumption",
+          "line": 2006,
+          "text": "* SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION (it's a new flag rather"
+        },
+        {
+          "term": "resumption",
+          "line": 2012,
+          "text": "* SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION setting will be"
+        },
+        {
+          "term": "resumption",
+          "line": 2015,
+          "text": "if (s->new_session && (s->options & SSL_OP_NO_SESSION_RESUMPTION_ON_RENEGOTIATION)) {"
+        },
+        {
+          "term": "resumption",
+          "line": 2045,
+          "text": "* ciphersuite compatibility with the session as part of resumption."
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_construct_ctos_psk",
+      "line_range": [
+        1298,
+        1591
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 43,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "PSK",
+          "resumption"
+        ]
+      },
+      "hits": [
+        {
+          "term": "PSK",
+          "line": 1298,
+          "text": "EXT_RETURN tls_construct_ctos_psk(SSL_CONNECTION *s, WPACKET *pkt,"
+        },
+        {
+          "term": "PSK",
+          "line": 1305,
+          "text": "int reshashsize = 0, pskhashsize = 0;"
+        },
+        {
+          "term": "PSK",
+          "line": 1306,
+          "text": "unsigned char *resbinder = NULL, *pskbinder = NULL, *msgstart = NULL;"
+        },
+        {
+          "term": "PSK",
+          "line": 1307,
+          "text": "const EVP_MD *handmd = NULL, *mdres = NULL, *mdpsk = NULL;"
+        },
+        {
+          "term": "PSK",
+          "line": 1316,
+          "text": "* resumption PSK. If we add support for multiple PSKs then the length"
+        },
+        {
+          "term": "PSK",
+          "line": 1325,
+          "text": "|| (s->session->ext.ticklen == 0 && s->psksession == NULL))"
+        },
+        {
+          "term": "PSK",
+          "line": 1343,
+          "text": "goto dopsksess;"
+        },
+        {
+          "term": "PSK",
+          "line": 1351,
+          "text": "goto dopsksess;"
+        },
+        {
+          "term": "PSK",
+          "line": 1363,
+          "text": "goto dopsksess;"
+        },
+        {
+          "term": "PSK",
+          "line": 1391,
+          "text": "goto dopsksess;"
+        },
+        {
+          "term": "PSK",
+          "line": 1405,
+          "text": "goto dopsksess;"
+        },
+        {
+          "term": "PSK",
+          "line": 1416,
+          "text": "goto dopsksess;"
+        },
+        {
+          "term": "PSK",
+          "line": 1426,
+          "text": "dopsksess:"
+        },
+        {
+          "term": "PSK",
+          "line": 1427,
+          "text": "if (!dores && s->psksession == NULL)"
+        },
+        {
+          "term": "PSK",
+          "line": 1430,
+          "text": "if (s->psksession != NULL) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1431,
+          "text": "mdpsk = ssl_md(sctx, s->psksession->cipher->algorithm2);"
+        },
+        {
+          "term": "PSK",
+          "line": 1432,
+          "text": "if (mdpsk == NULL) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1437,
+          "text": "SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_BAD_PSK);"
+        },
+        {
+          "term": "PSK",
+          "line": 1441,
+          "text": "if (s->hello_retry_request == SSL_HRR_PENDING && mdpsk != handmd) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1443,
+          "text": "* Selected ciphersuite hash does not match the hash for the PSK"
+        },
+        {
+          "term": "PSK",
+          "line": 1446,
+          "text": "SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_BAD_PSK);"
+        },
+        {
+          "term": "PSK",
+          "line": 1450,
+          "text": "pskhashsize = EVP_MD_get_size(mdpsk);"
+        },
+        {
+          "term": "PSK",
+          "line": 1451,
+          "text": "if (pskhashsize <= 0) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1452,
+          "text": "SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_BAD_PSK);"
+        },
+        {
+          "term": "PSK",
+          "line": 1458,
+          "text": "if (!WPACKET_put_bytes_u16(pkt, TLSEXT_TYPE_psk)"
+        },
+        {
+          "term": "PSK",
+          "line": 1468,
+          "text": "* has a PSK, then we want to send a GREASE PSK in the outer."
+        },
+        {
+          "term": "PSK",
+          "line": 1478,
+          "text": "+ s->psksession_id_len"
+        },
+        {
+          "term": "PSK",
+          "line": 1480,
+          "text": "+ pskhashsize;"
+        },
+        {
+          "term": "PSK",
+          "line": 1506,
+          "text": "if (s->psksession != NULL) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1507,
+          "text": "if (!WPACKET_sub_memcpy_u16(pkt, rndbufp, s->psksession_id_len)"
+        },
+        {
+          "term": "PSK",
+          "line": 1513,
+          "text": "rndbufp += s->psksession_id_len;"
+        },
+        {
+          "term": "PSK",
+          "line": 1519,
+          "text": "|| (s->psksession != NULL"
+        },
+        {
+          "term": "PSK",
+          "line": 1520,
+          "text": "&& !WPACKET_sub_memcpy_u8(pkt, rndbufp, pskhashsize))"
+        },
+        {
+          "term": "PSK",
+          "line": 1540,
+          "text": "if (s->psksession != NULL) {"
+        },
+        {
+          "term": "PSK",
+          "line": 1541,
+          "text": "if (!WPACKET_sub_memcpy_u16(pkt, s->psksession_id,"
+        },
+        {
+          "term": "PSK",
+          "line": 1542,
+          "text": "s->psksession_id_len)"
+        },
+        {
+          "term": "PSK",
+          "line": 1555,
+          "text": "|| (s->psksession != NULL"
+        },
+        {
+          "term": "PSK",
+          "line": 1556,
+          "text": "&& !WPACKET_sub_allocate_bytes_u8(pkt, pskhashsize, &pskbinder))"
+        },
+        {
+          "term": "PSK",
+          "line": 1572,
+          "text": "&& tls_psk_do_binder(s, mdres, msgstart, binderoffset, NULL,"
+        },
+        {
+          "term": "PSK",
+          "line": 1579,
+          "text": "if (s->psksession != NULL"
+        },
+        {
+          "term": "PSK",
+          "line": 1580,
+          "text": "&& tls_psk_do_binder(s, mdpsk, msgstart, binderoffset, NULL,"
+        },
+        {
+          "term": "PSK",
+          "line": 1581,
+          "text": "pskbinder, s->psksession, 1, 1)"
+        },
+        {
+          "term": "resumption",
+          "line": 1316,
+          "text": "* resumption PSK. If we add support for multiple PSKs then the length"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_construct_client_hello",
+      "line_range": [
+        1198,
+        1379
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 18,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1361,
+          "text": "if (s->clienthello != NULL"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1362,
+          "text": "&& s->clienthello->pre_proc_exts != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1363,
+          "text": "OPENSSL_free(s->clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1364,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1365,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1373,
+          "text": "if (s->clienthello != NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1374,
+          "text": "OPENSSL_free(s->clienthello->pre_proc_exts);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1375,
+          "text": "OPENSSL_free(s->clienthello);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1376,
+          "text": "s->clienthello = NULL;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1198,
+          "text": "__owur CON_FUNC_RETURN tls_construct_client_hello(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1207,
+          "text": "int mt = SSL3_MT_CLIENT_HELLO, rv = 0;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1211,
+          "text": "int protverr = ssl_set_client_hello_version(s);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1219,
+          "text": "return tls_construct_client_hello_aux(s, pkt);"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1292,
+          "text": "|| tls_construct_client_hello_aux(s, &inner) != 1"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1328,
+          "text": "if (!tls_process_client_hello(s, &rpkt)) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1344,
+          "text": "rv = tls_construct_client_hello_aux(s, pkt);"
+        },
+        {
+          "term": "key_share",
+          "line": 1336,
+          "text": "* zap the one for the inner. The inner key_share is stashed"
+        },
+        {
+          "term": "key_share",
+          "line": 1339,
+          "text": "if (ossl_ech_same_key_share() == 0) {"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_key_share",
+      "line_range": [
+        830,
+        1006
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 17,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "PSK",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_share",
+          "line": 830,
+          "text": "int tls_parse_ctos_key_share(SSL_CONNECTION *s, PACKET *pkt,"
+        },
+        {
+          "term": "key_share",
+          "line": 834,
+          "text": "PACKET key_share_list;"
+        },
+        {
+          "term": "key_share",
+          "line": 858,
+          "text": "if (!PACKET_as_length_prefixed_2(pkt, &key_share_list)) {"
+        },
+        {
+          "term": "key_share",
+          "line": 880,
+          "text": "if (s->s3.group_id != 0 && PACKET_remaining(&key_share_list) == 0) {"
+        },
+        {
+          "term": "key_share",
+          "line": 883,
+          "text": "* requesting a new key_share. If we haven't got one then that is an"
+        },
+        {
+          "term": "key_share",
+          "line": 886,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "key_share",
+          "line": 892,
+          "text": "&key_share_list,"
+        },
+        {
+          "term": "key_share",
+          "line": 840,
+          "text": "uint16_t *keyshares_arr = NULL;"
+        },
+        {
+          "term": "key_share",
+          "line": 841,
+          "text": "size_t keyshares_cnt = 0;"
+        },
+        {
+          "term": "key_share",
+          "line": 891,
+          "text": "ks_extraction_result = extract_keyshares(s,"
+        },
+        {
+          "term": "key_share",
+          "line": 895,
+          "text": "&keyshares_arr, &encoded_pubkey_arr,"
+        },
+        {
+          "term": "key_share",
+          "line": 896,
+          "text": "&keyshares_cnt);"
+        },
+        {
+          "term": "key_share",
+          "line": 907,
+          "text": "*              keyshares_arr[keyshares_cnt], encoded_pubkey_arr[keyshares_cnt]"
+        },
+        {
+          "term": "key_share",
+          "line": 931,
+          "text": "keyshares_arr, keyshares_cnt,"
+        },
+        {
+          "term": "key_share",
+          "line": 970,
+          "text": "keyshares_arr, keyshares_cnt,"
+        },
+        {
+          "term": "key_share",
+          "line": 999,
+          "text": "OPENSSL_free(keyshares_arr);"
+        },
+        {
+          "term": "PSK",
+          "line": 849,
+          "text": "if (s->hit && (s->ext.psk_kex_mode & TLSEXT_KEX_MODE_FLAG_KE_DHE) == 0)"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_psk",
+      "line_range": [
+        2439,
+        2495
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 15,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "PSK",
+          "resumption"
+        ]
+      },
+      "hits": [
+        {
+          "term": "PSK",
+          "line": 2439,
+          "text": "int tls_parse_stoc_psk(SSL_CONNECTION *s, PACKET *pkt,"
+        },
+        {
+          "term": "PSK",
+          "line": 2452,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_PSK_IDENTITY);"
+        },
+        {
+          "term": "PSK",
+          "line": 2457,
+          "text": "* Session resumption tickets are always sent before PSK tickets. If the"
+        },
+        {
+          "term": "PSK",
+          "line": 2459,
+          "text": "* sent two tickets, or if we didn't send a PSK ticket."
+        },
+        {
+          "term": "PSK",
+          "line": 2461,
+          "text": "if (identity == 0 && (s->psksession == NULL || s->ext.tick_identity == 2)) {"
+        },
+        {
+          "term": "PSK",
+          "line": 2463,
+          "text": "SSL_SESSION_free(s->psksession);"
+        },
+        {
+          "term": "PSK",
+          "line": 2464,
+          "text": "s->psksession = NULL;"
+        },
+        {
+          "term": "PSK",
+          "line": 2468,
+          "text": "if (s->psksession == NULL) {"
+        },
+        {
+          "term": "PSK",
+          "line": 2475,
+          "text": "* If we used the external PSK for sending early_data then s->early_secret"
+        },
+        {
+          "term": "PSK",
+          "line": 2482,
+          "text": "|| s->psksession->ext.max_early_data == 0)"
+        },
+        {
+          "term": "PSK",
+          "line": 2483,
+          "text": "memcpy(s->early_secret, s->psksession->early_secret, EVP_MAX_MD_SIZE);"
+        },
+        {
+          "term": "PSK",
+          "line": 2486,
+          "text": "s->session = s->psksession;"
+        },
+        {
+          "term": "PSK",
+          "line": 2487,
+          "text": "s->psksession = NULL;"
+        },
+        {
+          "term": "resumption",
+          "line": 2457,
+          "text": "* Session resumption tickets are always sent before PSK tickets. If the"
+        },
+        {
+          "term": "resumption",
+          "line": 2458,
+          "text": "* ticket index is 0 then it must be for a session resumption ticket if we"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-2-2-should-supply-key-share-with-psk_candidate_1.c",
+    "locations/code/rfc8446-2-2-should-supply-key-share-with-psk_candidate_2.c",
+    "locations/code/rfc8446-2-2-should-supply-key-share-with-psk_candidate_3.c",
+    "locations/code/rfc8446-2-2-should-supply-key-share-with-psk_candidate_4.c",
+    "locations/code/rfc8446-2-2-should-supply-key-share-with-psk_candidate_5.c",
+    "locations/code/rfc8446-2-2-should-supply-key-share-with-psk_candidate_6.c",
+    "locations/code/rfc8446-2-2-should-supply-key-share-with-psk_candidate_7.c",
+    "locations/code/rfc8446-2-2-should-supply-key-share-with-psk_candidate_8.c",
+    "locations/code/rfc8446-2-2-should-supply-key-share-with-psk_candidate_9.c",
+    "locations/code/rfc8446-2-2-should-supply-key-share-with-psk_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1805,
+    "files_with_hits": 37,
+    "functions_identified": 211,
+    "null_scope_hits": 714,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 2352
+  }
+}

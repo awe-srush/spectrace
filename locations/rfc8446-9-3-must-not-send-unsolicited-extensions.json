@@ -1,0 +1,651 @@
+{
+  "rule_id": "rfc8446-9.3-must-not-send-unsolicited-extensions",
+  "rule_type": "consistency_check",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ServerHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ServerHello",
+        "server_hello"
+      ]
+    },
+    {
+      "term": "EncryptedExtensions",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "EncryptedExtensions",
+        "encrypted_extensions"
+      ]
+    },
+    {
+      "term": "HelloRetryRequest",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "HelloRetryRequest",
+        "hello_retry_request"
+      ]
+    },
+    {
+      "term": "supported_versions",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "supported_versions",
+        "SupportedVersions"
+      ]
+    },
+    {
+      "term": "unsupported_extension",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unsupported_extension",
+        "UnsupportedExtension"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_parse",
+      "line_range": [
+        113,
+        167
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "ServerHello",
+          "unsupported_extension"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 137,
+          "text": "* If it's ServerHello or EncryptedExtensions we can't have any"
+        },
+        {
+          "term": "ServerHello",
+          "line": 123,
+          "text": "if ((context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_2_SERVER_HELLO)) != 0)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 135,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS)) != 0) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 137,
+          "text": "* If it's ServerHello or EncryptedExtensions we can't have any"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 135,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS)) != 0) {"
+        },
+        {
+          "term": "unsupported_extension",
+          "line": 141,
+          "text": "SSLfatal(s, TLS1_AD_UNSUPPORTED_EXTENSION, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "ssl_choose_server_version",
+      "line_range": [
+        2139,
+        2298
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2224,
+          "text": "* ClientHello.legacy_version or ServerHello.legacy_version set to"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2178,
+          "text": "* a HelloRetryRequest"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2251,
+          "text": "* This is after a HelloRetryRequest so we better check that we"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2204,
+          "text": "if (!suppversions->present && s->hello_retry_request != SSL_HRR_NONE)"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2249,
+          "text": "if (s->hello_retry_request != SSL_HRR_NONE) {"
+        },
+        {
+          "term": "supported_versions",
+          "line": 2189,
+          "text": "suppversions = &hello->pre_proc_exts[TLSEXT_IDX_supported_versions];"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_read_transition",
+      "line_range": [
+        94,
+        216
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "HelloRetryRequest",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 111,
+          "text": "* thing we can get now is a ServerHello."
+        },
+        {
+          "term": "ServerHello",
+          "line": 113,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 120,
+          "text": "if (mt == SSL3_MT_ENCRYPTED_EXTENSIONS) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 121,
+          "text": "st->hand_state = TLS_ST_CR_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 126,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 110,
+          "text": "* This must a ClientHello following a HelloRetryRequest, so the only"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_add",
+      "line_range": [
+        173,
+        321
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "HelloRetryRequest",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 312,
+          "text": "* is not an error if the extension is present in ServerHello."
+        },
+        {
+          "term": "ServerHello",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1159,
+          "text": "if (!WPACKET_put_bytes_u8(&hrrpkt, SSL3_MT_SERVER_HELLO)"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1212,
+          "text": "/* Act as if this ClientHello came after a HelloRetryRequest */"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1213,
+          "text": "s->hello_retry_request = SSL_HRR_PENDING;"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1173,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_supported_versions)"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "ssl_choose_client_version",
+      "line_range": [
+        2311,
+        2425
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2324,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2325,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2332,
+          "text": "if (s->hello_retry_request != SSL_HRR_NONE"
+        },
+        {
+          "term": "supported_versions",
+          "line": 2323,
+          "text": "if (!tls_parse_extension(s, TLSEXT_IDX_supported_versions,"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_supported_versions",
+      "line_range": [
+        2157,
+        2191
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2171,
+          "text": "* a ServerHello is TLSv1.3 therefore we shouldn't be getting anything else."
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2180,
+          "text": "if (context == SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST)"
+        },
+        {
+          "term": "supported_versions",
+          "line": 2157,
+          "text": "int tls_parse_stoc_supported_versions(SSL_CONNECTION *s, PACKET *pkt,"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1821,
+          "text": "* ServerHello.random confirmation trick. If that is good"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1967,
+          "text": "* In TLSv1.3 a ServerHello message signals a key change so the end of"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1702,
+          "text": "MSG_PROCESS_RETURN tls_process_server_hello(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1810,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1811,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1838,
+          "text": "prelude[0] = SSL3_MT_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1956,
+          "text": "context = SSL_CONNECTION_IS_TLS13(s) ? SSL_EXT_TLS1_3_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1957,
+          "text": ": SSL_EXT_TLS1_2_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1978,
+          "text": "SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1746,
+          "text": "if (s->hello_retry_request != SSL_HRR_NONE) {"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1750,
+          "text": "s->hello_retry_request = SSL_HRR_PENDING;"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1800,
+          "text": "if (!tls_collect_extensions(s, &extpkt, SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST,"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1803,
+          "text": "SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST,"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1946,
+          "text": "ret = tls_process_as_hello_retry_request(s, extensions);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_construct_server_hello",
+      "line_range": [
+        2577,
+        2820
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2577,
+          "text": "CON_FUNC_RETURN tls_construct_server_hello(SSL_CONNECTION *s, WPACKET *pkt)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2658,
+          "text": "? SSL_EXT_TLS1_3_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2659,
+          "text": ": SSL_EXT_TLS1_2_SERVER_HELLO),"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2813,
+          "text": "OSSL_TRACE(TLS, \"Error from tls_construct_server_hello/ech_cb\\n\");"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2584,
+          "text": "|| s->hello_retry_request == SSL_HRR_PENDING;"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2593,
+          "text": "s->hello_retry_request == SSL_HRR_PENDING"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2655,
+          "text": "s->hello_retry_request == SSL_HRR_PENDING"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2656,
+          "text": "? SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2665,
+          "text": "if (s->hello_retry_request == SSL_HRR_PENDING) {"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2760,
+          "text": "if (s->hello_retry_request == SSL_HRR_PENDING)"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2798,
+          "text": "&& s->hello_retry_request != SSL_HRR_PENDING) {"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_write_transition",
+      "line_range": [
+        582,
+        715
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "HelloRetryRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 624,
+          "text": "st->hand_state = TLS_ST_SW_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 631,
+          "text": "st->hand_state = TLS_ST_SW_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 634,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 619,
+          "text": "&& s->hello_retry_request != SSL_HRR_COMPLETE)"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 621,
+          "text": "else if (s->hello_retry_request == SSL_HRR_PENDING)"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 628,
+          "text": "if (s->hello_retry_request == SSL_HRR_PENDING)"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-9-3-must-not-send-unsolicited-extensions_candidate_1.c",
+    "locations/code/rfc8446-9-3-must-not-send-unsolicited-extensions_candidate_2.c",
+    "locations/code/rfc8446-9-3-must-not-send-unsolicited-extensions_candidate_3.c",
+    "locations/code/rfc8446-9-3-must-not-send-unsolicited-extensions_candidate_4.c",
+    "locations/code/rfc8446-9-3-must-not-send-unsolicited-extensions_candidate_5.c",
+    "locations/code/rfc8446-9-3-must-not-send-unsolicited-extensions_candidate_6.c",
+    "locations/code/rfc8446-9-3-must-not-send-unsolicited-extensions_candidate_7.c",
+    "locations/code/rfc8446-9-3-must-not-send-unsolicited-extensions_candidate_8.c",
+    "locations/code/rfc8446-9-3-must-not-send-unsolicited-extensions_candidate_9.c",
+    "locations/code/rfc8446-9-3-must-not-send-unsolicited-extensions_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 302,
+    "files_with_hits": 26,
+    "functions_identified": 87,
+    "null_scope_hits": 88,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1728
+  }
+}

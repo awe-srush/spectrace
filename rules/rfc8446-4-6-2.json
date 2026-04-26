@@ -1,0 +1,238 @@
+[
+  {
+    "rule_id": "rfc8446-4.6.2-client-must-respond-to-post-hs-cr",
+    "source_section": "4.6.2",
+    "source_text": "The client MUST respond with the appropriate Authentication messages (see Section 4.4).",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "The client MUST respond to post-handshake CertificateRequest with appropriate Authentication messages.",
+    "entity": "client",
+    "applies_when": "Client receives post-handshake CertificateRequest after sending post_handshake_auth",
+    "target_message": "CertificateRequest",
+    "target_field": null,
+    "expected_value": "client responds with Certificate/CertificateVerify/Finished or empty Certificate/Finished",
+    "related_fields": [
+      "post_handshake_auth"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateRequest",
+        "Certificate",
+        "CertificateVerify",
+        "Finished"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "post_handshake_auth"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "post-handshake authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify client sends authentication response to post-handshake CR.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "4.4"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.2-client-must-send-cert-cv-finished-if-authenticating",
+    "source_section": "4.6.2",
+    "source_text": "If the client chooses to authenticate, it MUST send Certificate, CertificateVerify, and Finished.",
+    "normative_keyword": "MUST",
+    "rule_type": "message_construction",
+    "rule_statement": "If authenticating post-handshake, the client MUST send Certificate, CertificateVerify, and Finished.",
+    "entity": "client",
+    "applies_when": "Client chooses to authenticate in post-handshake auth",
+    "target_message": "Certificate",
+    "target_field": null,
+    "expected_value": "Certificate + CertificateVerify + Finished",
+    "related_fields": [],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate",
+        "CertificateVerify",
+        "Finished"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "post-handshake authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify all three messages are sent in sequence.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.2-client-must-send-empty-cert-finished-if-declining",
+    "source_section": "4.6.2",
+    "source_text": "If it declines, it MUST send a Certificate message containing no certificates followed by Finished.",
+    "normative_keyword": "MUST",
+    "rule_type": "message_construction",
+    "rule_statement": "If declining post-handshake auth, the client MUST send empty Certificate followed by Finished.",
+    "entity": "client",
+    "applies_when": "Client declines post-handshake authentication",
+    "target_message": "Certificate",
+    "target_field": "certificate_list",
+    "expected_value": "empty Certificate + Finished",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate",
+        "Finished"
+      ],
+      "field_names": [
+        "certificate_list"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "post-handshake authentication",
+        "decline"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify empty certificate followed by Finished.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.2-response-messages-must-be-consecutive",
+    "source_section": "4.6.2",
+    "source_text": "All of the client's messages for a given response MUST appear consecutively on the wire with no intervening messages of other types.",
+    "normative_keyword": "MUST",
+    "rule_type": "ordering_constraint",
+    "rule_statement": "All client authentication messages for a given post-handshake response MUST appear consecutively with no intervening messages.",
+    "entity": "client",
+    "applies_when": "Client sends post-handshake authentication response",
+    "target_message": "Certificate",
+    "target_field": null,
+    "expected_value": "no interleaved messages between auth messages",
+    "related_fields": [],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate",
+        "CertificateVerify",
+        "Finished"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "post-handshake authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify message ordering on the wire.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.2-client-must-alert-if-no-extension-sent",
+    "source_section": "4.6.2",
+    "source_text": "A client that receives a CertificateRequest message without having sent the \"post_handshake_auth\" extension MUST send an \"unexpected_message\" fatal alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "A client that did not send post_handshake_auth MUST send unexpected_message alert if it receives post-handshake CertificateRequest.",
+    "entity": "client",
+    "applies_when": "Client receives CertificateRequest without having sent post_handshake_auth",
+    "target_message": "CertificateRequest",
+    "target_field": null,
+    "expected_value": "send unexpected_message alert",
+    "related_fields": [
+      "ClientHello.extensions.post_handshake_auth"
+    ],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "4.6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateRequest"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "post_handshake_auth"
+      ],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "post-handshake authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify client sends correct alert when it didn't offer the extension.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specified alert.",
+    "cross_section_context_used": [
+      "4.2.6"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.6.2-server-must-be-prepared-for-delay",
+    "source_section": "4.6.2",
+    "source_text": "servers MUST be prepared for some delay, including receiving an arbitrary number of other messages between sending the CertificateRequest and receiving a response.",
+    "normative_keyword": "MUST",
+    "rule_type": "behavioral_tolerance",
+    "rule_statement": "Servers MUST be prepared for delay and interleaved messages between sending CertificateRequest and receiving the response.",
+    "entity": "server",
+    "applies_when": "Server sends post-handshake CertificateRequest",
+    "target_message": "CertificateRequest",
+    "target_field": null,
+    "expected_value": "tolerant of arbitrary delay and interleaved messages",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "CertificateRequest",
+        "Certificate"
+      ],
+      "field_names": [
+        "certificate_request_context"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "post-handshake authentication"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can test server tolerance for delayed responses.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

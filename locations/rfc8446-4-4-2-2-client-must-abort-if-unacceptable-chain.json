@@ -1,0 +1,1053 @@
+{
+  "rule_id": "rfc8446-4.4.2.2-client-must-abort-if-unacceptable-chain",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "Certificate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Certificate"
+      ]
+    },
+    {
+      "term": "unsupported_certificate",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unsupported_certificate",
+        "UnsupportedCertificate"
+      ]
+    },
+    {
+      "term": "bad_certificate",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "bad_certificate",
+        "BadCertificate"
+      ]
+    },
+    {
+      "term": "certificate_revoked",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "certificate_revoked",
+        "CertificateRevoked"
+      ]
+    },
+    {
+      "term": "certificate_expired",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "certificate_expired",
+        "CertificateExpired"
+      ]
+    },
+    {
+      "term": "certificate_unknown",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "certificate_unknown",
+        "CertificateUnknown"
+      ]
+    },
+    {
+      "term": "unknown_ca",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unknown_ca",
+        "UnknownCa"
+      ]
+    },
+    {
+      "term": "certificate validation failure",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "certificate validation failure"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/t1_enc.c",
+      "function": "tls1_alert_code",
+      "line_range": [
+        527,
+        605
+      ],
+      "distinct_terms_matched": 7,
+      "hit_count": 34,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "bad_certificate",
+          "certificate_expired",
+          "certificate_revoked",
+          "certificate_unknown",
+          "unknown_ca",
+          "unsupported_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 544,
+          "text": "case SSL_AD_NO_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 546,
+          "text": "case SSL_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 547,
+          "text": "return SSL3_AD_BAD_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 548,
+          "text": "case SSL_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 549,
+          "text": "return SSL3_AD_UNSUPPORTED_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 550,
+          "text": "case SSL_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 551,
+          "text": "return SSL3_AD_CERTIFICATE_REVOKED;"
+        },
+        {
+          "term": "Certificate",
+          "line": 552,
+          "text": "case SSL_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 553,
+          "text": "return SSL3_AD_CERTIFICATE_EXPIRED;"
+        },
+        {
+          "term": "Certificate",
+          "line": 554,
+          "text": "case SSL_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "Certificate",
+          "line": 555,
+          "text": "return SSL3_AD_CERTIFICATE_UNKNOWN;"
+        },
+        {
+          "term": "Certificate",
+          "line": 580,
+          "text": "case SSL_AD_CERTIFICATE_UNOBTAINABLE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 581,
+          "text": "return TLS1_AD_CERTIFICATE_UNOBTAINABLE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 584,
+          "text": "case SSL_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 585,
+          "text": "return TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 586,
+          "text": "case SSL_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 587,
+          "text": "return TLS1_AD_BAD_CERTIFICATE_HASH_VALUE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 594,
+          "text": "case SSL_AD_CERTIFICATE_REQUIRED:"
+        },
+        {
+          "term": "unsupported_certificate",
+          "line": 548,
+          "text": "case SSL_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "unsupported_certificate",
+          "line": 549,
+          "text": "return SSL3_AD_UNSUPPORTED_CERTIFICATE;"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 546,
+          "text": "case SSL_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 547,
+          "text": "return SSL3_AD_BAD_CERTIFICATE;"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 584,
+          "text": "case SSL_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 585,
+          "text": "return TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE;"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 586,
+          "text": "case SSL_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 587,
+          "text": "return TLS1_AD_BAD_CERTIFICATE_HASH_VALUE;"
+        },
+        {
+          "term": "certificate_revoked",
+          "line": 550,
+          "text": "case SSL_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "certificate_revoked",
+          "line": 551,
+          "text": "return SSL3_AD_CERTIFICATE_REVOKED;"
+        },
+        {
+          "term": "certificate_expired",
+          "line": 552,
+          "text": "case SSL_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "certificate_expired",
+          "line": 553,
+          "text": "return SSL3_AD_CERTIFICATE_EXPIRED;"
+        },
+        {
+          "term": "certificate_unknown",
+          "line": 554,
+          "text": "case SSL_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "certificate_unknown",
+          "line": 555,
+          "text": "return SSL3_AD_CERTIFICATE_UNKNOWN;"
+        },
+        {
+          "term": "unknown_ca",
+          "line": 558,
+          "text": "case SSL_AD_UNKNOWN_CA:"
+        },
+        {
+          "term": "unknown_ca",
+          "line": 559,
+          "text": "return TLS1_AD_UNKNOWN_CA;"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_alert_desc_string_long",
+      "line_range": [
+        345,
+        417
+      ],
+      "distinct_terms_matched": 7,
+      "hit_count": 26,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "bad_certificate",
+          "certificate_expired",
+          "certificate_revoked",
+          "certificate_unknown",
+          "unknown_ca",
+          "unsupported_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 358,
+          "text": "case SSL3_AD_NO_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 359,
+          "text": "return \"no certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 360,
+          "text": "case SSL3_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 361,
+          "text": "return \"bad certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 362,
+          "text": "case SSL3_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 363,
+          "text": "return \"unsupported certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 364,
+          "text": "case SSL3_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 365,
+          "text": "return \"certificate revoked\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 366,
+          "text": "case SSL3_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 367,
+          "text": "return \"certificate expired\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 368,
+          "text": "case SSL3_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "Certificate",
+          "line": 369,
+          "text": "return \"certificate unknown\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 398,
+          "text": "case TLS1_AD_CERTIFICATE_UNOBTAINABLE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 399,
+          "text": "return \"certificate unobtainable\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 402,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 403,
+          "text": "return \"bad certificate status response\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 404,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 405,
+          "text": "return \"bad certificate hash value\";"
+        },
+        {
+          "term": "unsupported_certificate",
+          "line": 362,
+          "text": "case SSL3_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 360,
+          "text": "case SSL3_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 402,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 404,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "certificate_revoked",
+          "line": 364,
+          "text": "case SSL3_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "certificate_expired",
+          "line": 366,
+          "text": "case SSL3_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "certificate_unknown",
+          "line": 368,
+          "text": "case SSL3_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "unknown_ca",
+          "line": 376,
+          "text": "case TLS1_AD_UNKNOWN_CA:"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_alert_desc_string",
+      "line_range": [
+        273,
+        343
+      ],
+      "distinct_terms_matched": 7,
+      "hit_count": 17,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "bad_certificate",
+          "certificate_expired",
+          "certificate_revoked",
+          "certificate_unknown",
+          "unknown_ca",
+          "unsupported_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 286,
+          "text": "case SSL3_AD_NO_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 288,
+          "text": "case SSL3_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 290,
+          "text": "case SSL3_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 292,
+          "text": "case SSL3_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 294,
+          "text": "case SSL3_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 296,
+          "text": "case SSL3_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "Certificate",
+          "line": 326,
+          "text": "case TLS1_AD_CERTIFICATE_UNOBTAINABLE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 330,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 332,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "unsupported_certificate",
+          "line": 290,
+          "text": "case SSL3_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 288,
+          "text": "case SSL3_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 330,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 332,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "certificate_revoked",
+          "line": 292,
+          "text": "case SSL3_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "certificate_expired",
+          "line": 294,
+          "text": "case SSL3_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "certificate_unknown",
+          "line": 296,
+          "text": "case SSL3_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "unknown_ca",
+          "line": 304,
+          "text": "case TLS1_AD_UNKNOWN_CA:"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_certificate",
+      "line_range": [
+        2353,
+        2443
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "bad_certificate",
+          "unsupported_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2353,
+          "text": "MSG_PROCESS_RETURN tls_process_server_certificate(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2366,
+          "text": "SSLfatal(s, SSL_AD_UNSUPPORTED_CERTIFICATE,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2367,
+          "text": "SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2400,
+          "text": "SSLfatal(s, SSL_AD_BAD_CERTIFICATE, ERR_R_ASN1_LIB);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2418,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE, &rawexts,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2420,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE,"
+        },
+        {
+          "term": "unsupported_certificate",
+          "line": 2366,
+          "text": "SSLfatal(s, SSL_AD_UNSUPPORTED_CERTIFICATE,"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2400,
+          "text": "SSLfatal(s, SSL_AD_BAD_CERTIFICATE, ERR_R_ASN1_LIB);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_certificate",
+      "line_range": [
+        3940,
+        4131
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 15,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "unsupported_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 3940,
+          "text": "MSG_PROCESS_RETURN tls_process_client_certificate(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3965,
+          "text": "SSLfatal(s, SSL_AD_UNSUPPORTED_CERTIFICATE,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3966,
+          "text": "SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4023,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE, &rawexts,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4025,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4042,
+          "text": "/* Fail only if we required a certificate */"
+        },
+        {
+          "term": "Certificate",
+          "line": 4044,
+          "text": "SSLfatal(s, SSL_AD_CERTIFICATE_REQUIRED,"
+        },
+        {
+          "term": "Certificate",
+          "line": 4045,
+          "text": "SSL_R_PEER_DID_NOT_RETURN_A_CERTIFICATE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4048,
+          "text": "/* No client certificate so digest cached records */"
+        },
+        {
+          "term": "Certificate",
+          "line": 4058,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4064,
+          "text": "SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 4073,
+          "text": "* a new certificate is received via post-handshake authentication, as the"
+        },
+        {
+          "term": "Certificate",
+          "line": 4109,
+          "text": "* certificate, while we do include it in statem_clnt.c"
+        },
+        {
+          "term": "Certificate",
+          "line": 4112,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "unsupported_certificate",
+          "line": 3965,
+          "text": "SSLfatal(s, SSL_AD_UNSUPPORTED_CERTIFICATE,"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls13_process_compressed_certificate",
+      "line_range": [
+        2856,
+        2941
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "bad_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2856,
+          "text": "MSG_PROCESS_RETURN tls13_process_compressed_certificate(SSL_CONNECTION *sc,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2875,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2892,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2906,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2913,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_DECOMPRESSION);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2919,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_EXCESSIVE_MESSAGE_SIZE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2934,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_DECOMPRESSION);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2875,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2892,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2906,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_COMPRESSION_ALGORITHM);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2913,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_DECOMPRESSION);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2919,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_EXCESSIVE_MESSAGE_SIZE);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 2934,
+          "text": "SSLfatal(sc, SSL_AD_BAD_CERTIFICATE, SSL_R_BAD_DECOMPRESSION);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/ssl_lib.c",
+      "function": "dane_tlsa_add",
+      "line_range": [
+        265,
+        444
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "bad_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 288,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_DANE_TLSA_BAD_CERTIFICATE_USAGE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 331,
+          "text": "/* Validate and cache full certificate or public key */"
+        },
+        {
+          "term": "Certificate",
+          "line": 342,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_DANE_TLSA_BAD_CERTIFICATE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 348,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_DANE_TLSA_BAD_CERTIFICATE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 354,
+          "text": "* The Full(0) certificate decodes to a seemingly valid X.509"
+        },
+        {
+          "term": "Certificate",
+          "line": 356,
+          "text": "* formed.  However, we don't actually need the certificate for"
+        },
+        {
+          "term": "Certificate",
+          "line": 358,
+          "text": "* certificate is always presented by the peer.  We discard the"
+        },
+        {
+          "term": "Certificate",
+          "line": 359,
+          "text": "* certificate, and just use the TLSA data as an opaque blob"
+        },
+        {
+          "term": "Certificate",
+          "line": 371,
+          "text": "* records that contain full certificates of trust-anchors that are"
+        },
+        {
+          "term": "Certificate",
+          "line": 373,
+          "text": "* the chain with untrusted Full(0) certificates from DNS, in case"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 288,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_DANE_TLSA_BAD_CERTIFICATE_USAGE);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 342,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_DANE_TLSA_BAD_CERTIFICATE);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 348,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_DANE_TLSA_BAD_CERTIFICATE);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_construct_stoc_client_cert_type",
+      "line_range": [
+        2295,
+        2333
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "unsupported_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2300,
+          "text": "&& (send_certificate_request(sc)"
+        },
+        {
+          "term": "Certificate",
+          "line": 2303,
+          "text": "SSLfatal(sc, SSL_AD_UNSUPPORTED_CERTIFICATE, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2316,
+          "text": "if ((!send_certificate_request(sc) && sc->post_handshake_auth != SSL_PHA_EXT_RECEIVED)"
+        },
+        {
+          "term": "unsupported_certificate",
+          "line": 2303,
+          "text": "SSLfatal(sc, SSL_AD_UNSUPPORTED_CERTIFICATE, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_cert_status_body",
+      "line_range": [
+        3256,
+        3323
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "bad_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 3314,
+          "text": "SSLfatal(s, TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3315,
+          "text": "SSL_R_TLSV1_BAD_CERTIFICATE_STATUS_RESPONSE);"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 3314,
+          "text": "SSLfatal(s, TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE,"
+        },
+        {
+          "term": "bad_certificate",
+          "line": 3315,
+          "text": "SSL_R_TLSV1_BAD_CERTIFICATE_STATUS_RESPONSE);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_server_cert_type",
+      "line_range": [
+        2416,
+        2454
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "unsupported_certificate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2452,
+          "text": "SSLfatal(sc, SSL_AD_UNSUPPORTED_CERTIFICATE, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "unsupported_certificate",
+          "line": 2452,
+          "text": "SSLfatal(sc, SSL_AD_UNSUPPORTED_CERTIFICATE, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-4-2-2-client-must-abort-if-unacceptable-chain_candidate_1.c",
+    "locations/code/rfc8446-4-4-2-2-client-must-abort-if-unacceptable-chain_candidate_2.c",
+    "locations/code/rfc8446-4-4-2-2-client-must-abort-if-unacceptable-chain_candidate_3.c",
+    "locations/code/rfc8446-4-4-2-2-client-must-abort-if-unacceptable-chain_candidate_4.c",
+    "locations/code/rfc8446-4-4-2-2-client-must-abort-if-unacceptable-chain_candidate_5.c",
+    "locations/code/rfc8446-4-4-2-2-client-must-abort-if-unacceptable-chain_candidate_6.c",
+    "locations/code/rfc8446-4-4-2-2-client-must-abort-if-unacceptable-chain_candidate_7.c",
+    "locations/code/rfc8446-4-4-2-2-client-must-abort-if-unacceptable-chain_candidate_8.c",
+    "locations/code/rfc8446-4-4-2-2-client-must-abort-if-unacceptable-chain_candidate_9.c",
+    "locations/code/rfc8446-4-4-2-2-client-must-abort-if-unacceptable-chain_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1730,
+    "files_with_hits": 138,
+    "functions_identified": 312,
+    "null_scope_hits": 781,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 918
+  }
+}

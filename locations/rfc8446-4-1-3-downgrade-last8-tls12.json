@@ -1,0 +1,968 @@
+{
+  "rule_id": "rfc8446-4.1.3-downgrade-last8-tls12",
+  "rule_type": "value_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ServerHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ServerHello",
+        "server_hello"
+      ]
+    },
+    {
+      "term": "random",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "random"
+      ]
+    },
+    {
+      "term": "Random",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "Random"
+      ]
+    },
+    {
+      "term": "downgrade protection",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "downgrade protection"
+      ]
+    },
+    {
+      "term": "TLS 1.2 negotiation",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "TLS 1.2 negotiation"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 23,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Random",
+          "ServerHello",
+          "random"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1821,
+          "text": "* ServerHello.random confirmation trick. If that is good"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1967,
+          "text": "* In TLSv1.3 a ServerHello message signals a key change so the end of"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1702,
+          "text": "MSG_PROCESS_RETURN tls_process_server_hello(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1810,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1811,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1838,
+          "text": "prelude[0] = SSL3_MT_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1956,
+          "text": "context = SSL_CONNECTION_IS_TLS13(s) ? SSL_EXT_TLS1_3_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1957,
+          "text": ": SSL_EXT_TLS1_2_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1978,
+          "text": "SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "random",
+          "line": 1741,
+          "text": "/* load the server random */"
+        },
+        {
+          "term": "random",
+          "line": 1744,
+          "text": "&& PACKET_remaining(pkt) >= SSL3_RANDOM_SIZE"
+        },
+        {
+          "term": "random",
+          "line": 1745,
+          "text": "&& memcmp(hrrrandom, PACKET_data(pkt), SSL3_RANDOM_SIZE) == 0) {"
+        },
+        {
+          "term": "random",
+          "line": 1757,
+          "text": "if (!PACKET_forward(pkt, SSL3_RANDOM_SIZE)) {"
+        },
+        {
+          "term": "random",
+          "line": 1762,
+          "text": "if (!PACKET_copy_bytes(pkt, s->s3.server_random, SSL3_RANDOM_SIZE)) {"
+        },
+        {
+          "term": "random",
+          "line": 1821,
+          "text": "* ServerHello.random confirmation trick. If that is good"
+        },
+        {
+          "term": "random",
+          "line": 1890,
+          "text": "* the SH.random ECH acceptance signal is bad so that's an"
+        },
+        {
+          "term": "Random",
+          "line": 1741,
+          "text": "/* load the server random */"
+        },
+        {
+          "term": "Random",
+          "line": 1744,
+          "text": "&& PACKET_remaining(pkt) >= SSL3_RANDOM_SIZE"
+        },
+        {
+          "term": "Random",
+          "line": 1745,
+          "text": "&& memcmp(hrrrandom, PACKET_data(pkt), SSL3_RANDOM_SIZE) == 0) {"
+        },
+        {
+          "term": "Random",
+          "line": 1757,
+          "text": "if (!PACKET_forward(pkt, SSL3_RANDOM_SIZE)) {"
+        },
+        {
+          "term": "Random",
+          "line": 1762,
+          "text": "if (!PACKET_copy_bytes(pkt, s->s3.server_random, SSL3_RANDOM_SIZE)) {"
+        },
+        {
+          "term": "Random",
+          "line": 1821,
+          "text": "* ServerHello.random confirmation trick. If that is good"
+        },
+        {
+          "term": "Random",
+          "line": 1890,
+          "text": "* the SH.random ECH acceptance signal is bad so that's an"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_construct_server_hello",
+      "line_range": [
+        2577,
+        2820
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 22,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Random",
+          "ServerHello",
+          "random"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2577,
+          "text": "CON_FUNC_RETURN tls_construct_server_hello(SSL_CONNECTION *s, WPACKET *pkt)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2658,
+          "text": "? SSL_EXT_TLS1_3_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2659,
+          "text": ": SSL_EXT_TLS1_2_SERVER_HELLO),"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2813,
+          "text": "OSSL_TRACE(TLS, \"Error from tls_construct_server_hello/ech_cb\\n\");"
+        },
+        {
+          "term": "random",
+          "line": 2589,
+          "text": "* Random stuff. Filling of the server_random takes place in"
+        },
+        {
+          "term": "random",
+          "line": 2594,
+          "text": "? hrrrandom"
+        },
+        {
+          "term": "random",
+          "line": 2595,
+          "text": ": s->s3.server_random,"
+        },
+        {
+          "term": "random",
+          "line": 2596,
+          "text": "SSL3_RANDOM_SIZE)) {"
+        },
+        {
+          "term": "random",
+          "line": 2748,
+          "text": "* Calculate the ECH-accept server random to indicate that"
+        },
+        {
+          "term": "random",
+          "line": 2780,
+          "text": "memcpy(s->s3.server_random + SSL3_RANDOM_SIZE - 8, acbuf, 8);"
+        },
+        {
+          "term": "random",
+          "line": 2782,
+          "text": "/* confirm value hacked into SH.random rightmost octets */"
+        },
+        {
+          "term": "random",
+          "line": 2785,
+          "text": "+ SSL3_RANDOM_SIZE /* 32 */"
+        },
+        {
+          "term": "random",
+          "line": 2790,
+          "text": "* confirm value is in extension in HRR case as the SH.random"
+        },
+        {
+          "term": "Random",
+          "line": 2589,
+          "text": "* Random stuff. Filling of the server_random takes place in"
+        },
+        {
+          "term": "Random",
+          "line": 2594,
+          "text": "? hrrrandom"
+        },
+        {
+          "term": "Random",
+          "line": 2595,
+          "text": ": s->s3.server_random,"
+        },
+        {
+          "term": "Random",
+          "line": 2596,
+          "text": "SSL3_RANDOM_SIZE)) {"
+        },
+        {
+          "term": "Random",
+          "line": 2748,
+          "text": "* Calculate the ECH-accept server random to indicate that"
+        },
+        {
+          "term": "Random",
+          "line": 2780,
+          "text": "memcpy(s->s3.server_random + SSL3_RANDOM_SIZE - 8, acbuf, 8);"
+        },
+        {
+          "term": "Random",
+          "line": 2782,
+          "text": "/* confirm value hacked into SH.random rightmost octets */"
+        },
+        {
+          "term": "Random",
+          "line": 2785,
+          "text": "+ SSL3_RANDOM_SIZE /* 32 */"
+        },
+        {
+          "term": "Random",
+          "line": 2790,
+          "text": "* confirm value is in extension in HRR case as the SH.random"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_get_message_body",
+      "line_range": [
+        1649,
+        1731
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Random",
+          "ServerHello",
+          "random"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1705,
+          "text": "#define SERVER_HELLO_RANDOM_OFFSET (SSL3_HM_HEADER_LENGTH + 2)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1710,
+          "text": "if (s->s3.tmp.message_type != SSL3_MT_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1711,
+          "text": "|| s->init_num < SERVER_HELLO_RANDOM_OFFSET + SSL3_RANDOM_SIZE"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1713,
+          "text": "s->init_buf->data + SERVER_HELLO_RANDOM_OFFSET,"
+        },
+        {
+          "term": "random",
+          "line": 1705,
+          "text": "#define SERVER_HELLO_RANDOM_OFFSET (SSL3_HM_HEADER_LENGTH + 2)"
+        },
+        {
+          "term": "random",
+          "line": 1711,
+          "text": "|| s->init_num < SERVER_HELLO_RANDOM_OFFSET + SSL3_RANDOM_SIZE"
+        },
+        {
+          "term": "random",
+          "line": 1712,
+          "text": "|| memcmp(hrrrandom,"
+        },
+        {
+          "term": "random",
+          "line": 1713,
+          "text": "s->init_buf->data + SERVER_HELLO_RANDOM_OFFSET,"
+        },
+        {
+          "term": "random",
+          "line": 1714,
+          "text": "SSL3_RANDOM_SIZE)"
+        },
+        {
+          "term": "Random",
+          "line": 1705,
+          "text": "#define SERVER_HELLO_RANDOM_OFFSET (SSL3_HM_HEADER_LENGTH + 2)"
+        },
+        {
+          "term": "Random",
+          "line": 1711,
+          "text": "|| s->init_num < SERVER_HELLO_RANDOM_OFFSET + SSL3_RANDOM_SIZE"
+        },
+        {
+          "term": "Random",
+          "line": 1712,
+          "text": "|| memcmp(hrrrandom,"
+        },
+        {
+          "term": "Random",
+          "line": 1713,
+          "text": "s->init_buf->data + SERVER_HELLO_RANDOM_OFFSET,"
+        },
+        {
+          "term": "Random",
+          "line": 1714,
+          "text": "SSL3_RANDOM_SIZE)"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Random",
+          "ServerHello",
+          "random"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2164,
+          "text": "* ServerHello."
+        },
+        {
+          "term": "random",
+          "line": 1883,
+          "text": "/* Set up the client_random */"
+        },
+        {
+          "term": "random",
+          "line": 1884,
+          "text": "memcpy(s->s3.client_random, clienthello->random, SSL3_RANDOM_SIZE);"
+        },
+        {
+          "term": "random",
+          "line": 2105,
+          "text": "* for not reused session only. We need to generate server_random before"
+        },
+        {
+          "term": "random",
+          "line": 2111,
+          "text": "pos = s->s3.server_random;"
+        },
+        {
+          "term": "random",
+          "line": 2112,
+          "text": "if (ssl_fill_hello_random(s, 1, pos, SSL3_RANDOM_SIZE, dgrd) <= 0) {"
+        },
+        {
+          "term": "random",
+          "line": 2126,
+          "text": "* server random later to include the ECH accept value."
+        },
+        {
+          "term": "Random",
+          "line": 1883,
+          "text": "/* Set up the client_random */"
+        },
+        {
+          "term": "Random",
+          "line": 1884,
+          "text": "memcpy(s->s3.client_random, clienthello->random, SSL3_RANDOM_SIZE);"
+        },
+        {
+          "term": "Random",
+          "line": 2105,
+          "text": "* for not reused session only. We need to generate server_random before"
+        },
+        {
+          "term": "Random",
+          "line": 2111,
+          "text": "pos = s->s3.server_random;"
+        },
+        {
+          "term": "Random",
+          "line": 2112,
+          "text": "if (ssl_fill_hello_random(s, 1, pos, SSL3_RANDOM_SIZE, dgrd) <= 0) {"
+        },
+        {
+          "term": "Random",
+          "line": 2126,
+          "text": "* server random later to include the ECH accept value."
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "ssl_choose_client_version",
+      "line_range": [
+        2311,
+        2425
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Random",
+          "ServerHello",
+          "random"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2324,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2325,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "random",
+          "line": 2387,
+          "text": "s->s3.server_random + SSL3_RANDOM_SIZE"
+        },
+        {
+          "term": "random",
+          "line": 2399,
+          "text": "s->s3.server_random + SSL3_RANDOM_SIZE"
+        },
+        {
+          "term": "Random",
+          "line": 2387,
+          "text": "s->s3.server_random + SSL3_RANDOM_SIZE"
+        },
+        {
+          "term": "Random",
+          "line": 2399,
+          "text": "s->s3.server_random + SSL3_RANDOM_SIZE"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_hello",
+      "line_range": [
+        1619,
+        1846
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Random",
+          "ServerHello",
+          "random"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1633,
+          "text": "* the ServerHello.random (or ECH extension if HRR) to signal to the client"
+        },
+        {
+          "term": "random",
+          "line": 1633,
+          "text": "* the ServerHello.random (or ECH extension if HRR) to signal to the client"
+        },
+        {
+          "term": "random",
+          "line": 1761,
+          "text": "if (!PACKET_copy_bytes(pkt, clienthello->random, SSL3_RANDOM_SIZE)"
+        },
+        {
+          "term": "Random",
+          "line": 1633,
+          "text": "* the ServerHello.random (or ECH extension if HRR) to signal to the client"
+        },
+        {
+          "term": "Random",
+          "line": 1761,
+          "text": "if (!PACKET_copy_bytes(pkt, clienthello->random, SSL3_RANDOM_SIZE)"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_server_hello",
+      "line_range": [
+        1094,
+        1128
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Random",
+          "ServerHello",
+          "random"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1094,
+          "text": "static int ssl_print_server_hello(BIO *bio, int indent,"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1124,
+          "text": "if (!ssl_print_extensions(bio, indent, 1, SSL3_MT_SERVER_HELLO, &msg,"
+        },
+        {
+          "term": "random",
+          "line": 1102,
+          "text": "if (!ssl_print_random(bio, indent, &msg, &msglen))"
+        },
+        {
+          "term": "Random",
+          "line": 1102,
+          "text": "if (!ssl_print_random(bio, indent, &msg, &msglen))"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Random",
+          "ServerHello",
+          "random"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1159,
+          "text": "if (!WPACKET_put_bytes_u8(&hrrpkt, SSL3_MT_SERVER_HELLO)"
+        },
+        {
+          "term": "random",
+          "line": 1162,
+          "text": "|| !WPACKET_memcpy(&hrrpkt, hrrrandom, SSL3_RANDOM_SIZE)"
+        },
+        {
+          "term": "Random",
+          "line": 1162,
+          "text": "|| !WPACKET_memcpy(&hrrpkt, hrrrandom, SSL3_RANDOM_SIZE)"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/s3_lib.c",
+      "function": "ssl_fill_hello_random",
+      "line_range": [
+        5253,
+        5288
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Random",
+          "ServerHello",
+          "random"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 5262,
+          "text": "send_time = (s->mode & SSL_MODE_SEND_SERVERHELLO_TIME) != 0;"
+        },
+        {
+          "term": "random",
+          "line": 5253,
+          "text": "int ssl_fill_hello_random(SSL_CONNECTION *s, int server,"
+        },
+        {
+          "term": "Random",
+          "line": 5253,
+          "text": "int ssl_fill_hello_random(SSL_CONNECTION *s, int server,"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "crypto/rand/rand_lib.c",
+      "function": "random_conf_init",
+      "line_range": [
+        918,
+        992
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 34,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Random",
+          "random"
+        ]
+      },
+      "hits": [
+        {
+          "term": "random",
+          "line": 918,
+          "text": "static int random_conf_init(CONF_IMODULE *md, const CONF *cnf)"
+        },
+        {
+          "term": "random",
+          "line": 926,
+          "text": "OSSL_TRACE1(CONF, \"Loading random module: section %s\\n\","
+        },
+        {
+          "term": "random",
+          "line": 929,
+          "text": "/* Value is a section containing RANDOM configuration */"
+        },
+        {
+          "term": "random",
+          "line": 932,
+          "text": "ERR_raise(ERR_LIB_CRYPTO, CRYPTO_R_RANDOM_SECTION_ERROR);"
+        },
+        {
+          "term": "random",
+          "line": 941,
+          "text": "if (OPENSSL_strcasecmp(cval->name, \"random\") == 0) {"
+        },
+        {
+          "term": "random",
+          "line": 942,
+          "text": "if (!random_set_string(&dgbl->rng_name, cval->value))"
+        },
+        {
+          "term": "random",
+          "line": 945,
+          "text": "if (!random_set_string(&dgbl->rng_cipher, cval->value))"
+        },
+        {
+          "term": "random",
+          "line": 948,
+          "text": "if (!random_set_string(&dgbl->rng_digest, cval->value))"
+        },
+        {
+          "term": "random",
+          "line": 951,
+          "text": "if (!random_set_string(&dgbl->rng_propq, cval->value))"
+        },
+        {
+          "term": "random",
+          "line": 954,
+          "text": "if (!random_set_string(&dgbl->seed_name, cval->value))"
+        },
+        {
+          "term": "random",
+          "line": 957,
+          "text": "if (!random_set_string(&dgbl->seed_propq, cval->value))"
+        },
+        {
+          "term": "random",
+          "line": 959,
+          "text": "} else if (OPENSSL_strcasecmp(cval->name, \"random_provider\") == 0) {"
+        },
+        {
+          "term": "random",
+          "line": 964,
+          "text": "if (!RAND_set1_random_provider(libctx, prov)) {"
+        },
+        {
+          "term": "random",
+          "line": 973,
+          "text": "* The provider unload code checks for the random provider and,"
+        },
+        {
+          "term": "random",
+          "line": 977,
+          "text": "* hook random provider, use, unload, reload, reuse sequence will"
+        },
+        {
+          "term": "random",
+          "line": 981,
+          "text": "} else if (!set_random_provider_name(dgbl, cval->value))"
+        },
+        {
+          "term": "random",
+          "line": 986,
+          "text": "CRYPTO_R_UNKNOWN_NAME_IN_RANDOM_SECTION,"
+        },
+        {
+          "term": "Random",
+          "line": 918,
+          "text": "static int random_conf_init(CONF_IMODULE *md, const CONF *cnf)"
+        },
+        {
+          "term": "Random",
+          "line": 926,
+          "text": "OSSL_TRACE1(CONF, \"Loading random module: section %s\\n\","
+        },
+        {
+          "term": "Random",
+          "line": 929,
+          "text": "/* Value is a section containing RANDOM configuration */"
+        },
+        {
+          "term": "Random",
+          "line": 932,
+          "text": "ERR_raise(ERR_LIB_CRYPTO, CRYPTO_R_RANDOM_SECTION_ERROR);"
+        },
+        {
+          "term": "Random",
+          "line": 941,
+          "text": "if (OPENSSL_strcasecmp(cval->name, \"random\") == 0) {"
+        },
+        {
+          "term": "Random",
+          "line": 942,
+          "text": "if (!random_set_string(&dgbl->rng_name, cval->value))"
+        },
+        {
+          "term": "Random",
+          "line": 945,
+          "text": "if (!random_set_string(&dgbl->rng_cipher, cval->value))"
+        },
+        {
+          "term": "Random",
+          "line": 948,
+          "text": "if (!random_set_string(&dgbl->rng_digest, cval->value))"
+        },
+        {
+          "term": "Random",
+          "line": 951,
+          "text": "if (!random_set_string(&dgbl->rng_propq, cval->value))"
+        },
+        {
+          "term": "Random",
+          "line": 954,
+          "text": "if (!random_set_string(&dgbl->seed_name, cval->value))"
+        },
+        {
+          "term": "Random",
+          "line": 957,
+          "text": "if (!random_set_string(&dgbl->seed_propq, cval->value))"
+        },
+        {
+          "term": "Random",
+          "line": 959,
+          "text": "} else if (OPENSSL_strcasecmp(cval->name, \"random_provider\") == 0) {"
+        },
+        {
+          "term": "Random",
+          "line": 964,
+          "text": "if (!RAND_set1_random_provider(libctx, prov)) {"
+        },
+        {
+          "term": "Random",
+          "line": 973,
+          "text": "* The provider unload code checks for the random provider and,"
+        },
+        {
+          "term": "Random",
+          "line": 977,
+          "text": "* hook random provider, use, unload, reload, reuse sequence will"
+        },
+        {
+          "term": "Random",
+          "line": 981,
+          "text": "} else if (!set_random_provider_name(dgbl, cval->value))"
+        },
+        {
+          "term": "Random",
+          "line": 986,
+          "text": "CRYPTO_R_UNKNOWN_NAME_IN_RANDOM_SECTION,"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-1-3-downgrade-last8-tls12_candidate_1.c",
+    "locations/code/rfc8446-4-1-3-downgrade-last8-tls12_candidate_2.c",
+    "locations/code/rfc8446-4-1-3-downgrade-last8-tls12_candidate_3.c",
+    "locations/code/rfc8446-4-1-3-downgrade-last8-tls12_candidate_4.c",
+    "locations/code/rfc8446-4-1-3-downgrade-last8-tls12_candidate_5.c",
+    "locations/code/rfc8446-4-1-3-downgrade-last8-tls12_candidate_6.c",
+    "locations/code/rfc8446-4-1-3-downgrade-last8-tls12_candidate_7.c",
+    "locations/code/rfc8446-4-1-3-downgrade-last8-tls12_candidate_8.c",
+    "locations/code/rfc8446-4-1-3-downgrade-last8-tls12_candidate_9.c",
+    "locations/code/rfc8446-4-1-3-downgrade-last8-tls12_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1210,
+    "files_with_hits": 104,
+    "functions_identified": 185,
+    "null_scope_hits": 373,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1999
+  }
+}

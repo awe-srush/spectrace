@@ -1,0 +1,1002 @@
+{
+  "rule_id": "rfc8446-4.4.2-client-must-send-cert-iff-requested",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "Certificate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Certificate"
+      ]
+    },
+    {
+      "term": "CertificateRequest",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateRequest",
+        "certificate_request"
+      ]
+    },
+    {
+      "term": "unexpected_message",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unexpected_message",
+        "UnexpectedMessage"
+      ]
+    },
+    {
+      "term": "client authentication",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "client authentication"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_rpk",
+      "line_range": [
+        1114,
+        1310
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 27,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "client authentication"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 1127,
+          "text": "* TLS 1.3 Certificate message:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1135,
+          "text": "*   } CertificateType;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1138,
+          "text": "*       select (certificate_type) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 1147,
+          "text": "*   } CertificateEntry;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1150,
+          "text": "*       opaque certificate_request_context<0..2^8-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1151,
+          "text": "*       CertificateEntry certificate_list<0..2^24-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1152,
+          "text": "*   } Certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1154,
+          "text": "* The client MUST send a Certificate message if and only if the server"
+        },
+        {
+          "term": "Certificate",
+          "line": 1155,
+          "text": "* has requested client authentication via a CertificateRequest message"
+        },
+        {
+          "term": "Certificate",
+          "line": 1157,
+          "text": "* suitable certificate is available, the client MUST send a Certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 1158,
+          "text": "* message containing no certificates (i.e., with the \"certificate_list\""
+        },
+        {
+          "term": "Certificate",
+          "line": 1162,
+          "text": "* TLS 1.2 Certificate message:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1169,
+          "text": "*       select(certificate_type){"
+        },
+        {
+          "term": "Certificate",
+          "line": 1171,
+          "text": "*            // certificate type defined in this document."
+        },
+        {
+          "term": "Certificate",
+          "line": 1175,
+          "text": "*           // X.509 certificate defined in RFC 5246"
+        },
+        {
+          "term": "Certificate",
+          "line": 1177,
+          "text": "*             ASN.1Cert certificate_list<0..2^24-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1179,
+          "text": "*           // Additional certificate type based on"
+        },
+        {
+          "term": "Certificate",
+          "line": 1180,
+          "text": "*           // \"TLS Certificate Types\" subregistry"
+        },
+        {
+          "term": "Certificate",
+          "line": 1182,
+          "text": "*   } Certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1188,
+          "text": "* Certificate message has a 3-byte length that is zero in the client to"
+        },
+        {
+          "term": "Certificate",
+          "line": 1190,
+          "text": "* are no (TLS 1.3 only) per-certificate extensions either, because the"
+        },
+        {
+          "term": "Certificate",
+          "line": 1191,
+          "text": "* [CertificateEntry] list is empty."
+        },
+        {
+          "term": "Certificate",
+          "line": 1198,
+          "text": "* must match the value recorded in the certificate request in the client"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1155,
+          "text": "* has requested client authentication via a CertificateRequest message"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1150,
+          "text": "*       opaque certificate_request_context<0..2^8-1>;"
+        },
+        {
+          "term": "client authentication",
+          "line": 1155,
+          "text": "* has requested client authentication via a CertificateRequest message"
+        },
+        {
+          "term": "client authentication",
+          "line": 1156,
+          "text": "* (Section 4.3.2).  If the server requests client authentication but no"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_read_transition",
+      "line_range": [
+        227,
+        408
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 303,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 317,
+          "text": "} else if (mt == SSL3_MT_CERTIFICATE_REQUEST"
+        },
+        {
+          "term": "Certificate",
+          "line": 332,
+          "text": "* The CertificateStatus message is optional even if"
+        },
+        {
+          "term": "Certificate",
+          "line": 335,
+          "text": "if (s->ext.status_expected && mt == SSL3_MT_CERTIFICATE_STATUS) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 354,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 317,
+          "text": "} else if (mt == SSL3_MT_CERTIFICATE_REQUEST"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 354,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 406,
+          "text": "SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/quic/quic_channel.c",
+      "function": "ch_on_handshake_alert",
+      "line_range": [
+        1246,
+        1284
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 1252,
+          "text": "* TLS CertificateRequest messages, and clients MUST treat receipt of such"
+        },
+        {
+          "term": "Certificate",
+          "line": 1262,
+          "text": "\"CertificateRequest received\");"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1252,
+          "text": "* TLS CertificateRequest messages, and clients MUST treat receipt of such"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1262,
+          "text": "\"CertificateRequest received\");"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1255,
+          "text": "if (alert_code == SSL_AD_UNEXPECTED_MESSAGE"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/t1_enc.c",
+      "function": "tls1_alert_code",
+      "line_range": [
+        527,
+        605
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 20,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 544,
+          "text": "case SSL_AD_NO_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 546,
+          "text": "case SSL_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 547,
+          "text": "return SSL3_AD_BAD_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 548,
+          "text": "case SSL_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 549,
+          "text": "return SSL3_AD_UNSUPPORTED_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 550,
+          "text": "case SSL_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 551,
+          "text": "return SSL3_AD_CERTIFICATE_REVOKED;"
+        },
+        {
+          "term": "Certificate",
+          "line": 552,
+          "text": "case SSL_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 553,
+          "text": "return SSL3_AD_CERTIFICATE_EXPIRED;"
+        },
+        {
+          "term": "Certificate",
+          "line": 554,
+          "text": "case SSL_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "Certificate",
+          "line": 555,
+          "text": "return SSL3_AD_CERTIFICATE_UNKNOWN;"
+        },
+        {
+          "term": "Certificate",
+          "line": 580,
+          "text": "case SSL_AD_CERTIFICATE_UNOBTAINABLE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 581,
+          "text": "return TLS1_AD_CERTIFICATE_UNOBTAINABLE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 584,
+          "text": "case SSL_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 585,
+          "text": "return TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 586,
+          "text": "case SSL_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 587,
+          "text": "return TLS1_AD_BAD_CERTIFICATE_HASH_VALUE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 594,
+          "text": "case SSL_AD_CERTIFICATE_REQUIRED:"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 532,
+          "text": "case SSL_AD_UNEXPECTED_MESSAGE:"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 533,
+          "text": "return SSL3_AD_UNEXPECTED_MESSAGE;"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_alert_desc_string_long",
+      "line_range": [
+        345,
+        417
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 19,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 358,
+          "text": "case SSL3_AD_NO_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 359,
+          "text": "return \"no certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 360,
+          "text": "case SSL3_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 361,
+          "text": "return \"bad certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 362,
+          "text": "case SSL3_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 363,
+          "text": "return \"unsupported certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 364,
+          "text": "case SSL3_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 365,
+          "text": "return \"certificate revoked\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 366,
+          "text": "case SSL3_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 367,
+          "text": "return \"certificate expired\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 368,
+          "text": "case SSL3_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "Certificate",
+          "line": 369,
+          "text": "return \"certificate unknown\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 398,
+          "text": "case TLS1_AD_CERTIFICATE_UNOBTAINABLE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 399,
+          "text": "return \"certificate unobtainable\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 402,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 403,
+          "text": "return \"bad certificate status response\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 404,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 405,
+          "text": "return \"bad certificate hash value\";"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 350,
+          "text": "case SSL3_AD_UNEXPECTED_MESSAGE:"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_certificate_request",
+      "line_range": [
+        2959,
+        3081
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 16,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2962,
+          "text": "/* Clear certificate validity flags */"
+        },
+        {
+          "term": "Certificate",
+          "line": 2985,
+          "text": "/* Free and zero certificate types: it is not present in TLS 1.3 */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3019,
+          "text": "/* get the certificate types */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3039,
+          "text": "* Despite this being for certificates, preserve compatibility"
+        },
+        {
+          "term": "Certificate",
+          "line": 3065,
+          "text": "/* we should setup a certificate to return.... */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3069,
+          "text": "* In TLSv1.3 we don't prepare the client certificate yet. We wait until"
+        },
+        {
+          "term": "Certificate",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "Certificate",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "Certificate",
+          "line": 3073,
+          "text": "* SSL_get1_peer_certificate() returns something sensible in"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_read_transition",
+      "line_range": [
+        190,
+        314
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 216,
+          "text": "* 1) We didn't request a Certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 218,
+          "text": "* 2) We did request one and we allow no Certificate to be returned"
+        },
+        {
+          "term": "Certificate",
+          "line": 226,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 242,
+          "text": "* We should only process a CertificateVerify message if we have"
+        },
+        {
+          "term": "Certificate",
+          "line": 243,
+          "text": "* received a Certificate from the client. If so then |s->session->peer|"
+        },
+        {
+          "term": "Certificate",
+          "line": 244,
+          "text": "* will be non NULL. In some instances a CertificateVerify message is"
+        },
+        {
+          "term": "Certificate",
+          "line": 245,
+          "text": "* not required even if the peer has sent a Certificate (e.g. such as in"
+        },
+        {
+          "term": "Certificate",
+          "line": 253,
+          "text": "* pub key in a certificate, the CertificateVerify message is"
+        },
+        {
+          "term": "Certificate",
+          "line": 255,
+          "text": "* its key from the certificate for key exchange."
+        },
+        {
+          "term": "Certificate",
+          "line": 261,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 312,
+          "text": "SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_read_transition",
+      "line_range": [
+        94,
+        216
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 133,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 137,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 142,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 143,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 152,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 158,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 167,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 189,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 133,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 189,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_construct_message",
+      "line_range": [
+        1225,
+        1324
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 1261,
+          "text": "*confunc = tls_construct_server_certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1262,
+          "text": "*mt = SSL3_MT_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1267,
+          "text": "*confunc = tls_construct_server_compressed_certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1268,
+          "text": "*mt = SSL3_MT_COMPRESSED_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1274,
+          "text": "*mt = SSL3_MT_CERTIFICATE_VERIFY;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1283,
+          "text": "*confunc = tls_construct_certificate_request;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1284,
+          "text": "*mt = SSL3_MT_CERTIFICATE_REQUEST;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1299,
+          "text": "*mt = SSL3_MT_CERTIFICATE_STATUS;"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1283,
+          "text": "*confunc = tls_construct_certificate_request;"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1284,
+          "text": "*mt = SSL3_MT_CERTIFICATE_REQUEST;"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_alert_desc_string",
+      "line_range": [
+        273,
+        343
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 286,
+          "text": "case SSL3_AD_NO_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 288,
+          "text": "case SSL3_AD_BAD_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 290,
+          "text": "case SSL3_AD_UNSUPPORTED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 292,
+          "text": "case SSL3_AD_CERTIFICATE_REVOKED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 294,
+          "text": "case SSL3_AD_CERTIFICATE_EXPIRED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 296,
+          "text": "case SSL3_AD_CERTIFICATE_UNKNOWN:"
+        },
+        {
+          "term": "Certificate",
+          "line": 326,
+          "text": "case TLS1_AD_CERTIFICATE_UNOBTAINABLE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 330,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 332,
+          "text": "case TLS1_AD_BAD_CERTIFICATE_HASH_VALUE:"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 278,
+          "text": "case SSL3_AD_UNEXPECTED_MESSAGE:"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-4-2-client-must-send-cert-iff-requested_candidate_1.c",
+    "locations/code/rfc8446-4-4-2-client-must-send-cert-iff-requested_candidate_2.c",
+    "locations/code/rfc8446-4-4-2-client-must-send-cert-iff-requested_candidate_3.c",
+    "locations/code/rfc8446-4-4-2-client-must-send-cert-iff-requested_candidate_4.c",
+    "locations/code/rfc8446-4-4-2-client-must-send-cert-iff-requested_candidate_5.c",
+    "locations/code/rfc8446-4-4-2-client-must-send-cert-iff-requested_candidate_6.c",
+    "locations/code/rfc8446-4-4-2-client-must-send-cert-iff-requested_candidate_7.c",
+    "locations/code/rfc8446-4-4-2-client-must-send-cert-iff-requested_candidate_8.c",
+    "locations/code/rfc8446-4-4-2-client-must-send-cert-iff-requested_candidate_9.c",
+    "locations/code/rfc8446-4-4-2-client-must-send-cert-iff-requested_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1758,
+    "files_with_hits": 143,
+    "functions_identified": 332,
+    "null_scope_hits": 759,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1112
+  }
+}

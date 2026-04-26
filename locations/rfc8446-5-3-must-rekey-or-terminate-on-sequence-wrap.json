@@ -1,0 +1,630 @@
+{
+  "rule_id": "rfc8446-5.3-must-rekey-or-terminate-on-sequence-wrap",
+  "rule_type": "conditional_action",
+  "checkability": "low",
+  "search_terms": [
+    {
+      "term": "KeyUpdate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "KeyUpdate",
+        "key_update"
+      ]
+    },
+    {
+      "term": "sequence_number",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "sequence_number",
+        "SequenceNumber"
+      ]
+    },
+    {
+      "term": "sequence number wrap",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "sequence number wrap"
+      ]
+    },
+    {
+      "term": "key update",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "key update"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_key_update",
+      "line_range": [
+        698,
+        741
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "key update"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 703,
+          "text": "* A KeyUpdate message signals a key change so the end of the message must"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 729,
+          "text": "* to additionally send a KeyUpdate message. However that message should"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 698,
+          "text": "MSG_PROCESS_RETURN tls_process_key_update(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 713,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_KEY_UPDATE);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 721,
+          "text": "if (updatetype != SSL_KEY_UPDATE_NOT_REQUESTED"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 722,
+          "text": "&& updatetype != SSL_KEY_UPDATE_REQUESTED) {"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_UPDATE);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 732,
+          "text": "if (updatetype == SSL_KEY_UPDATE_REQUESTED)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 733,
+          "text": "s->key_update = SSL_KEY_UPDATE_NOT_REQUESTED;"
+        },
+        {
+          "term": "key update",
+          "line": 718,
+          "text": "* There are only two defined key update types. Fail if we get a value we"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_state_string_long",
+      "line_range": [
+        15,
+        130
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "key update"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 111,
+          "text": "case TLS_ST_SW_KEY_UPDATE:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 113,
+          "text": "case TLS_ST_CW_KEY_UPDATE:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 115,
+          "text": "case TLS_ST_SR_KEY_UPDATE:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 117,
+          "text": "case TLS_ST_CR_KEY_UPDATE:"
+        },
+        {
+          "term": "key update",
+          "line": 112,
+          "text": "return \"TLSv1.3 write server key update\";"
+        },
+        {
+          "term": "key update",
+          "line": 114,
+          "text": "return \"TLSv1.3 write client key update\";"
+        },
+        {
+          "term": "key update",
+          "line": 116,
+          "text": "return \"TLSv1.3 read client key update\";"
+        },
+        {
+          "term": "key update",
+          "line": 118,
+          "text": "return \"TLSv1.3 read server key update\";"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/quic/quic_impl.c",
+      "function": "ossl_quic_key_update",
+      "line_range": [
+        4670,
+        4702
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "key update"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 4670,
+          "text": "int ossl_quic_key_update(SSL *ssl, int update_type)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 4678,
+          "text": "case SSL_KEY_UPDATE_NOT_REQUESTED:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 4681,
+          "text": "* spontaneous TXKU. Silently upgrade this to SSL_KEY_UPDATE_REQUESTED."
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 4683,
+          "text": "case SSL_KEY_UPDATE_REQUESTED:"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 4695,
+          "text": "QUIC_RAISE_NON_NORMAL_ERROR(&ctx, SSL_R_TOO_MANY_KEY_UPDATES, NULL);"
+        },
+        {
+          "term": "key update",
+          "line": 4680,
+          "text": "* QUIC signals peer key update implicily by triggering a local"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/quic/quic_channel.c",
+      "function": "rxku_allowed",
+      "line_range": [
+        871,
+        890
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "key update"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 887,
+          "text": "* KEY_UPDATE_ERROR."
+        },
+        {
+          "term": "key update",
+          "line": 875,
+          "text": "* RFC 9001 s. 6.1: An endpoint MUST NOT initiate a key update prior to"
+        },
+        {
+          "term": "key update",
+          "line": 878,
+          "text": "* RFC 9001 s. 6.1: An endpoint MUST NOT initiate a subsequent key update"
+        },
+        {
+          "term": "key update",
+          "line": 884,
+          "text": "* packet that initiated the key update, it indicates that its peer has"
+        },
+        {
+          "term": "key update",
+          "line": 886,
+          "text": "* such consecutive key updates as a connection error of type"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/quic/quic_channel.c",
+      "function": "rxku_detected",
+      "line_range": [
+        902,
+        969
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "key update"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 935,
+          "text": "ossl_quic_channel_raise_protocol_error(ch, OSSL_QUIC_ERR_KEY_UPDATE_ERROR,"
+        },
+        {
+          "term": "key update",
+          "line": 921,
+          "text": "* If this key update was locally initiated (meaning that this detected"
+        },
+        {
+          "term": "key update",
+          "line": 924,
+          "text": "* ping-pong of key updates. We still process it as an RXKU."
+        },
+        {
+          "term": "key update",
+          "line": 936,
+          "text": "0, \"RX key update again too soon\");"
+        },
+        {
+          "term": "key update",
+          "line": 965,
+          "text": "* processing of ACK-eliciting frames as key update is not indicated via a"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/quic/quic_rx_depack.c",
+      "function": "depack_do_frame_ack",
+      "line_range": [
+        61,
+        140
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "key update"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 101,
+          "text": "* error of type KEY_UPDATE_ERROR."
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 119,
+          "text": "OSSL_QUIC_ERR_KEY_UPDATE_ERROR,"
+        },
+        {
+          "term": "key update",
+          "line": 122,
+          "text": "\"key update without a \""
+        },
+        {
+          "term": "key update",
+          "line": 123,
+          "text": "\"corresponding key update\");"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/quic/quic_impl.c",
+      "function": "ossl_quic_get_key_update_type",
+      "line_range": [
+        4708,
+        4715
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "key update"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 4708,
+          "text": "int ossl_quic_get_key_update_type(const SSL *s)"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 4714,
+          "text": "return SSL_KEY_UPDATE_NONE;"
+        },
+        {
+          "term": "key update",
+          "line": 4711,
+          "text": "* We always handle key updates immediately so a key update is never"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "crypto/cmp/cmp_status.c",
+      "function": "ossl_cmp_PKIStatus_to_string",
+      "line_range": [
+        28,
+        50
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "key update"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 43,
+          "text": "case OSSL_CMP_PKISTATUS_keyUpdateWarning:"
+        },
+        {
+          "term": "key update",
+          "line": 44,
+          "text": "return \"PKIStatus: key update warning - update already done for the cert\";"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/quic/quic_channel.c",
+      "function": "ch_trigger_txku",
+      "line_range": [
+        779,
+        795
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate",
+          "key update"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 786,
+          "text": "|| !ossl_qtx_trigger_key_update(ch->qtx)) {"
+        },
+        {
+          "term": "key update",
+          "line": 788,
+          "text": "\"key update\");"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "crypto/seed/seed.c",
+      "function": "SEED_set_key",
+      "line_range": [
+        435,
+        492
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 18,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "KeyUpdate"
+        ]
+      },
+      "hits": [
+        {
+          "term": "KeyUpdate",
+          "line": 448,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[0]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 450,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[2]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 454,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[4]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 456,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[6]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 458,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[8]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 460,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[10]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 462,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[12]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 464,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[14]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 466,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[16]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 468,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[18]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 470,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[20]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 472,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[22]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 474,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[24]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 476,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[26]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 478,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[28]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 480,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[30]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 486,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[i * 2]);"
+        },
+        {
+          "term": "KeyUpdate",
+          "line": 488,
+          "text": "KEYUPDATE_TEMP(t0, t1, &ks->data[i * 2 + 2]);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-3-must-rekey-or-terminate-on-sequence-wrap_candidate_1.c",
+    "locations/code/rfc8446-5-3-must-rekey-or-terminate-on-sequence-wrap_candidate_2.c",
+    "locations/code/rfc8446-5-3-must-rekey-or-terminate-on-sequence-wrap_candidate_3.c",
+    "locations/code/rfc8446-5-3-must-rekey-or-terminate-on-sequence-wrap_candidate_4.c",
+    "locations/code/rfc8446-5-3-must-rekey-or-terminate-on-sequence-wrap_candidate_5.c",
+    "locations/code/rfc8446-5-3-must-rekey-or-terminate-on-sequence-wrap_candidate_6.c",
+    "locations/code/rfc8446-5-3-must-rekey-or-terminate-on-sequence-wrap_candidate_7.c",
+    "locations/code/rfc8446-5-3-must-rekey-or-terminate-on-sequence-wrap_candidate_8.c",
+    "locations/code/rfc8446-5-3-must-rekey-or-terminate-on-sequence-wrap_candidate_9.c",
+    "locations/code/rfc8446-5-3-must-rekey-or-terminate-on-sequence-wrap_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 246,
+    "files_with_hits": 33,
+    "functions_identified": 63,
+    "null_scope_hits": 66,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 467
+  }
+}

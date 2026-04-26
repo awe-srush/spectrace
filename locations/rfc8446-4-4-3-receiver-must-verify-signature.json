@@ -1,0 +1,1268 @@
+{
+  "rule_id": "rfc8446-4.4.3-receiver-must-verify-signature",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "CertificateVerify",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateVerify",
+        "certificate_verify"
+      ]
+    },
+    {
+      "term": "Certificate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Certificate"
+      ]
+    },
+    {
+      "term": "signature",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "signature"
+      ]
+    },
+    {
+      "term": "algorithm",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "algorithm"
+      ]
+    },
+    {
+      "term": "decrypt_error",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "decrypt_error",
+        "DecryptError"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_certificate_request",
+      "line_range": [
+        2959,
+        3081
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 15,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "algorithm",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "Certificate",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2962,
+          "text": "/* Clear certificate validity flags */"
+        },
+        {
+          "term": "Certificate",
+          "line": 2985,
+          "text": "/* Free and zero certificate types: it is not present in TLS 1.3 */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3019,
+          "text": "/* get the certificate types */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3039,
+          "text": "* Despite this being for certificates, preserve compatibility"
+        },
+        {
+          "term": "Certificate",
+          "line": 3065,
+          "text": "/* we should setup a certificate to return.... */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3069,
+          "text": "* In TLSv1.3 we don't prepare the client certificate yet. We wait until"
+        },
+        {
+          "term": "Certificate",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "Certificate",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "Certificate",
+          "line": 3073,
+          "text": "* SSL_get1_peer_certificate() returns something sensible in"
+        },
+        {
+          "term": "signature",
+          "line": 3044,
+          "text": "SSL_R_SIGNATURE_ALGORITHMS_ERROR);"
+        },
+        {
+          "term": "algorithm",
+          "line": 3044,
+          "text": "SSL_R_SIGNATURE_ALGORITHMS_ERROR);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "crypto/x509/x509_txt.c",
+      "function": "X509_verify_cert_error_string",
+      "line_range": [
+        21,
+        242
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 71,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "algorithm",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 27,
+          "text": "return \"unspecified certificate verification error\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 29,
+          "text": "return \"unable to get issuer certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 31,
+          "text": "return \"unable to get certificate CRL\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 33,
+          "text": "return \"unable to decrypt certificate's signature\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 39,
+          "text": "return \"certificate signature failure\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 43,
+          "text": "return \"certificate is not yet valid or the system clock is incorrect\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 45,
+          "text": "return \"certificate has expired\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 51,
+          "text": "return \"format error in certificate's notBefore field\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 53,
+          "text": "return \"format error in certificate's notAfter field\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 61,
+          "text": "return \"self-signed certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 63,
+          "text": "return \"self-signed certificate in certificate chain\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 65,
+          "text": "return \"unable to get local issuer certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 67,
+          "text": "return \"unable to verify the first certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 69,
+          "text": "return \"certificate chain too long\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 71,
+          "text": "return \"certificate revoked\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 73,
+          "text": "return \"issuer certificate doesn't have a public key\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 77,
+          "text": "return \"unsuitable certificate purpose\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 79,
+          "text": "return \"certificate not trusted\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 81,
+          "text": "return \"certificate rejected\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 89,
+          "text": "return \"key usage does not include certificate signing\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 91,
+          "text": "return \"unable to get CRL issuer certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 99,
+          "text": "return \"invalid non-CA certificate (has CA markings)\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 104,
+          "text": "case X509_V_ERR_PROXY_CERTIFICATES_NOT_ALLOWED:"
+        },
+        {
+          "term": "Certificate",
+          "line": 105,
+          "text": "return \"proxy certificates not allowed, please set the appropriate flag\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 107,
+          "text": "return \"invalid or inconsistent certificate extension\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 109,
+          "text": "return \"invalid or inconsistent certificate policy extension\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 137,
+          "text": "return \"Suite B: certificate version invalid\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "return \"EE certificate key too weak\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 159,
+          "text": "return \"CA certificate key too weak\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 163,
+          "text": "return \"invalid certificate verification context\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 165,
+          "text": "return \"issuer certificate lookup error\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 167,
+          "text": "return \"Certificate Transparency required, but no valid SCTs found\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 185,
+          "text": "return \"no OCSP response available for certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 187,
+          "text": "return \"Cannot find certificate signature algorithm\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 193,
+          "text": "return \"invalid CA certificate\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 223,
+          "text": "return \"Certificate public key has explicit ECC parameters\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 231,
+          "text": "return \"Certificate includes more than one instance of a particular extension\";"
+        },
+        {
+          "term": "Certificate",
+          "line": 240,
+          "text": "return \"unknown certificate verification error\";"
+        },
+        {
+          "term": "signature",
+          "line": 32,
+          "text": "case X509_V_ERR_UNABLE_TO_DECRYPT_CERT_SIGNATURE:"
+        },
+        {
+          "term": "signature",
+          "line": 33,
+          "text": "return \"unable to decrypt certificate's signature\";"
+        },
+        {
+          "term": "signature",
+          "line": 34,
+          "text": "case X509_V_ERR_UNABLE_TO_DECRYPT_CRL_SIGNATURE:"
+        },
+        {
+          "term": "signature",
+          "line": 35,
+          "text": "return \"unable to decrypt CRL's signature\";"
+        },
+        {
+          "term": "signature",
+          "line": 38,
+          "text": "case X509_V_ERR_CERT_SIGNATURE_FAILURE:"
+        },
+        {
+          "term": "signature",
+          "line": 39,
+          "text": "return \"certificate signature failure\";"
+        },
+        {
+          "term": "signature",
+          "line": 40,
+          "text": "case X509_V_ERR_CRL_SIGNATURE_FAILURE:"
+        },
+        {
+          "term": "signature",
+          "line": 41,
+          "text": "return \"CRL signature failure\";"
+        },
+        {
+          "term": "signature",
+          "line": 66,
+          "text": "case X509_V_ERR_UNABLE_TO_VERIFY_LEAF_SIGNATURE:"
+        },
+        {
+          "term": "signature",
+          "line": 102,
+          "text": "case X509_V_ERR_KEYUSAGE_NO_DIGITAL_SIGNATURE:"
+        },
+        {
+          "term": "signature",
+          "line": 103,
+          "text": "return \"key usage does not include digital signature\";"
+        },
+        {
+          "term": "signature",
+          "line": 142,
+          "text": "case X509_V_ERR_SUITE_B_INVALID_SIGNATURE_ALGORITHM:"
+        },
+        {
+          "term": "signature",
+          "line": 143,
+          "text": "return \"Suite B: invalid signature algorithm\";"
+        },
+        {
+          "term": "signature",
+          "line": 161,
+          "text": "return \"CA signature digest algorithm too weak\";"
+        },
+        {
+          "term": "signature",
+          "line": 178,
+          "text": "case X509_V_ERR_OCSP_SIGNATURE_FAILURE:"
+        },
+        {
+          "term": "signature",
+          "line": 179,
+          "text": "return \"OCSP response signature verification failure\";"
+        },
+        {
+          "term": "signature",
+          "line": 186,
+          "text": "case X509_V_ERR_UNSUPPORTED_SIGNATURE_ALGORITHM:"
+        },
+        {
+          "term": "signature",
+          "line": 187,
+          "text": "return \"Cannot find certificate signature algorithm\";"
+        },
+        {
+          "term": "signature",
+          "line": 188,
+          "text": "case X509_V_ERR_SIGNATURE_ALGORITHM_MISMATCH:"
+        },
+        {
+          "term": "signature",
+          "line": 189,
+          "text": "return \"subject signature algorithm and issuer public key algorithm mismatch\";"
+        },
+        {
+          "term": "signature",
+          "line": 190,
+          "text": "case X509_V_ERR_SIGNATURE_ALGORITHM_INCONSISTENCY:"
+        },
+        {
+          "term": "signature",
+          "line": 191,
+          "text": "return \"cert info signature and signature algorithm mismatch\";"
+        },
+        {
+          "term": "algorithm",
+          "line": 138,
+          "text": "case X509_V_ERR_SUITE_B_INVALID_ALGORITHM:"
+        },
+        {
+          "term": "algorithm",
+          "line": 139,
+          "text": "return \"Suite B: invalid public key algorithm\";"
+        },
+        {
+          "term": "algorithm",
+          "line": 142,
+          "text": "case X509_V_ERR_SUITE_B_INVALID_SIGNATURE_ALGORITHM:"
+        },
+        {
+          "term": "algorithm",
+          "line": 143,
+          "text": "return \"Suite B: invalid signature algorithm\";"
+        },
+        {
+          "term": "algorithm",
+          "line": 161,
+          "text": "return \"CA signature digest algorithm too weak\";"
+        },
+        {
+          "term": "algorithm",
+          "line": 186,
+          "text": "case X509_V_ERR_UNSUPPORTED_SIGNATURE_ALGORITHM:"
+        },
+        {
+          "term": "algorithm",
+          "line": 187,
+          "text": "return \"Cannot find certificate signature algorithm\";"
+        },
+        {
+          "term": "algorithm",
+          "line": 188,
+          "text": "case X509_V_ERR_SIGNATURE_ALGORITHM_MISMATCH:"
+        },
+        {
+          "term": "algorithm",
+          "line": 189,
+          "text": "return \"subject signature algorithm and issuer public key algorithm mismatch\";"
+        },
+        {
+          "term": "algorithm",
+          "line": 190,
+          "text": "case X509_V_ERR_SIGNATURE_ALGORITHM_INCONSISTENCY:"
+        },
+        {
+          "term": "algorithm",
+          "line": 191,
+          "text": "return \"cert info signature and signature algorithm mismatch\";"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_check_chain",
+      "line_range": [
+        4215,
+        4476
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 16,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "algorithm",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 4229,
+          "text": "* idx == -2 means checking client certificate chains"
+        },
+        {
+          "term": "signature",
+          "line": 4286,
+          "text": "* Check all signature algorithms are consistent with signature"
+        },
+        {
+          "term": "signature",
+          "line": 4336,
+          "text": "* If peer sent no signature algorithms extension and we have set"
+        },
+        {
+          "term": "signature",
+          "line": 4337,
+          "text": "* preferred signature algorithms check we support sha1."
+        },
+        {
+          "term": "signature",
+          "line": 4355,
+          "text": "/* Check signature algorithm of each cert in chain */"
+        },
+        {
+          "term": "signature",
+          "line": 4362,
+          "text": "rv |= CERT_PKEY_EE_SIGNATURE;"
+        },
+        {
+          "term": "signature",
+          "line": 4367,
+          "text": "rv |= CERT_PKEY_EE_SIGNATURE;"
+        },
+        {
+          "term": "signature",
+          "line": 4368,
+          "text": "rv |= CERT_PKEY_CA_SIGNATURE;"
+        },
+        {
+          "term": "signature",
+          "line": 4372,
+          "text": "rv &= ~CERT_PKEY_CA_SIGNATURE;"
+        },
+        {
+          "term": "signature",
+          "line": 4381,
+          "text": "rv |= CERT_PKEY_EE_SIGNATURE | CERT_PKEY_CA_SIGNATURE;"
+        },
+        {
+          "term": "algorithm",
+          "line": 4286,
+          "text": "* Check all signature algorithms are consistent with signature"
+        },
+        {
+          "term": "algorithm",
+          "line": 4287,
+          "text": "* algorithms extension if TLS 1.2 or later and strict mode."
+        },
+        {
+          "term": "algorithm",
+          "line": 4336,
+          "text": "* If peer sent no signature algorithms extension and we have set"
+        },
+        {
+          "term": "algorithm",
+          "line": 4337,
+          "text": "* preferred signature algorithms check we support sha1."
+        },
+        {
+          "term": "algorithm",
+          "line": 4355,
+          "text": "/* Check signature algorithm of each cert in chain */"
+        },
+        {
+          "term": "algorithm",
+          "line": 4379,
+          "text": "/* Else not TLS 1.2, so mark EE and CA signing algorithms OK */"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_check_sig_alg",
+      "line_range": [
+        4119,
+        4184
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "algorithm",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 4129,
+          "text": "* The signatures on certificates that are self-signed or certificates"
+        },
+        {
+          "term": "Certificate",
+          "line": 4131,
+          "text": "* certification path (see [RFC5280], Section 3.2).  A certificate that"
+        },
+        {
+          "term": "Certificate",
+          "line": 4167,
+          "text": "* Accept RSA PKCS#1 signatures in certificates when the signature"
+        },
+        {
+          "term": "Certificate",
+          "line": 4171,
+          "text": "* points, and we're doing strict checking of the certificate chain (in"
+        },
+        {
+          "term": "Certificate",
+          "line": 4173,
+          "text": "* certificates in the chain, but the TLS requirement on PSS should not"
+        },
+        {
+          "term": "Certificate",
+          "line": 4174,
+          "text": "* extend to certificates.  Though the peer can in fact list the legacy"
+        },
+        {
+          "term": "signature",
+          "line": 4129,
+          "text": "* The signatures on certificates that are self-signed or certificates"
+        },
+        {
+          "term": "signature",
+          "line": 4132,
+          "text": "* begins a certification path MAY use a signature algorithm that is not"
+        },
+        {
+          "term": "signature",
+          "line": 4133,
+          "text": "* advertised as being supported in the \"signature_algorithms\""
+        },
+        {
+          "term": "signature",
+          "line": 4138,
+          "text": "sig_nid = X509_get_signature_nid(x);"
+        },
+        {
+          "term": "signature",
+          "line": 4167,
+          "text": "* Accept RSA PKCS#1 signatures in certificates when the signature"
+        },
+        {
+          "term": "algorithm",
+          "line": 4132,
+          "text": "* begins a certification path MAY use a signature algorithm that is not"
+        },
+        {
+          "term": "algorithm",
+          "line": 4133,
+          "text": "* advertised as being supported in the \"signature_algorithms\""
+        },
+        {
+          "term": "algorithm",
+          "line": 4168,
+          "text": "* algorithms include RSA-PSS with a matching digest algorithm."
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_cert_verify",
+      "line_range": [
+        430,
+        601
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "decrypt_error",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 462,
+          "text": "SSL_R_SIGNATURE_FOR_NON_SIGNING_CERTIFICATE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 583,
+          "text": "* certificate after the CertVerify instead of when we get the"
+        },
+        {
+          "term": "Certificate",
+          "line": 584,
+          "text": "* CertificateRequest. This is because in TLSv1.3 the CertificateRequest"
+        },
+        {
+          "term": "Certificate",
+          "line": 585,
+          "text": "* comes *before* the Certificate message. In TLSv1.2 it comes after. We"
+        },
+        {
+          "term": "Certificate",
+          "line": 586,
+          "text": "* want to make sure that SSL_get1_peer_certificate() will return the actual"
+        },
+        {
+          "term": "Certificate",
+          "line": 587,
+          "text": "* server certificate from the client_cert_cb callback."
+        },
+        {
+          "term": "signature",
+          "line": 462,
+          "text": "SSL_R_SIGNATURE_FOR_NON_SIGNING_CERTIFICATE);"
+        },
+        {
+          "term": "signature",
+          "line": 494,
+          "text": "* If key is GOST and len is exactly 64 or 128, it is signature without"
+        },
+        {
+          "term": "signature",
+          "line": 533,
+          "text": "*p++ = OSSL_PARAM_construct_int(OSSL_SIGNATURE_PARAM_TLS_VERSION, &s->version);"
+        },
+        {
+          "term": "signature",
+          "line": 535,
+          "text": "*p++ = OSSL_PARAM_construct_utf8_string(OSSL_SIGNATURE_PARAM_DIGEST,"
+        },
+        {
+          "term": "signature",
+          "line": 572,
+          "text": "/* Ignore bad signatures when fuzzing */"
+        },
+        {
+          "term": "signature",
+          "line": 577,
+          "text": "SSLfatal(s, SSL_AD_DECRYPT_ERROR, SSL_R_BAD_SIGNATURE);"
+        },
+        {
+          "term": "decrypt_error",
+          "line": 577,
+          "text": "SSLfatal(s, SSL_AD_DECRYPT_ERROR, SSL_R_BAD_SIGNATURE);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_post_process_server_certificate",
+      "line_range": [
+        2450,
+        2544
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "CertificateVerify",
+          "algorithm"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateVerify",
+          "line": 2535,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "CertificateVerify",
+          "line": 2484,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2450,
+          "text": "WORK_STATE tls_post_process_server_certificate(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2467,
+          "text": "* for client side verification of the server certificate to take place."
+        },
+        {
+          "term": "Certificate",
+          "line": 2484,
+          "text": "SSL_R_CERTIFICATE_VERIFY_FAILED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2492,
+          "text": "* Inconsistency alert: cert_chain does include the peer's certificate,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2508,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_UNKNOWN_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2512,
+          "text": "* Check certificate type is consistent with ciphersuite. For TLS 1.3"
+        },
+        {
+          "term": "Certificate",
+          "line": 2513,
+          "text": "* skip check since TLS 1.3 ciphersuites can be used with any certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 2518,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CERTIFICATE_TYPE);"
+        },
+        {
+          "term": "Certificate",
+          "line": 2535,
+          "text": "/* Save the current hash state for when we receive the CertificateVerify */"
+        },
+        {
+          "term": "algorithm",
+          "line": 2517,
+          "text": "if ((clu->amask & s->s3.tmp.new_cipher->algorithm_auth) == 0) {"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_key_exchange",
+      "line_range": [
+        2801,
+        2957
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "algorithm",
+          "decrypt_error",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "signature",
+          "line": 2807,
+          "text": "PACKET save_param_start, signature;"
+        },
+        {
+          "term": "signature",
+          "line": 2846,
+          "text": "/* if it was signed, check the signature */"
+        },
+        {
+          "term": "signature",
+          "line": 2855,
+          "text": "* |pkt| now points to the beginning of the signature, so the difference"
+        },
+        {
+          "term": "signature",
+          "line": 2890,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &signature)"
+        },
+        {
+          "term": "signature",
+          "line": 2926,
+          "text": "rv = EVP_DigestVerify(md_ctx, PACKET_data(&signature),"
+        },
+        {
+          "term": "signature",
+          "line": 2927,
+          "text": "PACKET_remaining(&signature), tbs, tbslen);"
+        },
+        {
+          "term": "signature",
+          "line": 2930,
+          "text": "SSLfatal(s, SSL_AD_DECRYPT_ERROR, SSL_R_BAD_SIGNATURE);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2810,
+          "text": "alg_k = s->s3.tmp.new_cipher->algorithm_mkey;"
+        },
+        {
+          "term": "algorithm",
+          "line": 2883,
+          "text": "SSL_R_NO_SUITABLE_DIGEST_ALGORITHM);"
+        },
+        {
+          "term": "algorithm",
+          "line": 2937,
+          "text": "if (!(s->s3.tmp.new_cipher->algorithm_auth & (SSL_aNULL | SSL_aSRP))"
+        },
+        {
+          "term": "algorithm",
+          "line": 2940,
+          "text": "if (ssl3_check_cert_and_algorithm(s)) {"
+        },
+        {
+          "term": "decrypt_error",
+          "line": 2930,
+          "text": "SSLfatal(s, SSL_AD_DECRYPT_ERROR, SSL_R_BAD_SIGNATURE);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "crypto/x509/x509_vfy.c",
+      "function": "check_extensions",
+      "line_range": [
+        599,
+        776
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "algorithm",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 608,
+          "text": "* -1: we accept both CA and non-CA certificates, to allow direct"
+        },
+        {
+          "term": "Certificate",
+          "line": 609,
+          "text": "*     use of self-signed certificates (which are marked as CA)."
+        },
+        {
+          "term": "Certificate",
+          "line": 610,
+          "text": "* 0:  we only accept non-CA certificates.  This is currently not"
+        },
+        {
+          "term": "Certificate",
+          "line": 612,
+          "text": "* 1:  we only accept CA certificates.  This is currently used for"
+        },
+        {
+          "term": "Certificate",
+          "line": 613,
+          "text": "*     all certificates in the chain except the leaf certificate."
+        },
+        {
+          "term": "Certificate",
+          "line": 635,
+          "text": "ctx, x, i, X509_V_ERR_PROXY_CERTIFICATES_NOT_ALLOWED);"
+        },
+        {
+          "term": "Certificate",
+          "line": 748,
+          "text": "* If this certificate is a proxy certificate, the next certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 749,
+          "text": "* must be another proxy certificate or a EE certificate.  If not,"
+        },
+        {
+          "term": "Certificate",
+          "line": 750,
+          "text": "* the next certificate must be a CA certificate."
+        },
+        {
+          "term": "signature",
+          "line": 701,
+          "text": "CB_FAIL_IF(X509_ALGOR_cmp(&x->sig_alg, &x->cert_info.signature) != 0,"
+        },
+        {
+          "term": "signature",
+          "line": 702,
+          "text": "ctx, x, i, X509_V_ERR_SIGNATURE_ALGORITHM_INCONSISTENCY);"
+        },
+        {
+          "term": "algorithm",
+          "line": 702,
+          "text": "ctx, x, i, X509_V_ERR_SIGNATURE_ALGORITHM_INCONSISTENCY);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_set_server_sigalgs",
+      "line_range": [
+        3107,
+        3162
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "algorithm",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 3116,
+          "text": "/* Clear certificate validity flags */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3127,
+          "text": "* the default algorithm for each certificate type"
+        },
+        {
+          "term": "signature",
+          "line": 3111,
+          "text": "/* Clear any shared signature algorithms */"
+        },
+        {
+          "term": "signature",
+          "line": 3126,
+          "text": "* If peer sent no signature algorithms check to see if we support"
+        },
+        {
+          "term": "signature",
+          "line": 3158,
+          "text": "/* Fatal error if no shared signature algorithms */"
+        },
+        {
+          "term": "signature",
+          "line": 3160,
+          "text": "SSL_R_NO_SHARED_SIGNATURE_ALGORITHMS);"
+        },
+        {
+          "term": "algorithm",
+          "line": 3111,
+          "text": "/* Clear any shared signature algorithms */"
+        },
+        {
+          "term": "algorithm",
+          "line": 3126,
+          "text": "* If peer sent no signature algorithms check to see if we support"
+        },
+        {
+          "term": "algorithm",
+          "line": 3127,
+          "text": "* the default algorithm for each certificate type"
+        },
+        {
+          "term": "algorithm",
+          "line": 3158,
+          "text": "/* Fatal error if no shared signature algorithms */"
+        },
+        {
+          "term": "algorithm",
+          "line": 3160,
+          "text": "SSL_R_NO_SHARED_SIGNATURE_ALGORITHMS);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "crypto/cms/cms_sd.c",
+      "function": "CMS_add1_signer",
+      "line_range": [
+        576,
+        773
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "algorithm",
+          "signature"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Certificate",
+          "line": 588,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_PRIVATE_KEY_DOES_NOT_MATCH_CERTIFICATE);"
+        },
+        {
+          "term": "signature",
+          "line": 661,
+          "text": "ERR_raise_data(ERR_LIB_CMS, CMS_R_UNSUPPORTED_SIGNATURE_ALGORITHM,"
+        },
+        {
+          "term": "signature",
+          "line": 746,
+          "text": "if (EVP_PKEY_CTX_set_signature_md(si->pctx, md) <= 0)"
+        },
+        {
+          "term": "algorithm",
+          "line": 637,
+          "text": "if (!X509_ALGOR_set_md(si->digestAlgorithm, md))"
+        },
+        {
+          "term": "algorithm",
+          "line": 640,
+          "text": "/* See if digest is present in digestAlgorithms */"
+        },
+        {
+          "term": "algorithm",
+          "line": 641,
+          "text": "for (i = 0; i < sk_X509_ALGOR_num(sd->digestAlgorithms); i++) {"
+        },
+        {
+          "term": "algorithm",
+          "line": 645,
+          "text": "alg = sk_X509_ALGOR_value(sd->digestAlgorithms, i);"
+        },
+        {
+          "term": "algorithm",
+          "line": 651,
+          "text": "if (i == sk_X509_ALGOR_num(sd->digestAlgorithms)) {"
+        },
+        {
+          "term": "algorithm",
+          "line": 654,
+          "text": "|| !sk_X509_ALGOR_push(sd->digestAlgorithms, alg)) {"
+        },
+        {
+          "term": "algorithm",
+          "line": 661,
+          "text": "ERR_raise_data(ERR_LIB_CMS, CMS_R_UNSUPPORTED_SIGNATURE_ALGORITHM,"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-4-3-receiver-must-verify-signature_candidate_1.c",
+    "locations/code/rfc8446-4-4-3-receiver-must-verify-signature_candidate_2.c",
+    "locations/code/rfc8446-4-4-3-receiver-must-verify-signature_candidate_3.c",
+    "locations/code/rfc8446-4-4-3-receiver-must-verify-signature_candidate_4.c",
+    "locations/code/rfc8446-4-4-3-receiver-must-verify-signature_candidate_5.c",
+    "locations/code/rfc8446-4-4-3-receiver-must-verify-signature_candidate_6.c",
+    "locations/code/rfc8446-4-4-3-receiver-must-verify-signature_candidate_7.c",
+    "locations/code/rfc8446-4-4-3-receiver-must-verify-signature_candidate_8.c",
+    "locations/code/rfc8446-4-4-3-receiver-must-verify-signature_candidate_9.c",
+    "locations/code/rfc8446-4-4-3-receiver-must-verify-signature_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 4785,
+    "files_with_hits": 328,
+    "functions_identified": 875,
+    "null_scope_hits": 1790,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1529
+  }
+}

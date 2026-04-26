@@ -1,0 +1,1100 @@
+{
+  "rule_id": "rfc8446-4.5-client-must-send-eoed-if-server-accepted",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "EndOfEarlyData",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "EndOfEarlyData",
+        "end_of_early_data"
+      ]
+    },
+    {
+      "term": "EncryptedExtensions",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "EncryptedExtensions",
+        "encrypted_extensions"
+      ]
+    },
+    {
+      "term": "Finished",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Finished"
+      ]
+    },
+    {
+      "term": "early_data",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "early_data",
+        "EarlyData"
+      ]
+    },
+    {
+      "term": "unexpected_message",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unexpected_message",
+        "UnexpectedMessage"
+      ]
+    },
+    {
+      "term": "0-RTT",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "0-RTT"
+      ]
+    },
+    {
+      "term": "early data accepted",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "early data accepted"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/ssl_lib.c",
+      "function": "SSL_read_early_data",
+      "line_range": [
+        2509,
+        2573
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 28,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "0-RTT",
+          "EndOfEarlyData",
+          "Finished",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EndOfEarlyData",
+          "line": 2554,
+          "text": "* SSL_EARLY_DATA_FINISHED_READING if we get an EndOfEarlyData"
+        },
+        {
+          "term": "Finished",
+          "line": 2554,
+          "text": "* SSL_EARLY_DATA_FINISHED_READING if we get an EndOfEarlyData"
+        },
+        {
+          "term": "Finished",
+          "line": 2557,
+          "text": "if (ret > 0 || (ret <= 0 && sc->early_data_state != SSL_EARLY_DATA_FINISHED_READING)) {"
+        },
+        {
+          "term": "Finished",
+          "line": 2563,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_FINISHED_READING;"
+        },
+        {
+          "term": "early_data",
+          "line": 2509,
+          "text": "int SSL_read_early_data(SSL *s, void *buf, size_t num, size_t *readbytes)"
+        },
+        {
+          "term": "early_data",
+          "line": 2517,
+          "text": "return SSL_READ_EARLY_DATA_ERROR;"
+        },
+        {
+          "term": "early_data",
+          "line": 2526,
+          "text": "return SSL_READ_EARLY_DATA_ERROR;"
+        },
+        {
+          "term": "early_data",
+          "line": 2529,
+          "text": "switch (sc->early_data_state) {"
+        },
+        {
+          "term": "early_data",
+          "line": 2530,
+          "text": "case SSL_EARLY_DATA_NONE:"
+        },
+        {
+          "term": "early_data",
+          "line": 2534,
+          "text": "return SSL_READ_EARLY_DATA_ERROR;"
+        },
+        {
+          "term": "early_data",
+          "line": 2538,
+          "text": "case SSL_EARLY_DATA_ACCEPT_RETRY:"
+        },
+        {
+          "term": "early_data",
+          "line": 2539,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_ACCEPTING;"
+        },
+        {
+          "term": "early_data",
+          "line": 2543,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_ACCEPT_RETRY;"
+        },
+        {
+          "term": "early_data",
+          "line": 2544,
+          "text": "return SSL_READ_EARLY_DATA_ERROR;"
+        },
+        {
+          "term": "early_data",
+          "line": 2548,
+          "text": "case SSL_EARLY_DATA_READ_RETRY:"
+        },
+        {
+          "term": "early_data",
+          "line": 2549,
+          "text": "if (sc->ext.early_data == SSL_EARLY_DATA_ACCEPTED) {"
+        },
+        {
+          "term": "early_data",
+          "line": 2550,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_READING;"
+        },
+        {
+          "term": "early_data",
+          "line": 2553,
+          "text": "* State machine will update early_data_state to"
+        },
+        {
+          "term": "early_data",
+          "line": 2554,
+          "text": "* SSL_EARLY_DATA_FINISHED_READING if we get an EndOfEarlyData"
+        },
+        {
+          "term": "early_data",
+          "line": 2557,
+          "text": "if (ret > 0 || (ret <= 0 && sc->early_data_state != SSL_EARLY_DATA_FINISHED_READING)) {"
+        },
+        {
+          "term": "early_data",
+          "line": 2558,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_READ_RETRY;"
+        },
+        {
+          "term": "early_data",
+          "line": 2559,
+          "text": "return ret > 0 ? SSL_READ_EARLY_DATA_SUCCESS"
+        },
+        {
+          "term": "early_data",
+          "line": 2560,
+          "text": ": SSL_READ_EARLY_DATA_ERROR;"
+        },
+        {
+          "term": "early_data",
+          "line": 2563,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_FINISHED_READING;"
+        },
+        {
+          "term": "early_data",
+          "line": 2566,
+          "text": "return SSL_READ_EARLY_DATA_FINISH;"
+        },
+        {
+          "term": "early_data",
+          "line": 2571,
+          "text": "return SSL_READ_EARLY_DATA_ERROR;"
+        },
+        {
+          "term": "early_data",
+          "line": 2554,
+          "text": "* SSL_EARLY_DATA_FINISHED_READING if we get an EndOfEarlyData"
+        },
+        {
+          "term": "0-RTT",
+          "line": 2514,
+          "text": "/* TODO(QUIC 0RTT): 0-RTT support */"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_state_string_long",
+      "line_range": [
+        15,
+        130
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 15,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "EndOfEarlyData",
+          "Finished",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EndOfEarlyData",
+          "line": 123,
+          "text": "case TLS_ST_CW_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 125,
+          "text": "case TLS_ST_SR_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 101,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 103,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "Finished",
+          "line": 34,
+          "text": "return \"SSL negotiation finished successfully\";"
+        },
+        {
+          "term": "Finished",
+          "line": 62,
+          "text": "case TLS_ST_CW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 63,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 64,
+          "text": "return \"SSLv3/TLS write finished\";"
+        },
+        {
+          "term": "Finished",
+          "line": 68,
+          "text": "case TLS_ST_CR_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 69,
+          "text": "case TLS_ST_SR_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 70,
+          "text": "return \"SSLv3/TLS read finished\";"
+        },
+        {
+          "term": "early_data",
+          "line": 119,
+          "text": "case TLS_ST_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 121,
+          "text": "case TLS_ST_PENDING_EARLY_DATA_END:"
+        },
+        {
+          "term": "early_data",
+          "line": 123,
+          "text": "case TLS_ST_CW_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 125,
+          "text": "case TLS_ST_SR_END_OF_EARLY_DATA:"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_state_string",
+      "line_range": [
+        132,
+        247
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "EndOfEarlyData",
+          "Finished",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EndOfEarlyData",
+          "line": 240,
+          "text": "case TLS_ST_CW_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 242,
+          "text": "case TLS_ST_SR_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 218,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 220,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "Finished",
+          "line": 181,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 182,
+          "text": "case TLS_ST_CW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 187,
+          "text": "case TLS_ST_SR_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 188,
+          "text": "case TLS_ST_CR_FINISHED:"
+        },
+        {
+          "term": "early_data",
+          "line": 236,
+          "text": "case TLS_ST_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 238,
+          "text": "case TLS_ST_PENDING_EARLY_DATA_END:"
+        },
+        {
+          "term": "early_data",
+          "line": 240,
+          "text": "case TLS_ST_CW_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 242,
+          "text": "case TLS_ST_SR_END_OF_EARLY_DATA:"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_end_of_early_data",
+      "line_range": [
+        4718,
+        4748
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "EndOfEarlyData",
+          "Finished",
+          "early_data",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EndOfEarlyData",
+          "line": 4732,
+          "text": "* EndOfEarlyData signals a key change so the end of the message must be on"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 4718,
+          "text": "MSG_PROCESS_RETURN tls_process_end_of_early_data(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "Finished",
+          "line": 4740,
+          "text": "s->early_data_state = SSL_EARLY_DATA_FINISHED_READING;"
+        },
+        {
+          "term": "early_data",
+          "line": 4718,
+          "text": "MSG_PROCESS_RETURN tls_process_end_of_early_data(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "early_data",
+          "line": 4725,
+          "text": "if (s->early_data_state != SSL_EARLY_DATA_READING"
+        },
+        {
+          "term": "early_data",
+          "line": 4726,
+          "text": "&& s->early_data_state != SSL_EARLY_DATA_READ_RETRY) {"
+        },
+        {
+          "term": "early_data",
+          "line": 4740,
+          "text": "s->early_data_state = SSL_EARLY_DATA_FINISHED_READING;"
+        },
+        {
+          "term": "early_data",
+          "line": 4732,
+          "text": "* EndOfEarlyData signals a key change so the end of the message must be on"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 4736,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_NOT_ON_RECORD_BOUNDARY);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_handshake",
+      "line_range": [
+        1625,
+        1738
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "EndOfEarlyData",
+          "Finished",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EndOfEarlyData",
+          "line": 1705,
+          "text": "case SSL3_MT_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1716,
+          "text": "case SSL3_MT_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1718,
+          "text": "SSL3_MT_ENCRYPTED_EXTENSIONS, &msg, &msglen))"
+        },
+        {
+          "term": "Finished",
+          "line": 1701,
+          "text": "case SSL3_MT_FINISHED:"
+        },
+        {
+          "term": "early_data",
+          "line": 1705,
+          "text": "case SSL3_MT_END_OF_EARLY_DATA:"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/record/rec_layer_s3.c",
+      "function": "ssl3_read_bytes",
+      "line_range": [
+        627,
+        1128
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 18,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "early_data",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 738,
+          "text": "* reset by ssl3_get_finished */"
+        },
+        {
+          "term": "Finished",
+          "line": 741,
+          "text": "SSL_R_DATA_BETWEEN_CCS_AND_FINISHED);"
+        },
+        {
+          "term": "early_data",
+          "line": 1033,
+          "text": "int ined = (s->early_data_state == SSL_EARLY_DATA_READING);"
+        },
+        {
+          "term": "early_data",
+          "line": 1105,
+          "text": "} else if (ossl_statem_skip_early_data(s)) {"
+        },
+        {
+          "term": "early_data",
+          "line": 1107,
+          "text": "* This can happen after a client sends a CH followed by early_data,"
+        },
+        {
+          "term": "early_data",
+          "line": 1115,
+          "text": "if (!ossl_early_data_count_ok(s, rr->length,"
+        },
+        {
+          "term": "early_data",
+          "line": 1116,
+          "text": "EARLY_DATA_CIPHERTEXT_OVERHEAD, 0)) {"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 740,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 770,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_APP_DATA_IN_HANDSHAKE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 777,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_CCS_RECEIVED_EARLY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 860,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 878,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_INVALID_ALERT);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 904,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1023,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_CCS_RECEIVED_EARLY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1082,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1092,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1124,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_write_transition",
+      "line_range": [
+        422,
+        518
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 17,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EndOfEarlyData",
+          "Finished",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EndOfEarlyData",
+          "line": 476,
+          "text": "st->hand_state = TLS_ST_CW_END_OF_EARLY_DATA;"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 481,
+          "text": "case TLS_ST_CW_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "Finished",
+          "line": 457,
+          "text": "case TLS_ST_CR_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 459,
+          "text": "|| s->early_data_state == SSL_EARLY_DATA_FINISHED_WRITING)"
+        },
+        {
+          "term": "Finished",
+          "line": 465,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 484,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 495,
+          "text": ": TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 499,
+          "text": "st->hand_state = TLS_ST_CW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 505,
+          "text": "case TLS_ST_CW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 516,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "early_data",
+          "line": 458,
+          "text": "if (s->early_data_state == SSL_EARLY_DATA_WRITE_RETRY"
+        },
+        {
+          "term": "early_data",
+          "line": 459,
+          "text": "|| s->early_data_state == SSL_EARLY_DATA_FINISHED_WRITING)"
+        },
+        {
+          "term": "early_data",
+          "line": 460,
+          "text": "st->hand_state = TLS_ST_PENDING_EARLY_DATA_END;"
+        },
+        {
+          "term": "early_data",
+          "line": 474,
+          "text": "case TLS_ST_PENDING_EARLY_DATA_END:"
+        },
+        {
+          "term": "early_data",
+          "line": 475,
+          "text": "if (s->ext.early_data == SSL_EARLY_DATA_ACCEPTED && !SSL_NO_EOED(s)) {"
+        },
+        {
+          "term": "early_data",
+          "line": 476,
+          "text": "st->hand_state = TLS_ST_CW_END_OF_EARLY_DATA;"
+        },
+        {
+          "term": "early_data",
+          "line": 481,
+          "text": "case TLS_ST_CW_END_OF_EARLY_DATA:"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_read_transition",
+      "line_range": [
+        74,
+        179
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 16,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EndOfEarlyData",
+          "Finished",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EndOfEarlyData",
+          "line": 96,
+          "text": "if (mt == SSL3_MT_END_OF_EARLY_DATA) {"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 97,
+          "text": "st->hand_state = TLS_ST_SR_END_OF_EARLY_DATA;"
+        },
+        {
+          "term": "EndOfEarlyData",
+          "line": 104,
+          "text": "case TLS_ST_SR_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "Finished",
+          "line": 105,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 119,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 120,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 129,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 130,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 142,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 143,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "early_data",
+          "line": 87,
+          "text": "case TLS_ST_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 94,
+          "text": "} else if (s->ext.early_data == SSL_EARLY_DATA_ACCEPTED"
+        },
+        {
+          "term": "early_data",
+          "line": 96,
+          "text": "if (mt == SSL3_MT_END_OF_EARLY_DATA) {"
+        },
+        {
+          "term": "early_data",
+          "line": 97,
+          "text": "st->hand_state = TLS_ST_SR_END_OF_EARLY_DATA;"
+        },
+        {
+          "term": "early_data",
+          "line": 104,
+          "text": "case TLS_ST_SR_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 153,
+          "text": "if (s->early_data_state == SSL_EARLY_DATA_READING)"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_write_transition",
+      "line_range": [
+        582,
+        715
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "Finished",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 624,
+          "text": "st->hand_state = TLS_ST_SW_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 631,
+          "text": "st->hand_state = TLS_ST_SW_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 634,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "Finished",
+          "line": 611,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 636,
+          "text": "st->hand_state = TLS_ST_SW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 663,
+          "text": "st->hand_state = TLS_ST_SW_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 666,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 672,
+          "text": "return WRITE_TRAN_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 674,
+          "text": "case TLS_ST_SR_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 677,
+          "text": "* Technically we have finished the handshake at this point, but we're"
+        },
+        {
+          "term": "early_data",
+          "line": 622,
+          "text": "st->hand_state = TLS_ST_EARLY_DATA;"
+        },
+        {
+          "term": "early_data",
+          "line": 629,
+          "text": "st->hand_state = TLS_ST_EARLY_DATA;"
+        },
+        {
+          "term": "early_data",
+          "line": 667,
+          "text": "st->hand_state = TLS_ST_EARLY_DATA;"
+        },
+        {
+          "term": "early_data",
+          "line": 671,
+          "text": "case TLS_ST_EARLY_DATA:"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_pre_work",
+      "line_range": [
+        860,
+        976
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "0-RTT",
+          "Finished",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 902,
+          "text": "return WORK_FINISHED_CONTINUE;"
+        },
+        {
+          "term": "Finished",
+          "line": 948,
+          "text": "return WORK_FINISHED_CONTINUE;"
+        },
+        {
+          "term": "Finished",
+          "line": 953,
+          "text": "return WORK_FINISHED_CONTINUE;"
+        },
+        {
+          "term": "Finished",
+          "line": 960,
+          "text": "&& s->early_data_state != SSL_EARLY_DATA_FINISHED_READING) {"
+        },
+        {
+          "term": "Finished",
+          "line": 961,
+          "text": "s->early_data_state = SSL_EARLY_DATA_FINISHED_READING;"
+        },
+        {
+          "term": "Finished",
+          "line": 966,
+          "text": "return WORK_FINISHED_SWAP;"
+        },
+        {
+          "term": "Finished",
+          "line": 975,
+          "text": "return WORK_FINISHED_CONTINUE;"
+        },
+        {
+          "term": "early_data",
+          "line": 950,
+          "text": "case TLS_ST_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 951,
+          "text": "if (s->early_data_state != SSL_EARLY_DATA_ACCEPTING"
+        },
+        {
+          "term": "early_data",
+          "line": 959,
+          "text": "if (SSL_NO_EOED(s) && s->ext.early_data == SSL_EARLY_DATA_ACCEPTED"
+        },
+        {
+          "term": "early_data",
+          "line": 960,
+          "text": "&& s->early_data_state != SSL_EARLY_DATA_FINISHED_READING) {"
+        },
+        {
+          "term": "early_data",
+          "line": 961,
+          "text": "s->early_data_state = SSL_EARLY_DATA_FINISHED_READING;"
+        },
+        {
+          "term": "0-RTT",
+          "line": 956,
+          "text": "* In QUIC with 0-RTT we just carry on when otherwise we would stop"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-5-client-must-send-eoed-if-server-accepted_candidate_1.c",
+    "locations/code/rfc8446-4-5-client-must-send-eoed-if-server-accepted_candidate_2.c",
+    "locations/code/rfc8446-4-5-client-must-send-eoed-if-server-accepted_candidate_3.c",
+    "locations/code/rfc8446-4-5-client-must-send-eoed-if-server-accepted_candidate_4.c",
+    "locations/code/rfc8446-4-5-client-must-send-eoed-if-server-accepted_candidate_5.c",
+    "locations/code/rfc8446-4-5-client-must-send-eoed-if-server-accepted_candidate_6.c",
+    "locations/code/rfc8446-4-5-client-must-send-eoed-if-server-accepted_candidate_7.c",
+    "locations/code/rfc8446-4-5-client-must-send-eoed-if-server-accepted_candidate_8.c",
+    "locations/code/rfc8446-4-5-client-must-send-eoed-if-server-accepted_candidate_9.c",
+    "locations/code/rfc8446-4-5-client-must-send-eoed-if-server-accepted_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 965,
+    "files_with_hits": 63,
+    "functions_identified": 202,
+    "null_scope_hits": 169,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1398
+  }
+}

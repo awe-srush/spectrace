@@ -1,0 +1,189 @@
+[
+  {
+    "rule_id": "rfc8446-4.1.1-R01",
+    "source_section": "4.1.1",
+    "source_text": "If there is no overlap between the received \"supported_groups\" and the groups supported by the server, then the server MUST abort the handshake with a \"handshake_failure\" or an \"insufficient_security\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If the server does not select a PSK and there is no overlap between the client's supported_groups and the server's supported groups, the server MUST abort the handshake with a handshake_failure or insufficient_security alert.",
+    "entity": "server",
+    "applies_when": "Non-PSK handshake with no overlap in supported_groups",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [
+      "supported_groups"
+    ],
+    "violation_alert": "handshake_failure",
+    "violation_alert_source": "inline",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "ServerHello"
+      ],
+      "field_names": [
+        "supported_groups"
+      ],
+      "extension_names": [
+        "supported_groups"
+      ],
+      "alert_names": [
+        "handshake_failure",
+        "insufficient_security"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Need to verify the server checks for group overlap and sends the correct alert. Logic may span multiple functions.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit conditional with specified alerts.",
+    "cross_section_context_used": [
+      "4.1.1",
+      "6.2",
+      "9.2",
+      "9.3"
+    ],
+    "ambiguity_notes": "Two alternative alerts are acceptable: handshake_failure or insufficient_security.",
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.1-R02",
+    "source_section": "4.1.1",
+    "source_text": "If the server selects a PSK, then it MUST also select a key establishment mode from the set indicated by the client's \"psk_key_exchange_modes\" extension (at present, PSK alone or with (EC)DHE).",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "When the server selects a PSK, it MUST also select a key establishment mode from the client's psk_key_exchange_modes extension.",
+    "entity": "server",
+    "applies_when": "Server selects a PSK for the handshake",
+    "target_message": "ServerHello",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [
+      "psk_key_exchange_modes",
+      "pre_shared_key"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello",
+        "ClientHello"
+      ],
+      "field_names": [
+        "psk_key_exchange_modes",
+        "pre_shared_key"
+      ],
+      "extension_names": [
+        "psk_key_exchange_modes",
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "psk_ke",
+        "psk_dhe_ke"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Need to trace server PSK selection and verify it checks the client's psk_key_exchange_modes.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Clear requirement linking PSK selection to key exchange mode.",
+    "cross_section_context_used": [
+      "4.1.1",
+      "4.2.9",
+      "6.2",
+      "9.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.1-R03",
+    "source_section": "4.1.1",
+    "source_text": "If the server selects an (EC)DHE group and the client did not offer a compatible \"key_share\" extension in the initial ClientHello, the server MUST respond with a HelloRetryRequest (Section 4.1.4) message.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If the server selects an (EC)DHE group but the client's initial ClientHello did not include a compatible key_share, the server MUST respond with a HelloRetryRequest.",
+    "entity": "server",
+    "applies_when": "Server selects (EC)DHE group without a compatible key_share in ClientHello",
+    "target_message": "HelloRetryRequest",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [
+      "key_share",
+      "supported_groups"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello",
+        "HelloRetryRequest",
+        "ServerHello"
+      ],
+      "field_names": [
+        "key_share",
+        "supported_groups"
+      ],
+      "extension_names": [
+        "key_share",
+        "supported_groups"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "EC_DHE"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Need to verify server sends HRR when no compatible key_share is offered.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Unambiguous conditional action.",
+    "cross_section_context_used": [
+      "4.1.1",
+      "4.1.4",
+      "6.2",
+      "9.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.1.1-R04",
+    "source_section": "4.1.1",
+    "source_text": "If the server is unable to negotiate a supported set of parameters (i.e., there is no overlap between the client and server parameters), it MUST abort the handshake with either a \"handshake_failure\" or \"insufficient_security\" fatal alert (see Section 6).",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If the server cannot negotiate any supported parameters with the client, it MUST abort with a handshake_failure or insufficient_security alert.",
+    "entity": "server",
+    "applies_when": "Server cannot find any overlap between client and server parameters",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [],
+    "violation_alert": "handshake_failure",
+    "violation_alert_source": "inline",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "handshake_failure",
+        "insufficient_security"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Need to verify all negotiation failure paths send the correct alert.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit requirement with specified alerts.",
+    "cross_section_context_used": [
+      "4.1.1",
+      "6",
+      "6.2",
+      "9.2"
+    ],
+    "ambiguity_notes": "This is a general catch-all for negotiation failures. R01 is a specific instance for supported_groups.",
+    "model": "claude-opus-4-6"
+  }
+]

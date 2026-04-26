@@ -1,0 +1,107 @@
+{
+  "rule_id": "rfc8446-4.4.3-server-must-send-cv",
+  "source_file": "ssl/statem/statem_srvr.c",
+  "primary_function": "ossl_statem_server13_write_transition",
+  "judgment": "conforms",
+  "confidence": "high",
+  "reasoning": "The rule requires servers to send CertificateVerify when authenticating via a certificate (RFC 8446, TLS 1.3). In ossl_statem_server13_write_transition (lines 658-661), after state TLS_ST_SW_CERT or TLS_ST_SW_COMP_CERT (both representing the server sending its Certificate), the code unconditionally transitions to TLS_ST_SW_CERT_VRFY: 'case TLS_ST_SW_COMP_CERT: case TLS_ST_SW_CERT: st->hand_state = TLS_ST_SW_CERT_VRFY; return WRITE_TRAN_CONTINUE;'. There is no conditional check that could skip this transition. The ossl_statem_server_construct_message function at lines 1272-1274 registers tls_construct_cert_verify for TLS_ST_SW_CERT_VRFY, confirming that CertificateVerify is sent. The only paths where CertificateVerify is not sent are resumed sessions (s->hit) which go directly to TLS_ST_SW_FINISHED from TLS_ST_SW_ENCRYPTED_EXTENSIONS - those sessions do not use certificate authentication so the rule's precondition does not apply. Pre-TLS 1.3 handshakes are out of scope for RFC 8446.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [
+      658,
+      659,
+      660,
+      661
+    ],
+    "key_code_snippet": "case TLS_ST_SW_COMP_CERT:\ncase TLS_ST_SW_CERT:\n    st->hand_state = TLS_ST_SW_CERT_VRFY;\n    return WRITE_TRAN_CONTINUE;",
+    "expected_behavior": "After the server sends a Certificate message, it must always send CertificateVerify next.",
+    "paths_checked": 3,
+    "paths_conforming": 3,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "ossl_statem_server_write_transition",
+    "ossl_statem_server13_write_transition",
+    "send_certificate_request",
+    "do_compressed_cert",
+    "tls_construct_server_certificate",
+    "ossl_statem_server_construct_message",
+    "ossl_statem_server13_read_transition",
+    "ossl_statem_server_read_transition"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 11,
+  "tools_used": [
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server_write_transition"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLS_ST_SW_CERT_VRFY"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ossl_statem_server13_write_transition"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "send_certificate_request"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "do_compressed_cert"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "server_cert_type"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLS_ST_SW_CERT"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLSEXT_cert_type_rpk"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls_construct_server_certificate"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls12_rpk_and_privkey"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls_construct_cert_verify"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 121934,
+    "output": 4134
+  }
+}

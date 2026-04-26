@@ -1,0 +1,950 @@
+{
+  "rule_id": "rfc8446-4.2.10-first-psk-for-early-data",
+  "rule_type": "ordering_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "identities",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "identities"
+      ]
+    },
+    {
+      "term": "pre_shared_key",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "pre_shared_key",
+        "PreSharedKey"
+      ]
+    },
+    {
+      "term": "early_data",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "early_data",
+        "EarlyData"
+      ]
+    },
+    {
+      "term": "0-RTT",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "0-RTT"
+      ]
+    },
+    {
+      "term": "early data",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "early data"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_psk",
+      "line_range": [
+        1318,
+        1566
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "field_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "early data",
+          "early_data",
+          "identities",
+          "pre_shared_key"
+        ]
+      },
+      "hits": [
+        {
+          "term": "identities",
+          "line": 1321,
+          "text": "PACKET identities, binders, binder;"
+        },
+        {
+          "term": "identities",
+          "line": 1339,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &identities)) {"
+        },
+        {
+          "term": "identities",
+          "line": 1345,
+          "text": "for (id = 0; PACKET_remaining(&identities) != 0 && id < MAX_PRE_SHARED_KEYS; id++) {"
+        },
+        {
+          "term": "identities",
+          "line": 1350,
+          "text": "if (!PACKET_get_length_prefixed_2(&identities, &identity)"
+        },
+        {
+          "term": "identities",
+          "line": 1351,
+          "text": "|| !PACKET_get_net_4(&identities, &ticket_agel)) {"
+        },
+        {
+          "term": "pre_shared_key",
+          "line": 1345,
+          "text": "for (id = 0; PACKET_remaining(&identities) != 0 && id < MAX_PRE_SHARED_KEYS; id++) {"
+        },
+        {
+          "term": "early_data",
+          "line": 1433,
+          "text": "s->ext.early_data_ok = 1;"
+        },
+        {
+          "term": "early_data",
+          "line": 1445,
+          "text": "|| (s->max_early_data > 0"
+        },
+        {
+          "term": "early_data",
+          "line": 1467,
+          "text": "if (s->max_early_data > 0"
+        },
+        {
+          "term": "early_data",
+          "line": 1500,
+          "text": "s->ext.early_data_ok = 1;"
+        },
+        {
+          "term": "early_data",
+          "line": 1515,
+          "text": "s->ext.early_data_ok = 0;"
+        },
+        {
+          "term": "early data",
+          "line": 1498,
+          "text": "* for early data"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/record/rec_layer_s3.c",
+      "function": "ssl3_read_bytes",
+      "line_range": [
+        627,
+        1128
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 844,
+          "text": "* initial ClientHello. Therefore |type| should always be equal to"
+        },
+        {
+          "term": "ClientHello",
+          "line": 856,
+          "text": "* with. We shouldn't be receiving anything other than a ClientHello"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1028,
+          "text": "* Unexpected handshake message (ClientHello, NewSessionTicket (TLS1.3) or"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1110,
+          "text": "* plaintext ClientHello but gets a record which appears to be"
+        },
+        {
+          "term": "early_data",
+          "line": 1033,
+          "text": "int ined = (s->early_data_state == SSL_EARLY_DATA_READING);"
+        },
+        {
+          "term": "early_data",
+          "line": 1105,
+          "text": "} else if (ossl_statem_skip_early_data(s)) {"
+        },
+        {
+          "term": "early_data",
+          "line": 1107,
+          "text": "* This can happen after a client sends a CH followed by early_data,"
+        },
+        {
+          "term": "early_data",
+          "line": 1115,
+          "text": "if (!ossl_early_data_count_ok(s, rr->length,"
+        },
+        {
+          "term": "early_data",
+          "line": 1116,
+          "text": "EARLY_DATA_CIPHERTEXT_OVERHEAD, 0)) {"
+        },
+        {
+          "term": "early data",
+          "line": 1047,
+          "text": "* If we were actually trying to read early data and we found a"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_pre_work",
+      "line_range": [
+        696,
+        771
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 708,
+          "text": "/* every DTLS ClientHello resets Finished MAC */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 715,
+          "text": "* This must be a second ClientHello after an HRR following an"
+        },
+        {
+          "term": "early_data",
+          "line": 713,
+          "text": "} else if (s->ext.early_data == SSL_EARLY_DATA_REJECTED) {"
+        },
+        {
+          "term": "early_data",
+          "line": 751,
+          "text": "case TLS_ST_PENDING_EARLY_DATA_END:"
+        },
+        {
+          "term": "early_data",
+          "line": 757,
+          "text": "if (s->early_data_state == SSL_EARLY_DATA_FINISHED_WRITING"
+        },
+        {
+          "term": "early_data",
+          "line": 758,
+          "text": "|| s->early_data_state == SSL_EARLY_DATA_NONE)"
+        },
+        {
+          "term": "early_data",
+          "line": 762,
+          "text": "case TLS_ST_EARLY_DATA:"
+        },
+        {
+          "term": "early data",
+          "line": 716,
+          "text": "* earlier rejected attempt to send early data. Since we were"
+        },
+        {
+          "term": "early data",
+          "line": 717,
+          "text": "* previously encrypting the early data we now need to reset the"
+        },
+        {
+          "term": "early data",
+          "line": 754,
+          "text": "* attempt to write early data before calling SSL_read() then we press"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_read_transition",
+      "line_range": [
+        74,
+        179
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 89,
+          "text": "if (mt == SSL3_MT_CLIENT_HELLO) {"
+        },
+        {
+          "term": "early_data",
+          "line": 87,
+          "text": "case TLS_ST_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 94,
+          "text": "} else if (s->ext.early_data == SSL_EARLY_DATA_ACCEPTED"
+        },
+        {
+          "term": "early_data",
+          "line": 96,
+          "text": "if (mt == SSL3_MT_END_OF_EARLY_DATA) {"
+        },
+        {
+          "term": "early_data",
+          "line": 97,
+          "text": "st->hand_state = TLS_ST_SR_END_OF_EARLY_DATA;"
+        },
+        {
+          "term": "early_data",
+          "line": 104,
+          "text": "case TLS_ST_SR_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 153,
+          "text": "if (s->early_data_state == SSL_EARLY_DATA_READING)"
+        },
+        {
+          "term": "early data",
+          "line": 151,
+          "text": "* early data (i.e. before we've received the end of early data alert)"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_write_transition",
+      "line_range": [
+        524,
+        690
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 529,
+          "text": "* Note that immediately before/after a ClientHello we don't know what"
+        },
+        {
+          "term": "early_data",
+          "line": 557,
+          "text": "if (s->early_data_state == SSL_EARLY_DATA_CONNECTING"
+        },
+        {
+          "term": "early_data",
+          "line": 566,
+          "text": "st->hand_state = TLS_ST_EARLY_DATA;"
+        },
+        {
+          "term": "early_data",
+          "line": 583,
+          "text": "&& s->early_data_state != SSL_EARLY_DATA_FINISHED_WRITING)"
+        },
+        {
+          "term": "early_data",
+          "line": 589,
+          "text": "case TLS_ST_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 637,
+          "text": "} else if (s->early_data_state == SSL_EARLY_DATA_CONNECTING) {"
+        },
+        {
+          "term": "early_data",
+          "line": 638,
+          "text": "st->hand_state = TLS_ST_EARLY_DATA;"
+        },
+        {
+          "term": "early data",
+          "line": 580,
+          "text": "* because we did early data."
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_pre_work",
+      "line_range": [
+        860,
+        976
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "0-RTT",
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "early_data",
+          "line": 950,
+          "text": "case TLS_ST_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 951,
+          "text": "if (s->early_data_state != SSL_EARLY_DATA_ACCEPTING"
+        },
+        {
+          "term": "early_data",
+          "line": 959,
+          "text": "if (SSL_NO_EOED(s) && s->ext.early_data == SSL_EARLY_DATA_ACCEPTED"
+        },
+        {
+          "term": "early_data",
+          "line": 960,
+          "text": "&& s->early_data_state != SSL_EARLY_DATA_FINISHED_READING) {"
+        },
+        {
+          "term": "early_data",
+          "line": 961,
+          "text": "s->early_data_state = SSL_EARLY_DATA_FINISHED_READING;"
+        },
+        {
+          "term": "0-RTT",
+          "line": 956,
+          "text": "* In QUIC with 0-RTT we just carry on when otherwise we would stop"
+        },
+        {
+          "term": "early data",
+          "line": 957,
+          "text": "* to allow the server to read early data"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2055,
+          "text": "* echo of what we originally sent in the ClientHello and should not be"
+        },
+        {
+          "term": "early_data",
+          "line": 2182,
+          "text": "|| (s->early_data_state == SSL_EARLY_DATA_NONE"
+        },
+        {
+          "term": "early data",
+          "line": 2176,
+          "text": "* early data is written. We could just always defer until the last"
+        },
+        {
+          "term": "early data",
+          "line": 2178,
+          "text": "* are changed. Since QUIC doesn't do TLS early data or need middlebox"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/ssl_lib.c",
+      "function": "SSL_read_early_data",
+      "line_range": [
+        2509,
+        2573
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 24,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "0-RTT",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "early_data",
+          "line": 2509,
+          "text": "int SSL_read_early_data(SSL *s, void *buf, size_t num, size_t *readbytes)"
+        },
+        {
+          "term": "early_data",
+          "line": 2517,
+          "text": "return SSL_READ_EARLY_DATA_ERROR;"
+        },
+        {
+          "term": "early_data",
+          "line": 2526,
+          "text": "return SSL_READ_EARLY_DATA_ERROR;"
+        },
+        {
+          "term": "early_data",
+          "line": 2529,
+          "text": "switch (sc->early_data_state) {"
+        },
+        {
+          "term": "early_data",
+          "line": 2530,
+          "text": "case SSL_EARLY_DATA_NONE:"
+        },
+        {
+          "term": "early_data",
+          "line": 2534,
+          "text": "return SSL_READ_EARLY_DATA_ERROR;"
+        },
+        {
+          "term": "early_data",
+          "line": 2538,
+          "text": "case SSL_EARLY_DATA_ACCEPT_RETRY:"
+        },
+        {
+          "term": "early_data",
+          "line": 2539,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_ACCEPTING;"
+        },
+        {
+          "term": "early_data",
+          "line": 2543,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_ACCEPT_RETRY;"
+        },
+        {
+          "term": "early_data",
+          "line": 2544,
+          "text": "return SSL_READ_EARLY_DATA_ERROR;"
+        },
+        {
+          "term": "early_data",
+          "line": 2548,
+          "text": "case SSL_EARLY_DATA_READ_RETRY:"
+        },
+        {
+          "term": "early_data",
+          "line": 2549,
+          "text": "if (sc->ext.early_data == SSL_EARLY_DATA_ACCEPTED) {"
+        },
+        {
+          "term": "early_data",
+          "line": 2550,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_READING;"
+        },
+        {
+          "term": "early_data",
+          "line": 2553,
+          "text": "* State machine will update early_data_state to"
+        },
+        {
+          "term": "early_data",
+          "line": 2554,
+          "text": "* SSL_EARLY_DATA_FINISHED_READING if we get an EndOfEarlyData"
+        },
+        {
+          "term": "early_data",
+          "line": 2557,
+          "text": "if (ret > 0 || (ret <= 0 && sc->early_data_state != SSL_EARLY_DATA_FINISHED_READING)) {"
+        },
+        {
+          "term": "early_data",
+          "line": 2558,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_READ_RETRY;"
+        },
+        {
+          "term": "early_data",
+          "line": 2559,
+          "text": "return ret > 0 ? SSL_READ_EARLY_DATA_SUCCESS"
+        },
+        {
+          "term": "early_data",
+          "line": 2560,
+          "text": ": SSL_READ_EARLY_DATA_ERROR;"
+        },
+        {
+          "term": "early_data",
+          "line": 2563,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_FINISHED_READING;"
+        },
+        {
+          "term": "early_data",
+          "line": 2566,
+          "text": "return SSL_READ_EARLY_DATA_FINISH;"
+        },
+        {
+          "term": "early_data",
+          "line": 2571,
+          "text": "return SSL_READ_EARLY_DATA_ERROR;"
+        },
+        {
+          "term": "early_data",
+          "line": 2554,
+          "text": "* SSL_EARLY_DATA_FINISHED_READING if we get an EndOfEarlyData"
+        },
+        {
+          "term": "0-RTT",
+          "line": 2514,
+          "text": "/* TODO(QUIC 0RTT): 0-RTT support */"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/ssl_lib.c",
+      "function": "SSL_write_early_data",
+      "line_range": [
+        2857,
+        2936
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 20,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "early_data",
+          "line": 2857,
+          "text": "int SSL_write_early_data(SSL *s, const void *buf, size_t num, size_t *written)"
+        },
+        {
+          "term": "early_data",
+          "line": 2859,
+          "text": "int ret, early_data_state;"
+        },
+        {
+          "term": "early_data",
+          "line": 2871,
+          "text": "switch (sc->early_data_state) {"
+        },
+        {
+          "term": "early_data",
+          "line": 2872,
+          "text": "case SSL_EARLY_DATA_NONE:"
+        },
+        {
+          "term": "early_data",
+          "line": 2875,
+          "text": "|| ((sc->session == NULL || sc->session->ext.max_early_data == 0)"
+        },
+        {
+          "term": "early_data",
+          "line": 2883,
+          "text": "case SSL_EARLY_DATA_CONNECT_RETRY:"
+        },
+        {
+          "term": "early_data",
+          "line": 2884,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_CONNECTING;"
+        },
+        {
+          "term": "early_data",
+          "line": 2888,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_CONNECT_RETRY;"
+        },
+        {
+          "term": "early_data",
+          "line": 2893,
+          "text": "case SSL_EARLY_DATA_WRITE_RETRY:"
+        },
+        {
+          "term": "early_data",
+          "line": 2894,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_WRITING;"
+        },
+        {
+          "term": "early_data",
+          "line": 2905,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_WRITE_RETRY;"
+        },
+        {
+          "term": "early_data",
+          "line": 2908,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_WRITE_FLUSH;"
+        },
+        {
+          "term": "early_data",
+          "line": 2911,
+          "text": "case SSL_EARLY_DATA_WRITE_FLUSH:"
+        },
+        {
+          "term": "early_data",
+          "line": 2916,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_WRITE_RETRY;"
+        },
+        {
+          "term": "early_data",
+          "line": 2919,
+          "text": "case SSL_EARLY_DATA_FINISHED_READING:"
+        },
+        {
+          "term": "early_data",
+          "line": 2920,
+          "text": "case SSL_EARLY_DATA_READ_RETRY:"
+        },
+        {
+          "term": "early_data",
+          "line": 2921,
+          "text": "early_data_state = sc->early_data_state;"
+        },
+        {
+          "term": "early_data",
+          "line": 2923,
+          "text": "sc->early_data_state = SSL_EARLY_DATA_UNAUTH_WRITING;"
+        },
+        {
+          "term": "early_data",
+          "line": 2928,
+          "text": "sc->early_data_state = early_data_state;"
+        },
+        {
+          "term": "early data",
+          "line": 2896,
+          "text": "* We disable partial write for early data because we don't keep track"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/ssl_lib.c",
+      "function": "SSL_CTX_new_ex",
+      "line_range": [
+        4210,
+        4538
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 17,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "early_data",
+          "line": 4432,
+          "text": "* We cannot usefully set a default max_early_data here (which gets"
+        },
+        {
+          "term": "early_data",
+          "line": 4434,
+          "text": "* SSL field causes tls_construct_stoc_early_data() to tell the"
+        },
+        {
+          "term": "early_data",
+          "line": 4440,
+          "text": "* SSL_read_early_data(); otherwise we'll just skip past the early data"
+        },
+        {
+          "term": "early_data",
+          "line": 4442,
+          "text": "* SSL_read_early_data(), we also require them to add"
+        },
+        {
+          "term": "early_data",
+          "line": 4443,
+          "text": "* calls to SSL_CTX_set_max_early_data() in order to use early data,"
+        },
+        {
+          "term": "early_data",
+          "line": 4447,
+          "text": "ret->max_early_data = 0;"
+        },
+        {
+          "term": "early_data",
+          "line": 4450,
+          "text": "* Default recv_max_early_data is a fully loaded single record. Could be"
+        },
+        {
+          "term": "early_data",
+          "line": 4452,
+          "text": "* max_early_data so that, in the default case, we do not advertise any"
+        },
+        {
+          "term": "early_data",
+          "line": 4453,
+          "text": "* support for early_data, but if a client were to send us some (e.g."
+        },
+        {
+          "term": "early_data",
+          "line": 4457,
+          "text": "ret->recv_max_early_data = SSL3_RT_MAX_PLAIN_LENGTH;"
+        },
+        {
+          "term": "early data",
+          "line": 4435,
+          "text": "* client that early data will be accepted when constructing a TLS 1.3"
+        },
+        {
+          "term": "early data",
+          "line": 4436,
+          "text": "* session ticket, and the client will accordingly send us early data"
+        },
+        {
+          "term": "early data",
+          "line": 4437,
+          "text": "* when using that ticket (if the client has early data to send)."
+        },
+        {
+          "term": "early data",
+          "line": 4438,
+          "text": "* However, in order for the early data to actually be consumed by"
+        },
+        {
+          "term": "early data",
+          "line": 4440,
+          "text": "* SSL_read_early_data(); otherwise we'll just skip past the early data"
+        },
+        {
+          "term": "early data",
+          "line": 4443,
+          "text": "* calls to SSL_CTX_set_max_early_data() in order to use early data,"
+        },
+        {
+          "term": "early data",
+          "line": 4444,
+          "text": "* eliminating the bandwidth-wasting early data in the case described"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-10-first-psk-for-early-data_candidate_1.c",
+    "locations/code/rfc8446-4-2-10-first-psk-for-early-data_candidate_2.c",
+    "locations/code/rfc8446-4-2-10-first-psk-for-early-data_candidate_3.c",
+    "locations/code/rfc8446-4-2-10-first-psk-for-early-data_candidate_4.c",
+    "locations/code/rfc8446-4-2-10-first-psk-for-early-data_candidate_5.c",
+    "locations/code/rfc8446-4-2-10-first-psk-for-early-data_candidate_6.c",
+    "locations/code/rfc8446-4-2-10-first-psk-for-early-data_candidate_7.c",
+    "locations/code/rfc8446-4-2-10-first-psk-for-early-data_candidate_8.c",
+    "locations/code/rfc8446-4-2-10-first-psk-for-early-data_candidate_9.c",
+    "locations/code/rfc8446-4-2-10-first-psk-for-early-data_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 905,
+    "files_with_hits": 41,
+    "functions_identified": 156,
+    "null_scope_hits": 209,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 2192
+  }
+}

@@ -1,0 +1,1095 @@
+{
+  "rule_id": "rfc8446-4.4.2.1-must-not-act-on-status-request-v2",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "EncryptedExtensions",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "EncryptedExtensions",
+        "encrypted_extensions"
+      ]
+    },
+    {
+      "term": "CertificateRequest",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "CertificateRequest",
+        "certificate_request"
+      ]
+    },
+    {
+      "term": "Certificate",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Certificate"
+      ]
+    },
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "status_request_v2",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "status_request_v2",
+        "StatusRequestV2"
+      ]
+    },
+    {
+      "term": "unsupported_extension",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unsupported_extension",
+        "UnsupportedExtension"
+      ]
+    },
+    {
+      "term": "TLS 1.3",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "TLS 1.3"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_parse",
+      "line_range": [
+        113,
+        167
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "ClientHello",
+          "EncryptedExtensions",
+          "unsupported_extension"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 137,
+          "text": "* If it's ServerHello or EncryptedExtensions we can't have any"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 135,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS)) != 0) {"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 147,
+          "text": "* Extensions received in the ClientHello or CertificateRequest are marked"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 151,
+          "text": "if ((context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST))"
+        },
+        {
+          "term": "Certificate",
+          "line": 147,
+          "text": "* Extensions received in the ClientHello or CertificateRequest are marked"
+        },
+        {
+          "term": "Certificate",
+          "line": 151,
+          "text": "if ((context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST))"
+        },
+        {
+          "term": "ClientHello",
+          "line": 138,
+          "text": "* extensions not sent in ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 147,
+          "text": "* Extensions received in the ClientHello or CertificateRequest are marked"
+        },
+        {
+          "term": "ClientHello",
+          "line": 123,
+          "text": "if ((context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_2_SERVER_HELLO)) != 0)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 151,
+          "text": "if ((context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST))"
+        },
+        {
+          "term": "unsupported_extension",
+          "line": 141,
+          "text": "SSLfatal(s, TLS1_AD_UNSUPPORTED_EXTENSION, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_post_work",
+      "line_range": [
+        1002,
+        1215
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "ClientHello",
+          "EncryptedExtensions",
+          "TLS 1.3"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 1175,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1176,
+          "text": "if (!s->hit && !send_certificate_request(s)) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 1170,
+          "text": "|| (s->options & SSL_OP_NO_TX_CERTIFICATE_COMPRESSION) != 0)"
+        },
+        {
+          "term": "Certificate",
+          "line": 1171,
+          "text": "s->ext.compress_certificate_from_peer[0] = TLSEXT_comp_cert_none;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1176,
+          "text": "if (!s->hit && !send_certificate_request(s)) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 1178,
+          "text": "|| (s->options & SSL_OP_NO_TX_CERTIFICATE_COMPRESSION) != 0)"
+        },
+        {
+          "term": "Certificate",
+          "line": 1179,
+          "text": "s->ext.compress_certificate_from_peer[0] = TLSEXT_comp_cert_none;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1032,
+          "text": "* The next message should be another ClientHello which we need to"
+        },
+        {
+          "term": "TLS 1.3",
+          "line": 1151,
+          "text": "/* TLS 1.3 gets the secret size from the handshake md */"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client13_read_transition",
+      "line_range": [
+        94,
+        216
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 15,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "ClientHello",
+          "EncryptedExtensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 120,
+          "text": "if (mt == SSL3_MT_ENCRYPTED_EXTENSIONS) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 121,
+          "text": "st->hand_state = TLS_ST_CR_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 126,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 133,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 189,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 133,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 137,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 142,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 143,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 152,
+          "text": "if (mt == SSL3_MT_CERTIFICATE) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 157,
+          "text": "if (mt == SSL3_MT_COMPRESSED_CERTIFICATE"
+        },
+        {
+          "term": "Certificate",
+          "line": 158,
+          "text": "&& s->ext.compress_certificate_sent) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 167,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_VERIFY) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 189,
+          "text": "if (mt == SSL3_MT_CERTIFICATE_REQUEST) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 110,
+          "text": "* This must a ClientHello following a HelloRetryRequest, so the only"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/extensions.c",
+      "function": "tls_collect_extensions",
+      "line_range": [
+        805,
+        927
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "ClientHello",
+          "unsupported_extension"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 863,
+          "text": "* be sent in the ClientHello and CertificateRequest. Unsolicited"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 876,
+          "text": "&& (context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST | SSL_EXT_TLS1_3_NEW_SESSION_TICKET)) == 0"
+        },
+        {
+          "term": "Certificate",
+          "line": 863,
+          "text": "* be sent in the ClientHello and CertificateRequest. Unsolicited"
+        },
+        {
+          "term": "Certificate",
+          "line": 871,
+          "text": "* - The signed_certificate_timestamp extension can be provided by a"
+        },
+        {
+          "term": "Certificate",
+          "line": 876,
+          "text": "&& (context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST | SSL_EXT_TLS1_3_NEW_SESSION_TICKET)) == 0"
+        },
+        {
+          "term": "Certificate",
+          "line": 879,
+          "text": "&& type != TLSEXT_TYPE_signed_certificate_timestamp"
+        },
+        {
+          "term": "ClientHello",
+          "line": 820,
+          "text": "* construction of extensions for the ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 850,
+          "text": "* PSK extension, which must be the last one in the ClientHello."
+        },
+        {
+          "term": "ClientHello",
+          "line": 863,
+          "text": "* be sent in the ClientHello and CertificateRequest. Unsolicited"
+        },
+        {
+          "term": "ClientHello",
+          "line": 823,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0 && s->ext.ech.attempted == 0)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 826,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 855,
+          "text": "&& (context & SSL_EXT_CLIENT_HELLO) != 0"
+        },
+        {
+          "term": "ClientHello",
+          "line": 876,
+          "text": "&& (context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST | SSL_EXT_TLS1_3_NEW_SESSION_TICKET)) == 0"
+        },
+        {
+          "term": "unsupported_extension",
+          "line": 886,
+          "text": "SSLfatal(s, SSL_AD_UNSUPPORTED_EXTENSION,"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_add",
+      "line_range": [
+        173,
+        321
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "ClientHello",
+          "EncryptedExtensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 192,
+          "text": "/* Only send extensions present in ClientHello/CertificateRequest */"
+        },
+        {
+          "term": "Certificate",
+          "line": 180,
+          "text": "int for_comp = (context & SSL_EXT_TLS1_3_CERTIFICATE_COMPRESSION) != 0;"
+        },
+        {
+          "term": "Certificate",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        },
+        {
+          "term": "Certificate",
+          "line": 192,
+          "text": "/* Only send extensions present in ClientHello/CertificateRequest */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 192,
+          "text": "/* Only send extensions present in ClientHello/CertificateRequest */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 235,
+          "text": "if (s->clienthello == NULL"
+        },
+        {
+          "term": "ClientHello",
+          "line": 236,
+          "text": "|| s->clienthello->pre_proc_exts == NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 240,
+          "text": "raws = s->clienthello->pre_proc_exts;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 241,
+          "text": "for (j = 0; j != (int)s->clienthello->pre_proc_exts_len; j++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 265,
+          "text": "* We skip it if the callback is absent - except for a ClientHello where"
+        },
+        {
+          "term": "ClientHello",
+          "line": 198,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0"
+        },
+        {
+          "term": "ClientHello",
+          "line": 268,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) == 0 && meth->add_cb == NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 297,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0) {"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_handshake",
+      "line_range": [
+        1625,
+        1738
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "ClientHello",
+          "EncryptedExtensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 1716,
+          "text": "case SSL3_MT_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1718,
+          "text": "SSL3_MT_ENCRYPTED_EXTENSIONS, &msg, &msglen))"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1696,
+          "text": "case SSL3_MT_CERTIFICATE_REQUEST:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1681,
+          "text": "case SSL3_MT_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1682,
+          "text": "if (!ssl_print_certificates(bio, sc, server, indent + 2, msg, msglen))"
+        },
+        {
+          "term": "Certificate",
+          "line": 1686,
+          "text": "case SSL3_MT_COMPRESSED_CERTIFICATE:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1687,
+          "text": "if (!ssl_print_compressed_certificates(bio, sc, server, indent + 2, msg, msglen))"
+        },
+        {
+          "term": "Certificate",
+          "line": 1691,
+          "text": "case SSL3_MT_CERTIFICATE_VERIFY:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1696,
+          "text": "case SSL3_MT_CERTIFICATE_REQUEST:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1656,
+          "text": "case SSL3_MT_CLIENT_HELLO:"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1657,
+          "text": "if (!ssl_print_client_hello(bio, sc, indent + 2, msg, msglen))"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_rpk",
+      "line_range": [
+        1114,
+        1310
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 30,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "TLS 1.3"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1155,
+          "text": "* has requested client authentication via a CertificateRequest message"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1150,
+          "text": "*       opaque certificate_request_context<0..2^8-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1127,
+          "text": "* TLS 1.3 Certificate message:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1135,
+          "text": "*   } CertificateType;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1138,
+          "text": "*       select (certificate_type) {"
+        },
+        {
+          "term": "Certificate",
+          "line": 1147,
+          "text": "*   } CertificateEntry;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1150,
+          "text": "*       opaque certificate_request_context<0..2^8-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1151,
+          "text": "*       CertificateEntry certificate_list<0..2^24-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1152,
+          "text": "*   } Certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1154,
+          "text": "* The client MUST send a Certificate message if and only if the server"
+        },
+        {
+          "term": "Certificate",
+          "line": 1155,
+          "text": "* has requested client authentication via a CertificateRequest message"
+        },
+        {
+          "term": "Certificate",
+          "line": 1157,
+          "text": "* suitable certificate is available, the client MUST send a Certificate"
+        },
+        {
+          "term": "Certificate",
+          "line": 1158,
+          "text": "* message containing no certificates (i.e., with the \"certificate_list\""
+        },
+        {
+          "term": "Certificate",
+          "line": 1162,
+          "text": "* TLS 1.2 Certificate message:"
+        },
+        {
+          "term": "Certificate",
+          "line": 1169,
+          "text": "*       select(certificate_type){"
+        },
+        {
+          "term": "Certificate",
+          "line": 1171,
+          "text": "*            // certificate type defined in this document."
+        },
+        {
+          "term": "Certificate",
+          "line": 1175,
+          "text": "*           // X.509 certificate defined in RFC 5246"
+        },
+        {
+          "term": "Certificate",
+          "line": 1177,
+          "text": "*             ASN.1Cert certificate_list<0..2^24-1>;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1179,
+          "text": "*           // Additional certificate type based on"
+        },
+        {
+          "term": "Certificate",
+          "line": 1180,
+          "text": "*           // \"TLS Certificate Types\" subregistry"
+        },
+        {
+          "term": "Certificate",
+          "line": 1182,
+          "text": "*   } Certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1188,
+          "text": "* Certificate message has a 3-byte length that is zero in the client to"
+        },
+        {
+          "term": "Certificate",
+          "line": 1190,
+          "text": "* are no (TLS 1.3 only) per-certificate extensions either, because the"
+        },
+        {
+          "term": "Certificate",
+          "line": 1191,
+          "text": "* [CertificateEntry] list is empty."
+        },
+        {
+          "term": "Certificate",
+          "line": 1198,
+          "text": "* must match the value recorded in the certificate request in the client"
+        },
+        {
+          "term": "TLS 1.3",
+          "line": 1127,
+          "text": "* TLS 1.3 Certificate message:"
+        },
+        {
+          "term": "TLS 1.3",
+          "line": 1187,
+          "text": "* After the (TLS 1.3 only) context octet string (1 byte length + data) the"
+        },
+        {
+          "term": "TLS 1.3",
+          "line": 1190,
+          "text": "* are no (TLS 1.3 only) per-certificate extensions either, because the"
+        },
+        {
+          "term": "TLS 1.3",
+          "line": 1194,
+          "text": "* the TLS 1.3 message just prepends the length of the RPK+extensions,"
+        },
+        {
+          "term": "TLS 1.3",
+          "line": 1245,
+          "text": "* With TLS 1.3, a non-empty explicit-length RPK octet-string followed"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_certificate_request",
+      "line_range": [
+        2959,
+        3081
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 18,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "TLS 1.3"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2959,
+          "text": "MSG_PROCESS_RETURN tls_process_certificate_request(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "Certificate",
+          "line": 2962,
+          "text": "/* Clear certificate validity flags */"
+        },
+        {
+          "term": "Certificate",
+          "line": 2985,
+          "text": "/* Free and zero certificate types: it is not present in TLS 1.3 */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3003,
+          "text": "SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3005,
+          "text": "|| !tls_parse_all_extensions(s, SSL_EXT_TLS1_3_CERTIFICATE_REQUEST,"
+        },
+        {
+          "term": "Certificate",
+          "line": 3019,
+          "text": "/* get the certificate types */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3039,
+          "text": "* Despite this being for certificates, preserve compatibility"
+        },
+        {
+          "term": "Certificate",
+          "line": 3065,
+          "text": "/* we should setup a certificate to return.... */"
+        },
+        {
+          "term": "Certificate",
+          "line": 3069,
+          "text": "* In TLSv1.3 we don't prepare the client certificate yet. We wait until"
+        },
+        {
+          "term": "Certificate",
+          "line": 3070,
+          "text": "* after the CertificateVerify message has been received. This is because"
+        },
+        {
+          "term": "Certificate",
+          "line": 3071,
+          "text": "* in TLSv1.3 the CertificateRequest arrives before the Certificate message"
+        },
+        {
+          "term": "Certificate",
+          "line": 3073,
+          "text": "* SSL_get1_peer_certificate() returns something sensible in"
+        },
+        {
+          "term": "TLS 1.3",
+          "line": 2985,
+          "text": "/* Free and zero certificate types: it is not present in TLS 1.3 */"
+        },
+        {
+          "term": "TLS 1.3",
+          "line": 3040,
+          "text": "* with pre-TLS 1.3 and use the regular sigalgs field."
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_construct_message",
+      "line_range": [
+        1225,
+        1324
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "EncryptedExtensions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 1312,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1313,
+          "text": "*confunc = tls_construct_encrypted_extensions;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1314,
+          "text": "*mt = SSL3_MT_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1283,
+          "text": "*confunc = tls_construct_certificate_request;"
+        },
+        {
+          "term": "CertificateRequest",
+          "line": 1284,
+          "text": "*mt = SSL3_MT_CERTIFICATE_REQUEST;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1261,
+          "text": "*confunc = tls_construct_server_certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1262,
+          "text": "*mt = SSL3_MT_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1267,
+          "text": "*confunc = tls_construct_server_compressed_certificate;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1268,
+          "text": "*mt = SSL3_MT_COMPRESSED_CERTIFICATE;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1274,
+          "text": "*mt = SSL3_MT_CERTIFICATE_VERIFY;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1283,
+          "text": "*confunc = tls_construct_certificate_request;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1284,
+          "text": "*mt = SSL3_MT_CERTIFICATE_REQUEST;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1299,
+          "text": "*mt = SSL3_MT_CERTIFICATE_STATUS;"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions.c",
+      "function": "tls_construct_extensions",
+      "line_range": [
+        1051,
+        1172
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Certificate",
+          "CertificateRequest",
+          "ClientHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "CertificateRequest",
+          "line": 1143,
+          "text": "&& (context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST | SSL_EXT_TLS1_3_NEW_SESSION_TICKET)) != 0)"
+        },
+        {
+          "term": "Certificate",
+          "line": 1058,
+          "text": "int for_comp = (context & SSL_EXT_TLS1_3_CERTIFICATE_COMPRESSION) != 0;"
+        },
+        {
+          "term": "Certificate",
+          "line": 1143,
+          "text": "&& (context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST | SSL_EXT_TLS1_3_NEW_SESSION_TICKET)) != 0)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1066,
+          "text": "* extensions length bytes to a ClientHello/ServerHello"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1089,
+          "text": "/* On the server side with initialise during ClientHello parsing */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1093,
+          "text": "/* On the server side with initialise during ClientHello parsing */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1069,
+          "text": "|| ((context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_2_SERVER_HELLO)) != 0"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1077,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1088,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0 && s->ext.ech.attempted == 0)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1092,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1143,
+          "text": "&& (context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_3_CERTIFICATE_REQUEST | SSL_EXT_TLS1_3_NEW_SESSION_TICKET)) != 0)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1154,
+          "text": "|| context != SSL_EXT_CLIENT_HELLO"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-4-2-1-must-not-act-on-status-request-v2_candidate_1.c",
+    "locations/code/rfc8446-4-4-2-1-must-not-act-on-status-request-v2_candidate_2.c",
+    "locations/code/rfc8446-4-4-2-1-must-not-act-on-status-request-v2_candidate_3.c",
+    "locations/code/rfc8446-4-4-2-1-must-not-act-on-status-request-v2_candidate_4.c",
+    "locations/code/rfc8446-4-4-2-1-must-not-act-on-status-request-v2_candidate_5.c",
+    "locations/code/rfc8446-4-4-2-1-must-not-act-on-status-request-v2_candidate_6.c",
+    "locations/code/rfc8446-4-4-2-1-must-not-act-on-status-request-v2_candidate_7.c",
+    "locations/code/rfc8446-4-4-2-1-must-not-act-on-status-request-v2_candidate_8.c",
+    "locations/code/rfc8446-4-4-2-1-must-not-act-on-status-request-v2_candidate_9.c",
+    "locations/code/rfc8446-4-4-2-1-must-not-act-on-status-request-v2_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 2195,
+    "files_with_hits": 148,
+    "functions_identified": 394,
+    "null_scope_hits": 887,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1320
+  }
+}

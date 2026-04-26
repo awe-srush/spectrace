@@ -1,0 +1,77 @@
+[
+  {
+    "rule_id": "rfc8446-2.2-should-supply-key-share-with-psk",
+    "source_section": "2.2",
+    "source_text": "When a client offers resumption via a PSK, it SHOULD also supply a \"key_share\" extension to the server to allow the server to decline resumption and fall back to a full handshake, if needed.",
+    "normative_keyword": "SHOULD",
+    "rule_type": "presence_requirement",
+    "rule_statement": "Clients offering PSK resumption SHOULD also include key_share to allow fallback to full handshake.",
+    "entity": "client",
+    "applies_when": "Client offers PSK resumption in ClientHello",
+    "target_message": "ClientHello",
+    "target_field": "extensions.key_share",
+    "expected_value": "key_share present alongside pre_shared_key",
+    "related_fields": [
+      "pre_shared_key"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "key_share",
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "PSK",
+        "resumption"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify key_share is present when pre_shared_key is offered.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit SHOULD.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-2.2-oob-psk-must-provision-identity-and-hash",
+    "source_section": "2.2",
+    "source_text": "When PSKs are provisioned out of band, the PSK identity and the KDF hash algorithm to be used with the PSK MUST also be provisioned.",
+    "normative_keyword": "MUST",
+    "rule_type": "presence_requirement",
+    "rule_statement": "Out-of-band PSKs MUST be provisioned with both their identity and the KDF hash algorithm.",
+    "entity": "both",
+    "applies_when": "Provisioning PSKs out of band",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "PSK identity and KDF hash algorithm both provisioned",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "PSK",
+        "external PSK"
+      ]
+    },
+    "checkability": "low",
+    "checkability_rationale": "Provisioning requirement; not observable at protocol level.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

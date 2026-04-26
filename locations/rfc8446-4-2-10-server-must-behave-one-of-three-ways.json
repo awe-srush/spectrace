@@ -1,0 +1,852 @@
+{
+  "rule_id": "rfc8446-4.2.10-server-must-behave-one-of-three-ways",
+  "rule_type": "conditional_action",
+  "checkability": "medium",
+  "search_terms": [
+    {
+      "term": "ClientHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ClientHello",
+        "client_hello"
+      ]
+    },
+    {
+      "term": "EncryptedExtensions",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "EncryptedExtensions",
+        "encrypted_extensions"
+      ]
+    },
+    {
+      "term": "HelloRetryRequest",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "HelloRetryRequest",
+        "hello_retry_request"
+      ]
+    },
+    {
+      "term": "early_data",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "early_data",
+        "EarlyData"
+      ]
+    },
+    {
+      "term": "0-RTT",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "0-RTT"
+      ]
+    },
+    {
+      "term": "early data",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "early data"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/record/rec_layer_s3.c",
+      "function": "ssl3_read_bytes",
+      "line_range": [
+        627,
+        1128
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "HelloRetryRequest",
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 844,
+          "text": "* initial ClientHello. Therefore |type| should always be equal to"
+        },
+        {
+          "term": "ClientHello",
+          "line": 856,
+          "text": "* with. We shouldn't be receiving anything other than a ClientHello"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1028,
+          "text": "* Unexpected handshake message (ClientHello, NewSessionTicket (TLS1.3) or"
+        },
+        {
+          "term": "ClientHello",
+          "line": 1110,
+          "text": "* plaintext ClientHello but gets a record which appears to be"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1108,
+          "text": "* but the server responds with a HelloRetryRequest. The server"
+        },
+        {
+          "term": "early_data",
+          "line": 1033,
+          "text": "int ined = (s->early_data_state == SSL_EARLY_DATA_READING);"
+        },
+        {
+          "term": "early_data",
+          "line": 1105,
+          "text": "} else if (ossl_statem_skip_early_data(s)) {"
+        },
+        {
+          "term": "early_data",
+          "line": 1107,
+          "text": "* This can happen after a client sends a CH followed by early_data,"
+        },
+        {
+          "term": "early_data",
+          "line": 1115,
+          "text": "if (!ossl_early_data_count_ok(s, rr->length,"
+        },
+        {
+          "term": "early_data",
+          "line": 1116,
+          "text": "EARLY_DATA_CIPHERTEXT_OVERHEAD, 0)) {"
+        },
+        {
+          "term": "early data",
+          "line": 1047,
+          "text": "* If we were actually trying to read early data and we found a"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_read_transition",
+      "line_range": [
+        74,
+        179
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "HelloRetryRequest",
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 89,
+          "text": "if (mt == SSL3_MT_CLIENT_HELLO) {"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 88,
+          "text": "if (s->hello_retry_request == SSL_HRR_PENDING) {"
+        },
+        {
+          "term": "early_data",
+          "line": 87,
+          "text": "case TLS_ST_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 94,
+          "text": "} else if (s->ext.early_data == SSL_EARLY_DATA_ACCEPTED"
+        },
+        {
+          "term": "early_data",
+          "line": 96,
+          "text": "if (mt == SSL3_MT_END_OF_EARLY_DATA) {"
+        },
+        {
+          "term": "early_data",
+          "line": 97,
+          "text": "st->hand_state = TLS_ST_SR_END_OF_EARLY_DATA;"
+        },
+        {
+          "term": "early_data",
+          "line": 104,
+          "text": "case TLS_ST_SR_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 153,
+          "text": "if (s->early_data_state == SSL_EARLY_DATA_READING)"
+        },
+        {
+          "term": "early data",
+          "line": 151,
+          "text": "* early data (i.e. before we've received the end of early data alert)"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_write_transition",
+      "line_range": [
+        524,
+        690
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "HelloRetryRequest",
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 529,
+          "text": "* Note that immediately before/after a ClientHello we don't know what"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 635,
+          "text": "if (s->hello_retry_request == SSL_HRR_PENDING) {"
+        },
+        {
+          "term": "early_data",
+          "line": 557,
+          "text": "if (s->early_data_state == SSL_EARLY_DATA_CONNECTING"
+        },
+        {
+          "term": "early_data",
+          "line": 566,
+          "text": "st->hand_state = TLS_ST_EARLY_DATA;"
+        },
+        {
+          "term": "early_data",
+          "line": 583,
+          "text": "&& s->early_data_state != SSL_EARLY_DATA_FINISHED_WRITING)"
+        },
+        {
+          "term": "early_data",
+          "line": 589,
+          "text": "case TLS_ST_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 637,
+          "text": "} else if (s->early_data_state == SSL_EARLY_DATA_CONNECTING) {"
+        },
+        {
+          "term": "early_data",
+          "line": 638,
+          "text": "st->hand_state = TLS_ST_EARLY_DATA;"
+        },
+        {
+          "term": "early data",
+          "line": 580,
+          "text": "* because we did early data."
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "HelloRetryRequest",
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 2055,
+          "text": "* echo of what we originally sent in the ClientHello and should not be"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1746,
+          "text": "if (s->hello_retry_request != SSL_HRR_NONE) {"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1750,
+          "text": "s->hello_retry_request = SSL_HRR_PENDING;"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1800,
+          "text": "if (!tls_collect_extensions(s, &extpkt, SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST,"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1803,
+          "text": "SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST,"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1946,
+          "text": "ret = tls_process_as_hello_retry_request(s, extensions);"
+        },
+        {
+          "term": "early_data",
+          "line": 2182,
+          "text": "|| (s->early_data_state == SSL_EARLY_DATA_NONE"
+        },
+        {
+          "term": "early data",
+          "line": 2176,
+          "text": "* early data is written. We could just always defer until the last"
+        },
+        {
+          "term": "early data",
+          "line": 2178,
+          "text": "* are changed. Since QUIC doesn't do TLS early data or need middlebox"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_post_work",
+      "line_range": [
+        1002,
+        1215
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "EncryptedExtensions",
+          "HelloRetryRequest",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 1032,
+          "text": "* The next message should be another ClientHello which we need to"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 1175,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1040,
+          "text": "&& s->hello_retry_request == SSL_HRR_PENDING) {"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1079,
+          "text": "&& s->hello_retry_request != SSL_HRR_COMPLETE))"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1084,
+          "text": "if (s->hello_retry_request == SSL_HRR_PENDING) {"
+        },
+        {
+          "term": "early_data",
+          "line": 1099,
+          "text": "if (s->ext.early_data != SSL_EARLY_DATA_ACCEPTED"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/extensions.c",
+      "function": "final_early_data",
+      "line_range": [
+        1981,
+        2022
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "HelloRetryRequest",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 1987,
+          "text": "if (context == SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2006,
+          "text": "|| s->hello_retry_request != SSL_HRR_NONE"
+        },
+        {
+          "term": "early_data",
+          "line": 1981,
+          "text": "static int final_early_data(SSL_CONNECTION *s, unsigned int context, int sent)"
+        },
+        {
+          "term": "early_data",
+          "line": 1989,
+          "text": "&& !s->ext.early_data_ok) {"
+        },
+        {
+          "term": "early_data",
+          "line": 1991,
+          "text": "* If we get here then the server accepted our early_data but we"
+        },
+        {
+          "term": "early_data",
+          "line": 1995,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EARLY_DATA);"
+        },
+        {
+          "term": "early_data",
+          "line": 2002,
+          "text": "if (s->max_early_data == 0"
+        },
+        {
+          "term": "early_data",
+          "line": 2004,
+          "text": "|| s->early_data_state != SSL_EARLY_DATA_ACCEPTING"
+        },
+        {
+          "term": "early_data",
+          "line": 2005,
+          "text": "|| !s->ext.early_data_ok"
+        },
+        {
+          "term": "early_data",
+          "line": 2007,
+          "text": "|| (s->allow_early_data_cb != NULL"
+        },
+        {
+          "term": "early_data",
+          "line": 2008,
+          "text": "&& !s->allow_early_data_cb(SSL_CONNECTION_GET_USER_SSL(s),"
+        },
+        {
+          "term": "early_data",
+          "line": 2009,
+          "text": "s->allow_early_data_cb_data))) {"
+        },
+        {
+          "term": "early_data",
+          "line": 2010,
+          "text": "s->ext.early_data = SSL_EARLY_DATA_REJECTED;"
+        },
+        {
+          "term": "early_data",
+          "line": 2012,
+          "text": "s->ext.early_data = SSL_EARLY_DATA_ACCEPTED;"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_add",
+      "line_range": [
+        173,
+        321
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "EncryptedExtensions",
+          "HelloRetryRequest"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 192,
+          "text": "/* Only send extensions present in ClientHello/CertificateRequest */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 235,
+          "text": "if (s->clienthello == NULL"
+        },
+        {
+          "term": "ClientHello",
+          "line": 236,
+          "text": "|| s->clienthello->pre_proc_exts == NULL) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 240,
+          "text": "raws = s->clienthello->pre_proc_exts;"
+        },
+        {
+          "term": "ClientHello",
+          "line": 241,
+          "text": "for (j = 0; j != (int)s->clienthello->pre_proc_exts_len; j++) {"
+        },
+        {
+          "term": "ClientHello",
+          "line": 265,
+          "text": "* We skip it if the callback is absent - except for a ClientHello where"
+        },
+        {
+          "term": "ClientHello",
+          "line": 198,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0"
+        },
+        {
+          "term": "ClientHello",
+          "line": 268,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) == 0 && meth->add_cb == NULL)"
+        },
+        {
+          "term": "ClientHello",
+          "line": 297,
+          "text": "if ((context & SSL_EXT_CLIENT_HELLO) != 0) {"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 191,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS | SSL_EXT_TLS1_3_CERTIFICATE | SSL_EXT_TLS1_3_RAW_PUBLIC_KEY | SSL_EXT_TLS1_3_HELLO_RETR"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server13_write_transition",
+      "line_range": [
+        582,
+        715
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "HelloRetryRequest",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 624,
+          "text": "st->hand_state = TLS_ST_SW_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 631,
+          "text": "st->hand_state = TLS_ST_SW_ENCRYPTED_EXTENSIONS;"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 634,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 619,
+          "text": "&& s->hello_retry_request != SSL_HRR_COMPLETE)"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 621,
+          "text": "else if (s->hello_retry_request == SSL_HRR_PENDING)"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 628,
+          "text": "if (s->hello_retry_request == SSL_HRR_PENDING)"
+        },
+        {
+          "term": "early_data",
+          "line": 622,
+          "text": "st->hand_state = TLS_ST_EARLY_DATA;"
+        },
+        {
+          "term": "early_data",
+          "line": 629,
+          "text": "st->hand_state = TLS_ST_EARLY_DATA;"
+        },
+        {
+          "term": "early_data",
+          "line": 667,
+          "text": "st->hand_state = TLS_ST_EARLY_DATA;"
+        },
+        {
+          "term": "early_data",
+          "line": 671,
+          "text": "case TLS_ST_EARLY_DATA:"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_pre_work",
+      "line_range": [
+        696,
+        771
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ClientHello",
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ClientHello",
+          "line": 708,
+          "text": "/* every DTLS ClientHello resets Finished MAC */"
+        },
+        {
+          "term": "ClientHello",
+          "line": 715,
+          "text": "* This must be a second ClientHello after an HRR following an"
+        },
+        {
+          "term": "early_data",
+          "line": 713,
+          "text": "} else if (s->ext.early_data == SSL_EARLY_DATA_REJECTED) {"
+        },
+        {
+          "term": "early_data",
+          "line": 751,
+          "text": "case TLS_ST_PENDING_EARLY_DATA_END:"
+        },
+        {
+          "term": "early_data",
+          "line": 757,
+          "text": "if (s->early_data_state == SSL_EARLY_DATA_FINISHED_WRITING"
+        },
+        {
+          "term": "early_data",
+          "line": 758,
+          "text": "|| s->early_data_state == SSL_EARLY_DATA_NONE)"
+        },
+        {
+          "term": "early_data",
+          "line": 762,
+          "text": "case TLS_ST_EARLY_DATA:"
+        },
+        {
+          "term": "early data",
+          "line": 716,
+          "text": "* earlier rejected attempt to send early data. Since we were"
+        },
+        {
+          "term": "early data",
+          "line": 717,
+          "text": "* previously encrypting the early data we now need to reset the"
+        },
+        {
+          "term": "early data",
+          "line": 754,
+          "text": "* attempt to write early data before calling SSL_read() then we press"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_state_string_long",
+      "line_range": [
+        15,
+        130
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "message_types",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "EncryptedExtensions",
+          "early data",
+          "early_data"
+        ]
+      },
+      "hits": [
+        {
+          "term": "EncryptedExtensions",
+          "line": 101,
+          "text": "case TLS_ST_SW_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "EncryptedExtensions",
+          "line": 103,
+          "text": "case TLS_ST_CR_ENCRYPTED_EXTENSIONS:"
+        },
+        {
+          "term": "early_data",
+          "line": 119,
+          "text": "case TLS_ST_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 121,
+          "text": "case TLS_ST_PENDING_EARLY_DATA_END:"
+        },
+        {
+          "term": "early_data",
+          "line": 123,
+          "text": "case TLS_ST_CW_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "early_data",
+          "line": 125,
+          "text": "case TLS_ST_SR_END_OF_EARLY_DATA:"
+        },
+        {
+          "term": "early data",
+          "line": 120,
+          "text": "return \"TLSv1.3 early data\";"
+        },
+        {
+          "term": "early data",
+          "line": 122,
+          "text": "return \"TLSv1.3 pending early data end\";"
+        },
+        {
+          "term": "early data",
+          "line": 124,
+          "text": "return \"TLSv1.3 write end of early data\";"
+        },
+        {
+          "term": "early data",
+          "line": 126,
+          "text": "return \"TLSv1.3 read end of early data\";"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-10-server-must-behave-one-of-three-ways_candidate_1.c",
+    "locations/code/rfc8446-4-2-10-server-must-behave-one-of-three-ways_candidate_2.c",
+    "locations/code/rfc8446-4-2-10-server-must-behave-one-of-three-ways_candidate_3.c",
+    "locations/code/rfc8446-4-2-10-server-must-behave-one-of-three-ways_candidate_4.c",
+    "locations/code/rfc8446-4-2-10-server-must-behave-one-of-three-ways_candidate_5.c",
+    "locations/code/rfc8446-4-2-10-server-must-behave-one-of-three-ways_candidate_6.c",
+    "locations/code/rfc8446-4-2-10-server-must-behave-one-of-three-ways_candidate_7.c",
+    "locations/code/rfc8446-4-2-10-server-must-behave-one-of-three-ways_candidate_8.c",
+    "locations/code/rfc8446-4-2-10-server-must-behave-one-of-three-ways_candidate_9.c",
+    "locations/code/rfc8446-4-2-10-server-must-behave-one-of-three-ways_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1044,
+    "files_with_hits": 42,
+    "functions_identified": 176,
+    "null_scope_hits": 233,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 2007
+  }
+}

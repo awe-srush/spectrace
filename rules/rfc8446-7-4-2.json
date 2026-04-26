@@ -1,0 +1,81 @@
+[
+  {
+    "rule_id": "rfc8446-7.4.2-leading-zeros-must-not-be-truncated",
+    "source_section": "7.4.2",
+    "source_text": "leading zeros found in this octet string MUST NOT be truncated.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "value_constraint",
+    "rule_statement": "Leading zeros in the ECDH shared secret octet string MUST NOT be truncated.",
+    "entity": "both",
+    "applies_when": "Computing ECDH shared secret for secp256r1/secp384r1/secp521r1",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "shared secret maintains constant field element length with leading zeros",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [
+        "key_exchange"
+      ],
+      "extension_names": [
+        "key_share"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "ECDHE",
+        "secp256r1",
+        "secp384r1",
+        "secp521r1"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify via test vectors but hard to observe in live traffic.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-7.4.2-must-check-all-zero-shared-secret",
+    "source_section": "7.4.2",
+    "source_text": "Implementations MUST check whether the computed Diffie-Hellman shared secret is the all-zero value and abort if so, as described in Section 6 of [RFC7748].",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "For X25519/X448, implementations MUST check for all-zero shared secret and abort if found.",
+    "entity": "both",
+    "applies_when": "Computing ECDH shared secret for X25519 or X448",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "abort connection if shared secret is all-zero",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [
+        "key_exchange"
+      ],
+      "extension_names": [
+        "key_share"
+      ],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "ECDHE",
+        "X25519",
+        "X448"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can send low-order point to trigger all-zero check.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

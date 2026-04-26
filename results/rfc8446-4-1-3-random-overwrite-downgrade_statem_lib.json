@@ -1,0 +1,99 @@
+{
+  "rule_id": "rfc8446-4.1.3-random-overwrite-downgrade",
+  "source_file": "ssl/statem/statem_lib.c",
+  "primary_function": "ssl_choose_client_version",
+  "judgment": "conforms",
+  "confidence": "high",
+  "reasoning": "The rule requires that when a server negotiates TLS 1.2 or TLS 1.1, the last 8 bytes of the ServerHello random field MUST be overwritten with the downgrade sentinel value. Tracing the server-side code flow: (1) In `tls_early_post_process_client_hello` (ssl/statem/statem_srvr.c:1848), `dgrd` is initialized to `DOWNGRADE_NONE`. (2) `ssl_choose_server_version` is called, which calls `check_for_downgrade` (ssl/statem/statem_lib.c:2109-2128). `check_for_downgrade` sets `*dgrd = DOWNGRADE_TO_1_2` when negotiating TLS 1.2 and TLS 1.3 is supported, and `*dgrd = DOWNGRADE_TO_1_1` when negotiating below TLS 1.2 (e.g., TLS 1.1) and TLS 1.2 is supported. (3) `ssl_fill_hello_random` (ssl/s3_lib.c:5253-5288) is called with the `dgrd` value. When `dgrd == DOWNGRADE_TO_1_2`, it executes `memcpy(result + len - sizeof(tls12downgrade), tls12downgrade, sizeof(tls12downgrade))`, overwriting the last 8 bytes with the TLS 1.2 downgrade sentinel. When `dgrd == DOWNGRADE_TO_1_1`, it executes `memcpy(result + len - sizeof(tls11downgrade), tls11downgrade, sizeof(tls11downgrade))`, overwriting the last 8 bytes with the TLS 1.1 downgrade sentinel. The sentinel arrays are declared as 8-byte values (`extern const unsigned char tls12downgrade[8]` and `tls11downgrade[8]` in ssl/ssl_local.h:2259-2260), consistent with the RFC's requirement. The remaining bytes are set to random values by `RAND_bytes_ex` before the sentinel overwrite. Both paths (TLS 1.2 and TLS 1.1 negotiation) correctly apply the downgrade sentinel.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [
+      5276,
+      5279,
+      5280,
+      5281,
+      5283,
+      5284
+    ],
+    "key_code_snippet": "if (dgrd == DOWNGRADE_TO_1_2)\n    memcpy(result + len - sizeof(tls12downgrade), tls12downgrade,\n        sizeof(tls12downgrade));\nelse if (dgrd == DOWNGRADE_TO_1_1)\n    memcpy(result + len - sizeof(tls11downgrade), tls11downgrade,\n        sizeof(tls11downgrade));",
+    "expected_behavior": "When negotiating TLS 1.2 or TLS 1.1, the last 8 bytes of the ServerHello random field must be overwritten with the appropriate downgrade sentinel value (DOWNGRADE_SENTINEL_1_2 or DOWNGRADE_SENTINEL_1_1 per RFC 8446 Section 4.1.3).",
+    "paths_checked": 2,
+    "paths_conforming": 2,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "ssl_fill_hello_random",
+    "ssl_choose_server_version",
+    "check_for_downgrade",
+    "tls_early_post_process_client_hello"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 10,
+  "tools_used": [
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls12downgrade"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls11downgrade"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ssl_fill_hello_random"
+      }
+    },
+    {
+      "tool": "get_callers",
+      "input": {
+        "function_name": "ssl_fill_hello_random"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls_early_post_process_client_hello"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ssl_choose_server_version"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "check_for_downgrade"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls12downgrade\\[\\]"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "DOWNGRADE_TO_1_2"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls12downgrade"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 109468,
+    "output": 2099
+  }
+}

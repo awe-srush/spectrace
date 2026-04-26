@@ -1,0 +1,134 @@
+{
+  "rule_id": "rfc8446-4.2.11-external-psk-hash-must-be-set",
+  "rule_type": "value_constraint",
+  "checkability": "medium",
+  "search_terms": [
+    {
+      "term": "pre_shared_key",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "pre_shared_key",
+        "PreSharedKey"
+      ]
+    },
+    {
+      "term": "external PSK",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "external PSK"
+      ]
+    },
+    {
+      "term": "PSK provisioning",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "PSK provisioning"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_psk",
+      "line_range": [
+        2439,
+        2495
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "external PSK"
+        ]
+      },
+      "hits": [
+        {
+          "term": "external PSK",
+          "line": 2475,
+          "text": "* If we used the external PSK for sending early_data then s->early_secret"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_psk",
+      "line_range": [
+        1318,
+        1566
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "pre_shared_key"
+        ]
+      },
+      "hits": [
+        {
+          "term": "pre_shared_key",
+          "line": 1345,
+          "text": "for (id = 0; PACKET_remaining(&identities) != 0 && id < MAX_PRE_SHARED_KEYS; id++) {"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/tls13_enc.c",
+      "function": "tls13_change_cipher_state",
+      "line_range": [
+        478,
+        788
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "external PSK"
+        ]
+      },
+      "hits": [
+        {
+          "term": "external PSK",
+          "line": 559,
+          "text": "* must be using an external PSK."
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-11-external-psk-hash-must-be-set_candidate_1.c",
+    "locations/code/rfc8446-4-2-11-external-psk-hash-must-be-set_candidate_2.c",
+    "locations/code/rfc8446-4-2-11-external-psk-hash-must-be-set_candidate_3.c"
+  ],
+  "stats": {
+    "total_grep_hits": 10,
+    "files_with_hits": 5,
+    "functions_identified": 3,
+    "null_scope_hits": 7,
+    "top_k_returned": 3,
+    "total_lines_in_top_k": 617
+  }
+}

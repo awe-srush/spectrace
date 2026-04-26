@@ -1,0 +1,120 @@
+[
+  {
+    "rule_id": "rfc8446-4.5-client-must-send-eoed-if-server-accepted",
+    "source_section": "4.5",
+    "source_text": "If the server sent an \"early_data\" extension in EncryptedExtensions, the client MUST send an EndOfEarlyData message after receiving the server Finished.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "If the server accepted early data (sent early_data in EE), the client MUST send EndOfEarlyData after receiving server Finished.",
+    "entity": "client",
+    "applies_when": "Server included early_data extension in EncryptedExtensions",
+    "target_message": "EndOfEarlyData",
+    "target_field": null,
+    "expected_value": "EndOfEarlyData sent after server Finished",
+    "related_fields": [
+      "EncryptedExtensions.extensions.early_data"
+    ],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "EndOfEarlyData",
+        "EncryptedExtensions",
+        "Finished"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "early_data"
+      ],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "0-RTT",
+        "early data accepted"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify EndOfEarlyData is sent when early_data is in EE.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.5-client-must-not-send-eoed-if-not-accepted",
+    "source_section": "4.5",
+    "source_text": "If the server does not send an \"early_data\" extension in EncryptedExtensions, then the client MUST NOT send an EndOfEarlyData message.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "conditional_action",
+    "rule_statement": "If the server did not accept early data, the client MUST NOT send EndOfEarlyData.",
+    "entity": "client",
+    "applies_when": "Server did not include early_data extension in EncryptedExtensions",
+    "target_message": "EndOfEarlyData",
+    "target_field": null,
+    "expected_value": "EndOfEarlyData not sent",
+    "related_fields": [
+      "EncryptedExtensions.extensions.early_data"
+    ],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "EndOfEarlyData",
+        "EncryptedExtensions"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "early_data"
+      ],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": [
+        "early data rejected"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify EndOfEarlyData is absent when early_data not in EE.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.5-server-must-not-send-eoed",
+    "source_section": "4.5",
+    "source_text": "Servers MUST NOT send this message, and clients receiving it MUST terminate the connection with an \"unexpected_message\" alert.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "presence_requirement",
+    "rule_statement": "Servers MUST NOT send EndOfEarlyData. Clients receiving it from server MUST terminate with unexpected_message.",
+    "entity": "server",
+    "applies_when": "Server constructs handshake messages",
+    "target_message": "EndOfEarlyData",
+    "target_field": null,
+    "expected_value": "never sent by server",
+    "related_fields": [],
+    "violation_alert": "unexpected_message",
+    "violation_alert_source": "4.5",
+    "protocol_keywords": {
+      "message_types": [
+        "EndOfEarlyData"
+      ],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "unexpected_message"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server never sends this message and client rejects it.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

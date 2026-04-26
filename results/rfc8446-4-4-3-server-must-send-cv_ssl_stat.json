@@ -1,0 +1,26 @@
+{
+  "rule_id": "rfc8446-4.4.3-server-must-send-cv",
+  "source_file": "ssl/ssl_stat.c",
+  "primary_function": "SSL_alert_desc_string_long",
+  "judgment": "not_applicable",
+  "confidence": "high",
+  "reasoning": "The functions SSL_alert_desc_string_long (lines 345-417) and SSL_alert_desc_string (lines 273-343) are simple lookup/translation utilities that convert TLS alert description integer codes into human-readable strings or short abbreviations. They contain no logic related to the TLS handshake, server certificate authentication, or sending of CertificateVerify messages. The rule RFC 8446 \u00a74.4.3 requires that servers send the CertificateVerify message when authenticating via a certificate \u2014 this is a handshake state machine requirement. These functions are completely unrelated to that requirement; they merely map alert code constants (like SSL3_AD_BAD_CERTIFICATE, TLS1_AD_BAD_CERTIFICATE_STATUS_RESPONSE, SSL3_AD_UNEXPECTED_MESSAGE) to string descriptions for diagnostic/logging purposes. The presence of certificate-related alert names and 'unexpected_message' in these functions is purely coincidental to the search terms used to locate them.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [],
+    "key_code_snippet": "const char *SSL_alert_desc_string_long(int value) { switch (value & 0xff) { case SSL3_AD_CLOSE_NOTIFY: return \"close notify\"; ... case SSL3_AD_UNEXPECTED_MESSAGE: return \"unexpected message\"; ... } }",
+    "expected_behavior": "Server should send CertificateVerify message after Certificate when performing certificate-based authentication during TLS 1.3 handshake.",
+    "paths_checked": 2,
+    "paths_conforming": 0,
+    "paths_violating": 0
+  },
+  "functions_explored": [],
+  "context_used_beyond_primary_function": false,
+  "tool_calls_made": 0,
+  "tools_used": [],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 9897,
+    "output": 1278
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "rule_id": "rfc8446-4.2.3-key-type-appropriate",
+  "source_file": "ssl/statem/statem_clnt.c",
+  "primary_function": "tls_process_cert_verify",
+  "judgment": "conforms",
+  "confidence": "high",
+  "reasoning": "The rule requires that certificate keys must be of appropriate type for the signature algorithms they are used with. The actual key-type-to-algorithm consistency check is implemented in tls_process_cert_verify (ssl/statem/statem_lib.c), which processes CertificateVerify messages. Path 1 - When SSL_USE_SIGALGS(s) is true (TLS 1.2 with sigalgs extension and TLS 1.3): tls12_check_peer_sigalg is called (ssl/t1_lib.c:2854-2989), which explicitly verifies the key type matches the signature algorithm: 'if ((pkeyid != lu->sig && (lu->sig != EVP_PKEY_RSA_PSS || pkeyid != EVP_PKEY_RSA))) { SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE); return 0; }'. This ensures the key type (pkeyid) matches the required signature algorithm (lu->sig), with the specific allowance that RSA keys can be used for RSA-PSS signatures. It also verifies sigalg consistency with key OID via ssl_cert_lookup_by_nid. Path 2 - When SSL_USE_SIGALGS(s) is false (legacy/pre-TLS1.2): tls1_set_peer_legacy_sigalg is called, which uses ssl_cert_lookup_by_pkey to identify the key type and retrieves the legacy algorithm corresponding to that key type, so the algorithm is always derived from the key type ensuring consistency. Additionally, before either path, ssl_cert_lookup_by_pkey is called in tls_process_cert_verify to ensure the key is a recognized signing key type. In tls_post_process_server_certificate, the function verifies the certificate key is recognized and for TLS < 1.3, checks it is consistent with the ciphersuite auth mask.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [
+      467,
+      472,
+      2877,
+      2895,
+      2907,
+      2912,
+      2916,
+      2921
+    ],
+    "key_code_snippet": "if ((pkeyid != lu->sig\n    && (lu->sig != EVP_PKEY_RSA_PSS || pkeyid != EVP_PKEY_RSA))) {\n    SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_SIGNATURE_TYPE);\n    return 0;\n}",
+    "expected_behavior": "Certificate keys must be of appropriate type for the signature algorithm used (e.g., RSA key for RSA-PSS, ECDSA key for ECDSA algorithms). The code must reject mismatched key-algorithm combinations.",
+    "paths_checked": 2,
+    "paths_conforming": 2,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "tls_process_cert_verify",
+    "ssl_cert_lookup_by_pkey",
+    "tls12_check_peer_sigalg",
+    "tls1_set_peer_legacy_sigalg",
+    "tls1_get_legacy_sigalg"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 5,
+  "tools_used": [
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls_process_cert_verify"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "ssl_cert_lookup_by_pkey"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls12_check_peer_sigalg"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls1_set_peer_legacy_sigalg"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls1_get_legacy_sigalg"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 73452,
+    "output": 3041
+  }
+}

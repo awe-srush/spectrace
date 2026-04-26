@@ -1,0 +1,101 @@
+{
+  "rule_id": "rfc8446-4.1.4-hrr-must-contain-supported-versions",
+  "source_file": "ssl/statem/statem_lib.c",
+  "primary_function": "ssl_choose_client_version",
+  "judgment": "conforms",
+  "confidence": "high",
+  "reasoning": "The rule requires that a HelloRetryRequest MUST contain the supported_versions extension. The code enforces this requirement on the client side when processing a received HRR.\n\n1. In `ssl_choose_client_version` (statem_lib.c:2323-2328), `tls_parse_extension` is called to parse the `supported_versions` extension from the server's message. If the extension is absent, `tls_parse_extension` (extensions.c:948) simply returns 1 without modifying `s->version`.\n\n2. However, the critical enforcement happens in `final_supported_versions` (extensions.c:1627-1636). This finalizer is registered in the extension definition table (extensions.c:386). When the HRR extensions are parsed via `tls_parse_all_extensions` (called from `tls_process_as_hello_retry_request` at statem_clnt.c:2224 with context `SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST`), the finalizer is invoked for each extension. If `supported_versions` was not sent (`!sent`) and the context is `SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST`, it calls `SSLfatal(s, TLS13_AD_MISSING_EXTENSION, SSL_R_MISSING_SUPPORTED_VERSIONS_EXTENSION)` and returns 0, aborting the handshake with a `missing_extension` alert \u2014 exactly as required by RFC 8446 section 6.2.\n\n3. The server side also has a conforming check: `ssl_choose_server_version` at line 2204 checks `if (!suppversions->present && s->hello_retry_request != SSL_HRR_NONE)` and returns an error, meaning when processing the second ClientHello after an HRR, the server verifies the client included supported_versions.\n\nTogether, these mechanisms ensure that if a HelloRetryRequest is received without the supported_versions extension, the client will detect it and abort with a missing_extension alert.",
+  "evidence": {
+    "violating_lines": [],
+    "conforming_lines": [
+      1627,
+      1628,
+      1629,
+      1630,
+      1631,
+      1632,
+      1633
+    ],
+    "key_code_snippet": "static int final_supported_versions(SSL_CONNECTION *s, unsigned int context, int sent)\n{\n    if (!sent && context == SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST) {\n        SSLfatal(s, TLS13_AD_MISSING_EXTENSION,\n            SSL_R_MISSING_SUPPORTED_VERSIONS_EXTENSION);\n        return 0;\n    }\n    return 1;\n}",
+    "expected_behavior": "When a HelloRetryRequest is received without the supported_versions extension, the client MUST reject it, ideally with a missing_extension alert.",
+    "paths_checked": 2,
+    "paths_conforming": 2,
+    "paths_violating": 0
+  },
+  "functions_explored": [
+    "ssl_choose_client_version",
+    "ssl_choose_server_version",
+    "tls_parse_extension",
+    "tls_construct_stoc_supported_versions",
+    "final_supported_versions"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 10,
+  "tools_used": [
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls_parse_extension"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL_HRR_NONE"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL_HRR_PENDING"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls_construct_hello_retry_request"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "HelloRetryRequest"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "tls_construct_stoc_supported_versions"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "tls_construct_stoc_supported_versions"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "final_supported_versions"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "final_supported_versions"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 95507,
+    "output": 2356
+  }
+}

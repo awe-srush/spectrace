@@ -1,0 +1,1099 @@
+{
+  "rule_id": "rfc8446-5.4-must-not-send-zero-length-hs-alert-content",
+  "rule_type": "value_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "TLSInnerPlaintext",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "TLSInnerPlaintext",
+        "tls_inner_plaintext"
+      ]
+    },
+    {
+      "term": "content",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "content"
+      ]
+    },
+    {
+      "term": "ContentType",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "ContentType",
+        "content_type"
+      ]
+    },
+    {
+      "term": "unexpected_message",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unexpected_message",
+        "UnexpectedMessage"
+      ]
+    },
+    {
+      "term": "record padding",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "record padding"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls13_common_post_process_record",
+      "line_range": [
+        1038,
+        1065
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "content",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "content",
+          "line": 1050,
+          "text": "rl->msg_callback(0, rl->version, SSL3_RT_INNER_CONTENT_TYPE, &ctype,"
+        },
+        {
+          "term": "ContentType",
+          "line": 1050,
+          "text": "rl->msg_callback(0, rl->version, SSL3_RT_INNER_CONTENT_TYPE, &ctype,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1043,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_BAD_RECORD_TYPE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1060,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_BAD_LENGTH);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "crypto/http/http_client.c",
+      "function": "OSSL_HTTP_REQ_CTX_nbio",
+      "line_range": [
+        551,
+        970
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 35,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "content"
+        ]
+      },
+      "hits": [
+        {
+          "term": "content",
+          "line": 575,
+          "text": "if (rctx->expect_asn1 && (rctx->state == OHS_ASN1_HEADER || rctx->state == OHS_ASN1_CONTENT)) {"
+        },
+        {
+          "term": "content",
+          "line": 588,
+          "text": "if (rctx->state == OHS_ERROR_CONTENT) {"
+        },
+        {
+          "term": "content",
+          "line": 590,
+          "text": "OSSL_TRACE(HTTP, \"]\\n\"); /* end of error response content */"
+        },
+        {
+          "term": "content",
+          "line": 592,
+          "text": "(void)check_set_resp_len(\"error response content\", rctx, resp_len);"
+        },
+        {
+          "term": "content",
+          "line": 646,
+          "text": "OSSL_TRACE(HTTP, \"]\\n\"); /* end of request header or content */"
+        },
+        {
+          "term": "content",
+          "line": 660,
+          "text": "OSSL_TRACE1(HTTP, \"Sending request content (likely %s)\\n\","
+        },
+        {
+          "term": "content",
+          "line": 697,
+          "text": "case OHS_ERROR_CONTENT:"
+        },
+        {
+          "term": "content",
+          "line": 723,
+          "text": "if (rctx->state == OHS_ERROR_CONTENT) {"
+        },
+        {
+          "term": "content",
+          "line": 725,
+          "text": "if (!check_max_len(\"error response content\", rctx->max_resp_len, resp_len))"
+        },
+        {
+          "term": "content",
+          "line": 727,
+          "text": "if (OSSL_TRACE_ENABLED(HTTP)) /* dump response content line */"
+        },
+        {
+          "term": "content",
+          "line": 770,
+          "text": "/* must return content if status >= 400 */"
+        },
+        {
+          "term": "content",
+          "line": 799,
+          "text": "if (OPENSSL_strcasecmp(key, \"Content-Type\") == 0) {"
+        },
+        {
+          "term": "content",
+          "line": 806,
+          "text": "ERR_raise_data(ERR_LIB_HTTP, HTTP_R_CONTENT_TYPE_MISMATCH,"
+        },
+        {
+          "term": "content",
+          "line": 807,
+          "text": "\"expected ASN.1 content but got http code %d with Content-Type: %s\","
+        },
+        {
+          "term": "content",
+          "line": 825,
+          "text": "HTTP_R_UNEXPECTED_CONTENT_TYPE,"
+        },
+        {
+          "term": "content",
+          "line": 840,
+          "text": "} else if (OPENSSL_strcasecmp(key, \"Content-Length\") == 0) {"
+        },
+        {
+          "term": "content",
+          "line": 841,
+          "text": "size_t content_len = (size_t)strtoul(value, &line_end, 10);"
+        },
+        {
+          "term": "content",
+          "line": 845,
+          "text": "HTTP_R_ERROR_PARSING_CONTENT_LENGTH,"
+        },
+        {
+          "term": "content",
+          "line": 849,
+          "text": "if (!check_set_resp_len(\"response content-length\", rctx, content_len))"
+        },
+        {
+          "term": "content",
+          "line": 859,
+          "text": "if (*p != '\\0') /* not end of headers or not end of error response content */"
+        },
+        {
+          "term": "content",
+          "line": 877,
+          "text": "rctx->state = OHS_ERROR_CONTENT;"
+        },
+        {
+          "term": "content",
+          "line": 879,
+          "text": "OSSL_TRACE1(HTTP, \"Receiving error response content (likely %s): [\\n\","
+        },
+        {
+          "term": "content",
+          "line": 883,
+          "text": "/* discard response content when trace not enabled */"
+        },
+        {
+          "term": "content",
+          "line": 889,
+          "text": "ERR_raise_data(ERR_LIB_HTTP, HTTP_R_MISSING_CONTENT_TYPE,"
+        },
+        {
+          "term": "content",
+          "line": 899,
+          "text": "/* Note: in non-error situations cannot trace response content */"
+        },
+        {
+          "term": "content",
+          "line": 902,
+          "text": "OSSL_TRACE(HTTP, \"Receiving response text content\\n\");"
+        },
+        {
+          "term": "content",
+          "line": 908,
+          "text": "OSSL_TRACE(HTTP, \"Receiving response ASN.1 content\\n\");"
+        },
+        {
+          "term": "content",
+          "line": 952,
+          "text": "if (!check_set_resp_len(\"ASN.1 DER content\", rctx, resp_len))"
+        },
+        {
+          "term": "content",
+          "line": 956,
+          "text": "OSSL_TRACE1(HTTP, \"Expected response ASN.1 DER content length: %zd\\n\", resp_len);"
+        },
+        {
+          "term": "content",
+          "line": 957,
+          "text": "rctx->state = OHS_ASN1_CONTENT;"
+        },
+        {
+          "term": "content",
+          "line": 960,
+          "text": "case OHS_ASN1_CONTENT:"
+        },
+        {
+          "term": "content",
+          "line": 966,
+          "text": "OSSL_TRACE(HTTP, \"Finished receiving response ASN.1 content\\n\");"
+        },
+        {
+          "term": "ContentType",
+          "line": 806,
+          "text": "ERR_raise_data(ERR_LIB_HTTP, HTTP_R_CONTENT_TYPE_MISMATCH,"
+        },
+        {
+          "term": "ContentType",
+          "line": 825,
+          "text": "HTTP_R_UNEXPECTED_CONTENT_TYPE,"
+        },
+        {
+          "term": "ContentType",
+          "line": 889,
+          "text": "ERR_raise_data(ERR_LIB_HTTP, HTTP_R_MISSING_CONTENT_TYPE,"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "crypto/cms/cms_lib.c",
+      "function": "cms_get0_econtent_type",
+      "line_range": [
+        311,
+        340
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 21,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ContentType",
+          "content"
+        ]
+      },
+      "hits": [
+        {
+          "term": "content",
+          "line": 311,
+          "text": "static ASN1_OBJECT **cms_get0_econtent_type(CMS_ContentInfo *cms)"
+        },
+        {
+          "term": "content",
+          "line": 313,
+          "text": "switch (OBJ_obj2nid(cms->contentType)) {"
+        },
+        {
+          "term": "content",
+          "line": 316,
+          "text": "return &cms->d.signedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "content",
+          "line": 319,
+          "text": "return &cms->d.envelopedData->encryptedContentInfo->contentType;"
+        },
+        {
+          "term": "content",
+          "line": 322,
+          "text": "return &cms->d.digestedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "content",
+          "line": 325,
+          "text": "return &cms->d.encryptedData->encryptedContentInfo->contentType;"
+        },
+        {
+          "term": "content",
+          "line": 328,
+          "text": "return &cms->d.authEnvelopedData->authEncryptedContentInfo"
+        },
+        {
+          "term": "content",
+          "line": 329,
+          "text": "->contentType;"
+        },
+        {
+          "term": "content",
+          "line": 331,
+          "text": "return &cms->d.authenticatedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "content",
+          "line": 334,
+          "text": "return &cms->d.compressedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "content",
+          "line": 337,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_UNSUPPORTED_CONTENT_TYPE);"
+        },
+        {
+          "term": "ContentType",
+          "line": 313,
+          "text": "switch (OBJ_obj2nid(cms->contentType)) {"
+        },
+        {
+          "term": "ContentType",
+          "line": 316,
+          "text": "return &cms->d.signedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 319,
+          "text": "return &cms->d.envelopedData->encryptedContentInfo->contentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 322,
+          "text": "return &cms->d.digestedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 325,
+          "text": "return &cms->d.encryptedData->encryptedContentInfo->contentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 329,
+          "text": "->contentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 331,
+          "text": "return &cms->d.authenticatedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 334,
+          "text": "return &cms->d.compressedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 311,
+          "text": "static ASN1_OBJECT **cms_get0_econtent_type(CMS_ContentInfo *cms)"
+        },
+        {
+          "term": "ContentType",
+          "line": 337,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_UNSUPPORTED_CONTENT_TYPE);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "crypto/cms/cms_ess.c",
+      "function": "ossl_cms_Receipt_verify",
+      "line_range": [
+        256,
+        377
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 20,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "content"
+        ]
+      },
+      "hits": [
+        {
+          "term": "content",
+          "line": 256,
+          "text": "int ossl_cms_Receipt_verify(CMS_ContentInfo *cms, CMS_ContentInfo *req_cms)"
+        },
+        {
+          "term": "content",
+          "line": 269,
+          "text": "/* Get SignerInfos, also checks SignedData content type */"
+        },
+        {
+          "term": "content",
+          "line": 280,
+          "text": "/* Check receipt content type */"
+        },
+        {
+          "term": "content",
+          "line": 281,
+          "text": "if (OBJ_obj2nid(CMS_get0_eContentType(cms)) != NID_id_smime_ct_receipt) {"
+        },
+        {
+          "term": "content",
+          "line": 286,
+          "text": "/* Extract and decode receipt content */"
+        },
+        {
+          "term": "content",
+          "line": 287,
+          "text": "pcont = CMS_get0_content(cms);"
+        },
+        {
+          "term": "content",
+          "line": 289,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_NO_CONTENT);"
+        },
+        {
+          "term": "content",
+          "line": 341,
+          "text": "/* Compare content types */"
+        },
+        {
+          "term": "content",
+          "line": 344,
+          "text": "OBJ_nid2obj(NID_pkcs9_contentType),"
+        },
+        {
+          "term": "content",
+          "line": 347,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_NO_CONTENT_TYPE);"
+        },
+        {
+          "term": "content",
+          "line": 353,
+          "text": "if (OBJ_cmp(octype, rct->contentType)) {"
+        },
+        {
+          "term": "content",
+          "line": 354,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_CONTENT_TYPE_MISMATCH);"
+        },
+        {
+          "term": "content",
+          "line": 365,
+          "text": "if (ASN1_STRING_cmp(rr->signedContentIdentifier,"
+        },
+        {
+          "term": "content",
+          "line": 366,
+          "text": "rct->signedContentIdentifier)) {"
+        },
+        {
+          "term": "content",
+          "line": 367,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_CONTENTIDENTIFIER_MISMATCH);"
+        },
+        {
+          "term": "ContentType",
+          "line": 281,
+          "text": "if (OBJ_obj2nid(CMS_get0_eContentType(cms)) != NID_id_smime_ct_receipt) {"
+        },
+        {
+          "term": "ContentType",
+          "line": 344,
+          "text": "OBJ_nid2obj(NID_pkcs9_contentType),"
+        },
+        {
+          "term": "ContentType",
+          "line": 353,
+          "text": "if (OBJ_cmp(octype, rct->contentType)) {"
+        },
+        {
+          "term": "ContentType",
+          "line": 347,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_NO_CONTENT_TYPE);"
+        },
+        {
+          "term": "ContentType",
+          "line": 354,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_CONTENT_TYPE_MISMATCH);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "crypto/pkcs7/pk7_doit.c",
+      "function": "PKCS7_dataFinal",
+      "line_range": [
+        741,
+        925
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 15,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "content"
+        ]
+      },
+      "hits": [
+        {
+          "term": "content",
+          "line": 761,
+          "text": "ERR_raise(ERR_LIB_PKCS7, PKCS7_R_NO_CONTENT);"
+        },
+        {
+          "term": "content",
+          "line": 805,
+          "text": "if (p7->d.sign->contents == NULL) {"
+        },
+        {
+          "term": "content",
+          "line": 806,
+          "text": "ERR_raise(ERR_LIB_PKCS7, PKCS7_R_NO_CONTENT);"
+        },
+        {
+          "term": "content",
+          "line": 809,
+          "text": "os = PKCS7_get_octet_string(p7->d.sign->contents);"
+        },
+        {
+          "term": "content",
+          "line": 810,
+          "text": "/* If detached data then the content is excluded */"
+        },
+        {
+          "term": "content",
+          "line": 811,
+          "text": "if (PKCS7_type_is_data(p7->d.sign->contents) && p7->detached) {"
+        },
+        {
+          "term": "content",
+          "line": 814,
+          "text": "p7->d.sign->contents->d.data = NULL;"
+        },
+        {
+          "term": "content",
+          "line": 819,
+          "text": "if (p7->d.digest->contents == NULL) {"
+        },
+        {
+          "term": "content",
+          "line": 820,
+          "text": "ERR_raise(ERR_LIB_PKCS7, PKCS7_R_NO_CONTENT);"
+        },
+        {
+          "term": "content",
+          "line": 823,
+          "text": "os = PKCS7_get_octet_string(p7->d.digest->contents);"
+        },
+        {
+          "term": "content",
+          "line": 824,
+          "text": "/* If detached data then the content is excluded */"
+        },
+        {
+          "term": "content",
+          "line": 825,
+          "text": "if (PKCS7_type_is_data(p7->d.digest->contents) && p7->detached) {"
+        },
+        {
+          "term": "content",
+          "line": 828,
+          "text": "p7->d.digest->contents->d.data = NULL;"
+        },
+        {
+          "term": "content",
+          "line": 833,
+          "text": "ERR_raise(ERR_LIB_PKCS7, PKCS7_R_UNSUPPORTED_CONTENT_TYPE);"
+        },
+        {
+          "term": "ContentType",
+          "line": 833,
+          "text": "ERR_raise(ERR_LIB_PKCS7, PKCS7_R_UNSUPPORTED_CONTENT_TYPE);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/t1_trce.c",
+      "function": "SSL_trace",
+      "line_range": [
+        1740,
+        1819
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "content"
+        ]
+      },
+      "hits": [
+        {
+          "term": "content",
+          "line": 1740,
+          "text": "void SSL_trace(int write_p, int version, int content_type,"
+        },
+        {
+          "term": "content",
+          "line": 1750,
+          "text": "if (ossl_quic_trace(write_p, version, content_type, buf, msglen, ssl,"
+        },
+        {
+          "term": "content",
+          "line": 1754,
+          "text": "* Otherwise ossl_quic_trace didn't handle this content_type so we"
+        },
+        {
+          "term": "content",
+          "line": 1763,
+          "text": "switch (content_type) {"
+        },
+        {
+          "term": "content",
+          "line": 1785,
+          "text": "BIO_printf(bio, \"  Content Type = %s (%d)\\n  Length = %d\","
+        },
+        {
+          "term": "content",
+          "line": 1786,
+          "text": "ssl_trace_str(msg[0], ssl_content_tbl), msg[0],"
+        },
+        {
+          "term": "content",
+          "line": 1790,
+          "text": "case SSL3_RT_INNER_CONTENT_TYPE:"
+        },
+        {
+          "term": "content",
+          "line": 1791,
+          "text": "BIO_printf(bio, \"  Inner Content Type = %s (%d)\","
+        },
+        {
+          "term": "content",
+          "line": 1792,
+          "text": "ssl_trace_str(msg[0], ssl_content_tbl), msg[0]);"
+        },
+        {
+          "term": "ContentType",
+          "line": 1740,
+          "text": "void SSL_trace(int write_p, int version, int content_type,"
+        },
+        {
+          "term": "ContentType",
+          "line": 1750,
+          "text": "if (ossl_quic_trace(write_p, version, content_type, buf, msglen, ssl,"
+        },
+        {
+          "term": "ContentType",
+          "line": 1754,
+          "text": "* Otherwise ossl_quic_trace didn't handle this content_type so we"
+        },
+        {
+          "term": "ContentType",
+          "line": 1763,
+          "text": "switch (content_type) {"
+        },
+        {
+          "term": "ContentType",
+          "line": 1790,
+          "text": "case SSL3_RT_INNER_CONTENT_TYPE:"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "crypto/pkcs7/pk7_doit.c",
+      "function": "PKCS7_dataDecode",
+      "line_range": [
+        431,
+        689
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "content"
+        ]
+      },
+      "hits": [
+        {
+          "term": "content",
+          "line": 461,
+          "text": "ERR_raise(ERR_LIB_PKCS7, PKCS7_R_NO_CONTENT);"
+        },
+        {
+          "term": "content",
+          "line": 471,
+          "text": "* p7->d.sign->contents is a PKCS7 structure consisting of a contentType"
+        },
+        {
+          "term": "content",
+          "line": 472,
+          "text": "* field and optional content."
+        },
+        {
+          "term": "content",
+          "line": 473,
+          "text": "* data_body is NULL if that structure has no (=detached) content"
+        },
+        {
+          "term": "content",
+          "line": 474,
+          "text": "* or if the contentType is wrong (i.e., not \"data\")."
+        },
+        {
+          "term": "content",
+          "line": 476,
+          "text": "data_body = PKCS7_get_octet_string(p7->d.sign->contents);"
+        },
+        {
+          "term": "content",
+          "line": 486,
+          "text": "/* data_body is NULL if the optional EncryptedContent is missing. */"
+        },
+        {
+          "term": "content",
+          "line": 502,
+          "text": "/* data_body is NULL if the optional EncryptedContent is missing. */"
+        },
+        {
+          "term": "content",
+          "line": 514,
+          "text": "ERR_raise(ERR_LIB_PKCS7, PKCS7_R_UNSUPPORTED_CONTENT_TYPE);"
+        },
+        {
+          "term": "content",
+          "line": 518,
+          "text": "/* Detached content must be supplied via in_bio instead. */"
+        },
+        {
+          "term": "content",
+          "line": 520,
+          "text": "ERR_raise(ERR_LIB_PKCS7, PKCS7_R_NO_CONTENT);"
+        },
+        {
+          "term": "ContentType",
+          "line": 471,
+          "text": "* p7->d.sign->contents is a PKCS7 structure consisting of a contentType"
+        },
+        {
+          "term": "ContentType",
+          "line": 474,
+          "text": "* or if the contentType is wrong (i.e., not \"data\")."
+        },
+        {
+          "term": "ContentType",
+          "line": 514,
+          "text": "ERR_raise(ERR_LIB_PKCS7, PKCS7_R_UNSUPPORTED_CONTENT_TYPE);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "crypto/cms/cms_lib.c",
+      "function": "CMS_get0_content",
+      "line_range": [
+        269,
+        304
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ContentType",
+          "content"
+        ]
+      },
+      "hits": [
+        {
+          "term": "content",
+          "line": 269,
+          "text": "ASN1_OCTET_STRING **CMS_get0_content(CMS_ContentInfo *cms)"
+        },
+        {
+          "term": "content",
+          "line": 271,
+          "text": "switch (OBJ_obj2nid(cms->contentType)) {"
+        },
+        {
+          "term": "content",
+          "line": 277,
+          "text": "return &cms->d.signedData->encapContentInfo->eContent;"
+        },
+        {
+          "term": "content",
+          "line": 280,
+          "text": "return &cms->d.envelopedData->encryptedContentInfo->encryptedContent;"
+        },
+        {
+          "term": "content",
+          "line": 283,
+          "text": "return &cms->d.digestedData->encapContentInfo->eContent;"
+        },
+        {
+          "term": "content",
+          "line": 286,
+          "text": "return &cms->d.encryptedData->encryptedContentInfo->encryptedContent;"
+        },
+        {
+          "term": "content",
+          "line": 289,
+          "text": "return &cms->d.authEnvelopedData->authEncryptedContentInfo"
+        },
+        {
+          "term": "content",
+          "line": 290,
+          "text": "->encryptedContent;"
+        },
+        {
+          "term": "content",
+          "line": 293,
+          "text": "return &cms->d.authenticatedData->encapContentInfo->eContent;"
+        },
+        {
+          "term": "content",
+          "line": 296,
+          "text": "return &cms->d.compressedData->encapContentInfo->eContent;"
+        },
+        {
+          "term": "content",
+          "line": 301,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_UNSUPPORTED_CONTENT_TYPE);"
+        },
+        {
+          "term": "ContentType",
+          "line": 271,
+          "text": "switch (OBJ_obj2nid(cms->contentType)) {"
+        },
+        {
+          "term": "ContentType",
+          "line": 301,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_UNSUPPORTED_CONTENT_TYPE);"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "crypto/cms/cms_smime.c",
+      "function": "CMS_verify",
+      "line_range": [
+        305,
+        496
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "content"
+        ]
+      },
+      "hits": [
+        {
+          "term": "content",
+          "line": 305,
+          "text": "int CMS_verify(CMS_ContentInfo *cms, const STACK_OF(X509) *certs,"
+        },
+        {
+          "term": "content",
+          "line": 319,
+          "text": "if (dcont == NULL && !check_content(cms))"
+        },
+        {
+          "term": "content",
+          "line": 322,
+          "text": "const ASN1_OBJECT *coid = CMS_get0_eContentType(cms);"
+        },
+        {
+          "term": "content",
+          "line": 401,
+          "text": "* Performance optimization: if the content is a memory BIO then store"
+        },
+        {
+          "term": "content",
+          "line": 402,
+          "text": "* its contents in a temporary read only memory BIO. This avoids"
+        },
+        {
+          "term": "content",
+          "line": 427,
+          "text": "* included content doesn't override detached content."
+        },
+        {
+          "term": "content",
+          "line": 455,
+          "text": "if (!cms_copy_content(out, cmsbio, flags))"
+        },
+        {
+          "term": "content",
+          "line": 458,
+          "text": "if (!(flags & CMS_NO_CONTENT_VERIFY)) {"
+        },
+        {
+          "term": "content",
+          "line": 462,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_CONTENT_VERIFY_ERROR);"
+        },
+        {
+          "term": "ContentType",
+          "line": 322,
+          "text": "const ASN1_OBJECT *coid = CMS_get0_eContentType(cms);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "crypto/cms/cms_smime.c",
+      "function": "CMS_sign_receipt",
+      "line_range": [
+        565,
+        635
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "content"
+        ]
+      },
+      "hits": [
+        {
+          "term": "content",
+          "line": 565,
+          "text": "CMS_ContentInfo *CMS_sign_receipt(CMS_SignerInfo *si,"
+        },
+        {
+          "term": "content",
+          "line": 570,
+          "text": "CMS_ContentInfo *cms = NULL;"
+        },
+        {
+          "term": "content",
+          "line": 577,
+          "text": "/* Not really detached but avoids content being allocated */"
+        },
+        {
+          "term": "content",
+          "line": 592,
+          "text": "/* Set inner content type to signed receipt */"
+        },
+        {
+          "term": "content",
+          "line": 593,
+          "text": "if (!CMS_set1_eContentType(cms, OBJ_nid2obj(NID_id_smime_ct_receipt)))"
+        },
+        {
+          "term": "content",
+          "line": 606,
+          "text": "/* Set content to digest */"
+        },
+        {
+          "term": "content",
+          "line": 620,
+          "text": "/* Set embedded content */"
+        },
+        {
+          "term": "content",
+          "line": 621,
+          "text": "pos = CMS_get0_content(cms);"
+        },
+        {
+          "term": "content",
+          "line": 632,
+          "text": "CMS_ContentInfo_free(cms);"
+        },
+        {
+          "term": "ContentType",
+          "line": 593,
+          "text": "if (!CMS_set1_eContentType(cms, OBJ_nid2obj(NID_id_smime_ct_receipt)))"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-4-must-not-send-zero-length-hs-alert-content_candidate_1.c",
+    "locations/code/rfc8446-5-4-must-not-send-zero-length-hs-alert-content_candidate_2.c",
+    "locations/code/rfc8446-5-4-must-not-send-zero-length-hs-alert-content_candidate_3.c",
+    "locations/code/rfc8446-5-4-must-not-send-zero-length-hs-alert-content_candidate_4.c",
+    "locations/code/rfc8446-5-4-must-not-send-zero-length-hs-alert-content_candidate_5.c",
+    "locations/code/rfc8446-5-4-must-not-send-zero-length-hs-alert-content_candidate_6.c",
+    "locations/code/rfc8446-5-4-must-not-send-zero-length-hs-alert-content_candidate_7.c",
+    "locations/code/rfc8446-5-4-must-not-send-zero-length-hs-alert-content_candidate_8.c",
+    "locations/code/rfc8446-5-4-must-not-send-zero-length-hs-alert-content_candidate_9.c",
+    "locations/code/rfc8446-5-4-must-not-send-zero-length-hs-alert-content_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1436,
+    "files_with_hits": 125,
+    "functions_identified": 302,
+    "null_scope_hits": 535,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1423
+  }
+}

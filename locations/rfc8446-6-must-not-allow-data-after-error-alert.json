@@ -1,0 +1,66 @@
+{
+  "rule_id": "rfc8446-6-must-not-allow-data-after-error-alert",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "error alert",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "error alert"
+      ]
+    },
+    {
+      "term": "connection closure",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "connection closure"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/quic/quic_impl.c",
+      "function": "ossl_quic_conn_shutdown",
+      "line_range": [
+        1544,
+        1662
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "connection closure"
+        ]
+      },
+      "hits": [
+        {
+          "term": "connection closure",
+          "line": 1605,
+          "text": "/* Phase 2: Connection Closure */"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-6-must-not-allow-data-after-error-alert_candidate_1.c"
+  ],
+  "stats": {
+    "total_grep_hits": 1,
+    "files_with_hits": 1,
+    "functions_identified": 1,
+    "null_scope_hits": 0,
+    "top_k_returned": 1,
+    "total_lines_in_top_k": 119
+  }
+}

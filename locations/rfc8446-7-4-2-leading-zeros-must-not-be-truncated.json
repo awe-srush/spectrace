@@ -1,0 +1,557 @@
+{
+  "rule_id": "rfc8446-7.4.2-leading-zeros-must-not-be-truncated",
+  "rule_type": "value_constraint",
+  "checkability": "medium",
+  "search_terms": [
+    {
+      "term": "key_exchange",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "key_exchange",
+        "KeyExchange"
+      ]
+    },
+    {
+      "term": "key_share",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "key_share",
+        "KeyShare"
+      ]
+    },
+    {
+      "term": "ECDHE",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "ECDHE"
+      ]
+    },
+    {
+      "term": "secp256r1",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "secp256r1"
+      ]
+    },
+    {
+      "term": "secp384r1",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "secp384r1"
+      ]
+    },
+    {
+      "term": "secp521r1",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "secp521r1"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_shared_group",
+      "line_range": [
+        1028,
+        1103
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ECDHE",
+          "secp256r1",
+          "secp384r1"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ECDHE",
+          "line": 1046,
+          "text": "if (cid == TLS1_CK_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256)"
+        },
+        {
+          "term": "ECDHE",
+          "line": 1048,
+          "text": "if (cid == TLS1_CK_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384)"
+        },
+        {
+          "term": "secp256r1",
+          "line": 1047,
+          "text": "return OSSL_TLS_GROUP_ID_secp256r1;"
+        },
+        {
+          "term": "secp384r1",
+          "line": 1049,
+          "text": "return OSSL_TLS_GROUP_ID_secp384r1;"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_check_group_id",
+      "line_range": [
+        1833,
+        1884
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ECDHE",
+          "secp256r1",
+          "secp384r1"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ECDHE",
+          "line": 1846,
+          "text": "if (cid == TLS1_CK_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256) {"
+        },
+        {
+          "term": "ECDHE",
+          "line": 1849,
+          "text": "} else if (cid == TLS1_CK_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384) {"
+        },
+        {
+          "term": "secp256r1",
+          "line": 1847,
+          "text": "if (group_id != OSSL_TLS_GROUP_ID_secp256r1)"
+        },
+        {
+          "term": "secp384r1",
+          "line": 1850,
+          "text": "if (group_id != OSSL_TLS_GROUP_ID_secp384r1)"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/t1_lib.c",
+      "function": "tls1_check_ec_tmp_key",
+      "line_range": [
+        2063,
+        2078
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ECDHE",
+          "secp256r1",
+          "secp384r1"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ECDHE",
+          "line": 2072,
+          "text": "if (cid == TLS1_CK_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256)"
+        },
+        {
+          "term": "ECDHE",
+          "line": 2074,
+          "text": "if (cid == TLS1_CK_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384)"
+        },
+        {
+          "term": "secp256r1",
+          "line": 2073,
+          "text": "return tls1_check_group_id(s, OSSL_TLS_GROUP_ID_secp256r1, 1);"
+        },
+        {
+          "term": "secp384r1",
+          "line": 2075,
+          "text": "return tls1_check_group_id(s, OSSL_TLS_GROUP_ID_secp384r1, 1);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_cke_ecdhe",
+      "line_range": [
+        3441,
+        3498
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "field_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ECDHE",
+          "key_exchange",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_exchange",
+          "line": 3457,
+          "text": "* ClientKeyExchange message."
+        },
+        {
+          "term": "key_share",
+          "line": 3481,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_KEY_SHARE);"
+        },
+        {
+          "term": "ECDHE",
+          "line": 3441,
+          "text": "static int tls_process_cke_ecdhe(SSL_CONNECTION *s, PACKET *pkt)"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "send_server_key_exchange",
+      "line_range": [
+        323,
+        356
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ECDHE",
+          "key_exchange"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_exchange",
+          "line": 323,
+          "text": "static int send_server_key_exchange(SSL_CONNECTION *s)"
+        },
+        {
+          "term": "key_exchange",
+          "line": 328,
+          "text": "* only send a ServerKeyExchange if DH or fortezza but we have a"
+        },
+        {
+          "term": "key_exchange",
+          "line": 330,
+          "text": "* ECC ciphersuites, we send a serverKeyExchange message only if"
+        },
+        {
+          "term": "key_exchange",
+          "line": 337,
+          "text": "* PSK: send ServerKeyExchange if PSK identity hint if"
+        },
+        {
+          "term": "key_exchange",
+          "line": 348,
+          "text": "/* SRP: send ServerKeyExchange */"
+        },
+        {
+          "term": "ECDHE",
+          "line": 331,
+          "text": "* the cipher suite is either ECDH-anon or ECDHE. In other cases,"
+        },
+        {
+          "term": "ECDHE",
+          "line": 335,
+          "text": "if (alg_k & (SSL_kDHE | SSL_kECDHE)"
+        },
+        {
+          "term": "ECDHE",
+          "line": 345,
+          "text": "|| (alg_k & (SSL_PSK & (SSL_kDHEPSK | SSL_kECDHEPSK)))"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_construct_server_key_exchange",
+      "line_range": [
+        2833,
+        3157
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ECDHE",
+          "key_exchange"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_exchange",
+          "line": 2833,
+          "text": "CON_FUNC_RETURN tls_construct_server_key_exchange(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "key_exchange",
+          "line": 2997,
+          "text": "SSLfatal(s, SSL_AD_INTERNAL_ERROR, SSL_R_UNKNOWN_KEY_EXCHANGE_TYPE);"
+        },
+        {
+          "term": "key_exchange",
+          "line": 3125,
+          "text": "tbslen = construct_key_exchange_tbs(s, &tbs,"
+        },
+        {
+          "term": "key_exchange",
+          "line": 2976,
+          "text": "* We'll generate the serverKeyExchange message explicitly so we"
+        },
+        {
+          "term": "key_exchange",
+          "line": 3073,
+          "text": "* ServerKeyExchange message has: [1 byte CurveType], [2 byte CurveName]"
+        },
+        {
+          "term": "ECDHE",
+          "line": 2943,
+          "text": "} else if (type & (SSL_kECDHE | SSL_kECDHEPSK)) {"
+        },
+        {
+          "term": "ECDHE",
+          "line": 2950,
+          "text": "/* Get NID of appropriate shared ECDHE curve */"
+        },
+        {
+          "term": "ECDHE",
+          "line": 3070,
+          "text": "if (type & (SSL_kECDHE | SSL_kECDHEPSK)) {"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_key_exchange",
+      "line_range": [
+        2801,
+        2957
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ECDHE",
+          "key_exchange"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_exchange",
+          "line": 2801,
+          "text": "MSG_PROCESS_RETURN tls_process_key_exchange(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "key_exchange",
+          "line": 2919,
+          "text": "tbslen = construct_key_exchange_tbs(s, &tbs, PACKET_data(&params),"
+        },
+        {
+          "term": "ECDHE",
+          "line": 2836,
+          "text": "} else if (alg_k & (SSL_kECDHE | SSL_kECDHEPSK)) {"
+        },
+        {
+          "term": "ECDHE",
+          "line": 2837,
+          "text": "if (!tls_process_ske_ecdhe(s, pkt, &pkey)) {"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_key_exchange",
+      "line_range": [
+        3721,
+        3788
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ECDHE",
+          "key_exchange"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_exchange",
+          "line": 3721,
+          "text": "MSG_PROCESS_RETURN tls_process_client_key_exchange(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "ECDHE",
+          "line": 3755,
+          "text": "} else if (alg_k & (SSL_kECDHE | SSL_kECDHEPSK)) {"
+        },
+        {
+          "term": "ECDHE",
+          "line": 3756,
+          "text": "if (!tls_process_cke_ecdhe(s, pkt)) {"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_construct_client_key_exchange",
+      "line_range": [
+        3970,
+        4019
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ECDHE",
+          "key_exchange"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_exchange",
+          "line": 3970,
+          "text": "CON_FUNC_RETURN tls_construct_client_key_exchange(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "ECDHE",
+          "line": 3991,
+          "text": "} else if (alg_k & (SSL_kECDHE | SSL_kECDHEPSK)) {"
+        },
+        {
+          "term": "ECDHE",
+          "line": 3992,
+          "text": "if (!tls_construct_cke_ecdhe(s, pkt))"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/t1_trce.c",
+      "function": "ssl_print_extension",
+      "line_range": [
+        763,
+        972
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "key_exchange",
+          "key_share"
+        ]
+      },
+      "hits": [
+        {
+          "term": "key_exchange",
+          "line": 908,
+          "text": "ssl_print_hex(bio, indent + 4, \"key_exchange: \", ext, share_len);"
+        },
+        {
+          "term": "key_share",
+          "line": 873,
+          "text": "case TLSEXT_TYPE_key_share:"
+        },
+        {
+          "term": "key_share",
+          "line": 877,
+          "text": "/* We assume this is an HRR, otherwise this is an invalid key_share */"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-7-4-2-leading-zeros-must-not-be-truncated_candidate_1.c",
+    "locations/code/rfc8446-7-4-2-leading-zeros-must-not-be-truncated_candidate_2.c",
+    "locations/code/rfc8446-7-4-2-leading-zeros-must-not-be-truncated_candidate_3.c",
+    "locations/code/rfc8446-7-4-2-leading-zeros-must-not-be-truncated_candidate_4.c",
+    "locations/code/rfc8446-7-4-2-leading-zeros-must-not-be-truncated_candidate_5.c",
+    "locations/code/rfc8446-7-4-2-leading-zeros-must-not-be-truncated_candidate_6.c",
+    "locations/code/rfc8446-7-4-2-leading-zeros-must-not-be-truncated_candidate_7.c",
+    "locations/code/rfc8446-7-4-2-leading-zeros-must-not-be-truncated_candidate_8.c",
+    "locations/code/rfc8446-7-4-2-leading-zeros-must-not-be-truncated_candidate_9.c",
+    "locations/code/rfc8446-7-4-2-leading-zeros-must-not-be-truncated_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 716,
+    "files_with_hits": 24,
+    "functions_identified": 94,
+    "null_scope_hits": 378,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1046
+  }
+}

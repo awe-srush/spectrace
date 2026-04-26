@@ -1,0 +1,176 @@
+[
+  {
+    "rule_id": "rfc8446-4.4.2.3-client-cert-type-must-be-x509v3",
+    "source_section": "4.4.2.3",
+    "source_text": "The certificate type MUST be X.509v3 [RFC5280], unless explicitly negotiated otherwise (e.g., [RFC7250]).",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "The client certificate type MUST be X.509v3 unless another type is explicitly negotiated.",
+    "entity": "client",
+    "applies_when": "Client sends Certificate without negotiating alternative certificate type",
+    "target_message": "Certificate",
+    "target_field": "certificate_list[0]",
+    "expected_value": "X.509v3 certificate",
+    "related_fields": [],
+    "violation_alert": "bad_certificate",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate"
+      ],
+      "field_names": [
+        "cert_data"
+      ],
+      "extension_names": [
+        "client_certificate_type"
+      ],
+      "alert_names": [
+        "bad_certificate"
+      ],
+      "modes_or_conditions": [
+        "client authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify certificate format is X.509v3.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.2.3-cert-should-be-from-listed-ca",
+    "source_section": "4.4.2.3",
+    "source_text": "If the \"certificate_authorities\" extension in the CertificateRequest message was present, at least one of the certificates in the certificate chain SHOULD be issued by one of the listed CAs.",
+    "normative_keyword": "SHOULD",
+    "rule_type": "consistency_check",
+    "rule_statement": "If certificate_authorities was present in CertificateRequest, at least one certificate in the chain SHOULD be issued by a listed CA.",
+    "entity": "client",
+    "applies_when": "CertificateRequest contained certificate_authorities extension",
+    "target_message": "Certificate",
+    "target_field": "certificate_list",
+    "expected_value": "at least one cert issued by listed CA",
+    "related_fields": [
+      "CertificateRequest.extensions.certificate_authorities"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate",
+        "CertificateRequest"
+      ],
+      "field_names": [
+        "certificate_list",
+        "authorities"
+      ],
+      "extension_names": [
+        "certificate_authorities"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "client authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can check certificate issuer against CA list.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit SHOULD.",
+    "cross_section_context_used": [
+      "4.2.4"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.2.3-certs-must-use-acceptable-sig-alg",
+    "source_section": "4.4.2.3",
+    "source_text": "The certificates MUST be signed using an acceptable signature algorithm, as described in Section 4.3.2.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "Client certificates MUST be signed using an acceptable signature algorithm from CertificateRequest.",
+    "entity": "client",
+    "applies_when": "Client selects certificates for authentication",
+    "target_message": "Certificate",
+    "target_field": "certificate_list",
+    "expected_value": "signed with algorithm from CertificateRequest signature_algorithms",
+    "related_fields": [
+      "CertificateRequest.extensions.signature_algorithms"
+    ],
+    "violation_alert": "bad_certificate",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate",
+        "CertificateRequest"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "signature_algorithms",
+        "signature_algorithms_cert"
+      ],
+      "alert_names": [
+        "bad_certificate"
+      ],
+      "modes_or_conditions": [
+        "client authentication"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify certificate signature algorithm is in CertificateRequest's list.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "4.3.2"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.4.2.3-end-entity-must-match-oid-filters",
+    "source_section": "4.4.2.3",
+    "source_text": "If the CertificateRequest message contained a non-empty \"oid_filters\" extension, the end-entity certificate MUST match the extension OIDs that are recognized by the client, as described in Section 4.2.5.",
+    "normative_keyword": "MUST",
+    "rule_type": "consistency_check",
+    "rule_statement": "If CertificateRequest has non-empty oid_filters, the client's end-entity certificate MUST match the recognized extension OIDs.",
+    "entity": "client",
+    "applies_when": "CertificateRequest contained non-empty oid_filters",
+    "target_message": "Certificate",
+    "target_field": "certificate_list[0]",
+    "expected_value": "matches recognized OIDs from oid_filters",
+    "related_fields": [
+      "CertificateRequest.extensions.oid_filters"
+    ],
+    "violation_alert": "unsupported_certificate",
+    "violation_alert_source": "4.2.5",
+    "protocol_keywords": {
+      "message_types": [
+        "Certificate",
+        "CertificateRequest"
+      ],
+      "field_names": [
+        "filters"
+      ],
+      "extension_names": [
+        "oid_filters"
+      ],
+      "alert_names": [
+        "unsupported_certificate"
+      ],
+      "modes_or_conditions": [
+        "client authentication",
+        "OID filtering"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Requires parsing certificate extensions and matching against filter list.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "4.2.5"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

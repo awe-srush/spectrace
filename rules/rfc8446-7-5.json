@@ -1,0 +1,67 @@
+[
+  {
+    "rule_id": "rfc8446-7.5-must-use-exporter-master-secret-by-default",
+    "source_section": "7.5",
+    "source_text": "Implementations MUST use the exporter_master_secret unless explicitly specified by the application.",
+    "normative_keyword": "MUST",
+    "rule_type": "value_constraint",
+    "rule_statement": "Exporters MUST use exporter_master_secret unless the application explicitly specifies early_exporter_master_secret.",
+    "entity": "both",
+    "applies_when": "Application uses TLS exporter interface",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "exporter_master_secret used by default",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "exporter",
+        "key schedule"
+      ]
+    },
+    "checkability": "medium",
+    "checkability_rationale": "Can verify via exporter output but requires application-level testing.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-7.5-must-not-define-same-label-empty-and-absent-context",
+    "source_section": "7.5",
+    "source_text": "Future specifications MUST NOT define a use of exporters that permit both an empty context and no context with the same label.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "value_constraint",
+    "rule_statement": "Exporter labels MUST NOT be defined for use with both empty context and absent context.",
+    "entity": "both",
+    "applies_when": "Defining new exporter label usage",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "each label used with either context or without, not both",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "exporter"
+      ]
+    },
+    "checkability": "low",
+    "checkability_rationale": "Specification-level requirement; not testable at implementation level.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

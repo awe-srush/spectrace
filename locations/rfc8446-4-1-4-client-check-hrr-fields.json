@@ -1,0 +1,909 @@
+{
+  "rule_id": "rfc8446-4.1.4-client-check-hrr-fields",
+  "rule_type": "consistency_check",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "HelloRetryRequest",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "HelloRetryRequest",
+        "hello_retry_request"
+      ]
+    },
+    {
+      "term": "ServerHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ServerHello",
+        "server_hello"
+      ]
+    },
+    {
+      "term": "legacy_version",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "legacy_version",
+        "LegacyVersion"
+      ]
+    },
+    {
+      "term": "legacy_session_id_echo",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "legacy_session_id_echo",
+        "LegacySessionIdEcho"
+      ]
+    },
+    {
+      "term": "cipher_suite",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "cipher_suite",
+        "CipherSuite"
+      ]
+    },
+    {
+      "term": "legacy_compression_method",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "legacy_compression_method",
+        "LegacyCompressionMethod"
+      ]
+    },
+    {
+      "term": "supported_versions",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "supported_versions",
+        "SupportedVersions"
+      ]
+    },
+    {
+      "term": "illegal_parameter",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "illegal_parameter",
+        "IllegalParameter"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 5,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "cipher_suite",
+          "illegal_parameter",
+          "legacy_version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "HelloRetryRequest",
+          "line": 1978,
+          "text": "if (s->hello_retry_request == SSL_HRR_PENDING"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2164,
+          "text": "* ServerHello."
+        },
+        {
+          "term": "legacy_version",
+          "line": 1897,
+          "text": "s->version = s->client_version = clienthello->legacy_version;"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1936,
+          "text": "if (!ssl_cache_cipherlist(s, &clienthello->ciphersuites)"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1937,
+          "text": "|| !ossl_bytes_to_cipher_list(s, &clienthello->ciphersuites, &ciphers, &scsvs, 1)) {"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1970,
+          "text": "/* For TLSv1.3 we must select the ciphersuite *before* session resumption */"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1982,
+          "text": "* A previous HRR picked a different ciphersuite to the one we"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 2045,
+          "text": "* ciphersuite compatibility with the session as part of resumption."
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1891,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, protverr);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1985,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_CIPHER);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2071,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2088,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2204,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2240,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 27,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "cipher_suite",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "HelloRetryRequest",
+          "line": 1746,
+          "text": "if (s->hello_retry_request != SSL_HRR_NONE) {"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1750,
+          "text": "s->hello_retry_request = SSL_HRR_PENDING;"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1800,
+          "text": "if (!tls_collect_extensions(s, &extpkt, SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST,"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1803,
+          "text": "SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST,"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1946,
+          "text": "ret = tls_process_as_hello_retry_request(s, extensions);"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1821,
+          "text": "* ServerHello.random confirmation trick. If that is good"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1967,
+          "text": "* In TLSv1.3 a ServerHello message signals a key change so the end of"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1702,
+          "text": "MSG_PROCESS_RETURN tls_process_server_hello(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1810,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1811,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1838,
+          "text": "prelude[0] = SSL3_MT_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1956,
+          "text": "context = SSL_CONNECTION_IS_TLS13(s) ? SSL_EXT_TLS1_3_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1957,
+          "text": ": SSL_EXT_TLS1_2_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1978,
+          "text": "SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1830,
+          "text": "if (!set_client_ciphersuite(s, cipherchars)) {"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1941,
+          "text": "if (!set_client_ciphersuite(s, cipherchars)) {"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 2080,
+          "text": "if (!set_client_ciphersuite(s, cipherchars)) {"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1776,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_TLS_SESSION_ID_TOO_LONG);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1893,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_ECH_REQUIRED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1924,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1933,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_INVALID_SESSION_ID);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1959,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2031,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2087,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2101,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2108,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COMPRESSION_DISABLED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2116,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "ssl_choose_server_version",
+      "line_range": [
+        2139,
+        2298
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "extension_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "legacy_version",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "HelloRetryRequest",
+          "line": 2178,
+          "text": "* a HelloRetryRequest"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2251,
+          "text": "* This is after a HelloRetryRequest so we better check that we"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2204,
+          "text": "if (!suppversions->present && s->hello_retry_request != SSL_HRR_NONE)"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 2249,
+          "text": "if (s->hello_retry_request != SSL_HRR_NONE) {"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2224,
+          "text": "* ClientHello.legacy_version or ServerHello.legacy_version set to"
+        },
+        {
+          "term": "legacy_version",
+          "line": 2153,
+          "text": "int client_version = hello->legacy_version;"
+        },
+        {
+          "term": "legacy_version",
+          "line": 2224,
+          "text": "* ClientHello.legacy_version or ServerHello.legacy_version set to"
+        },
+        {
+          "term": "legacy_version",
+          "line": 2230,
+          "text": "return SSL_R_BAD_LEGACY_VERSION;"
+        },
+        {
+          "term": "supported_versions",
+          "line": 2189,
+          "text": "suppversions = &hello->pre_proc_exts[TLSEXT_IDX_supported_versions];"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 8,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "illegal_parameter",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "HelloRetryRequest",
+          "line": 1212,
+          "text": "/* Act as if this ClientHello came after a HelloRetryRequest */"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1213,
+          "text": "s->hello_retry_request = SSL_HRR_PENDING;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1159,
+          "text": "if (!WPACKET_put_bytes_u8(&hrrpkt, SSL3_MT_SERVER_HELLO)"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1173,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_supported_versions)"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1076,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COOKIE_MISMATCH);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1099,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1121,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_CIPHER);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1146,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_COOKIE_MISMATCH);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "ssl_choose_client_version",
+      "line_range": [
+        2311,
+        2425
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "illegal_parameter",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "HelloRetryRequest",
+          "line": 2332,
+          "text": "if (s->hello_retry_request != SSL_HRR_NONE"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2324,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2325,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "supported_versions",
+          "line": 2323,
+          "text": "if (!tls_parse_extension(s, TLSEXT_IDX_supported_versions,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2392,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2404,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_supported_versions",
+      "line_range": [
+        2157,
+        2191
+      ],
+      "distinct_terms_matched": 4,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "illegal_parameter",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "HelloRetryRequest",
+          "line": 2180,
+          "text": "if (context == SSL_EXT_TLS1_3_HELLO_RETRY_REQUEST)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2171,
+          "text": "* a ServerHello is TLSv1.3 therefore we shouldn't be getting anything else."
+        },
+        {
+          "term": "supported_versions",
+          "line": 2157,
+          "text": "int tls_parse_stoc_supported_versions(SSL_CONNECTION *s, PACKET *pkt,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 2174,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/ech/ech_internal.c",
+      "function": "ech_decode_inbound_ech",
+      "line_range": [
+        1246,
+        1411
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 15,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "cipher_suite",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "HelloRetryRequest",
+          "line": 1315,
+          "text": "if (pval_tmp == 0 && s->hello_retry_request != SSL_HRR_PENDING) {"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1318,
+          "text": "} else if (pval_tmp > 0 && s->hello_retry_request == SSL_HRR_PENDING) {"
+        },
+        {
+          "term": "HelloRetryRequest",
+          "line": 1353,
+          "text": "} else if (pval_tmp == 0 && s->hello_retry_request == SSL_HRR_PENDING) {"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1262,
+          "text": "*             HpkeSymmetricCipherSuite cipher_suite;"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1262,
+          "text": "*             HpkeSymmetricCipherSuite cipher_suite;"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1280,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1308,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1316,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1328,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1332,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1336,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1349,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1355,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1387,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1391,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_BAD_EXTENSION);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "set_client_ciphersuite",
+      "line_range": [
+        1624,
+        1700
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 3,
+        "categories_present": [
+          "alert_names",
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "cipher_suite",
+          "illegal_parameter"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1657,
+          "text": "/* ServerHello selected a different ciphersuite to that in the HRR */"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1624,
+          "text": "static int set_client_ciphersuite(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1657,
+          "text": "/* ServerHello selected a different ciphersuite to that in the HRR */"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1679,
+          "text": "* ciphersuite as long as the hash is the same."
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1684,
+          "text": "SSL_R_CIPHERSUITE_DIGEST_HAS_CHANGED);"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1690,
+          "text": "* ciphersuite."
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1635,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_UNKNOWN_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1643,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1651,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1658,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_R_WRONG_CIPHER_RETURNED);"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1683,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        },
+        {
+          "term": "illegal_parameter",
+          "line": 1692,
+          "text": "SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER,"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_read_transition",
+      "line_range": [
+        227,
+        408
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "HelloRetryRequest",
+          "ServerHello",
+          "cipher_suite"
+        ]
+      },
+      "hits": [
+        {
+          "term": "HelloRetryRequest",
+          "line": 264,
+          "text": "* HelloRetryRequest."
+        },
+        {
+          "term": "ServerHello",
+          "line": 263,
+          "text": "* data. The only thing allowed now is a ServerHello or a"
+        },
+        {
+          "term": "ServerHello",
+          "line": 295,
+          "text": "* the next server message after the ServerHello to determine if"
+        },
+        {
+          "term": "ServerHello",
+          "line": 247,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "ServerHello",
+          "line": 266,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 309,
+          "text": "/* SKE is optional for some PSK ciphersuites */"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 343,
+          "text": "/* SKE is optional for some PSK ciphersuites */"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_client_hello",
+      "line_range": [
+        1619,
+        1846
+      ],
+      "distinct_terms_matched": 3,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "field_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "cipher_suite",
+          "legacy_version"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1633,
+          "text": "* the ServerHello.random (or ECH extension if HRR) to signal to the client"
+        },
+        {
+          "term": "legacy_version",
+          "line": 1756,
+          "text": "if (!PACKET_get_net_2(pkt, &clienthello->legacy_version)) {"
+        },
+        {
+          "term": "cipher_suite",
+          "line": 1794,
+          "text": "if (!PACKET_get_length_prefixed_2(pkt, &clienthello->ciphersuites)) {"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-1-4-client-check-hrr-fields_candidate_1.c",
+    "locations/code/rfc8446-4-1-4-client-check-hrr-fields_candidate_2.c",
+    "locations/code/rfc8446-4-1-4-client-check-hrr-fields_candidate_3.c",
+    "locations/code/rfc8446-4-1-4-client-check-hrr-fields_candidate_4.c",
+    "locations/code/rfc8446-4-1-4-client-check-hrr-fields_candidate_5.c",
+    "locations/code/rfc8446-4-1-4-client-check-hrr-fields_candidate_6.c",
+    "locations/code/rfc8446-4-1-4-client-check-hrr-fields_candidate_7.c",
+    "locations/code/rfc8446-4-1-4-client-check-hrr-fields_candidate_8.c",
+    "locations/code/rfc8446-4-1-4-client-check-hrr-fields_candidate_9.c",
+    "locations/code/rfc8446-4-1-4-client-check-hrr-fields_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 552,
+    "files_with_hits": 39,
+    "functions_identified": 170,
+    "null_scope_hits": 110,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 2146
+  }
+}

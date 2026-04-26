@@ -1,0 +1,501 @@
+{
+  "rule_id": "rfc8446-4.2.1-tls13-must-send-supported-versions-0x0304",
+  "rule_type": "presence_requirement",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ServerHello",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "ServerHello",
+        "server_hello"
+      ]
+    },
+    {
+      "term": "selected_version",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "selected_version",
+        "SelectedVersion"
+      ]
+    },
+    {
+      "term": "supported_versions",
+      "categories": [
+        "extension_names"
+      ],
+      "variants_searched": [
+        "supported_versions",
+        "SupportedVersions"
+      ]
+    },
+    {
+      "term": "TLS 1.3 negotiation",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "TLS 1.3 negotiation"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "ssl_choose_client_version",
+      "line_range": [
+        2311,
+        2425
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2324,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2325,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "supported_versions",
+          "line": 2323,
+          "text": "if (!tls_parse_extension(s, TLSEXT_IDX_supported_versions,"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_parse_stoc_supported_versions",
+      "line_range": [
+        2157,
+        2191
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ServerHello",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2171,
+          "text": "* a ServerHello is TLSv1.3 therefore we shouldn't be getting anything else."
+        },
+        {
+          "term": "supported_versions",
+          "line": 2157,
+          "text": "int tls_parse_stoc_supported_versions(SSL_CONNECTION *s, PACKET *pkt,"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_parse_ctos_cookie",
+      "line_range": [
+        1008,
+        1219
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1159,
+          "text": "if (!WPACKET_put_bytes_u8(&hrrpkt, SSL3_MT_SERVER_HELLO)"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1173,
+          "text": "if (!WPACKET_put_bytes_u16(&hrrpkt, TLSEXT_TYPE_supported_versions)"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "ssl_choose_server_version",
+      "line_range": [
+        2139,
+        2298
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "extension_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello",
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2224,
+          "text": "* ClientHello.legacy_version or ServerHello.legacy_version set to"
+        },
+        {
+          "term": "supported_versions",
+          "line": 2189,
+          "text": "suppversions = &hello->pre_proc_exts[TLSEXT_IDX_supported_versions];"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "tls_process_server_hello",
+      "line_range": [
+        1702,
+        2202
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 9,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1821,
+          "text": "* ServerHello.random confirmation trick. If that is good"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1967,
+          "text": "* In TLSv1.3 a ServerHello message signals a key change so the end of"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1702,
+          "text": "MSG_PROCESS_RETURN tls_process_server_hello(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1810,
+          "text": "SSL_EXT_TLS1_2_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1811,
+          "text": "| SSL_EXT_TLS1_3_SERVER_HELLO,"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1838,
+          "text": "prelude[0] = SSL3_MT_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1956,
+          "text": "context = SSL_CONNECTION_IS_TLS13(s) ? SSL_EXT_TLS1_3_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1957,
+          "text": ": SSL_EXT_TLS1_2_SERVER_HELLO;"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1978,
+          "text": "SSL_EXT_TLS1_3_SERVER_HELLO,"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/quic/quic_port.c",
+      "function": "port_send_version_negotiation",
+      "line_range": [
+        1309,
+        1379
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "extension_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "supported_versions"
+        ]
+      },
+      "hits": [
+        {
+          "term": "supported_versions",
+          "line": 1316,
+          "text": "uint32_t supported_versions[1];"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1331,
+          "text": "supported_versions[0] = QUIC_VERSION_1;"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1342,
+          "text": "hdr.len = sizeof(supported_versions);"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1343,
+          "text": "hdr.data = (unsigned char *)supported_versions;"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1360,
+          "text": "for (i = 0; i < OSSL_NELEM(supported_versions); i++) {"
+        },
+        {
+          "term": "supported_versions",
+          "line": 1361,
+          "text": "if (!WPACKET_put_bytes_u32(&wpkt, supported_versions[i]))"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_construct_server_hello",
+      "line_range": [
+        2577,
+        2820
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 2577,
+          "text": "CON_FUNC_RETURN tls_construct_server_hello(SSL_CONNECTION *s, WPACKET *pkt)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2658,
+          "text": "? SSL_EXT_TLS1_3_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2659,
+          "text": ": SSL_EXT_TLS1_2_SERVER_HELLO),"
+        },
+        {
+          "term": "ServerHello",
+          "line": 2813,
+          "text": "OSSL_TRACE(TLS, \"Error from tls_construct_server_hello/ech_cb\\n\");"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_get_message_body",
+      "line_range": [
+        1649,
+        1731
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 1705,
+          "text": "#define SERVER_HELLO_RANDOM_OFFSET (SSL3_HM_HEADER_LENGTH + 2)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1710,
+          "text": "if (s->s3.tmp.message_type != SSL3_MT_SERVER_HELLO"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1711,
+          "text": "|| s->init_num < SERVER_HELLO_RANDOM_OFFSET + SSL3_RANDOM_SIZE"
+        },
+        {
+          "term": "ServerHello",
+          "line": 1713,
+          "text": "s->init_buf->data + SERVER_HELLO_RANDOM_OFFSET,"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_read_transition",
+      "line_range": [
+        227,
+        408
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 263,
+          "text": "* data. The only thing allowed now is a ServerHello or a"
+        },
+        {
+          "term": "ServerHello",
+          "line": 295,
+          "text": "* the next server message after the ServerHello to determine if"
+        },
+        {
+          "term": "ServerHello",
+          "line": 247,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        },
+        {
+          "term": "ServerHello",
+          "line": 266,
+          "text": "if (mt == SSL3_MT_SERVER_HELLO) {"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/extensions_cust.c",
+      "function": "custom_ext_parse",
+      "line_range": [
+        113,
+        167
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ServerHello"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ServerHello",
+          "line": 137,
+          "text": "* If it's ServerHello or EncryptedExtensions we can't have any"
+        },
+        {
+          "term": "ServerHello",
+          "line": 123,
+          "text": "if ((context & (SSL_EXT_CLIENT_HELLO | SSL_EXT_TLS1_2_SERVER_HELLO)) != 0)"
+        },
+        {
+          "term": "ServerHello",
+          "line": 135,
+          "text": "if ((context & (SSL_EXT_TLS1_2_SERVER_HELLO | SSL_EXT_TLS1_3_SERVER_HELLO | SSL_EXT_TLS1_3_ENCRYPTED_EXTENSIONS)) != 0) {"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-2-1-tls13-must-send-supported-versions-0x0304_candidate_1.c",
+    "locations/code/rfc8446-4-2-1-tls13-must-send-supported-versions-0x0304_candidate_2.c",
+    "locations/code/rfc8446-4-2-1-tls13-must-send-supported-versions-0x0304_candidate_3.c",
+    "locations/code/rfc8446-4-2-1-tls13-must-send-supported-versions-0x0304_candidate_4.c",
+    "locations/code/rfc8446-4-2-1-tls13-must-send-supported-versions-0x0304_candidate_5.c",
+    "locations/code/rfc8446-4-2-1-tls13-must-send-supported-versions-0x0304_candidate_6.c",
+    "locations/code/rfc8446-4-2-1-tls13-must-send-supported-versions-0x0304_candidate_7.c",
+    "locations/code/rfc8446-4-2-1-tls13-must-send-supported-versions-0x0304_candidate_8.c",
+    "locations/code/rfc8446-4-2-1-tls13-must-send-supported-versions-0x0304_candidate_9.c",
+    "locations/code/rfc8446-4-2-1-tls13-must-send-supported-versions-0x0304_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 138,
+    "files_with_hits": 20,
+    "functions_identified": 41,
+    "null_scope_hits": 57,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1658
+  }
+}

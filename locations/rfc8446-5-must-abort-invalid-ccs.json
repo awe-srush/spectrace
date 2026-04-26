@@ -1,0 +1,669 @@
+{
+  "rule_id": "rfc8446-5-must-abort-invalid-ccs",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "unexpected_message",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unexpected_message",
+        "UnexpectedMessage"
+      ]
+    },
+    {
+      "term": "change_cipher_spec",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "change_cipher_spec",
+        "ChangeCipherSpec"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/record/rec_layer_s3.c",
+      "function": "ssl3_read_bytes",
+      "line_range": [
+        627,
+        1128
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 18,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "change_cipher_spec",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 740,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 770,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_APP_DATA_IN_HANDSHAKE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 777,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_CCS_RECEIVED_EARLY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 860,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 878,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_INVALID_ALERT);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 904,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1023,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_CCS_RECEIVED_EARLY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1082,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1092,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1124,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 737,
+          "text": "if (s->s3.change_cipher_spec /* set when we receive ChangeCipherSpec,"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 756,
+          "text": "|| (rr->type == SSL3_RT_CHANGE_CIPHER_SPEC"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 762,
+          "text": "* SSL3_RT_CHANGE_CIPHER_SPEC"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 775,
+          "text": "&& rr->type == SSL3_RT_CHANGE_CIPHER_SPEC"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 1022,
+          "text": "if (rr->type == SSL3_RT_CHANGE_CIPHER_SPEC) {"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 1084,
+          "text": "case SSL3_RT_CHANGE_CIPHER_SPEC:"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 737,
+          "text": "if (s->s3.change_cipher_spec /* set when we receive ChangeCipherSpec,"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/record/rec_layer_d1.c",
+      "function": "dtls1_read_bytes",
+      "line_range": [
+        197,
+        605
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "change_cipher_spec",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 324,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 386,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_INVALID_ALERT);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 411,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 576,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 586,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 600,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 282,
+          "text": "if (sc->s3.change_cipher_spec /* set when we receive ChangeCipherSpec,"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 311,
+          "text": "|| (rr->type == SSL3_RT_CHANGE_CIPHER_SPEC"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 316,
+          "text": "* SSL3_RT_CHANGE_CIPHER_SPEC"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 472,
+          "text": "if (rr->type == SSL3_RT_CHANGE_CIPHER_SPEC) {"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 578,
+          "text": "case SSL3_RT_CHANGE_CIPHER_SPEC:"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 282,
+          "text": "if (sc->s3.change_cipher_spec /* set when we receive ChangeCipherSpec,"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_dtls.c",
+      "function": "dtls_get_reassembled_message",
+      "line_range": [
+        868,
+        1085
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 12,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "change_cipher_spec",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 930,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 948,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 955,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1022,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 889,
+          "text": "&& s->d1->has_change_cipher_spec && dtls_ccs_expected(s)) {"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 892,
+          "text": "s->d1->has_change_cipher_spec = 0;"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 902,
+          "text": "s->s3.tmp.message_type = SSL3_MT_CHANGE_CIPHER_SPEC;"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 928,
+          "text": "if (recvd_type == SSL3_RT_CHANGE_CIPHER_SPEC) {"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 931,
+          "text": "SSL_R_BAD_CHANGE_CIPHER_SPEC);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 942,
+          "text": "SSL_R_BAD_CHANGE_CIPHER_SPEC);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 945,
+          "text": "s->d1->has_change_cipher_spec = 1;"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 949,
+          "text": "SSL_R_BAD_CHANGE_CIPHER_SPEC);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_change_cipher_spec",
+      "line_range": [
+        772,
+        826
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "change_cipher_spec",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 800,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_CCS_RECEIVED_EARLY);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 772,
+          "text": "MSG_PROCESS_RETURN tls_process_change_cipher_spec(SSL_CONNECTION *s,"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 788,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_CHANGE_CIPHER_SPEC);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 793,
+          "text": "SSLfatal(s, SSL_AD_DECODE_ERROR, SSL_R_BAD_CHANGE_CIPHER_SPEC);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 804,
+          "text": "s->s3.change_cipher_spec = 1;"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 805,
+          "text": "if (!ssl3_do_change_cipher_spec(s)) {"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_get_message_header",
+      "line_range": [
+        1538,
+        1631
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "change_cipher_spec",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 1566,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1587,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 1560,
+          "text": "if (recvd_type == SSL3_RT_CHANGE_CIPHER_SPEC) {"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 1567,
+          "text": "SSL_R_BAD_CHANGE_CIPHER_SPEC);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 1581,
+          "text": "s->s3.tmp.message_type = *mt = SSL3_MT_CHANGE_CIPHER_SPEC;"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 1562,
+          "text": "* A ChangeCipherSpec must be a single byte and may not occur"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls_get_more_records",
+      "line_range": [
+        543,
+        939
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "change_cipher_spec",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 697,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 710,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 908,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 689,
+          "text": "&& thisrr->type == SSL3_RT_CHANGE_CIPHER_SPEC"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 706,
+          "text": "rl->msg_callback(0, TLS1_3_VERSION, SSL3_RT_CHANGE_CIPHER_SPEC,"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_read_transition",
+      "line_range": [
+        227,
+        408
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "change_cipher_spec",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 406,
+          "text": "SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 279,
+          "text": "} else if (mt == SSL3_MT_CHANGE_CIPHER_SPEC) {"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 291,
+          "text": "&& mt == SSL3_MT_CHANGE_CIPHER_SPEC) {"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 376,
+          "text": "} else if (mt == SSL3_MT_CHANGE_CIPHER_SPEC) {"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 383,
+          "text": "if (mt == SSL3_MT_CHANGE_CIPHER_SPEC) {"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_read_transition",
+      "line_range": [
+        190,
+        314
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "change_cipher_spec",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 312,
+          "text": "SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 250,
+          "text": "if (mt == SSL3_MT_CHANGE_CIPHER_SPEC) {"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 269,
+          "text": "if (mt == SSL3_MT_CHANGE_CIPHER_SPEC) {"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 303,
+          "text": "if (mt == SSL3_MT_CHANGE_CIPHER_SPEC) {"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_finished",
+      "line_range": [
+        828,
+        959
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "change_cipher_spec",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 859,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_NOT_ON_RECORD_BOUNDARY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 865,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_GOT_A_FIN_BEFORE_A_CCS);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 864,
+          "text": "if (!SSL_CONNECTION_IS_TLS13(s) && !s->s3.change_cipher_spec) {"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 868,
+          "text": "s->s3.change_cipher_spec = 0;"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/record/methods/tls13_meth.c",
+      "function": "tls13_validate_record_header",
+      "line_range": [
+        256,
+        278
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "change_cipher_spec",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 263,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_BAD_RECORD_TYPE);"
+        },
+        {
+          "term": "change_cipher_spec",
+          "line": 260,
+          "text": "&& (rec->type != SSL3_RT_CHANGE_CIPHER_SPEC"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-must-abort-invalid-ccs_candidate_1.c",
+    "locations/code/rfc8446-5-must-abort-invalid-ccs_candidate_2.c",
+    "locations/code/rfc8446-5-must-abort-invalid-ccs_candidate_3.c",
+    "locations/code/rfc8446-5-must-abort-invalid-ccs_candidate_4.c",
+    "locations/code/rfc8446-5-must-abort-invalid-ccs_candidate_5.c",
+    "locations/code/rfc8446-5-must-abort-invalid-ccs_candidate_6.c",
+    "locations/code/rfc8446-5-must-abort-invalid-ccs_candidate_7.c",
+    "locations/code/rfc8446-5-must-abort-invalid-ccs_candidate_8.c",
+    "locations/code/rfc8446-5-must-abort-invalid-ccs_candidate_9.c",
+    "locations/code/rfc8446-5-must-abort-invalid-ccs_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 143,
+    "files_with_hits": 19,
+    "functions_identified": 46,
+    "null_scope_hits": 17,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 2137
+  }
+}

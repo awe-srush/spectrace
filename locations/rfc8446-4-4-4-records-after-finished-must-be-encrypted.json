@@ -1,0 +1,636 @@
+{
+  "rule_id": "rfc8446-4.4.4-records-after-finished-must-be-encrypted",
+  "rule_type": "ordering_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "Finished",
+      "categories": [
+        "message_types"
+      ],
+      "variants_searched": [
+        "Finished"
+      ]
+    },
+    {
+      "term": "unexpected_message",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unexpected_message",
+        "UnexpectedMessage"
+      ]
+    },
+    {
+      "term": "key transition",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "key transition"
+      ]
+    },
+    {
+      "term": "application traffic",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "application traffic"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/record/rec_layer_d1.c",
+      "function": "dtls1_read_bytes",
+      "line_range": [
+        197,
+        605
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 14,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 232,
+          "text": "if (SSL_is_init_finished(s))"
+        },
+        {
+          "term": "Finished",
+          "line": 283,
+          "text": "* reset by ssl3_get_finished */"
+        },
+        {
+          "term": "Finished",
+          "line": 286,
+          "text": "* We now have application data between CCS and Finished. Most likely"
+        },
+        {
+          "term": "Finished",
+          "line": 502,
+          "text": "* If we are server, we may have a repeated FINISHED of the client"
+        },
+        {
+          "term": "Finished",
+          "line": 503,
+          "text": "* here, then retransmit our CCS and FINISHED."
+        },
+        {
+          "term": "Finished",
+          "line": 505,
+          "text": "if (msg_hdr.type == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 537,
+          "text": "* finished"
+        },
+        {
+          "term": "Finished",
+          "line": 539,
+          "text": "if (!ossl_assert(SSL_is_init_finished(s))) {"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 324,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 386,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_INVALID_ALERT);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 411,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 576,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 586,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 600,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/record/rec_layer_s3.c",
+      "function": "ssl3_read_bytes",
+      "line_range": [
+        627,
+        1128
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 13,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 738,
+          "text": "* reset by ssl3_get_finished */"
+        },
+        {
+          "term": "Finished",
+          "line": 741,
+          "text": "SSL_R_DATA_BETWEEN_CCS_AND_FINISHED);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 740,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 770,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_APP_DATA_IN_HANDSHAKE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 777,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_CCS_RECEIVED_EARLY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 860,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 878,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_INVALID_ALERT);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 904,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1023,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_CCS_RECEIVED_EARLY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1082,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1092,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1124,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_finished",
+      "line_range": [
+        828,
+        959
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "Finished",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 828,
+          "text": "MSG_PROCESS_RETURN tls_process_finished(SSL_CONNECTION *s, PACKET *pkt)"
+        },
+        {
+          "term": "Finished",
+          "line": 854,
+          "text": "* In TLSv1.3 a Finished message signals a key change so the end of the"
+        },
+        {
+          "term": "Finished",
+          "line": 892,
+          "text": "* Copy the finished so we can use it for renegotiation checks"
+        },
+        {
+          "term": "Finished",
+          "line": 899,
+          "text": "memcpy(s->s3.previous_client_finished, s->s3.tmp.peer_finish_md,"
+        },
+        {
+          "term": "Finished",
+          "line": 901,
+          "text": "s->s3.previous_client_finished_len = md_len;"
+        },
+        {
+          "term": "Finished",
+          "line": 903,
+          "text": "memcpy(s->s3.previous_server_finished, s->s3.tmp.peer_finish_md,"
+        },
+        {
+          "term": "Finished",
+          "line": 905,
+          "text": "s->s3.previous_server_finished_len = md_len;"
+        },
+        {
+          "term": "Finished",
+          "line": 927,
+          "text": "if (!tls13_store_server_finished_hash(s)) {"
+        },
+        {
+          "term": "Finished",
+          "line": 958,
+          "text": "return MSG_PROCESS_FINISHED_READING;"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 859,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_NOT_ON_RECORD_BOUNDARY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 865,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_GOT_A_FIN_BEFORE_A_CCS);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "ossl_statem_server_read_transition",
+      "line_range": [
+        190,
+        314
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 284,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 285,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 295,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 296,
+          "text": "st->hand_state = TLS_ST_SR_FINISHED;"
+        },
+        {
+          "term": "Finished",
+          "line": 302,
+          "text": "case TLS_ST_SW_FINISHED:"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 312,
+          "text": "SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/statem/statem_dtls.c",
+      "function": "dtls_get_reassembled_message",
+      "line_range": [
+        868,
+        1085
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 1010,
+          "text": "* correct. Does not count for 'Finished' MAC."
+        },
+        {
+          "term": "unexpected_message",
+          "line": 930,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 948,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 955,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1022,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/statem/statem_clnt.c",
+      "function": "ossl_statem_client_read_transition",
+      "line_range": [
+        227,
+        408
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 370,
+          "text": "case TLS_ST_CW_FINISHED:"
+        },
+        {
+          "term": "Finished",
+          "line": 390,
+          "text": "if (mt == SSL3_MT_FINISHED) {"
+        },
+        {
+          "term": "Finished",
+          "line": 391,
+          "text": "st->hand_state = TLS_ST_CR_FINISHED;"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 406,
+          "text": "SSLfatal(s, SSL3_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/d1_lib.c",
+      "function": "DTLSv1_listen",
+      "line_range": [
+        407,
+        843
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 545,
+          "text": "/* Finished processing the record header, now process the message */"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 512,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 538,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 558,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_UNEXPECTED_MESSAGE);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_get_message_header",
+      "line_range": [
+        1538,
+        1631
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 1601,
+          "text": "* their format is correct. Does not count for 'Finished'"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1566,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1587,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_early_post_process_client_hello",
+      "line_range": [
+        1848,
+        2317
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 1866,
+          "text": "/* Finished parsing the ClientHello, now we can start processing it */"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1906,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_NOT_ON_RECORD_BOUNDARY);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_srvr.c",
+      "function": "tls_process_end_of_early_data",
+      "line_range": [
+        4718,
+        4748
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "message_types"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "Finished",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "Finished",
+          "line": 4740,
+          "text": "s->early_data_state = SSL_EARLY_DATA_FINISHED_READING;"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 4736,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_NOT_ON_RECORD_BOUNDARY);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-4-4-4-records-after-finished-must-be-encrypted_candidate_1.c",
+    "locations/code/rfc8446-4-4-4-records-after-finished-must-be-encrypted_candidate_2.c",
+    "locations/code/rfc8446-4-4-4-records-after-finished-must-be-encrypted_candidate_3.c",
+    "locations/code/rfc8446-4-4-4-records-after-finished-must-be-encrypted_candidate_4.c",
+    "locations/code/rfc8446-4-4-4-records-after-finished-must-be-encrypted_candidate_5.c",
+    "locations/code/rfc8446-4-4-4-records-after-finished-must-be-encrypted_candidate_6.c",
+    "locations/code/rfc8446-4-4-4-records-after-finished-must-be-encrypted_candidate_7.c",
+    "locations/code/rfc8446-4-4-4-records-after-finished-must-be-encrypted_candidate_8.c",
+    "locations/code/rfc8446-4-4-4-records-after-finished-must-be-encrypted_candidate_9.c",
+    "locations/code/rfc8446-4-4-4-records-after-finished-must-be-encrypted_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 455,
+    "files_with_hits": 54,
+    "functions_identified": 146,
+    "null_scope_hits": 73,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 2600
+  }
+}

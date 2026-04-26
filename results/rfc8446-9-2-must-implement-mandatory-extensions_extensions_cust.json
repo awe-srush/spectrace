@@ -1,0 +1,74 @@
+{
+  "rule_id": "rfc8446-9.2-must-implement-mandatory-extensions",
+  "source_file": "ssl/statem/extensions_cust.c",
+  "primary_function": "SSL_extension_supported",
+  "judgment": "violates",
+  "confidence": "high",
+  "reasoning": "RFC 8446 \u00a79.2 requires TLS-compliant applications to implement all of: supported_versions, cookie, signature_algorithms, signature_algorithms_cert, supported_groups, key_share, and server_name. The function SSL_extension_supported (ssl/statem/extensions_cust.c:621-670) lists internally supported extensions and returns 1 for each one. It includes TLSEXT_TYPE_supported_versions (line 651), TLSEXT_TYPE_cookie (line 654), TLSEXT_TYPE_signature_algorithms (line 637), TLSEXT_TYPE_supported_groups (line 627), TLSEXT_TYPE_key_share (line 628), and TLSEXT_TYPE_server_name (line 635) \u2014 but it does NOT include TLSEXT_TYPE_signature_algorithms_cert anywhere in the switch statement. A search of the codebase confirms the type constant exists (used in ssl/statem/extensions.c:338 and ssl/t1_trce.c:498), but it falls through to the 'default: return 0;' branch. Furthermore, a comment at ssl/statem/extensions.c:343 explicitly states 'We do not generate signature_algorithms_cert at present,' confirming this extension is not implemented as a built-in supported extension. This means the function does not declare support for a mandatory extension required by RFC 8446 \u00a79.2.",
+  "evidence": {
+    "violating_lines": [
+      669
+    ],
+    "conforming_lines": [
+      627,
+      628,
+      635,
+      637,
+      651,
+      654
+    ],
+    "key_code_snippet": "case TLSEXT_TYPE_signature_algorithms:\n    ...\ncase TLSEXT_TYPE_supported_versions:\n    ...\ncase TLSEXT_TYPE_cookie:\n    ...\n    return 1;\ndefault:\n    return 0;\n// TLSEXT_TYPE_signature_algorithms_cert is absent from the switch; comment in ssl/statem/extensions.c:343 states: 'We do not generate signature_algorithms_cert at present.'",
+    "expected_behavior": "SSL_extension_supported should return 1 for TLSEXT_TYPE_signature_algorithms_cert, as RFC 8446 \u00a79.2 mandates that TLS-compliant implementations support the signature_algorithms_cert extension.",
+    "paths_checked": 1,
+    "paths_conforming": 0,
+    "paths_violating": 1
+  },
+  "functions_explored": [
+    "SSL_extension_supported"
+  ],
+  "context_used_beyond_primary_function": true,
+  "tool_calls_made": 6,
+  "tools_used": [
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLSEXT_TYPE_signature_algorithms_cert"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "signature_algorithms_cert"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "SSL_extension_supported"
+      }
+    },
+    {
+      "tool": "search_symbol",
+      "input": {
+        "symbol": "TLSEXT_TYPE_signature_algorithms_cert"
+      }
+    },
+    {
+      "tool": "get_function_source",
+      "input": {
+        "function_name": "get_callers"
+      }
+    },
+    {
+      "tool": "get_callers",
+      "input": {
+        "function_name": "SSL_extension_supported"
+      }
+    }
+  ],
+  "model": "claude-sonnet-4-6",
+  "tokens_used": {
+    "input": 22330,
+    "output": 2100
+  }
+}

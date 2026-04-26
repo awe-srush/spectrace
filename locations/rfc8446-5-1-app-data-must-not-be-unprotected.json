@@ -1,0 +1,570 @@
+{
+  "rule_id": "rfc8446-5.1-app-data-must-not-be-unprotected",
+  "rule_type": "ordering_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "ContentType",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "ContentType",
+        "content_type"
+      ]
+    },
+    {
+      "term": "unexpected_message",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unexpected_message",
+        "UnexpectedMessage"
+      ]
+    },
+    {
+      "term": "record protection",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "record protection"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls13_common_post_process_record",
+      "line_range": [
+        1038,
+        1065
+      ],
+      "distinct_terms_matched": 2,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 2,
+        "categories_present": [
+          "alert_names",
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType",
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 1050,
+          "text": "rl->msg_callback(0, rl->version, SSL3_RT_INNER_CONTENT_TYPE, &ctype,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1043,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_BAD_RECORD_TYPE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1060,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_BAD_LENGTH);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/record/rec_layer_s3.c",
+      "function": "ssl3_read_bytes",
+      "line_range": [
+        627,
+        1128
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 740,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 770,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_APP_DATA_IN_HANDSHAKE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 777,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_CCS_RECEIVED_EARLY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 860,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 878,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_INVALID_ALERT);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 904,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1023,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_CCS_RECEIVED_EARLY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1082,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1092,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1124,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "crypto/cms/cms_lib.c",
+      "function": "cms_get0_econtent_type",
+      "line_range": [
+        311,
+        340
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 10,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 313,
+          "text": "switch (OBJ_obj2nid(cms->contentType)) {"
+        },
+        {
+          "term": "ContentType",
+          "line": 316,
+          "text": "return &cms->d.signedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 319,
+          "text": "return &cms->d.envelopedData->encryptedContentInfo->contentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 322,
+          "text": "return &cms->d.digestedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 325,
+          "text": "return &cms->d.encryptedData->encryptedContentInfo->contentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 329,
+          "text": "->contentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 331,
+          "text": "return &cms->d.authenticatedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 334,
+          "text": "return &cms->d.compressedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 311,
+          "text": "static ASN1_OBJECT **cms_get0_econtent_type(CMS_ContentInfo *cms)"
+        },
+        {
+          "term": "ContentType",
+          "line": 337,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_UNSUPPORTED_CONTENT_TYPE);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/record/rec_layer_d1.c",
+      "function": "dtls1_read_bytes",
+      "line_range": [
+        197,
+        605
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 324,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 386,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_INVALID_ALERT);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 411,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 576,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 586,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 600,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "crypto/cms/cms_ess.c",
+      "function": "ossl_cms_Receipt_verify",
+      "line_range": [
+        256,
+        377
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 281,
+          "text": "if (OBJ_obj2nid(CMS_get0_eContentType(cms)) != NID_id_smime_ct_receipt) {"
+        },
+        {
+          "term": "ContentType",
+          "line": 344,
+          "text": "OBJ_nid2obj(NID_pkcs9_contentType),"
+        },
+        {
+          "term": "ContentType",
+          "line": 353,
+          "text": "if (OBJ_cmp(octype, rct->contentType)) {"
+        },
+        {
+          "term": "ContentType",
+          "line": 347,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_NO_CONTENT_TYPE);"
+        },
+        {
+          "term": "ContentType",
+          "line": 354,
+          "text": "ERR_raise(ERR_LIB_CMS, CMS_R_CONTENT_TYPE_MISMATCH);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/t1_trce.c",
+      "function": "SSL_trace",
+      "line_range": [
+        1740,
+        1819
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 1740,
+          "text": "void SSL_trace(int write_p, int version, int content_type,"
+        },
+        {
+          "term": "ContentType",
+          "line": 1750,
+          "text": "if (ossl_quic_trace(write_p, version, content_type, buf, msglen, ssl,"
+        },
+        {
+          "term": "ContentType",
+          "line": 1754,
+          "text": "* Otherwise ossl_quic_trace didn't handle this content_type so we"
+        },
+        {
+          "term": "ContentType",
+          "line": 1763,
+          "text": "switch (content_type) {"
+        },
+        {
+          "term": "ContentType",
+          "line": 1790,
+          "text": "case SSL3_RT_INNER_CONTENT_TYPE:"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls_setup_write_buffer",
+      "line_range": [
+        142,
+        220
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 150,
+          "text": "size_t contenttypelen = 0;"
+        },
+        {
+          "term": "ContentType",
+          "line": 160,
+          "text": "contenttypelen = 1;"
+        },
+        {
+          "term": "ContentType",
+          "line": 167,
+          "text": "+ contenttypelen + SSL3_RT_SEND_MAX_ENCRYPTED_OVERHEAD;"
+        },
+        {
+          "term": "ContentType",
+          "line": 174,
+          "text": "* when we don't have an explicit IV. The contenttype byte will also"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "crypto/cms/cms_sd.c",
+      "function": "cms_set_si_contentType_attr",
+      "line_range": [
+        125,
+        133
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": true,
+        "terms_matched": [
+          "ContentType"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 125,
+          "text": "static int cms_set_si_contentType_attr(CMS_ContentInfo *cms, CMS_SignerInfo *si)"
+        },
+        {
+          "term": "ContentType",
+          "line": 127,
+          "text": "ASN1_OBJECT *ctype = cms->d.signedData->encapContentInfo->eContentType;"
+        },
+        {
+          "term": "ContentType",
+          "line": 129,
+          "text": "/* Add the contentType attribute */"
+        },
+        {
+          "term": "ContentType",
+          "line": 130,
+          "text": "return CMS_signed_add1_attr_by_NID(si, NID_pkcs9_contentType,"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "crypto/http/http_client.c",
+      "function": "OSSL_HTTP_set1_request",
+      "line_range": [
+        1159,
+        1186
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 1161,
+          "text": "const char *content_type, BIO *req,"
+        },
+        {
+          "term": "ContentType",
+          "line": 1162,
+          "text": "const char *expected_content_type, int expect_asn1,"
+        },
+        {
+          "term": "ContentType",
+          "line": 1183,
+          "text": "&& OSSL_HTTP_REQ_CTX_set_expected(rctx, expected_content_type,"
+        },
+        {
+          "term": "ContentType",
+          "line": 1185,
+          "text": "&& set1_content(rctx, content_type, req);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "crypto/pkcs7/pk7_lib.c",
+      "function": "PKCS7_set_type",
+      "line_range": [
+        116,
+        185
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "ContentType"
+        ]
+      },
+      "hits": [
+        {
+          "term": "ContentType",
+          "line": 148,
+          "text": "p7->d.signed_and_enveloped->enc_data->content_type"
+        },
+        {
+          "term": "ContentType",
+          "line": 158,
+          "text": "p7->d.enveloped->enc_data->content_type = OBJ_nid2obj(NID_pkcs7_data);"
+        },
+        {
+          "term": "ContentType",
+          "line": 167,
+          "text": "p7->d.encrypted->enc_data->content_type = OBJ_nid2obj(NID_pkcs7_data);"
+        },
+        {
+          "term": "ContentType",
+          "line": 179,
+          "text": "ERR_raise(ERR_LIB_PKCS7, PKCS7_R_UNSUPPORTED_CONTENT_TYPE);"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-1-app-data-must-not-be-unprotected_candidate_1.c",
+    "locations/code/rfc8446-5-1-app-data-must-not-be-unprotected_candidate_2.c",
+    "locations/code/rfc8446-5-1-app-data-must-not-be-unprotected_candidate_3.c",
+    "locations/code/rfc8446-5-1-app-data-must-not-be-unprotected_candidate_4.c",
+    "locations/code/rfc8446-5-1-app-data-must-not-be-unprotected_candidate_5.c",
+    "locations/code/rfc8446-5-1-app-data-must-not-be-unprotected_candidate_6.c",
+    "locations/code/rfc8446-5-1-app-data-must-not-be-unprotected_candidate_7.c",
+    "locations/code/rfc8446-5-1-app-data-must-not-be-unprotected_candidate_8.c",
+    "locations/code/rfc8446-5-1-app-data-must-not-be-unprotected_candidate_9.c",
+    "locations/code/rfc8446-5-1-app-data-must-not-be-unprotected_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 249,
+    "files_with_hits": 53,
+    "functions_identified": 104,
+    "null_scope_hits": 48,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 1357
+  }
+}

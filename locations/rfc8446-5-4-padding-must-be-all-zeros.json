@@ -1,0 +1,427 @@
+{
+  "rule_id": "rfc8446-5.4-padding-must-be-all-zeros",
+  "rule_type": "value_constraint",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "zeros",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "zeros"
+      ]
+    },
+    {
+      "term": "TLSInnerPlaintext",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "TLSInnerPlaintext",
+        "tls_inner_plaintext"
+      ]
+    },
+    {
+      "term": "record padding",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "record padding"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "crypto/evp/enc_b64_avx2.c",
+      "function": "insert_nl_gt16",
+      "line_range": [
+        270,
+        344
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 5,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "zeros"
+        ]
+      },
+      "hits": [
+        {
+          "term": "zeros",
+          "line": 295,
+          "text": "__m256i shifted_0_L = shift_left_zeros(shift_right_zeros(v0, wrap_rem),"
+        },
+        {
+          "term": "zeros",
+          "line": 297,
+          "text": "__m256i mask_shifted_0_L = shift_left_zeros(all_ff_mask, wrap_rem + surplus_0);"
+        },
+        {
+          "term": "zeros",
+          "line": 299,
+          "text": "__m256i shifted_1_L = shift_left_zeros(v0, 1);"
+        },
+        {
+          "term": "zeros",
+          "line": 313,
+          "text": "__m256i shifted_1_L = shift_left_zeros(shift_right_zeros(v0, wrap_rem_1),"
+        },
+        {
+          "term": "zeros",
+          "line": 315,
+          "text": "__m256i mask_shifted_1_L = shift_left_zeros(all_ff_mask, wrap_rem_1 + surplus_0 + surplus_1);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/statem/extensions_clnt.c",
+      "function": "tls_construct_ctos_ech",
+      "line_range": [
+        2608,
+        2820
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "zeros"
+        ]
+      },
+      "hits": [
+        {
+          "term": "zeros",
+          "line": 2665,
+          "text": "* entire thing has been constructed, putting in zeros for now where"
+        },
+        {
+          "term": "zeros",
+          "line": 2731,
+          "text": "* zeros for where the ECH ciphertext octets will later be placed. So we"
+        },
+        {
+          "term": "zeros",
+          "line": 2732,
+          "text": "* add the ECH extension to the |pkt| but with zeros for ciphertext, that"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/extensions_srvr.c",
+      "function": "tls_construct_stoc_ech",
+      "line_range": [
+        2523,
+        2619
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "zeros"
+        ]
+      },
+      "hits": [
+        {
+          "term": "zeros",
+          "line": 2534,
+          "text": "unsigned char eightzeros[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };"
+        },
+        {
+          "term": "zeros",
+          "line": 2537,
+          "text": "|| !WPACKET_sub_memcpy_u16(pkt, eightzeros, 8)) {"
+        },
+        {
+          "term": "zeros",
+          "line": 2543,
+          "text": "BIO_printf(trc_out, \"set 8 zeros for ECH accept confirm in HRR\\n\");"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/ech/ech_internal.c",
+      "function": "ech_hkdf_extract_wrap",
+      "line_range": [
+        930,
+        995
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "zeros"
+        ]
+      },
+      "hits": [
+        {
+          "term": "zeros",
+          "line": 935,
+          "text": "unsigned char notsecret[EVP_MAX_MD_SIZE], zeros[EVP_MAX_MD_SIZE];"
+        },
+        {
+          "term": "zeros",
+          "line": 952,
+          "text": "memset(zeros, 0, EVP_MAX_MD_SIZE);"
+        },
+        {
+          "term": "zeros",
+          "line": 973,
+          "text": "|| EVP_PKEY_CTX_set1_hkdf_salt(pctx, zeros, (int)hashlen) != 1"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "crypto/ec/ecp_nistp256.c",
+      "function": "felem_shrink",
+      "line_range": [
+        376,
+        465
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "zeros"
+        ]
+      },
+      "hits": [
+        {
+          "term": "zeros",
+          "line": 427,
+          "text": "*   all zeros  if the high word of tmp[3] if 0"
+        },
+        {
+          "term": "zeros",
+          "line": 434,
+          "text": "*   all zeros  if the MSB of low if 0"
+        },
+        {
+          "term": "zeros",
+          "line": 444,
+          "text": "*   all zeros  if low was <= kPrime3Test"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "crypto/ec/ecp_sm2p256.c",
+      "function": "ecp_sm2p256_point_add_affine",
+      "line_range": [
+        214,
+        274
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "zeros"
+        ]
+      },
+      "hits": [
+        {
+          "term": "zeros",
+          "line": 224,
+          "text": "if (is_zeros(P->Z)) {"
+        },
+        {
+          "term": "zeros",
+          "line": 243,
+          "text": "if (is_zeros(tmp0)) {"
+        },
+        {
+          "term": "zeros",
+          "line": 244,
+          "text": "if (is_zeros(tmp1)) {"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/ech/ech_internal.c",
+      "function": "ossl_ech_aad_and_encrypt",
+      "line_range": [
+        686,
+        756
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "zeros"
+        ]
+      },
+      "hits": [
+        {
+          "term": "zeros",
+          "line": 712,
+          "text": "/* where we'll replace zeros with ciphertext */"
+        },
+        {
+          "term": "zeros",
+          "line": 727,
+          "text": "clear = OPENSSL_zalloc(clear_len); /* zeros incl. padding */"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/ech/ech_internal.c",
+      "function": "hpke_decrypt_encch",
+      "line_range": [
+        1752,
+        1918
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "zeros"
+        ]
+      },
+      "hits": [
+        {
+          "term": "zeros",
+          "line": 1858,
+          "text": "/* RFC 9849 pads after the encoded CH with zeros */"
+        },
+        {
+          "term": "zeros",
+          "line": 1895,
+          "text": "/* The RFC calls for that padding to be all zeros */"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "crypto/modes/wrap128.c",
+      "function": "CRYPTO_128_unwrap_pad",
+      "line_range": [
+        258,
+        338
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "zeros"
+        ]
+      },
+      "hits": [
+        {
+          "term": "zeros",
+          "line": 270,
+          "text": "static unsigned char zeros[8] = { 0x0 };"
+        },
+        {
+          "term": "zeros",
+          "line": 331,
+          "text": "if (CRYPTO_memcmp(out + ptext_len, zeros, padding_len) != 0) {"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "crypto/modes/ocb128.c",
+      "function": "ocb_ntz",
+      "line_range": [
+        20,
+        37
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "field_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "zeros"
+        ]
+      },
+      "hits": [
+        {
+          "term": "zeros",
+          "line": 26,
+          "text": "* efficient as the distribution of trailing zeros is not uniform,"
+        },
+        {
+          "term": "zeros",
+          "line": 27,
+          "text": "* e.g. the number of possible inputs with no trailing zeros is equal to"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-4-padding-must-be-all-zeros_candidate_1.c",
+    "locations/code/rfc8446-5-4-padding-must-be-all-zeros_candidate_2.c",
+    "locations/code/rfc8446-5-4-padding-must-be-all-zeros_candidate_3.c",
+    "locations/code/rfc8446-5-4-padding-must-be-all-zeros_candidate_4.c",
+    "locations/code/rfc8446-5-4-padding-must-be-all-zeros_candidate_5.c",
+    "locations/code/rfc8446-5-4-padding-must-be-all-zeros_candidate_6.c",
+    "locations/code/rfc8446-5-4-padding-must-be-all-zeros_candidate_7.c",
+    "locations/code/rfc8446-5-4-padding-must-be-all-zeros_candidate_8.c",
+    "locations/code/rfc8446-5-4-padding-must-be-all-zeros_candidate_9.c",
+    "locations/code/rfc8446-5-4-padding-must-be-all-zeros_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 104,
+    "files_with_hits": 38,
+    "functions_identified": 48,
+    "null_scope_hits": 35,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 939
+  }
+}

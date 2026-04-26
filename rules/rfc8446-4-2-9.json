@@ -1,0 +1,291 @@
+[
+  {
+    "rule_id": "rfc8446-4.2.9-client-must-send-psk-modes-with-psk",
+    "source_section": "4.2.9",
+    "source_text": "In order to use PSKs, clients MUST also send a \"psk_key_exchange_modes\" extension.",
+    "normative_keyword": "MUST",
+    "rule_type": "presence_requirement",
+    "rule_statement": "Clients using PSKs MUST also send the psk_key_exchange_modes extension.",
+    "entity": "client",
+    "applies_when": "Client includes pre_shared_key extension in ClientHello",
+    "target_message": "ClientHello",
+    "target_field": "extensions",
+    "expected_value": "psk_key_exchange_modes extension present when pre_shared_key is present",
+    "related_fields": [
+      "pre_shared_key"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "ke_modes"
+      ],
+      "extension_names": [
+        "psk_key_exchange_modes",
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "PSK"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct check that both extensions are present together.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.9-must-provide-psk-modes-if-psk",
+    "source_section": "4.2.9",
+    "source_text": "A client MUST provide a \"psk_key_exchange_modes\" extension if it offers a \"pre_shared_key\" extension.",
+    "normative_keyword": "MUST",
+    "rule_type": "presence_requirement",
+    "rule_statement": "A client MUST provide psk_key_exchange_modes if it offers pre_shared_key.",
+    "entity": "client",
+    "applies_when": "Client offers pre_shared_key in ClientHello",
+    "target_message": "ClientHello",
+    "target_field": "extensions",
+    "expected_value": "psk_key_exchange_modes present",
+    "related_fields": [
+      "pre_shared_key"
+    ],
+    "violation_alert": "missing_extension",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [
+        "ke_modes"
+      ],
+      "extension_names": [
+        "psk_key_exchange_modes",
+        "pre_shared_key"
+      ],
+      "alert_names": [
+        "missing_extension"
+      ],
+      "modes_or_conditions": [
+        "PSK"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Direct presence check.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST, reinforces previous rule.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.9-server-must-abort-if-missing-modes",
+    "source_section": "4.2.9",
+    "source_text": "If clients offer \"pre_shared_key\" without a \"psk_key_exchange_modes\" extension, servers MUST abort the handshake.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Servers MUST abort the handshake if the client offers pre_shared_key without psk_key_exchange_modes.",
+    "entity": "server",
+    "applies_when": "Server receives ClientHello with pre_shared_key but without psk_key_exchange_modes",
+    "target_message": "ClientHello",
+    "target_field": null,
+    "expected_value": null,
+    "related_fields": [
+      "pre_shared_key",
+      "psk_key_exchange_modes"
+    ],
+    "violation_alert": "missing_extension",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "pre_shared_key",
+        "psk_key_exchange_modes"
+      ],
+      "alert_names": [
+        "missing_extension"
+      ],
+      "modes_or_conditions": [
+        "PSK"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server checks for both extensions and aborts appropriately.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.9-server-must-not-select-unlisted-mode",
+    "source_section": "4.2.9",
+    "source_text": "Servers MUST NOT select a key exchange mode that is not listed by the client.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "value_constraint",
+    "rule_statement": "Servers MUST NOT select a PSK key exchange mode not listed in the client's psk_key_exchange_modes extension.",
+    "entity": "server",
+    "applies_when": "Server selects PSK key exchange mode",
+    "target_message": "ServerHello",
+    "target_field": null,
+    "expected_value": "selected mode in client's ke_modes list",
+    "related_fields": [
+      "ClientHello.psk_key_exchange_modes.ke_modes"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello",
+        "ClientHello"
+      ],
+      "field_names": [
+        "ke_modes"
+      ],
+      "extension_names": [
+        "psk_key_exchange_modes",
+        "key_share"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "PSK",
+        "key exchange mode selection"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server's mode selection is from client's offered list.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.9-server-must-not-send-extension",
+    "source_section": "4.2.9",
+    "source_text": "The server MUST NOT send a \"psk_key_exchange_modes\" extension.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "presence_requirement",
+    "rule_statement": "Servers MUST NOT send the psk_key_exchange_modes extension (it is client-only).",
+    "entity": "server",
+    "applies_when": "Server constructs any handshake message",
+    "target_message": "ServerHello",
+    "target_field": "extensions",
+    "expected_value": "psk_key_exchange_modes not present",
+    "related_fields": [],
+    "violation_alert": "unsupported_extension",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello",
+        "EncryptedExtensions"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "psk_key_exchange_modes"
+      ],
+      "alert_names": [
+        "unsupported_extension"
+      ],
+      "modes_or_conditions": []
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify server never includes this extension.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.9-psk-ke-no-key-share",
+    "source_section": "4.2.9",
+    "source_text": "psk_ke: PSK-only key establishment. In this mode, the server MUST NOT supply a \"key_share\" value.",
+    "normative_keyword": "MUST NOT",
+    "rule_type": "presence_requirement",
+    "rule_statement": "In psk_ke mode (PSK-only), the server MUST NOT supply a key_share value in ServerHello.",
+    "entity": "server",
+    "applies_when": "Server uses psk_ke (PSK-only) key exchange mode",
+    "target_message": "ServerHello",
+    "target_field": "extensions",
+    "expected_value": "no key_share extension",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "key_share",
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "psk_ke",
+        "PSK-only"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify key_share is absent from ServerHello in psk_ke mode.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST NOT.",
+    "cross_section_context_used": [
+      "4.2.8"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-4.2.9-psk-dhe-ke-must-supply-key-share",
+    "source_section": "4.2.9",
+    "source_text": "psk_dhe_ke: PSK with (EC)DHE key establishment. In this mode, the client and server MUST supply \"key_share\" values as described in Section 4.2.8.",
+    "normative_keyword": "MUST",
+    "rule_type": "presence_requirement",
+    "rule_statement": "In psk_dhe_ke mode, both client and server MUST supply key_share values.",
+    "entity": "both",
+    "applies_when": "PSK with (EC)DHE key exchange mode is used",
+    "target_message": "ServerHello",
+    "target_field": "extensions",
+    "expected_value": "key_share extension present",
+    "related_fields": [
+      "ClientHello.key_share"
+    ],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [
+        "ServerHello",
+        "ClientHello"
+      ],
+      "field_names": [],
+      "extension_names": [
+        "key_share",
+        "pre_shared_key"
+      ],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "psk_dhe_ke",
+        "PSK with ECDHE"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify key_share is present in both ClientHello and ServerHello in this mode.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [
+      "4.2.8"
+    ],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

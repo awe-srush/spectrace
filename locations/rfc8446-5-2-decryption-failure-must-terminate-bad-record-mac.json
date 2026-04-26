@@ -1,0 +1,305 @@
+{
+  "rule_id": "rfc8446-5.2-decryption-failure-must-terminate-bad-record-mac",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "encrypted_record",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "encrypted_record",
+        "EncryptedRecord"
+      ]
+    },
+    {
+      "term": "bad_record_mac",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "bad_record_mac",
+        "BadRecordMac"
+      ]
+    },
+    {
+      "term": "AEAD decryption",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "AEAD decryption"
+      ]
+    },
+    {
+      "term": "record protection",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "record protection"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls_get_more_records",
+      "line_range": [
+        543,
+        939
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 7,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "bad_record_mac"
+        ]
+      },
+      "hits": [
+        {
+          "term": "bad_record_mac",
+          "line": 752,
+          "text": "RLAYERfatal(rl, SSL_AD_BAD_RECORD_MAC,"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 753,
+          "text": "SSL_R_DECRYPTION_FAILED_OR_BAD_RECORD_MAC);"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 819,
+          "text": "RLAYERfatal(rl, SSL_AD_BAD_RECORD_MAC,"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 820,
+          "text": "SSL_R_DECRYPTION_FAILED_OR_BAD_RECORD_MAC);"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 862,
+          "text": "* SSL 3.0 only has 'bad_record_mac'.  But unless a decryption"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 867,
+          "text": "RLAYERfatal(rl, SSL_AD_BAD_RECORD_MAC,"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 868,
+          "text": "SSL_R_DECRYPTION_FAILED_OR_BAD_RECORD_MAC);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/record/methods/ktls_meth.c",
+      "function": "ktls_read_n",
+      "line_range": [
+        344,
+        371
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "bad_record_mac"
+        ]
+      },
+      "hits": [
+        {
+          "term": "bad_record_mac",
+          "line": 354,
+          "text": "RLAYERfatal(rl, SSL_AD_BAD_RECORD_MAC,"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 355,
+          "text": "SSL_R_DECRYPTION_FAILED_OR_BAD_RECORD_MAC);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/record/methods/dtls_meth.c",
+      "function": "dtls_process_record",
+      "line_range": [
+        108,
+        281
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "bad_record_mac"
+        ]
+      },
+      "hits": [
+        {
+          "term": "bad_record_mac",
+          "line": 173,
+          "text": "RLAYERfatal(rl, SSL_AD_BAD_RECORD_MAC,"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 174,
+          "text": "SSL_R_DECRYPTION_FAILED_OR_BAD_RECORD_MAC);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/t1_enc.c",
+      "function": "tls1_alert_code",
+      "line_range": [
+        527,
+        605
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "bad_record_mac"
+        ]
+      },
+      "hits": [
+        {
+          "term": "bad_record_mac",
+          "line": 534,
+          "text": "case SSL_AD_BAD_RECORD_MAC:"
+        },
+        {
+          "term": "bad_record_mac",
+          "line": 535,
+          "text": "return SSL3_AD_BAD_RECORD_MAC;"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_alert_desc_string",
+      "line_range": [
+        273,
+        343
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "bad_record_mac"
+        ]
+      },
+      "hits": [
+        {
+          "term": "bad_record_mac",
+          "line": 280,
+          "text": "case SSL3_AD_BAD_RECORD_MAC:"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/ssl_stat.c",
+      "function": "SSL_alert_desc_string_long",
+      "line_range": [
+        345,
+        417
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "bad_record_mac"
+        ]
+      },
+      "hits": [
+        {
+          "term": "bad_record_mac",
+          "line": 352,
+          "text": "case SSL3_AD_BAD_RECORD_MAC:"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/quic/quic_record_rx.c",
+      "function": "qrx_get_cipher_ctx_idx",
+      "line_range": [
+        787,
+        876
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 1,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "modes_or_conditions"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "AEAD decryption"
+        ]
+      },
+      "hits": [
+        {
+          "term": "AEAD decryption",
+          "line": 868,
+          "text": "* decrypt with, so just try that. If AEAD decryption fails, the"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-2-decryption-failure-must-terminate-bad-record-mac_candidate_1.c",
+    "locations/code/rfc8446-5-2-decryption-failure-must-terminate-bad-record-mac_candidate_2.c",
+    "locations/code/rfc8446-5-2-decryption-failure-must-terminate-bad-record-mac_candidate_3.c",
+    "locations/code/rfc8446-5-2-decryption-failure-must-terminate-bad-record-mac_candidate_4.c",
+    "locations/code/rfc8446-5-2-decryption-failure-must-terminate-bad-record-mac_candidate_5.c",
+    "locations/code/rfc8446-5-2-decryption-failure-must-terminate-bad-record-mac_candidate_6.c",
+    "locations/code/rfc8446-5-2-decryption-failure-must-terminate-bad-record-mac_candidate_7.c"
+  ],
+  "stats": {
+    "total_grep_hits": 20,
+    "files_with_hits": 9,
+    "functions_identified": 7,
+    "null_scope_hits": 4,
+    "top_k_returned": 7,
+    "total_lines_in_top_k": 912
+  }
+}

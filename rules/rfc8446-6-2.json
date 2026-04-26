@@ -1,0 +1,174 @@
+[
+  {
+    "rule_id": "rfc8446-6.2-must-immediately-close-on-fatal-alert",
+    "source_section": "6.2",
+    "source_text": "Upon transmission or receipt of a fatal alert message, both parties MUST immediately close the connection.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Upon sending or receiving a fatal alert, both parties MUST immediately close the connection.",
+    "entity": "both",
+    "applies_when": "Fatal alert is sent or received",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "connection immediately closed",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [
+        "AlertLevel"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "fatal alert",
+        "connection closure"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify connection is closed after fatal alert.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-6.2-must-close-without-additional-data",
+    "source_section": "6.2",
+    "source_text": "Whenever an implementation encounters a fatal error condition, it SHOULD send an appropriate fatal alert and MUST close the connection without sending or receiving any additional data.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "On fatal error, implementation MUST close connection without sending or receiving additional data.",
+    "entity": "both",
+    "applies_when": "Implementation encounters fatal error condition",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "no additional data after fatal error",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "fatal error",
+        "connection closure"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify no data is sent/received after error alert.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-6.2-must-send-specified-alert-if-any",
+    "source_section": "6.2",
+    "source_text": "The phrases \"terminate the connection with an X alert\" and \"abort the handshake with an X alert\" mean that the implementation MUST send alert X if it sends any alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "When spec says terminate/abort with alert X, implementation MUST send alert X if it sends any alert.",
+    "entity": "both",
+    "applies_when": "Implementation terminates connection where specific alert is mandated",
+    "target_message": null,
+    "target_field": "AlertDescription",
+    "expected_value": "the specified alert type",
+    "related_fields": [],
+    "violation_alert": null,
+    "violation_alert_source": null,
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [
+        "AlertDescription"
+      ],
+      "extension_names": [],
+      "alert_names": [],
+      "modes_or_conditions": [
+        "fatal error"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can verify correct alert type is sent for each error condition.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-6.2-must-terminate-with-decode-error-on-parse-failure",
+    "source_section": "6.2",
+    "source_text": "Peers which receive a message which cannot be parsed according to the syntax (e.g., have a length extending beyond the message boundary or contain an out-of-range length) MUST terminate the connection with a \"decode_error\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Messages that cannot be parsed syntactically MUST trigger decode_error alert.",
+    "entity": "both",
+    "applies_when": "Endpoint receives syntactically unparseable message",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "terminate with decode_error",
+    "related_fields": [],
+    "violation_alert": "decode_error",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "decode_error"
+      ],
+      "modes_or_conditions": [
+        "syntax error",
+        "parsing failure"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can send malformed messages and verify decode_error response.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specified alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  },
+  {
+    "rule_id": "rfc8446-6.2-must-terminate-with-illegal-parameter-on-semantic-error",
+    "source_section": "6.2",
+    "source_text": "Peers which receive a message which is syntactically correct but semantically invalid (e.g., a DHE share of p - 1, or an invalid enum) MUST terminate the connection with an \"illegal_parameter\" alert.",
+    "normative_keyword": "MUST",
+    "rule_type": "conditional_action",
+    "rule_statement": "Messages that are syntactically correct but semantically invalid MUST trigger illegal_parameter alert.",
+    "entity": "both",
+    "applies_when": "Endpoint receives semantically invalid message",
+    "target_message": null,
+    "target_field": null,
+    "expected_value": "terminate with illegal_parameter",
+    "related_fields": [],
+    "violation_alert": "illegal_parameter",
+    "violation_alert_source": "6.2",
+    "protocol_keywords": {
+      "message_types": [],
+      "field_names": [],
+      "extension_names": [],
+      "alert_names": [
+        "illegal_parameter"
+      ],
+      "modes_or_conditions": [
+        "semantic error",
+        "invalid value"
+      ]
+    },
+    "checkability": "high",
+    "checkability_rationale": "Can send semantically invalid messages and verify illegal_parameter response.",
+    "extraction_confidence": "high",
+    "extraction_confidence_rationale": "Explicit MUST with specified alert.",
+    "cross_section_context_used": [],
+    "ambiguity_notes": null,
+    "model": "claude-opus-4-6"
+  }
+]

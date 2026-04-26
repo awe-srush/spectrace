@@ -1,0 +1,482 @@
+{
+  "rule_id": "rfc8446-5.4-must-terminate-if-no-nonzero-octet",
+  "rule_type": "conditional_action",
+  "checkability": "high",
+  "search_terms": [
+    {
+      "term": "TLSInnerPlaintext",
+      "categories": [
+        "field_names"
+      ],
+      "variants_searched": [
+        "TLSInnerPlaintext",
+        "tls_inner_plaintext"
+      ]
+    },
+    {
+      "term": "unexpected_message",
+      "categories": [
+        "alert_names"
+      ],
+      "variants_searched": [
+        "unexpected_message",
+        "UnexpectedMessage"
+      ]
+    },
+    {
+      "term": "record padding",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "record padding"
+      ]
+    },
+    {
+      "term": "content type scanning",
+      "categories": [
+        "modes_or_conditions"
+      ],
+      "variants_searched": [
+        "content type scanning"
+      ]
+    }
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "file": "ssl/record/rec_layer_s3.c",
+      "function": "ssl3_read_bytes",
+      "line_range": [
+        627,
+        1128
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 11,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 723,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 740,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 770,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_APP_DATA_IN_HANDSHAKE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 777,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_CCS_RECEIVED_EARLY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 860,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 878,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_INVALID_ALERT);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 904,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1023,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_CCS_RECEIVED_EARLY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1082,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1092,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1124,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        }
+      ]
+    },
+    {
+      "rank": 2,
+      "file": "ssl/record/rec_layer_d1.c",
+      "function": "dtls1_read_bytes",
+      "line_range": [
+        197,
+        605
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 6,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 324,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 386,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_INVALID_ALERT);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 411,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 576,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 586,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, ERR_R_INTERNAL_ERROR);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 600,
+          "text": "SSLfatal(sc, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_RECORD);"
+        }
+      ]
+    },
+    {
+      "rank": 3,
+      "file": "ssl/statem/statem_dtls.c",
+      "function": "dtls_get_reassembled_message",
+      "line_range": [
+        868,
+        1085
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 4,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 930,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 948,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 955,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1022,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_UNEXPECTED_MESSAGE);"
+        }
+      ]
+    },
+    {
+      "rank": 4,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls_get_more_records",
+      "line_range": [
+        543,
+        939
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 697,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 710,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 908,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE,"
+        }
+      ]
+    },
+    {
+      "rank": 5,
+      "file": "ssl/d1_lib.c",
+      "function": "DTLSv1_listen",
+      "line_range": [
+        407,
+        843
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 3,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 512,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 538,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_UNEXPECTED_MESSAGE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 558,
+          "text": "ERR_raise(ERR_LIB_SSL, SSL_R_UNEXPECTED_MESSAGE);"
+        }
+      ]
+    },
+    {
+      "rank": 6,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "rlayer_early_data_count_ok",
+      "line_range": [
+        497,
+        519
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 503,
+          "text": "RLAYERfatal(rl, send ? SSL_AD_INTERNAL_ERROR : SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 512,
+          "text": "RLAYERfatal(rl, send ? SSL_AD_INTERNAL_ERROR : SSL_AD_UNEXPECTED_MESSAGE,"
+        }
+      ]
+    },
+    {
+      "rank": 7,
+      "file": "ssl/record/methods/tls_common.c",
+      "function": "tls13_common_post_process_record",
+      "line_range": [
+        1038,
+        1065
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 1043,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_BAD_RECORD_TYPE);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1060,
+          "text": "RLAYERfatal(rl, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_BAD_LENGTH);"
+        }
+      ]
+    },
+    {
+      "rank": 8,
+      "file": "ssl/record/rec_layer_s3.c",
+      "function": "ossl_early_data_count_ok",
+      "line_range": [
+        150,
+        174
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 158,
+          "text": "SSLfatal(s, send ? SSL_AD_INTERNAL_ERROR : SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 167,
+          "text": "SSLfatal(s, send ? SSL_AD_INTERNAL_ERROR : SSL_AD_UNEXPECTED_MESSAGE,"
+        }
+      ]
+    },
+    {
+      "rank": 9,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_process_finished",
+      "line_range": [
+        828,
+        959
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 859,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_NOT_ON_RECORD_BOUNDARY);"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 865,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE, SSL_R_GOT_A_FIN_BEFORE_A_CCS);"
+        }
+      ]
+    },
+    {
+      "rank": 10,
+      "file": "ssl/statem/statem_lib.c",
+      "function": "tls_get_message_header",
+      "line_range": [
+        1538,
+        1631
+      ],
+      "distinct_terms_matched": 1,
+      "hit_count": 2,
+      "metadata": {
+        "category_breadth": 1,
+        "categories_present": [
+          "alert_names"
+        ],
+        "function_name_match": false,
+        "terms_matched": [
+          "unexpected_message"
+        ]
+      },
+      "hits": [
+        {
+          "term": "unexpected_message",
+          "line": 1566,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        },
+        {
+          "term": "unexpected_message",
+          "line": 1587,
+          "text": "SSLfatal(s, SSL_AD_UNEXPECTED_MESSAGE,"
+        }
+      ]
+    }
+  ],
+  "scoped_code_files": [
+    "locations/code/rfc8446-5-4-must-terminate-if-no-nonzero-octet_candidate_1.c",
+    "locations/code/rfc8446-5-4-must-terminate-if-no-nonzero-octet_candidate_2.c",
+    "locations/code/rfc8446-5-4-must-terminate-if-no-nonzero-octet_candidate_3.c",
+    "locations/code/rfc8446-5-4-must-terminate-if-no-nonzero-octet_candidate_4.c",
+    "locations/code/rfc8446-5-4-must-terminate-if-no-nonzero-octet_candidate_5.c",
+    "locations/code/rfc8446-5-4-must-terminate-if-no-nonzero-octet_candidate_6.c",
+    "locations/code/rfc8446-5-4-must-terminate-if-no-nonzero-octet_candidate_7.c",
+    "locations/code/rfc8446-5-4-must-terminate-if-no-nonzero-octet_candidate_8.c",
+    "locations/code/rfc8446-5-4-must-terminate-if-no-nonzero-octet_candidate_9.c",
+    "locations/code/rfc8446-5-4-must-terminate-if-no-nonzero-octet_candidate_10.c"
+  ],
+  "stats": {
+    "total_grep_hits": 60,
+    "files_with_hits": 16,
+    "functions_identified": 28,
+    "null_scope_hits": 3,
+    "top_k_returned": 10,
+    "total_lines_in_top_k": 2265
+  }
+}
